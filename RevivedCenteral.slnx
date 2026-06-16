@@ -1,0 +1,28 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/NS1/">
+    <Project Path="NarutoStorm1Revived/steam_api64/steam_api64.vcxproj" Id="d262af8a-d686-4053-92e4-1f938978cf63" />
+  </Folder>
+  <Folder Name="/NS2/">
+    <Project Path="NarutoStorm2RevivedPrivate/NS2FrameWork/NS2FrameWork.vcxproj" Id="c2f8b4e3-3e5d-4a9b-8c4f-72f9d55ce901" />
+    <Project Path="NarutoStorm2RevivedPrivate/steam_api64/steam_api64.vcxproj" Id="a36a5aaf-0f0c-4998-a6c7-3a583b9f4ca2" />
+  </Folder>
+  <Folder Name="/NS3/">
+    <Project Path="NarutoStorm3Revived/steam_api/steam_api.vcxproj" Id="4bbbe7c5-11e3-49bc-9d6d-0e8356edb5da" />
+  </Folder>
+  <Folder Name="/NS3FB/">
+    <Project Path="NarutoStorm3FullBurstRevived/steam_api64/steam_api64.vcxproj" Id="5b9f6673-54df-44f1-b1d0-0c32337f93d6" />
+  </Folder>
+  <Folder Name="/NS4/">
+    <Project Path="NarutoStorm4Revived/steam_api64/steam_api64.vcxproj" Id="68030e86-2d3c-4cb9-943c-e317b28fbe1b" />
+  </Folder>
+  <Folder Name="/NSC/">
+    <Project Path="NarutoStormConnectionsRevived/steam_api64/steam_api64.vcxproj" Id="a3fb42e5-26f4-4beb-9d06-5e66ddd2a12e" />
+  </Folder>
+  <Folder Name="/NSR/">
+    <Project Path="NarutoStormRevolationRevived/steam_api/steam_api.vcxproj" Id="ac3b2bef-bcdb-4e30-ad94-48494a350ecc" />
+  </Folder>
+</Solution>
