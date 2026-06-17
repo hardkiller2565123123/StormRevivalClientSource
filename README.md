@@ -12,8 +12,8 @@
 > * Online Menu access
 > * Project-specific startup hooks
 > * Foundation for future offline/LAN functionality
-> * 
-> * 
+>   
+>   
 > * Every Game Reaches Online Menu no lan
 > * storm Revolution crashes right now
 > * storm connections does not reach online menu
