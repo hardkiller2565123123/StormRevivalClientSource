@@ -32,6 +32,68 @@ namespace
     std::string g_UserDataFolder;
     std::vector<unsigned char> g_LastEncryptedTicket;
 
+    struct DlcInfo
+    {
+        AppId_t AppID;
+        const char* Name;
+    };
+
+    constexpr DlcInfo kKnownDlc[] =
+    {
+        { 416410, "Naruto Shippuden Ultimate Ninja Storm 4 - Pre Order DLC" },
+        { 416420, "NARUTO SHIPPUDEN: Ultimate Ninja STORM 4 - Shikamaru's Tale Extra Scenario Pack" },
+        { 416421, "NARUTO SHIPPUDEN: Ultimate Ninja STORM 4 - Gaara's Tale Extra Scenario Pack" },
+        { 416422, "NARUTO SHIPPUDEN: Ultimate Ninja STORM 4 - The Sound Four Characters Pack" },
+        { 416423, "NARUTO STORM 4 - Season Pass Bonus" },
+        { 416424, "NARUTO SHIPPUDEN: Ultimate Ninja Storm 4 - Season Pass" },
+        { 435160, "NARUTO SHIPPUDEN: Ultimate Ninja STORM 4 - Traditional Festival Costume" },
+        { 495160, "NARUTO STORM 4 : Road to Boruto Expansion" },
+        { 1142330, "NARUTO SHIPPUDEN: UNS 4 ROAD TO BORUTO NEXT GENERATIONS Pack" },
+        { 24, "NS4 Internal DLC_24" },
+        { 27, "NS4 Internal DLC_27" },
+        { 28, "NS4 Internal DLC_28" },
+        { 29, "NS4 Internal DLC_29" },
+        { 30, "NS4 Internal DLC_30" },
+        { 36, "NS4 Internal DLC_36" },
+        { 38, "NS4 Internal DLC_38" },
+        { 39, "NS4 Internal DLC_39" },
+        { 44, "NS4 Internal DLC_44" },
+        { 45, "NS4 Internal DLC_45" },
+        { 13, "NS4 Internal DLC_ex_13" },
+        { 14, "NS4 Internal DLC_ex_14" },
+        { 16, "NS4 Internal DLC_ex_16" },
+        { 4, "NS4 Internal DLC_ex_04" },
+        { 14014, "NS4 Character DLC_cha_014" },
+        { 14017, "NS4 Character DLC_cha_017" },
+        { 14019, "NS4 Character DLC_cha_019" },
+        { 14022, "NS4 Character DLC_cha_022" },
+        { 14026, "NS4 Character DLC_cha_026" },
+        { 14042, "NS4 Character DLC_cha_042" },
+        { 14044, "NS4 Character DLC_cha_044" },
+        { 14047, "NS4 Character DLC_cha_047" },
+        { 14050, "NS4 Character DLC_cha_050" },
+        { 14051, "NS4 Character DLC_cha_051" },
+        { 14052, "NS4 Character DLC_cha_052" },
+        { 14053, "NS4 Character DLC_cha_053" },
+        { 14054, "NS4 Character DLC_cha_054" },
+        { 14055, "NS4 Character DLC_cha_055" },
+        { 14056, "NS4 Character DLC_cha_056" },
+        { 14059, "NS4 Character DLC_cha_059" },
+        { 14063, "NS4 Character DLC_cha_063" },
+        { 14064, "NS4 Character DLC_cha_064" },
+        { 14067, "NS4 Character DLC_cha_067" },
+        { 14068, "NS4 Character DLC_cha_068" },
+        { 14069, "NS4 Character DLC_cha_069" },
+        { 14070, "NS4 Character DLC_cha_070" },
+        { 14071, "NS4 Character DLC_cha_071" },
+        { 14072, "NS4 Character DLC_cha_072" },
+        { 14073, "NS4 Character DLC_cha_073" },
+        { 14075, "NS4 Character DLC_cha_075" },
+        { 14079, "NS4 Character DLC_cha_079" },
+        { 14080, "NS4 Character DLC_cha_080" },
+        { 14081, "NS4 Character DLC_cha_081" },
+    };
+
 #pragma pack(push, 1)
     struct OfflineSteamIPAddress
     {
@@ -794,20 +856,46 @@ namespace
         virtual bool BIsVACBanned() { TraceCore("SteamApps", "BIsVACBanned"); return false; }
         virtual const char* GetCurrentGameLanguage() { TraceCore("SteamApps", "GetCurrentGameLanguage"); return "english"; }
         virtual const char* GetAvailableGameLanguages() { TraceCore("SteamApps", "GetAvailableGameLanguages"); return "english"; }
-        virtual bool BIsSubscribedApp(AppId_t appID) { TraceCore("SteamApps", "BIsSubscribedApp", std::to_string(appID)); NSR_UNUSED(appID); return true; }
-        virtual bool BIsDlcInstalled(AppId_t appID) { TraceCore("SteamApps", "BIsDlcInstalled", std::to_string(appID)); NSR_UNUSED(appID); return true; }
+        virtual bool BIsSubscribedApp(AppId_t appID)
+        {
+            TraceCore("SteamApps", "BIsSubscribedApp", std::to_string(appID));
+            return appID == kNS4AppId || SteamConfig::IsDlcAvailable(appID);
+        }
+
+        virtual bool BIsDlcInstalled(AppId_t appID)
+        {
+            TraceCore("SteamApps", "BIsDlcInstalled", std::to_string(appID));
+            return SteamConfig::IsDlcAvailable(appID);
+        }
+
         virtual uint32_t GetEarliestPurchaseUnixTime(AppId_t appID) { NSR_UNUSED(appID); return 1262304000u; }
         virtual bool BIsSubscribedFromFreeWeekend() { return false; }
-        virtual int GetDLCCount() { return 0; }
+        virtual int GetDLCCount() { return static_cast<int>(ARRAYSIZE(kKnownDlc)); }
+
         virtual bool BGetDLCDataByIndex(int index, AppId_t* appID, bool* available, char* name, int nameSize)
         {
-            NSR_UNUSED(index);
-            if (appID) *appID = 0;
-            if (available) *available = false;
-            if (name && nameSize > 0) name[0] = '\0';
-            return false;
+            if (index < 0 || index >= static_cast<int>(ARRAYSIZE(kKnownDlc)))
+            {
+                if (appID) *appID = 0;
+                if (available) *available = false;
+                if (name && nameSize > 0) name[0] = '\0';
+                return false;
+            }
+
+            const DlcInfo& dlc = kKnownDlc[index];
+            if (appID) *appID = dlc.AppID;
+            if (available) *available = SteamConfig::IsDlcAvailable(dlc.AppID);
+            CopyString(name, nameSize, dlc.Name);
+            return true;
         }
-        virtual void InstallDLC(AppId_t appID) { NSR_UNUSED(appID); }
+
+        virtual void InstallDLC(AppId_t appID)
+        {
+            TraceCore("SteamApps", "InstallDLC", std::to_string(appID));
+            if (!SteamConfig::IsDlcAvailable(appID))
+                Logger::Info("SteamApps InstallDLC ignored because DLC is not listed in owned_dlc and was not found in the dlc folder: " + std::to_string(appID));
+        }
+
         virtual void UninstallDLC(AppId_t appID) { NSR_UNUSED(appID); }
         virtual void RequestAppProofOfPurchaseKey(AppId_t appID) { NSR_UNUSED(appID); }
         virtual bool GetCurrentBetaName(char* name, int nameSize)
@@ -825,19 +913,27 @@ namespace
         virtual uint32_t GetAppInstallDir(AppId_t appID, char* folder, uint32_t folderSize)
         {
             TraceCore("SteamApps", "GetAppInstallDir", "app=" + std::to_string(appID));
-            NSR_UNUSED(appID);
-            CopyString(folder, static_cast<int>(folderSize), g_InstallPath);
-            return static_cast<uint32_t>(g_InstallPath.size());
+
+            const std::string installDir = (appID != kNS4AppId && SteamConfig::IsDlcAvailable(appID))
+                ? SteamConfig::GetDlcInstallDir(appID)
+                : g_InstallPath;
+
+            CopyString(folder, static_cast<int>(folderSize), installDir);
+            return static_cast<uint32_t>(installDir.size());
         }
-        virtual bool BIsAppInstalled(AppId_t appID) { TraceCore("SteamApps", "BIsAppInstalled", std::to_string(appID)); NSR_UNUSED(appID); return true; }
+        virtual bool BIsAppInstalled(AppId_t appID)
+        {
+            TraceCore("SteamApps", "BIsAppInstalled", std::to_string(appID));
+            return appID == kNS4AppId || SteamConfig::IsDlcAvailable(appID) || SteamConfig::HasDlcContentOnDisk();
+        }
         virtual CSteamID GetAppOwner() { TraceCore("SteamApps", "GetAppOwner"); return OfflineSteamIDObjectReturn(SteamIDManager::GetLocalSteamID()); }
         virtual const char* GetLaunchQueryParam(const char* key) { TraceCore("SteamApps", "GetLaunchQueryParam", key ? key : "null"); NSR_UNUSED(key); return ""; }
         virtual bool GetDlcDownloadProgress(AppId_t appID, uint64_t* downloaded, uint64_t* total)
         {
-            NSR_UNUSED(appID);
-            if (downloaded) *downloaded = 0;
-            if (total) *total = 0;
-            return false;
+            const bool available = SteamConfig::IsDlcAvailable(appID);
+            if (downloaded) *downloaded = available ? 1 : 0;
+            if (total) *total = available ? 1 : 0;
+            return available;
         }
         virtual int GetAppBuildId() { TraceCore("SteamApps", "GetAppBuildId"); return 1; }
         virtual void RequestAllProofOfPurchaseKeys() {}
@@ -858,7 +954,7 @@ namespace
             if (played) *played = 0;
             return false;
         }
-        virtual bool SetDlcContext(AppId_t appID) { NSR_UNUSED(appID); return true; }
+        virtual bool SetDlcContext(AppId_t appID) { return appID == 0 || SteamConfig::IsDlcAvailable(appID); }
     };
 
     class OfflineSteamGameServer final

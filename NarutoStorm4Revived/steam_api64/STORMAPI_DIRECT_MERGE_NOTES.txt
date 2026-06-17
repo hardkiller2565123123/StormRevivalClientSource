@@ -1,0 +1,10 @@
+StormAPI direct merge
+
+- UltimateStormAPI cpp/h files were moved into the steam_api64 root.
+- No StormAPI source folder is included.
+- xinput9_1_0 proxy files were intentionally skipped.
+- Existing sdk_includes remains separate.
+- Existing FrameworkAddon files remain separate.
+- Existing NS4 Steam/lobby/networking implementation remains primary.
+- Legacy StormAPI cpp files are included in the project as source but excluded from build where they conflict with the NS4 steam_api64 runtime.
+- UltimateStormAPI.cpp was rewritten as a safe bridge initializer for NarutoStorm4Revived.

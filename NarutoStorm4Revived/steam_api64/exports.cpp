@@ -270,8 +270,10 @@ namespace
     SteamAPICall_t FlatRequestLobbyList()
     {
         FlatLobbyMatchListResult result{};
-        result.m_nLobbiesMatching = static_cast<uint32_t>(SteamLobbyManager::RefreshNetworkLobbies(25));
-        return SteamCallResultManager::CreateCallResult(510, &result, sizeof(result), true);
+        result.m_nLobbiesMatching = static_cast<uint32_t>(SteamLobbyManager::RefreshNetworkLobbies(3500));
+        const SteamAPICall_t call = SteamCallResultManager::CreateCallResult(510, &result, sizeof(result), true);
+        SteamCallbackManager::PushCallback(510, &result, sizeof(result));
+        return call;
     }
 
     SteamAPICall_t FlatCreateLobby(int lobbyType, int maxMembers)
@@ -1047,7 +1049,9 @@ extern "C" __declspec(dllexport) uint64_t __cdecl SteamAPI_ISteamFriends_GetFrie
 extern "C" __declspec(dllexport) int __cdecl SteamAPI_ISteamFriends_GetFriendRelationship(void* self, uint64_t steamIDFriend)
 {
     NSR_UNUSED(self);
-    NSR_UNUSED(steamIDFriend);
+    steamIDFriend = ResolveFlatSteamID(steamIDFriend, "GetFriendRelationship");
+    if (steamIDFriend && !SteamPersonaManager::HasFriend(steamIDFriend))
+        SteamPersonaManager::AddOrUpdateFriend(steamIDFriend);
     return 3;
 }
 

@@ -14,6 +14,9 @@ namespace
         return std::filesystem::path(path).parent_path().string();
     }
 
+
+	
+
     std::string ReadString(const char* key, const char* fallback)
     {
         char buffer[512]{};
@@ -59,6 +62,7 @@ namespace SteamConfig
         Logger::Info(std::string("SteamConfig initialized mode=") + ModeName(g_Config.CurrentMode) + " path=" + g_Path);
         return true;
     }
+
 
     bool Load()
     {
@@ -122,6 +126,48 @@ namespace SteamConfig
     bool ShouldBlockOfficialTraffic() { return g_Config.BlockOfficialTraffic; }
     bool IsLanOnly() { return g_Config.LanOnly; }
     const std::string& GetPath() { return g_Path; }
+	bool IsSteamPassthrough() { return g_Config.CurrentMode == Mode::SteamPassthrough; }
+	bool IsEmbeddedMasterServerEnabled() { return g_Config.EnableEmbeddedMasterServer; }
+	bool IsLoggingPackets() { return g_Config.LogPackets; }
+	bool IsLocalStorageEnabled() { return g_Config.EnableLocalStorage; }
+	bool IsLocalStatsEnabled() { return g_Config.EnableLocalStats; }
+	bool IsLocalMatchmakingEnabled() { return g_Config.EnableLocalMatchmaking; }
+	bool AutoInstanceSteamID() { return g_Config.AutoInstanceSteamID; }
+	bool ShouldUseRevivedServer() { return IsRevivedServer() || IsCustomServer(); }
+	bool ShouldUseCustomServer() { return IsCustomServer(); }
+	bool ShouldUseSteamPassthrough() { return IsSteamPassthrough(); }
+	bool ShouldUseOfficialServer() { return !ShouldUseRevivedServer() && !IsSteamPassthrough(); }
+	bool ShouldUseAnyServer() { return ShouldUseRevivedServer() || IsSteamPassthrough(); }
+	bool ShouldBlockSteam() { return ShouldBlockOfficialTraffic() || ShouldUseRevivedServer(); }
+	bool ShouldBlockRevived() { return ShouldBlockOfficialTraffic() || ShouldUseCustomServer(); }
+	bool ShouldBlockCustom() { return ShouldBlockOfficialTraffic() || ShouldUseRevivedServer(); }
+	bool ShouldBlockAny() { return ShouldBlockOfficialTraffic() || ShouldUseRevivedServer() || ShouldUseCustomServer(); }
+	bool  ShouldLogPackets() { return g_Config.LogPackets; }
+	bool ShouldLanOnly() { return g_Config.LanOnly; }
+	bool ShouldAutoInstanceSteamID() { return g_Config.AutoInstanceSteamID; }
+	bool ShouldEnableEmbeddedMasterServer() { return g_Config.EnableEmbeddedMasterServer; }
+	bool ShouldEnableLocalStorage() { return g_Config.EnableLocalStorage; }
+	bool ShouldEnableLocalStats() { return g_Config.EnableLocalStats; }
+	bool ShouldEnableLocalMatchmaking() { return g_Config.EnableLocalMatchmaking; }
+	bool ShouldEnableLocalFeatures() { return ShouldEnableLocalStorage() || ShouldEnableLocalStats() || ShouldEnableLocalMatchmaking(); }
+	bool ShouldEnableRevivedServer() { return IsRevivedServer(); }
+	bool ShouldEnableCustomServer() { return IsCustomServer(); }
+	bool ShouldEnableSteamPassthrough() { return IsSteamPassthrough(); }
+	bool ShouldEnableOffline() { return IsOffline(); }
+	bool ShouldEnableAnyServer() { return ShouldEnableRevivedServer() || ShouldEnableCustomServer() || ShouldUseSteamPassthrough(); }
+	bool ShouldBlockOfficial() { return ShouldBlockOfficialTraffic(); }
+	bool ShouldBlockLAN() { return ShouldLanOnly(); }
+	
+    
+    const auto& GetEvolutionFolders() {
+		static std::vector<std::string> folders = []() {
+			std::vector<std::string> out;
+			for (int i = 1; i <= 4; ++i)
+				out.push_back(GetExeFolder() + "StormEvolution" + std::to_string(i));
+			return out;
+			}(); return folders;
+	}
+    
 
     const char* ModeName(Mode mode)
     {

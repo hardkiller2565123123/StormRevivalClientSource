@@ -3,6 +3,8 @@
 
 namespace
 {
+    const char* kOverlayTitle = "NS2 Revived";
+
     bool ShouldShowFrameworkTabs()
     {
         return FrameworkAddon::IsLoaded() || FrameworkAddon::IsAvailable();
@@ -62,7 +64,7 @@ void DrawDropdownPanel()
     ImGui::SetNextWindowBgAlpha(0.90f);
 
     ImGui::Begin(
-        "##NS2ShipwrightDropdown",
+        "##NarutoRevivalDropdown",
         nullptr,
         ImGuiWindowFlags_NoTitleBar |
         ImGuiWindowFlags_NoMove |
@@ -75,7 +77,7 @@ void DrawDropdownPanel()
     if (!frameworkTab)
     {
         float leftWidth = panelWidth < 900.0f ? 185.0f : 220.0f;
-        ImGui::BeginChild("##NS2LeftList", ImVec2(leftWidth, 0.0f), true);
+        ImGui::BeginChild("##NarutoRevivalLeftList", ImVec2(leftWidth, 0.0f), true);
         ImGui::Text("Options");
         ImGui::Separator();
 
@@ -83,8 +85,7 @@ void DrawDropdownPanel()
         {
         case TAB_CLIENT:
             DrawLeftButton("Overview", 0);
-            DrawLeftButton("Framework", 1);
-            DrawLeftButton("Connection", 2);
+            DrawLeftButton("Connection", 1);
             break;
 
         case TAB_ONLINE:
@@ -101,7 +102,7 @@ void DrawDropdownPanel()
         ImGui::SameLine();
     }
 
-    ImGui::BeginChild("##NS2PageArea", ImVec2(0.0f, 0.0f), true);
+    ImGui::BeginChild("##NarutoRevivalPageArea", ImVec2(0.0f, 0.0f), true);
 
     switch (g_SelectedTab)
     {
@@ -150,7 +151,7 @@ void DrawAnimatedTopMenu()
     ImGui::SetNextWindowBgAlpha(0.92f);
 
     ImGui::Begin(
-        "##NS2AnimatedTopMenuBar",
+        "##NarutoRevivalAnimatedTopMenuBar",
         nullptr,
         ImGuiWindowFlags_NoDecoration |
         ImGuiWindowFlags_NoMove |
@@ -162,11 +163,11 @@ void DrawAnimatedTopMenu()
 
     ImGui::SetCursorPos(ImVec2(8.0f, 5.0f));
 
-    ImGui::Text("NS2 Revived");
+    ImGui::Text("%s", kOverlayTitle);
     ImGui::SameLine(95.0f);
 
     DrawTabButton("Client", TAB_CLIENT); ImGui::SameLine();
-    DrawTabButton("Online", TAB_ONLINE); ImGui::SameLine();
+    DrawTabButton("LAN", TAB_ONLINE); ImGui::SameLine();
 
     if (ShouldShowFrameworkTabs())
     {
@@ -178,12 +179,12 @@ void DrawAnimatedTopMenu()
         DrawTabButton("Patches", TAB_PATCHES); ImGui::SameLine();
     }
 
-    float rightTextX = viewport->Size.x - 240.0f;
+    float rightTextX = viewport->Size.x - 120.0f;
 
     if (rightTextX > ImGui::GetCursorPosX() + 20.0f)
         ImGui::SameLine(rightTextX);
 
-    ImGui::Text("FPS %d | LAT 0 ms", g_CurrentFps);
+    ImGui::Text("FPS %d", g_CurrentFps);
 
     ImGui::End();
 

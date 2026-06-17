@@ -1,8 +1,21 @@
 #include "StdInc.h"
 #include "SteamAuth.h"
 #include "Logger.h"
+#include "SteamCallbackManager.h"
 
 static uint32_t g_NextTicket = 1;
+
+namespace
+{
+    constexpr int kCallbackGetAuthSessionTicketResponse = 163;
+
+    struct GetAuthSessionTicketResponse
+    {
+        uint32_t m_hAuthTicket;
+        int m_eResult;
+    };
+}
+
 
 namespace SteamAuth
 {
@@ -25,7 +38,12 @@ namespace SteamAuth
 
         uint32_t handle = g_NextTicket++;
 
-        Logger::Info("SteamAuth::GetAuthSessionTicket handle=" + std::to_string(handle));
+        GetAuthSessionTicketResponse response{};
+        response.m_hAuthTicket = handle;
+        response.m_eResult = 1;
+        SteamCallbackManager::PushCallback(kCallbackGetAuthSessionTicketResponse, &response, sizeof(response));
+
+        Logger::Info("SteamAuth::GetAuthSessionTicket handle=" + std::to_string(handle) + " result_callback=1");
 
         return handle;
     }

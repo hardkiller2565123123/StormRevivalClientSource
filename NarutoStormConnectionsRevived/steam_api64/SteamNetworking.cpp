@@ -258,7 +258,7 @@ public:
         NSR_UNUSED(sendType);
 
         if (!data || size == 0)
-            return false;
+            return true;
 
         const bool sent = SteamP2PManager::Send(steamIDRemote, data, size, channel);
 
@@ -270,7 +270,11 @@ public:
             " udp=" +
             std::to_string(sent ? 1 : 0));
 
-        return sent;
+        // For online-menu compatibility, report Steam networking send success even
+        // when no peer/server is available yet. Actual LAN packets still go through
+        // SteamP2PManager when possible.
+        NSR_UNUSED(sent);
+        return true;
     }
 
     virtual bool IsP2PPacketAvailable(uint32_t* size, int channel)
@@ -359,7 +363,7 @@ public:
         localState.m_bConnectionActive = 1;
         localState.m_bConnecting = 0;
         localState.m_eP2PSessionError = 0;
-        localState.m_bUsingRelay = 0;
+        localState.m_bUsingRelay = 1;
         localState.m_nBytesQueuedForSend = 0;
         localState.m_nPacketsQueuedForSend = 0;
 

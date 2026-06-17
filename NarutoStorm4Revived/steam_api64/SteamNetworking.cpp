@@ -549,10 +549,26 @@ public:
         SteamVersionLogger::LogCall("SteamNetworking", "GetSocketInfo", std::to_string(socket));
         NSR_UNUSED(socket);
 
-        SafeWriteValue(remote, SteamIDManager::GetLocalSteamID());
-        SafeWriteValue(socketStatus, 1);
-        SafeWriteValue(remoteIP, 0x7F000001u);
-        SafeWriteValue(remotePort, NS4_DEFAULT_P2P_PORT);
+        std::string host;
+        uint16_t port = 0;
+        CSteamID target = SteamIDManager::GetLocalSteamID();
+        SteamOfflineServer::GetBestEndpoint(static_cast<uint64_t>(target), host, port);
+
+        in_addr address{};
+        if (host.empty() || inet_pton(AF_INET, host.c_str(), &address) != 1)
+            inet_pton(AF_INET, NS4_DEFAULT_P2P_HOST, &address);
+
+        if (remote)
+            *remote = target;
+
+        if (socketStatus)
+            *socketStatus = 1;
+
+        if (remoteIP)
+            *remoteIP = ntohl(address.S_un.S_addr);
+
+        if (remotePort)
+            *remotePort = port ? port : NS4_DEFAULT_P2P_PORT;
 
         return true;
     }

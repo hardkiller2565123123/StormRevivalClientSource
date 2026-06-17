@@ -1,9 +1,94 @@
 #include "DX11OverlayInternal.h"
 #include "FrameworkAddon.h"
 #include "MinHook.h"
+#include "WindowedFullscreen.h"
 
 namespace
 {
+    constexpr double kTargetFrameSeconds = 1.0 / 60.0;
+    LARGE_INTEGER g_FramePaceFrequency{};
+    LARGE_INTEGER g_LastPacedPresent{};
+    bool g_FramePacerReady = false;
+    bool g_TimerResolutionRaised = false;
+
+    void RaiseTimerResolutionForPacing()
+    {
+        if (g_TimerResolutionRaised)
+            return;
+
+        HMODULE winmm = LoadLibraryA("winmm.dll");
+        if (!winmm)
+            return;
+
+        using TimeBeginPeriodFn = UINT(WINAPI*)(UINT);
+        TimeBeginPeriodFn timeBeginPeriodFn = reinterpret_cast<TimeBeginPeriodFn>(GetProcAddress(winmm, "timeBeginPeriod"));
+        if (timeBeginPeriodFn && timeBeginPeriodFn(1) == 0)
+            g_TimerResolutionRaised = true;
+    }
+
+    void ResetFramePacer()
+    {
+        g_LastPacedPresent.QuadPart = 0;
+    }
+
+    void PaceFrameForLowLatency60()
+    {
+        if (g_GraphicsVsync || !g_GraphicsWindowedFullscreen)
+        {
+            ResetFramePacer();
+            return;
+        }
+
+        RaiseTimerResolutionForPacing();
+
+        if (!g_FramePacerReady)
+        {
+            QueryPerformanceFrequency(&g_FramePaceFrequency);
+            g_FramePacerReady = g_FramePaceFrequency.QuadPart > 0;
+        }
+
+        if (!g_FramePacerReady)
+            return;
+
+        LARGE_INTEGER now{};
+        QueryPerformanceCounter(&now);
+
+        if (g_LastPacedPresent.QuadPart == 0)
+        {
+            g_LastPacedPresent = now;
+            return;
+        }
+
+        const LONGLONG targetTicks = static_cast<LONGLONG>(static_cast<double>(g_FramePaceFrequency.QuadPart) * kTargetFrameSeconds);
+        const LONGLONG targetPresent = g_LastPacedPresent.QuadPart + targetTicks;
+
+        while (now.QuadPart < targetPresent)
+        {
+            const double remainingMs = static_cast<double>(targetPresent - now.QuadPart) * 1000.0 / static_cast<double>(g_FramePaceFrequency.QuadPart);
+
+            if (remainingMs > 2.0)
+                Sleep(1);
+            else if (remainingMs > 0.25)
+                Sleep(0);
+            else
+                YieldProcessor();
+
+            QueryPerformanceCounter(&now);
+        }
+
+        if (now.QuadPart > targetPresent + (targetTicks * 4))
+            g_LastPacedPresent = now;
+        else
+            g_LastPacedPresent.QuadPart = targetPresent;
+    }
+
+    UINT EffectivePresentSyncInterval(UINT requestedSyncInterval)
+    {
+        if (g_GraphicsVsync)
+            return requestedSyncInterval > 0 ? requestedSyncInterval : 1;
+
+        return 0;
+    }
 }
 
 void CleanupRenderTarget()
@@ -300,16 +385,37 @@ void DrawImGui(IDXGISwapChain* swapChain)
 
 HRESULT __stdcall PresentHook(IDXGISwapChain* swapChain, UINT syncInterval, UINT flags)
 {
+    if (!g_OriginalPresent)
+        return S_OK;
+
+    if (g_DX11OverlayShuttingDown || !swapChain)
+        return g_OriginalPresent(swapChain, syncInterval, flags);
+
     g_PresentSeen = true;
+
+    DXGI_SWAP_CHAIN_DESC swapDesc{};
+    if (SUCCEEDED(swapChain->GetDesc(&swapDesc)) && swapDesc.OutputWindow)
+        WindowedFullscreen::SetGameWindowHint(swapDesc.OutputWindow);
+
     const bool loginGateActive = false;
 
-    if (g_OverlayEnabled)
-        DrawImGui(swapChain);
+    try
+    {
+        if (g_OverlayEnabled)
+            DrawImGui(swapChain);
 
-    if (loginGateActive)
-        Sleep(33);
+        if (loginGateActive)
+            Sleep(33);
 
-    return g_OriginalPresent(swapChain, loginGateActive ? 1 : syncInterval, flags);
+        PaceFrameForLowLatency60();
+    }
+    catch (...)
+    {
+        g_OverlayEnabled = false;
+        Logger::Error("DX11 overlay: C++ exception inside PresentHook; overlay disabled for this run");
+    }
+
+    return g_OriginalPresent(swapChain, loginGateActive ? 1 : EffectivePresentSyncInterval(syncInterval), flags);
 }
 
 HRESULT __stdcall ResizeBuffersHook(
@@ -320,7 +426,11 @@ HRESULT __stdcall ResizeBuffersHook(
     DXGI_FORMAT newFormat,
     UINT swapChainFlags)
 {
-    CleanupRenderTarget();
+    if (!g_OriginalResizeBuffers)
+        return DXGI_ERROR_INVALID_CALL;
+
+    if (!g_DX11OverlayShuttingDown)
+        CleanupRenderTarget();
 
     return g_OriginalResizeBuffers(
         swapChain,

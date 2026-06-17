@@ -53,14 +53,67 @@ typedef int (WSAAPI* WSASendToFn)(
     LPWSAOVERLAPPED lpOverlapped,
     LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 
+typedef int (WSAAPI* recvFn)(
+    SOCKET s,
+    char* buf,
+    int len,
+    int flags);
+
+typedef int (WSAAPI* WSARecvFn)(
+    SOCKET s,
+    LPWSABUF lpBuffers,
+    DWORD dwBufferCount,
+    LPDWORD lpNumberOfBytesRecvd,
+    LPDWORD lpFlags,
+    LPWSAOVERLAPPED lpOverlapped,
+    LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
+
+typedef int (WSAAPI* selectFn)(
+    int nfds,
+    fd_set* readfds,
+    fd_set* writefds,
+    fd_set* exceptfds,
+    const timeval* timeout);
+
+typedef int (WSAAPI* closesocketFn)(SOCKET s);
+
 static connectFn g_OriginalConnect = nullptr;
 static WSAConnectFn g_OriginalWSAConnect = nullptr;
 static getaddrinfoFn g_OriginalGetAddrInfo = nullptr;
 static GetAddrInfoWFn g_OriginalGetAddrInfoW = nullptr;
 static sendtoFn g_OriginalSendTo = nullptr;
 static WSASendToFn g_OriginalWSASendTo = nullptr;
+static recvFn g_OriginalRecv = nullptr;
+static WSARecvFn g_OriginalWSARecv = nullptr;
+static selectFn g_OriginalSelect = nullptr;
+static closesocketFn g_OriginalCloseSocket = nullptr;
+
 static std::mutex g_AllowedPublicMutex;
 static std::set<uint32_t> g_AllowedPublicIPv4;
+
+static std::mutex g_FakeSocketMutex;
+static std::set<SOCKET> g_FakeConnectedSockets;
+
+static void MarkFakeSocket(SOCKET s)
+{
+    if (s == INVALID_SOCKET)
+        return;
+
+    std::lock_guard<std::mutex> lock(g_FakeSocketMutex);
+    g_FakeConnectedSockets.insert(s);
+}
+
+static void UnmarkFakeSocket(SOCKET s)
+{
+    std::lock_guard<std::mutex> lock(g_FakeSocketMutex);
+    g_FakeConnectedSockets.erase(s);
+}
+
+static bool IsFakeSocket(SOCKET s)
+{
+    std::lock_guard<std::mutex> lock(g_FakeSocketMutex);
+    return g_FakeConnectedSockets.find(s) != g_FakeConnectedSockets.end();
+}
 
 static bool IsAllowedIPv4(uint32_t ip)
 {
@@ -135,6 +188,17 @@ static bool EndsWith(const std::string& text, const char* suffix)
         text.compare(text.size() - suffixLength, suffixLength, suffix) == 0;
 }
 
+
+static bool IsOnlineMenuServiceHost(const std::string& lower)
+{
+    // NSC checks these HTTPS services before it opens the online menu.
+    // Let only these auth/status endpoints connect for menu compatibility.
+    return EndsWith(lower, ".playfabapi.com") ||
+        lower == "titleid.playfabapi.com" ||
+        EndsWith(lower, ".cosmos.channel.or.jp") ||
+        lower == "neo.cosmos.channel.or.jp";
+}
+
 static bool IsAllowedHostName(const std::string& host)
 {
     if (host.empty() || host == "null")
@@ -155,6 +219,8 @@ static bool IsAllowedHostName(const std::string& host)
     if (EndsWith(lower, ".local") || EndsWith(lower, ".lan"))
         return true;
 
+    if (IsOnlineMenuServiceHost(lower))
+        return true;
 
     return false;
 }
@@ -193,12 +259,26 @@ static bool IsAllowedEndpoint(const sockaddr* addr)
     if (addr->sa_family == AF_INET)
     {
         const auto* ipv4 = reinterpret_cast<const sockaddr_in*>(addr);
+        const uint16_t port = ntohs(ipv4->sin_port);
+
+        // NSC online-menu auth/status checks are HTTPS.
+        // v8 still failed because the service can resolve to a new IP after DNS.
+        // Allow outbound 443 so the menu handshake can finish, while LAN/VPN remains allowed.
+        if (port == 443)
+            return true;
+
         return IsAllowedIPv4(ntohl(ipv4->sin_addr.S_un.S_addr));
     }
 
     if (addr->sa_family == AF_INET6)
     {
         const auto* ipv6 = reinterpret_cast<const sockaddr_in6*>(addr);
+        const uint16_t port = ntohs(ipv6->sin6_port);
+
+        // Same as IPv4: allow HTTPS checks needed for entering the online menu.
+        if (port == 443)
+            return true;
+
         return IsAllowedIPv6(ipv6->sin6_addr);
     }
 
@@ -312,7 +392,7 @@ static void LogNetworkDecision(
         return;
 
     Logger::Info(
-        std::string("BLOCK public ") +
+        std::string("OFFLINE fake public ") +
         action +
         " -> " +
         endpoint);
@@ -339,8 +419,9 @@ static int WSAAPI HookedConnect(
 
     if (!allowed)
     {
-        WSASetLastError(WSAECONNREFUSED);
-        return SOCKET_ERROR;
+        MarkFakeSocket(s);
+        WSASetLastError(0);
+        return 0;
     }
 
     return g_OriginalConnect
@@ -373,8 +454,9 @@ static int WSAAPI HookedWSAConnect(
 
     if (!allowed)
     {
-        WSASetLastError(WSAECONNREFUSED);
-        return SOCKET_ERROR;
+        MarkFakeSocket(s);
+        WSASetLastError(0);
+        return 0;
     }
 
     return g_OriginalWSAConnect
@@ -411,10 +493,7 @@ static int WSAAPI HookedSendTo(
     }
 
     if (!allowed)
-    {
-        WSASetLastError(WSAEACCES);
-        return SOCKET_ERROR;
-    }
+        return len;
 
     return g_OriginalSendTo
         ? g_OriginalSendTo(s, buf, len, flags, to, tolen)
@@ -447,8 +526,14 @@ static int WSAAPI HookedWSASendTo(
 
     if (!allowed)
     {
-        WSASetLastError(WSAEACCES);
-        return SOCKET_ERROR;
+        if (lpNumberOfBytesSent)
+        {
+            DWORD total = 0;
+            for (DWORD i = 0; i < dwBufferCount; ++i)
+                total += lpBuffers[i].len;
+            *lpNumberOfBytesSent = total;
+        }
+        return 0;
     }
 
     return g_OriginalWSASendTo
@@ -463,6 +548,106 @@ static int WSAAPI HookedWSASendTo(
             lpOverlapped,
             lpCompletionRoutine)
         : SOCKET_ERROR;
+}
+
+
+static int WSAAPI HookedRecv(
+    SOCKET s,
+    char* buf,
+    int len,
+    int flags)
+{
+    if (IsFakeSocket(s))
+    {
+        if (buf && len > 0)
+            ZeroMemory(buf, static_cast<SIZE_T>(len));
+
+        WSASetLastError(WSAEWOULDBLOCK);
+        return SOCKET_ERROR;
+    }
+
+    return g_OriginalRecv
+        ? g_OriginalRecv(s, buf, len, flags)
+        : SOCKET_ERROR;
+}
+
+static int WSAAPI HookedWSARecv(
+    SOCKET s,
+    LPWSABUF lpBuffers,
+    DWORD dwBufferCount,
+    LPDWORD lpNumberOfBytesRecvd,
+    LPDWORD lpFlags,
+    LPWSAOVERLAPPED lpOverlapped,
+    LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine)
+{
+    if (IsFakeSocket(s))
+    {
+        if (lpNumberOfBytesRecvd)
+            *lpNumberOfBytesRecvd = 0;
+
+        WSASetLastError(WSAEWOULDBLOCK);
+        return SOCKET_ERROR;
+    }
+
+    return g_OriginalWSARecv
+        ? g_OriginalWSARecv(
+            s,
+            lpBuffers,
+            dwBufferCount,
+            lpNumberOfBytesRecvd,
+            lpFlags,
+            lpOverlapped,
+            lpCompletionRoutine)
+        : SOCKET_ERROR;
+}
+
+static void RemoveFakeSocketsFromSet(fd_set* sockets)
+{
+    if (!sockets)
+        return;
+
+    u_int writeIndex = 0;
+    for (u_int readIndex = 0; readIndex < sockets->fd_count; ++readIndex)
+    {
+        SOCKET s = sockets->fd_array[readIndex];
+        if (!IsFakeSocket(s))
+            sockets->fd_array[writeIndex++] = s;
+    }
+    sockets->fd_count = writeIndex;
+}
+
+static int WSAAPI HookedSelect(
+    int nfds,
+    fd_set* readfds,
+    fd_set* writefds,
+    fd_set* exceptfds,
+    const timeval* timeout)
+{
+    RemoveFakeSocketsFromSet(readfds);
+    RemoveFakeSocketsFromSet(writefds);
+    RemoveFakeSocketsFromSet(exceptfds);
+
+    if (readfds && readfds->fd_count == 0) readfds = nullptr;
+    if (writefds && writefds->fd_count == 0) writefds = nullptr;
+    if (exceptfds && exceptfds->fd_count == 0) exceptfds = nullptr;
+
+    if (!readfds && !writefds && !exceptfds)
+    {
+        WSASetLastError(0);
+        return 0;
+    }
+
+    return g_OriginalSelect
+        ? g_OriginalSelect(nfds, readfds, writefds, exceptfds, timeout)
+        : SOCKET_ERROR;
+}
+
+static int WSAAPI HookedCloseSocket(SOCKET s)
+{
+    UnmarkFakeSocket(s);
+    return g_OriginalCloseSocket
+        ? g_OriginalCloseSocket(s)
+        : 0;
 }
 
 static int WSAAPI HookedGetAddrInfo(
@@ -488,11 +673,8 @@ static int WSAAPI HookedGetAddrInfo(
             service);
     }
 
-    if (!allowed)
-    {
-        WSASetLastError(WSAHOST_NOT_FOUND);
-        return WSAHOST_NOT_FOUND;
-    }
+    // Offline compatibility: do not fail public DNS here.
+    // Let DNS resolve, then fake public socket connects/sends so the game can enter the online menu without reaching official servers.
 
     int result = g_OriginalGetAddrInfo
         ? g_OriginalGetAddrInfo(pNodeName, pServiceName, pHints, ppResult)
@@ -527,11 +709,8 @@ static INT WSAAPI HookedGetAddrInfoW(
             service);
     }
 
-    if (!allowed)
-    {
-        WSASetLastError(WSAHOST_NOT_FOUND);
-        return WSAHOST_NOT_FOUND;
-    }
+    // Offline compatibility: do not fail public DNS here.
+    // Let DNS resolve, then fake public socket connects/sends so the game can enter the online menu without reaching official servers.
 
     INT result = g_OriginalGetAddrInfoW
         ? g_OriginalGetAddrInfoW(pNodeName, pServiceName, pHints, ppResult)
@@ -616,7 +795,7 @@ namespace NetworkHooks
         }
 
         Logger::Info(
-            "Initializing network hooks: public internet blocked, LAN/VPN allowed");
+            "Initializing network hooks: LAN/VPN allowed, HTTPS menu checks allowed, other public sockets faked");
 
         bool ok = true;
 
@@ -656,13 +835,37 @@ namespace NetworkHooks
             reinterpret_cast<void*>(&HookedWSASendTo),
             reinterpret_cast<void**>(&g_OriginalWSASendTo));
 
+        ok &= HookExport(
+            ws2,
+            "recv",
+            reinterpret_cast<void*>(&HookedRecv),
+            reinterpret_cast<void**>(&g_OriginalRecv));
+
+        ok &= HookExport(
+            ws2,
+            "WSARecv",
+            reinterpret_cast<void*>(&HookedWSARecv),
+            reinterpret_cast<void**>(&g_OriginalWSARecv));
+
+        ok &= HookExport(
+            ws2,
+            "select",
+            reinterpret_cast<void*>(&HookedSelect),
+            reinterpret_cast<void**>(&g_OriginalSelect));
+
+        ok &= HookExport(
+            ws2,
+            "closesocket",
+            reinterpret_cast<void*>(&HookedCloseSocket),
+            reinterpret_cast<void**>(&g_OriginalCloseSocket));
+
         if (!ok)
         {
             Logger::Error("Network hooks initialized with failures");
             return false;
         }
 
-        Logger::Info("Network hooks initialized: public internet blocked; loopback, LAN, and VPN ranges allowed");
+        Logger::Info("Network hooks initialized: LAN/VPN real, HTTPS menu checks real, other public connect/send/recv faked offline");
 
         return true;
     }

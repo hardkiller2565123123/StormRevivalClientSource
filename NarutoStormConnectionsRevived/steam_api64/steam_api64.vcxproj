@@ -219,6 +219,8 @@
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="NetworkStateBypass.h" />
+    <ClInclude Include="OnlineStorageBypass.h" />
     <ClInclude Include="MinHook.h" />
     <ClInclude Include="ModLoader.h" />
     <ClInclude Include="NetworkHooks.h" />
@@ -470,7 +472,10 @@
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="ModLoader.cpp" />
     <ClCompile Include="NetworkHooks.cpp" />
-    <ClCompile Include="OnlineCheckBypass.cpp" />    <ClCompile Include="SteamAuth.cpp" />
+    <ClCompile Include="NetworkStateBypass.cpp" />
+    <ClCompile Include="OnlineCheckBypass.cpp" />
+    <ClCompile Include="OnlineStorageBypass.cpp" />
+    <ClCompile Include="SteamAuth.cpp" />
     <ClCompile Include="SteamCallbackManager.cpp" />
     <ClCompile Include="SteamCallResultManager.cpp" />
     <ClCompile Include="SteamConfig.cpp" />

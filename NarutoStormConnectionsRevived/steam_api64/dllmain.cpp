@@ -91,15 +91,19 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID)
     {
         DisableThreadLibraryCalls(module);
         g_MainThread = CreateThread(nullptr, 0, MainThread, nullptr, 0, nullptr);
+        if (g_MainThread)
+            CloseHandle(g_MainThread);
+        g_MainThread = nullptr;
         break;
     }
     case DLL_PROCESS_DETACH:
     {
-        NetworkHooks::Shutdown();
+        // Shut down graphics hooks first so Present/ResizeBuffers cannot run while other systems are unloading.
+        DX11Overlay::Shutdown();
         InputFocusGuard::Shutdown();
+        NetworkHooks::Shutdown();
         OnlineCheckBypass::Shutdown();
         FakeSteamCore::Shutdown();
-        DX11Overlay::Shutdown();
         HookManager::Shutdown();
         SteamDiagnostics::Shutdown();
         Logger::Shutdown();

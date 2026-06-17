@@ -42,6 +42,7 @@ namespace SteamLobbyManager
     bool JoinAddress(const std::string& host, uint16_t port, const std::string& password);
     void LeaveLobby(CSteamID lobbyID);
     void LeaveCurrentLobby();
+    void ImportRemoteLobbyMember(CSteamID lobbyID, CSteamID member, const std::string& name, const std::string& host, uint16_t port);
 
     CSteamID GetCurrentLobby();
     uint64_t GetCurrentLobbyID();

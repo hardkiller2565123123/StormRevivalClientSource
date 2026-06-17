@@ -18,6 +18,7 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include <cmath>
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -44,6 +45,7 @@ bool HookGameWindow();
 void ApplyStyle();
 bool InitImGui(IDXGISwapChain* swapChain);
 void DrawAlwaysStatusBar();
+void DrawStormAPINotification();
 void DrawDropdownPanel();
 void DrawAnimatedTopMenu();
 void DrawImGui(IDXGISwapChain* swapChain);

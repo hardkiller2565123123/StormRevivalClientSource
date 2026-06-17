@@ -4,6 +4,7 @@
 #include "SteamDiagnostics.h"
 #include "SteamIDManager.h"
 #include "SteamPersonaManager.h"
+#include "SteamLobbyManager.h"
 #include "SteamCallbackManager.h"
 #include "SteamCallResultManager.h"
 #include "SteamVersionLogger.h"
@@ -345,15 +346,15 @@ public:
         TraceFriends("GetFriendCount", "flags=" + std::to_string(flags));
         NSR_UNUSED(flags);
         Logger::Info("SteamFriends::GetFriendCount");
-        return 0;
+        return std::max(1, SteamPersonaManager::GetFriendCount());
     }
 
     CSteamID GetFriendByIndexValue(int index, int flags)
     {
-        TraceFriends("GetFriendByIndex", "index=" + std::to_string(index) + " flags=" + std::to_string(flags));
         NSR_UNUSED(flags);
         Logger::Info("SteamFriends::GetFriendByIndex");
-        return SteamPersonaManager::GetFriendByIndex(index);
+        CSteamID id = SteamPersonaManager::GetFriendByIndex(index);
+        return id ? id : SteamIDManager::GetLocalSteamID();
     }
 
     virtual CSteamID GetFriendByIndex(int index, int flags)
@@ -367,7 +368,8 @@ public:
         TraceFriends("GetFriendRelationship", std::to_string(static_cast<unsigned long long>(id)));
         NSR_UNUSED(id);
         Logger::Info("SteamFriends::GetFriendRelationship");
-        return 0;
+        // k_EFriendRelationshipFriend. Storm 4 expects lobby members to be valid friends.
+        return 3;
     }
 
     virtual int GetFriendPersonaState(CSteamID id)
@@ -382,9 +384,8 @@ public:
     virtual const char* GetFriendPersonaName(CSteamID id)
     {
         id = ResolveSteamIDArgument(id, "GetFriendPersonaName");
-        TraceFriends("GetFriendPersonaName", std::to_string(static_cast<unsigned long long>(id)));
         Logger::Info("SteamFriends::GetFriendPersonaName");
-        return SteamPersonaManager::GetFriendPersonaName(id);
+        return SteamPersonaManager::GetFriendPersonaName(id ? id : SteamIDManager::GetLocalSteamID());
     }
 
     virtual bool GetFriendGamePlayed(CSteamID id, void* info)
@@ -394,13 +395,20 @@ public:
         NSR_UNUSED(id);
         Logger::Info("SteamFriends::GetFriendGamePlayed");
 
+        const CSteamID currentLobby = SteamLobbyManager::GetCurrentLobby();
+
         if (info)
         {
             FriendGameInfoStub gameInfo{};
+            gameInfo.GameID = 349040;
+            gameInfo.GameIP = 0;
+            gameInfo.GamePort = 0;
+            gameInfo.QueryPort = 0;
+            gameInfo.LobbyID = currentLobby;
             SafeCopy(info, sizeof(gameInfo), &gameInfo, sizeof(gameInfo), "GetFriendGamePlayed");
         }
 
-        return false;
+        return currentLobby != 0;
     }
 
     virtual const char* GetFriendPersonaNameHistory(CSteamID id, int index)
@@ -532,17 +540,19 @@ public:
 
     virtual int GetFriendCountFromSource(CSteamID source)
     {
+        source = ResolveSteamIDArgument(source, "GetFriendCountFromSource");
         NSR_UNUSED(source);
         Logger::Info("SteamFriends::GetFriendCountFromSource");
-        return 0;
+        return std::max(1, SteamPersonaManager::GetFriendCount());
     }
 
     CSteamID GetFriendFromSourceByIndexValue(CSteamID source, int index)
     {
+        source = ResolveSteamIDArgument(source, "GetFriendFromSourceByIndex");
         NSR_UNUSED(source);
-        NSR_UNUSED(index);
         Logger::Info("SteamFriends::GetFriendFromSourceByIndex");
-        return 0;
+        CSteamID id = SteamPersonaManager::GetFriendByIndex(index);
+        return id ? id : SteamIDManager::GetLocalSteamID();
     }
 
     virtual CSteamID GetFriendFromSourceByIndex(CSteamID source, int index)
@@ -552,9 +562,16 @@ public:
 
     virtual bool IsUserInSource(CSteamID user, CSteamID source)
     {
-        NSR_UNUSED(user);
+        user = ResolveSteamIDArgument(user, "IsUserInSource/user");
+        source = ResolveSteamIDArgument(source, "IsUserInSource/source");
         NSR_UNUSED(source);
         Logger::Info("SteamFriends::IsUserInSource");
+        const uint64_t wanted = static_cast<uint64_t>(user);
+        for (int i = 0; i < SteamPersonaManager::GetFriendCount(); ++i)
+        {
+            if (static_cast<uint64_t>(SteamPersonaManager::GetFriendByIndex(i)) == wanted)
+                return true;
+        }
         return false;
     }
 
@@ -1069,15 +1086,9 @@ void* FakeSteamInterfaces::Friends()
 
 void* FakeSteamInterfaces::FriendsForVersion(const char* version)
 {
+    NSR_UNUSED(version);
     SteamVersionLogger::LogInterfaceRequest("FakeSteamInterfaces::Friends", "SteamFriends");
-    const std::string requested = SafeVersionString(version, "SteamFriends015");
-    const std::string upper = UpperInterfaceName(requested);
-    SteamVersionLogger::LogInterfaceRequest("FakeSteamInterfaces::FriendsForVersion", requested.c_str());
-
-    if (upper.find("STEAMFRIENDS") != std::string::npos)
-        Logger::Info("SteamFriends: offline emulated interface returned for " + requested);
-    else
-        Logger::Info("SteamFriends: offline emulated interface returned");
-
+    SteamVersionLogger::LogInterfaceRequest("FakeSteamInterfaces::FriendsForVersion", "SteamFriends015");
+    Logger::Info("SteamFriends: offline emulated interface returned for SteamFriends015");
     return &g_Interface;
 }

@@ -116,34 +116,14 @@ namespace
 
     void MarkCallResultRegistered(void* callback)
     {
-        if (!callback)
-            return;
-
-        auto* base = reinterpret_cast<CallbackBaseShim*>(callback);
-
-        if (!IsWritableMemory(base, sizeof(CallbackBaseShim)))
-        {
-            Logger::Error("SteamCallResultManager skipped invalid register flag write");
-            return;
-        }
-
-        base->Flags |= kCallbackRegistered;
+        // NSC online-menu stability: store CCallResult pointers internally only.
+        // Do not write flags into game-owned callback objects.
+        NSR_UNUSED(callback);
     }
 
     void MarkCallResultUnregistered(void* callback)
     {
-        if (!callback)
-            return;
-
-        auto* base = reinterpret_cast<CallbackBaseShim*>(callback);
-
-        if (!IsWritableMemory(base, sizeof(CallbackBaseShim)))
-        {
-            Logger::Error("SteamCallResultManager skipped invalid unregister flag write");
-            return;
-        }
-
-        base->Flags &= static_cast<uint8_t>(~kCallbackRegistered);
+        NSR_UNUSED(callback);
     }
 
     std::vector<unsigned char> BuildDispatchPayload(void* callback, const std::vector<unsigned char>& data)
@@ -271,6 +251,18 @@ namespace SteamCallResultManager
         completed.m_cubParam = static_cast<uint32_t>(record.Data.size());
         SteamCallbackManager::PushCallback(kCallbackSteamAPICallCompleted, &completed, sizeof(completed));
 
+        // NSC sometimes polls async SteamAPICall_t results without registering a
+        // CCallResult object. Also mirror important successful async results as
+        // regular callbacks so the menu state machine cannot time out waiting
+        // for Steam to advance.
+        if (callbackID == 1104 || callbackID == 1105 || callbackID == 1106 ||
+            callbackID == 510 || callbackID == 513 || callbackID == 504 ||
+            callbackID == 163)
+        {
+            if (data && size > 0)
+                SteamCallbackManager::PushCallback(callbackID, data, size);
+        }
+
         Logger::Info(
             "SteamCallResultManager created call=" +
             std::to_string(static_cast<unsigned long long>(record.Call)) +
@@ -332,9 +324,19 @@ namespace SteamCallResultManager
                 }
             }
 
+            Logger::Info(
+                "SteamCallResultManager::GetData call=" +
+                std::to_string(static_cast<unsigned long long>(call)) +
+                " callbackID=" +
+                std::to_string(result.CallbackID) +
+                " bytes=" +
+                std::to_string(static_cast<unsigned long long>(result.Data.size())));
             return true;
         }
 
+        Logger::Info(
+            "SteamCallResultManager::GetData missing call=" +
+            std::to_string(static_cast<unsigned long long>(call)));
         return false;
     }
 
@@ -383,14 +385,68 @@ namespace SteamCallResultManager
         if (!callResult)
             return;
 
-        std::lock_guard<std::mutex> lock(g_Mutex);
-        g_Registered[call].push_back(callResult);
-        MarkCallResultRegistered(callResult);
+        std::vector<unsigned char> immediateData;
+        int immediateCallbackID = 0;
+        bool shouldImmediateDispatch = false;
 
-        SteamDiagnostics::MarkSteam(
-            "RegisterCallResult",
-            "call=" +
-            std::to_string(static_cast<unsigned long long>(call)));
+        {
+            std::lock_guard<std::mutex> lock(g_Mutex);
+
+            auto& list = g_Registered[call];
+            if (std::find(list.begin(), list.end(), callResult) == list.end())
+                list.push_back(callResult);
+            MarkCallResultRegistered(callResult);
+
+            auto resultIt = std::find_if(
+                g_Results.begin(),
+                g_Results.end(),
+                [call](const CallResultRecord& result) {
+                    return result.Call == call && result.Completed;
+                });
+
+            if (resultIt != g_Results.end())
+            {
+                immediateCallbackID = resultIt->CallbackID;
+                immediateData = resultIt->Data;
+                shouldImmediateDispatch = true;
+
+                // NSC registers leaderboard call results late and can enter the
+                // online-error path before the next SteamAPI_RunCallbacks tick.
+                // Remove this call from the pending registration list and fire
+                // the result right now, exactly like an already-completed Steam
+                // async result.
+                list.erase(std::remove(list.begin(), list.end(), callResult), list.end());
+            }
+
+            SteamDiagnostics::MarkSteam(
+                "RegisterCallResult",
+                "call=" +
+                std::to_string(static_cast<unsigned long long>(call)) +
+                " immediate=" +
+                (shouldImmediateDispatch ? "1" : "0") +
+                " callbackID=" +
+                std::to_string(immediateCallbackID));
+        }
+
+        if (shouldImmediateDispatch)
+        {
+            Logger::Info(
+                "SteamCallResultManager immediate dispatch call=" +
+                std::to_string(static_cast<unsigned long long>(call)) +
+                " callbackID=" +
+                std::to_string(immediateCallbackID) +
+                " bytes=" +
+                std::to_string(static_cast<unsigned long long>(immediateData.size())));
+
+            SteamDiagnostics::MarkSteam(
+                "ImmediateCallResultDispatch",
+                "call=" +
+                std::to_string(static_cast<unsigned long long>(call)) +
+                " callbackID=" +
+                std::to_string(immediateCallbackID));
+
+            DispatchCallResult(callResult, call, immediateData);
+        }
     }
 
     void Unregister(void* callResult, SteamAPICall_t call)
@@ -421,6 +477,11 @@ namespace SteamCallResultManager
 
     void RegisterCallResult(void* callResult, SteamAPICall_t call)
     {
+        Logger::Info(
+            "SteamAPI_RegisterCallResult callback=" +
+            PointerText(callResult) +
+            " call=" +
+            std::to_string(static_cast<unsigned long long>(call)));
         Register(callResult, call);
     }
 

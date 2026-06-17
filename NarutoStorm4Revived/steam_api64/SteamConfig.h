@@ -25,7 +25,14 @@ namespace SteamConfig
         bool EnableLocalStats = true;
         bool EnableLocalMatchmaking = true;
         bool AutoInstanceSteamID = true;
+        bool AutoDetectSteamID = true;
         bool EnableEmbeddedMasterServer = true;
+        std::vector<std::string> RadminPeers;
+        std::vector<std::string> EvolutionFolders;
+        std::vector<AppId_t> OwnedDlcAppIds;
+        std::string DlcFolder;
+        bool AutoDetectDlcFolder = true;
+        bool EnableDlcUnlock = false;
     };
 
     bool Init();
@@ -40,6 +47,18 @@ namespace SteamConfig
     bool IsRevivedServer();
     bool ShouldBlockOfficialTraffic();
     bool IsLanOnly();
+    bool IsDlcUnlockEnabled();
+    void SetDlcUnlockEnabled(bool enabled);
+    bool IsOwnedDlc(AppId_t appID);
+    bool HasDlcContentOnDisk();
+    bool IsDlcInstalledOnDisk(AppId_t appID);
+    bool IsDlcAvailable(AppId_t appID);
+    const std::string& GetDlcFolder();
+    std::string GetGameFolder();
+    std::vector<std::string> GetDlcContentProbePaths();
+    std::vector<std::string> GetRadminPeers();
+    std::vector<std::string> GetEvolutionFolders();
+    std::string GetDlcInstallDir(AppId_t appID);
 
     const std::string& GetPath();
     const char* ModeName(Mode mode);

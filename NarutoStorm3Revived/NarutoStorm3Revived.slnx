@@ -1,7 +1,8 @@
-﻿<Solution>
+<Solution>
   <Configurations>
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="NS3FrameWork/NS3FrameWork.vcxproj" Id="c3f8b4e3-3e5d-4a9b-8c4f-72f9d55ce901" />
   <Project Path="steam_api/steam_api.vcxproj" Id="4bbbe7c5-11e3-49bc-9d6d-0e8356edb5da" />
 </Solution>

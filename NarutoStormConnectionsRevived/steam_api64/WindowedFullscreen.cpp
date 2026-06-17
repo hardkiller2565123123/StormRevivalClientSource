@@ -3,12 +3,49 @@
 #include "Logger.h"
 
 static HWND g_GameWindow = nullptr;
+static HWND g_GameWindowHint = nullptr;
 static WNDPROC g_OriginalWndProc = nullptr;
 static bool g_Applied = false;
 static DWORD g_BackgroundKeepAliveArmTick = 0;
 static bool g_BackgroundKeepAliveLogged = false;
 
 extern bool g_PatchBackgroundPauseFix;
+
+static bool IsSameProcessWindow(HWND hwnd)
+{
+    if (!hwnd || !IsWindow(hwnd))
+        return false;
+
+    DWORD windowProcessId = 0;
+    GetWindowThreadProcessId(hwnd, &windowProcessId);
+    return windowProcessId == GetCurrentProcessId();
+}
+
+static bool IsRealGameRenderWindow(HWND hwnd)
+{
+    if (!IsSameProcessWindow(hwnd))
+        return false;
+
+    if (!IsWindowVisible(hwnd))
+        return false;
+
+    char className[256]{};
+    GetClassNameA(hwnd, className, sizeof(className));
+
+    if (_stricmp(className, "ConsoleWindowClass") == 0)
+        return false;
+
+    if (strstr(className, "Console") || strstr(className, "CASCADIA") || strstr(className, "WindowsForms") || strstr(className, "Qt") || strstr(className, "Chrome"))
+        return false;
+
+    RECT rect{};
+    if (!GetWindowRect(hwnd, &rect))
+        return false;
+
+    const int width = rect.right - rect.left;
+    const int height = rect.bottom - rect.top;
+    return width >= 640 && height >= 360;
+}
 
 static bool BackgroundKeepAliveReady()
 {
@@ -61,6 +98,79 @@ static LRESULT CALLBACK GameWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARA
     return CallWindowProcA(g_OriginalWndProc, hwnd, msg, wParam, lParam);
 }
 
+static bool WindowTitleLooksLikeGame(const char* title)
+{
+    if (!title || !title[0])
+        return false;
+
+    // Storm Connections main window titles normally contain one of these.
+    // Do NOT fall back to random visible windows, because that can borderless the debug console/CMD window.
+    return strstr(title, "NARUTO") ||
+        strstr(title, "Naruto") ||
+        strstr(title, "BORUTO") ||
+        strstr(title, "Storm") ||
+        strstr(title, "STORM") ||
+        strstr(title, "NSUNSC") ||
+        strstr(title, "Ultimate Ninja");
+}
+
+static bool IsDefinitelyNotGameWindow(HWND hwnd)
+{
+    if (!IsRealGameRenderWindow(hwnd))
+        return true;
+
+    if (!IsWindowVisible(hwnd))
+        return true;
+
+    if (GetAncestor(hwnd, GA_ROOT) != hwnd)
+        return true;
+
+    if (GetWindow(hwnd, GW_OWNER) != nullptr)
+        return true;
+
+    char className[256]{};
+    GetClassNameA(hwnd, className, sizeof(className));
+
+    // Console/CMD windows created by AllocConsole are visible top-level windows in the same process.
+    // Never apply borderless fullscreen or focus hooks to them.
+    if (_stricmp(className, "ConsoleWindowClass") == 0)
+        return true;
+
+    if (strstr(className, "Console") || strstr(className, "WindowsForms") || strstr(className, "Qt") || strstr(className, "Chrome"))
+        return true;
+
+    const LONG_PTR style = GetWindowLongPtrA(hwnd, GWL_STYLE);
+    const LONG_PTR exStyle = GetWindowLongPtrA(hwnd, GWL_EXSTYLE);
+
+    if ((style & WS_CHILD) != 0)
+        return true;
+
+    if ((exStyle & WS_EX_TOOLWINDOW) != 0)
+        return true;
+
+    RECT rect{};
+    if (!GetWindowRect(hwnd, &rect))
+        return true;
+
+    const int width = rect.right - rect.left;
+    const int height = rect.bottom - rect.top;
+
+    // Avoid tiny utility/debug windows.
+    if (width < 640 || height < 360)
+        return true;
+
+    char title[256]{};
+    GetWindowTextA(hwnd, title, sizeof(title));
+
+    if (strstr(title, "NarutoStormConnectionsRevived Debug Console"))
+        return true;
+
+    if (strstr(title, "Command Prompt") || strstr(title, "Windows PowerShell") || strstr(title, "cmd.exe"))
+        return true;
+
+    return !WindowTitleLooksLikeGame(title);
+}
+
 static BOOL CALLBACK EnumWindowsCallback(HWND hwnd, LPARAM)
 {
     DWORD windowProcessId = 0;
@@ -69,33 +179,31 @@ static BOOL CALLBACK EnumWindowsCallback(HWND hwnd, LPARAM)
     if (windowProcessId != GetCurrentProcessId())
         return TRUE;
 
-    if (!IsWindowVisible(hwnd))
+    if (IsDefinitelyNotGameWindow(hwnd))
         return TRUE;
 
     char title[256]{};
+    char className[256]{};
     GetWindowTextA(hwnd, title, sizeof(title));
-
-    if (strlen(title) <= 0)
-        return TRUE;
-
-    if (strstr(title, "NarutoStormConnectionsRevived Debug Console"))
-        return TRUE;
-
-    if (strstr(title, "NARUTO") ||
-        strstr(title, "Naruto") ||
-        strstr(title, "NSUNS") ||
-        strstr(title, "Storm"))
-    {
-        g_GameWindow = hwnd;
-        return FALSE;
-    }
+    GetClassNameA(hwnd, className, sizeof(className));
 
     g_GameWindow = hwnd;
+
+    char message[512]{};
+    sprintf_s(message, "Selected game window for borderless fullscreen title='%s' class='%s'", title, className);
+    Logger::Info(message);
+
     return FALSE;
 }
 
 static HWND FindGameWindow()
 {
+    if (IsRealGameRenderWindow(g_GameWindowHint))
+    {
+        g_GameWindow = g_GameWindowHint;
+        return g_GameWindow;
+    }
+
     g_GameWindow = nullptr;
     EnumWindows(EnumWindowsCallback, 0);
     return g_GameWindow;
@@ -115,9 +223,33 @@ static void HookGameWindowProc(HWND hwnd)
         Logger::Error("Failed to hook game window procedure");
 }
 
+static bool IsBorderlessFullscreenApplied(HWND hwnd, const RECT& rect)
+{
+    if (!hwnd)
+        return false;
+
+    const LONG_PTR style = GetWindowLongPtrA(hwnd, GWL_STYLE);
+    const LONG_PTR exStyle = GetWindowLongPtrA(hwnd, GWL_EXSTYLE);
+
+    if ((style & (WS_CAPTION | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU)) != 0)
+        return false;
+
+    if ((exStyle & (WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE | WS_EX_WINDOWEDGE)) != 0)
+        return false;
+
+    RECT windowRect{};
+    if (!GetWindowRect(hwnd, &windowRect))
+        return false;
+
+    return windowRect.left == rect.left &&
+        windowRect.top == rect.top &&
+        windowRect.right == rect.right &&
+        windowRect.bottom == rect.bottom;
+}
+
 static void ApplyBorderlessFullscreen(HWND hwnd)
 {
-    if (!hwnd || g_Applied)
+    if (!hwnd)
         return;
 
     HMONITOR monitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
@@ -126,6 +258,11 @@ static void ApplyBorderlessFullscreen(HWND hwnd)
     monitorInfo.cbSize = sizeof(MONITORINFO);
 
     if (!GetMonitorInfoA(monitor, &monitorInfo))
+        return;
+
+    const RECT& rect = monitorInfo.rcMonitor;
+
+    if (g_Applied && IsBorderlessFullscreenApplied(hwnd, rect))
         return;
 
     LONG_PTR style = GetWindowLongPtrA(hwnd, GWL_STYLE);
@@ -145,7 +282,7 @@ static void ApplyBorderlessFullscreen(HWND hwnd)
     SetWindowLongPtrA(hwnd, GWL_STYLE, style);
     SetWindowLongPtrA(hwnd, GWL_EXSTYLE, exStyle);
 
-    const RECT& rect = monitorInfo.rcMonitor;
+    ShowWindow(hwnd, SW_RESTORE);
 
     SetWindowPos(
         hwnd,
@@ -160,12 +297,19 @@ static void ApplyBorderlessFullscreen(HWND hwnd)
 
     HookGameWindowProc(hwnd);
 
-    g_Applied = true;
-    g_BackgroundKeepAliveArmTick = GetTickCount();
-    g_BackgroundKeepAliveLogged = false;
+    if (!g_Applied)
+    {
+        g_BackgroundKeepAliveArmTick = GetTickCount();
+        g_BackgroundKeepAliveLogged = false;
+        Logger::Info("Windowed fullscreen applied to game window");
+        Logger::Info("Background keep-alive will arm after startup audio grace");
+    }
+    else
+    {
+        Logger::Info("Windowed fullscreen corrected after game window changed");
+    }
 
-    Logger::Info("Windowed fullscreen applied to game window");
-    Logger::Info("Background keep-alive will arm after startup audio grace");
+    g_Applied = true;
 }
 
 static DWORD WINAPI WindowedFullscreenThread(LPVOID)
@@ -179,18 +323,41 @@ static DWORD WINAPI WindowedFullscreenThread(LPVOID)
         if (hwnd)
         {
             ApplyBorderlessFullscreen(hwnd);
-            return 0;
+            Sleep(1000);
+            continue;
         }
 
         Sleep(500);
     }
 
-    Logger::Error("Failed to find game window for windowed fullscreen");
+    if (!g_Applied)
+        Logger::Error("Failed to find game window for windowed fullscreen");
     return 0;
 }
 
 namespace WindowedFullscreen
 {
+    void SetGameWindowHint(HWND hwnd)
+    {
+        if (!IsRealGameRenderWindow(hwnd))
+            return;
+
+        if (g_GameWindowHint == hwnd)
+            return;
+
+        g_GameWindowHint = hwnd;
+        g_GameWindow = hwnd;
+
+        char title[256]{};
+        char className[256]{};
+        GetWindowTextA(hwnd, title, sizeof(title));
+        GetClassNameA(hwnd, className, sizeof(className));
+
+        char message[512]{};
+        sprintf_s(message, "DX11 swapchain selected game window title='%s' class='%s'", title, className);
+        Logger::Info(message);
+    }
+
     void Init()
     {
         CreateThread(

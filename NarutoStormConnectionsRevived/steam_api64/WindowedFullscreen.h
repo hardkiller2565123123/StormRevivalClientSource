@@ -5,4 +5,5 @@
 namespace WindowedFullscreen
 {
     void Init();
+    void SetGameWindowHint(HWND hwnd);
 }

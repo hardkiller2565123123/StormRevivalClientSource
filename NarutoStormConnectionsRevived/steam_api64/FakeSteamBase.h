@@ -135,11 +135,34 @@ protected:
 
     uintptr_t LogSlot(int slot)
     {
-        Logger::Info(
-            std::string(InterfaceName()) +
-            ": virtual slot " +
-            std::to_string(slot) +
-            " called");
+        // Keep logs useful: NSC calls some generic SteamInput/SteamNetworking
+        // virtual fallback slots every frame. Log the first call, then only
+        // occasionally so the real online-menu failure is visible.
+        struct SlotKey
+        {
+            const char* Name;
+            int Slot;
+        };
+
+        static std::mutex s_LogMutex;
+        static std::map<std::string, uint64_t> s_Counts;
+
+        const std::string key = std::string(InterfaceName()) + ":" + std::to_string(slot);
+        uint64_t count = 0;
+        {
+            std::lock_guard<std::mutex> lock(s_LogMutex);
+            count = ++s_Counts[key];
+        }
+
+        if (count == 1 || count == 10 || count == 100 || (count % 1000) == 0)
+        {
+            Logger::Info(
+                std::string(InterfaceName()) +
+                ": virtual slot " +
+                std::to_string(slot) +
+                " called x" +
+                std::to_string(static_cast<unsigned long long>(count)));
+        }
 
         return 0;
     }

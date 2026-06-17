@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{c097aef3-c5d5-43d7-8673-4280fad81d98}</ProjectGuid>
+    <RootNamespace>NSRFrameWork</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Platform)'=='x64'">
+    <MinHookLibName>libMinHook.x64.lib</MinHookLibName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='Win32'">
+    <MinHookLibName>libMinHook.x86.lib</MinHookLibName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>C:\Users\dylan\source\repos\NarutoRevival Offline Release\Build\nsr\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>C:\Users\dylan\source\repos\NarutoRevival Offline Release\Build\_obj\nsr\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetName>NSRFrameWork</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;FRAMEWORK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\steam_api;$(ProjectDir)..\steam_api\sdk_includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;d2d1.lib;dwrite.lib;user32.lib;Ws2_32.lib;..\steam_api\$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\steam_api\HookManager.h" />
+    <ClInclude Include="..\steam_api\imconfig.h" />
+    <ClInclude Include="..\steam_api\imgui.h" />
+    <ClInclude Include="..\steam_api\imgui_impl_dx11.h" />
+    <ClInclude Include="..\steam_api\imgui_impl_win32.h" />
+    <ClInclude Include="..\steam_api\imgui_internal.h" />
+    <ClInclude Include="..\steam_api\imstb_rectpack.h" />
+    <ClInclude Include="..\steam_api\imstb_textedit.h" />
+    <ClInclude Include="..\steam_api\imstb_truetype.h" />
+    <ClInclude Include="..\steam_api\Logger.h" />
+    <ClInclude Include="..\steam_api\MinHook.h" />
+    <ClInclude Include="..\steam_api\StdInc.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FrameWorkApi.cpp" />
+    <ClCompile Include="..\steam_api\HookManager.cpp" />
+    <ClCompile Include="..\steam_api\imgui.cpp" />
+    <ClCompile Include="..\steam_api\imgui_draw.cpp" />
+    <ClCompile Include="..\steam_api\imgui_impl_dx11.cpp" />
+    <ClCompile Include="..\steam_api\imgui_impl_win32.cpp" />
+    <ClCompile Include="..\steam_api\imgui_tables.cpp" />
+    <ClCompile Include="..\steam_api\imgui_widgets.cpp" />
+    <ClCompile Include="..\steam_api\Logger.cpp" />
+    <ClCompile Include="AssetBackupManager.cpp" />
+    <ClCompile Include="AssetBrowser.cpp" />
+    <ClCompile Include="AssetBulkExtractor.cpp" />
+    <ClCompile Include="AssetConflictScanner.cpp" />
+    <ClCompile Include="AssetDuplicateFinder.cpp" />
+    <ClCompile Include="AssetFavorites.cpp" />
+    <ClCompile Include="AssetHash.cpp" />
+    <ClCompile Include="AssetHexEditor.cpp" />
+    <ClCompile Include="AssetModelViewer.cpp" />
+    <ClCompile Include="AssetNotification.cpp" />
+    <ClCompile Include="AssetOverrideManager.cpp" />
+    <ClCompile Include="AssetPackageCreator.cpp" />
+    <ClCompile Include="AssetPreloadManager.cpp" />
+    <ClCompile Include="AssetPreview.cpp" />
+    <ClCompile Include="AssetPreviewResolver.cpp" />
+    <ClCompile Include="AssetRelations.cpp" />
+    <ClCompile Include="AssetReport.cpp" />
+    <ClCompile Include="AssetSearchFilter.cpp" />
+    <ClCompile Include="AssetTaskQueue.cpp" />
+    <ClCompile Include="AssetTextureInfo.cpp" />
+    <ClCompile Include="AssetTexturePreview.cpp" />
+    <ClCompile Include="AssetToolkitUI.cpp" />
+    <ClCompile Include="CpkArchive.cpp" />
+    <ClCompile Include="DX11OverlayHelpers.cpp" />
+    <ClCompile Include="DX11OverlayPageAssets.cpp" />
+    <ClCompile Include="DX11OverlayPageCamera.cpp" />
+    <ClCompile Include="DX11OverlayPageControls.cpp" />
+    <ClCompile Include="DX11OverlayPageGraphics.cpp" />
+    <ClCompile Include="DX11OverlayPageLua.cpp" />
+    <ClCompile Include="DX11OverlayPageMods.cpp" />
+    <ClCompile Include="DX11OverlayPagePatches.cpp" />
+    <ClCompile Include="..\steam_api\DX11OverlayState.cpp" />
+    <ClCompile Include="LuaHooks.cpp" />
+    <ClCompile Include="LuaManager.cpp" />
+    <ClCompile Include="ModRedirector.cpp" />
+    <ClCompile Include="NS2Config.cpp" />
+    <ClCompile Include="NS2Offsets.cpp" />
+    <ClCompile Include="OverlayConsole.cpp" />
+    <ClCompile Include="PatchManager.cpp" />
+    <ClCompile Include="RuntimeAssetTelemetry.cpp" />
+    <ClCompile Include="RuntimeFileHooks.cpp" />
+    <ClCompile Include="RuntimeGameHooks.cpp" />
+    <ClCompile Include="RuntimeHookAddresses.cpp" />
+    <ClCompile Include="RuntimeHookBootstrap.cpp" />
+    <ClCompile Include="XfbinInspector.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\steam_api\$(MinHookLibName)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DX11OverlayInternal.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
+

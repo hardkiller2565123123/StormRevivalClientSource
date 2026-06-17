@@ -24,6 +24,8 @@
 #include "FakeSteamCore.h"
 #include "OnlineCheckBypass.h"
 #include "InputFocusGuard.h"
+#include "DlcContentLoader.h"
+#include "StormAPIBridge.h"
 
 static HANDLE g_MainThread = nullptr;
 
@@ -60,7 +62,11 @@ static DWORD WINAPI MainThread(LPVOID)
     SteamPersonaManager::Init();
     SteamStorageLocal::Init();
     SteamStatsLocal::Init();
+    StormAPIBridge::Init();
     OnlineCheckBypass::Init();
+
+    if (!DlcContentLoader::Init())
+        Logger::Error("DLC content loader failed to initialize");
 
     SteamFactoryRegistry::Dump();
 
@@ -97,6 +103,7 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID)
     {
         NetworkHooks::Shutdown();
         InputFocusGuard::Shutdown();
+        DlcContentLoader::Shutdown();
         OnlineCheckBypass::Shutdown();
         FakeSteamCore::Shutdown();
         DX11Overlay::Shutdown();

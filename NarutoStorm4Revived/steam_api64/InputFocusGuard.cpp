@@ -16,6 +16,34 @@ namespace
     std::atomic<bool> g_Stop{ false };
     std::atomic<bool> g_LoggedBlocked{ false };
 
+    std::string ToLowerString(std::string text)
+    {
+        for (char& c : text)
+            c = static_cast<char>(tolower(static_cast<unsigned char>(c)));
+        return text;
+    }
+
+    std::string GetCurrentProcessName()
+    {
+        char exePath[MAX_PATH]{};
+        GetModuleFileNameA(nullptr, exePath, MAX_PATH);
+
+        std::string path = exePath;
+        const size_t slash = path.find_last_of("\\/");
+        if (slash != std::string::npos)
+            path = path.substr(slash + 1);
+
+        return ToLowerString(path);
+    }
+
+    bool IsStorm4GameProcess()
+    {
+        const std::string exe = GetCurrentProcessName();
+        return exe == "nsuns4.exe" ||
+            exe.find("nsuns4") != std::string::npos ||
+            (exe.find("naruto") != std::string::npos && exe.find("storm") != std::string::npos);
+    }
+
     BOOL CALLBACK EnumWindowsCallback(HWND hwnd, LPARAM)
     {
         DWORD windowProcessId = 0;
@@ -26,8 +54,14 @@ namespace
 
         char title[256]{};
         GetWindowTextA(hwnd, title, sizeof(title));
-        if (title[0] == '\0' || strstr(title, "Debug Console"))
+        if (title[0] == '\0' ||
+            strstr(title, "Debug Console") ||
+            strstr(title, "Naruto Revival Offline Debug Console") ||
+            strstr(title, "PowerShell") ||
+            strstr(title, "Command Prompt"))
+        {
             return TRUE;
+        }
 
         g_GameWindow = hwnd;
         return FALSE;
@@ -113,6 +147,12 @@ namespace InputFocusGuard
 {
     bool Init()
     {
+        if (!IsStorm4GameProcess())
+        {
+            Logger::Info("InputFocusGuard skipped because this process is not NSUNS4");
+            return true;
+        }
+
         g_Stop = false;
         g_Thread = CreateThread(nullptr, 0, HookThread, nullptr, 0, nullptr);
         return g_Thread != nullptr;

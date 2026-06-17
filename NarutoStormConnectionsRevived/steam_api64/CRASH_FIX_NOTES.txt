@@ -1,0 +1,31 @@
+Naruto Storm Connections Revived - launch crash fix patch
+
+Changed files:
+- dllmain.cpp
+- DX11Overlay.cpp
+- DX11OverlayCore.cpp
+- DX11OverlayState.cpp
+- DX11OverlayState.h
+- HookManager.cpp
+
+Fixes applied:
+1. Fixed DX11 overlay shutdown to disable the actual hook targets instead of the trampoline pointers.
+2. Added stored Present/ResizeBuffers hook target addresses.
+3. Added a DX11 overlay shutdown guard so Present/ResizeBuffers do not run while the DLL unloads.
+4. Added null checks before calling g_OriginalPresent and g_OriginalResizeBuffers.
+5. Wrapped overlay drawing in PresentHook with SEH protection. If the overlay crashes, it disables itself instead of crashing the game.
+6. Changed shutdown order so DX11 hooks unload before other systems.
+7. Made HookManager shutdown tolerate already-uninitialized MinHook states.
+8. Closed the worker thread handle after creation to avoid leaking handles.
+
+Build notes:
+- Build the steam_api64 project as x64 Release.
+- Put the compiled steam_api64.dll beside the game exe.
+- If it still crashes on boot, temporarily comment out DX11Overlay::Init() in dllmain.cpp to test whether the game itself launches without the overlay.
+
+
+V3 launch fix:
+- SteamCallbackManager no longer writes CCallbackBase flags/id into game-owned callback objects.
+- Callback registration validates vtable and filters duplicates.
+- Steam callbacks/callresults are delayed for 15 seconds after first RunCallbacks to avoid startup re-entry crash.
+- Based on logs: crash after SteamAPI_RegisterCallback id=333 inside NSUNSC.exe virtual call.

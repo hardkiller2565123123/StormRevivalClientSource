@@ -256,7 +256,7 @@ public:
         SteamDiagnostics::MarkOnline("RequestLobbyList", "offline LAN/Radmin discovery");
 
         LobbyMatchListResult result{};
-        const int found = SteamLobbyManager::RefreshNetworkLobbies(100);
+        const int found = SteamLobbyManager::RefreshNetworkLobbies(3500);
         const int limited = std::max(0, std::min(found, g_ResultCountLimit));
         result.m_nLobbiesMatching = static_cast<uint32_t>(limited);
         g_LastLobbyListResult = result.m_nLobbiesMatching > 0 ? SteamLobbyManager::GetLobbyByIndex(0) : 0;

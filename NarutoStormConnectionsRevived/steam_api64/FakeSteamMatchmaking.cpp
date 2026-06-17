@@ -256,7 +256,20 @@ public:
         SteamDiagnostics::MarkOnline("RequestLobbyList", "offline LAN/Radmin discovery");
 
         LobbyMatchListResult result{};
-        const int found = SteamLobbyManager::RefreshNetworkLobbies(100);
+        int found = SteamLobbyManager::RefreshNetworkLobbies(100);
+
+        // NSC online menu expects the Steam lobby-list async path to complete cleanly.
+        // If LAN discovery finds nothing, create one local placeholder lobby so the
+        // menu state machine receives a valid lobby handle instead of timing out.
+        if (found <= 0 && SteamLobbyManager::GetCurrentLobby() == 0)
+        {
+            CSteamID menuLobby = SteamLobbyManager::CreateLobby(0, 4);
+            SteamLobbyManager::SetData(menuLobby, "name", "NSC Revived Offline Lobby");
+            SteamLobbyManager::SetData(menuLobby, "mode", "offline");
+            SteamLobbyManager::SetData(menuLobby, "build", "revived");
+            found = SteamLobbyManager::GetLobbyCount();
+        }
+
         const int limited = std::max(0, std::min(found, g_ResultCountLimit));
         result.m_nLobbiesMatching = static_cast<uint32_t>(limited);
         g_LastLobbyListResult = result.m_nLobbiesMatching > 0 ? SteamLobbyManager::GetLobbyByIndex(0) : 0;

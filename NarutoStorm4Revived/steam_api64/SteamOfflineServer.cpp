@@ -4,6 +4,7 @@
 #include "SteamIDManager.h"
 #include "SteamP2PManager.h"
 #include "SteamCallbackManager.h"
+#include "SteamLobbyManager.h"
 #include "Logger.h"
 
 #include <chrono>
@@ -546,6 +547,64 @@ namespace
         SendTo(address, message);
     }
 
+
+    bool IsUsableIPv4(const std::string& host)
+    {
+        in_addr address{};
+        return !host.empty() && inet_pton(AF_INET, host.c_str(), &address) == 1;
+    }
+
+    void AddTarget(std::vector<std::string>& targets, const std::string& host)
+    {
+        if (!IsUsableIPv4(host))
+            return;
+        if (std::find(targets.begin(), targets.end(), host) == targets.end())
+            targets.push_back(host);
+    }
+
+    std::vector<std::string> BuildDirectRadminTargets()
+    {
+        std::vector<std::string> targets;
+        const SteamConfig::Config& config = SteamConfig::Get();
+        AddTarget(targets, config.CustomServerHost);
+        AddTarget(targets, "127.0.0.1");
+        AddTarget(targets, "255.255.255.255");
+        AddTarget(targets, "26.255.255.255");
+
+        for (const std::string& peer : SteamConfig::GetRadminPeers())
+            AddTarget(targets, peer);
+
+        const std::string local = SteamOfflineServer::GetLocalAddress();
+        if (local.rfind("26.", 0) == 0)
+        {
+            std::vector<std::string> parts;
+            std::stringstream ss(local);
+            std::string part;
+            while (std::getline(ss, part, '.'))
+                parts.push_back(part);
+
+            if (parts.size() == 4)
+            {
+                const std::string prefix = parts[0] + "." + parts[1] + "." + parts[2] + ".";
+                for (int i = 1; i <= 254; ++i)
+                {
+                    std::string candidate = prefix + std::to_string(i);
+                    if (candidate != local)
+                        AddTarget(targets, candidate);
+                }
+            }
+        }
+
+        return targets;
+    }
+
+    void DirectSendToKnownPeers(const std::string& message)
+    {
+        const uint16_t port = g_Port ? g_Port : ConfiguredPort();
+        for (const std::string& target : BuildDirectRadminTargets())
+            SendToHost(target, port, message);
+    }
+
     void Broadcast(const std::string& message)
     {
         sockaddr_in broadcast{};
@@ -558,6 +617,7 @@ namespace
         SendToHost(config.CustomServerHost, g_Port, message);
         SendToHost("26.255.255.255", g_Port, message);
         SendToHost("127.0.0.1", g_Port, message);
+        DirectSendToKnownPeers(message);
     }
 
     void StoreRemoteLobby(const SteamOfflineServer::LobbyRecord& record, const sockaddr_in* from = nullptr)
@@ -597,9 +657,14 @@ namespace
         const std::string roomCode = NormalizeRoomCodeInternal(ReadString(values, "room", ""));
         const std::string passwordHash = ReadString(values, "password_hash", "");
         const uint64_t requesterSteamID = ReadU64(values, "steamid");
+        const std::string requesterName = ReadString(values, "name", "NS4 Player");
+        const std::string requesterHost = AddressToString(from);
+        const uint16_t requesterPort = AddressPort(from);
+
         SteamOfflineServer::LobbyRecord local{};
         bool accepted = false;
         std::string reason = "room not found";
+        uint64_t acceptedLobbyID = 0;
 
         {
             std::lock_guard<std::mutex> lock(g_Mutex);
@@ -620,8 +685,9 @@ namespace
                 else
                 {
                     accepted = true;
+                    acceptedLobbyID = g_LocalLobby.LobbyID;
 
-                    int maxMembers = std::max(1, g_LocalLobby.MaxMembers);
+                    const int maxMembers = std::max(1, g_LocalLobby.MaxMembers);
                     if (g_LocalLobby.Members < maxMembers)
                         ++g_LocalLobby.Members;
 
@@ -630,10 +696,22 @@ namespace
             }
         }
 
+        // Important: do this outside SteamOfflineServer's mutex. Importing the member
+        // advertises the lobby again and can call back into SteamOfflineServer.
+        if (accepted && acceptedLobbyID != 0 && requesterSteamID != 0)
+        {
+            SteamLobbyManager::ImportRemoteLobbyMember(
+                static_cast<CSteamID>(acceptedLobbyID),
+                static_cast<CSteamID>(requesterSteamID),
+                requesterName,
+                requesterHost,
+                requesterPort);
+        }
+
         if (accepted)
         {
             SendTo(from, BuildMessage("join_ok", &local));
-            Logger::Info("SteamOfflineServer accepted room join " + roomCode);
+            Logger::Info("SteamOfflineServer accepted room join " + roomCode + " steamid=" + std::to_string(requesterSteamID));
             return;
         }
 
@@ -877,7 +955,10 @@ namespace SteamOfflineServer
         if (!Init())
             return static_cast<int>(GetLobbies().size());
 
-        Broadcast(BuildMessage("discover", nullptr));
+        const std::string discover = BuildMessage("discover", nullptr);
+        Broadcast(discover);
+        DirectSendToKnownPeers(discover);
+        Logger::Info("SteamOfflineServer discovery probe sent on LAN/Radmin");
 
         const uint64_t until = NowMs() + static_cast<uint64_t>(std::max(0, waitMs));
 
@@ -1043,14 +1124,10 @@ namespace SteamOfflineServer
                 directHost = found.Host;
                 directPort = found.Port;
 
-                if (!found.PasswordProtected)
-                {
-                    g_LastJoinAccepted = true;
-                    g_LastJoinRecord = found;
-                    g_LastJoinStatus = "accepted";
-                    outRecord = found;
-                    return true;
-                }
+                // Do not return immediately for open remote rooms.
+                // Storm 4 needs the host to actually receive a join request so
+                // the host-side member table is updated and a LobbyChatUpdate can fire.
+                // We keep the direct endpoint and still send the join packet below.
             }
         }
 
@@ -1058,8 +1135,12 @@ namespace SteamOfflineServer
         Broadcast(joinMessage);
         if (!directHost.empty())
             SendToHost(directHost, directPort ? directPort : ConfiguredPort(), joinMessage);
+        Logger::Info("SteamOfflineServer join request sent room=" + normalizedRoom +
+            (directHost.empty() ? std::string(" via broadcast") : (std::string(" direct=") + directHost + ":" + std::to_string(directPort ? directPort : ConfiguredPort()))));
 
-        Broadcast(BuildMessage("discover", nullptr));
+        const std::string discover = BuildMessage("discover", nullptr);
+        Broadcast(discover);
+        DirectSendToKnownPeers(discover);
 
         const uint64_t until = NowMs() + static_cast<uint64_t>(std::max(0, waitMs));
 
@@ -1124,11 +1205,9 @@ namespace SteamOfflineServer
             if (record.Host != target)
                 continue;
 
-            if (record.PasswordProtected)
-                return JoinByRoomCode(record.RoomCode, password, outRecord, waitMs);
-
-            outRecord = record;
-            return true;
+            // Always go through JoinByRoomCode, even for open rooms, so the host
+            // receives a real join packet and adds this player to its lobby.
+            return JoinByRoomCode(record.RoomCode, password, outRecord, waitMs);
         }
 
         std::lock_guard<std::mutex> lock(g_Mutex);
@@ -1139,6 +1218,7 @@ namespace SteamOfflineServer
     std::string GetLocalAddress()
     {
         char hostname[256]{};
+        std::string firstNonLoopback;
 
         if (gethostname(hostname, sizeof(hostname)) == 0)
         {
@@ -1155,18 +1235,23 @@ namespace SteamOfflineServer
                     auto* address = reinterpret_cast<sockaddr_in*>(item->ai_addr);
                     std::string host = AddressToString(*address);
 
-                    if (host != "127.0.0.1")
-                    {
-                        freeaddrinfo(result);
+                    if (host == "127.0.0.1" || host.empty())
+                        continue;
+
+                    // Radmin VPN uses 26.x.x.x. Prefer that address so lobby
+                    // advertisements contain the reachable VPN endpoint.
+                    if (host.rfind("26.", 0) == 0)
                         return host;
-                    }
+
+                    if (firstNonLoopback.empty())
+                        firstNonLoopback = host;
                 }
 
                 freeaddrinfo(result);
             }
         }
 
-        return "127.0.0.1";
+        return firstNonLoopback.empty() ? std::string("127.0.0.1") : firstNonLoopback;
     }
 
     std::string GenerateRoomCode(uint64_t lobbyID)

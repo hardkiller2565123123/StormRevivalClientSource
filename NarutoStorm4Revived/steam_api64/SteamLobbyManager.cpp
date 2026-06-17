@@ -3,6 +3,8 @@
 #include "SteamOfflineServer.h"
 #include "SteamConfig.h"
 #include "SteamDiagnostics.h"
+#include "SteamPersonaManager.h"
+#include "SteamCallbackManager.h"
 #include "Logger.h"
 
 namespace
@@ -16,6 +18,23 @@ namespace
     uint64_t g_LastLanHeartbeatMs = 0;
     std::string g_ReturnString;
     std::string g_LastJoinError = "idle";
+    constexpr int kCallbackLobbyDataUpdate = 505;
+    constexpr int kCallbackLobbyChatUpdate = 506;
+
+    struct LobbyDataUpdateResult
+    {
+        uint64_t m_ulSteamIDLobby;
+        uint64_t m_ulSteamIDMember;
+        uint8_t m_bSuccess;
+    };
+
+    struct LobbyChatUpdateResult
+    {
+        uint64_t m_ulSteamIDLobby;
+        uint64_t m_ulSteamIDUserChanged;
+        uint64_t m_ulSteamIDMakingChange;
+        uint32_t m_rgfChatMemberStateChange;
+    };
 
     uint64_t Key(CSteamID id)
     {
@@ -179,6 +198,55 @@ namespace
             EnsureDefaultMemberDataUnlocked(lobby, member);
     }
 
+    void SyncLobbyMembersToPersonaUnlocked(const SteamLobbyManager::NS2Lobby& lobby)
+    {
+        if (lobby.OwnerID)
+            SteamPersonaManager::AddOrUpdateFriend(lobby.OwnerID, lobby.Data.count("name") ? lobby.Data.at("name") : "NS4 Host");
+
+        for (CSteamID member : lobby.Members)
+        {
+            if (!member)
+                continue;
+
+            std::string name = "NS4 Player";
+            const auto dataIt = lobby.MemberData.find(Key(member));
+            if (dataIt != lobby.MemberData.end())
+            {
+                const auto nameIt = dataIt->second.find("name");
+                if (nameIt != dataIt->second.end() && !nameIt->second.empty())
+                    name = nameIt->second;
+            }
+
+            if (Key(member) == SteamIDManager::GetSteamID64())
+                name = SteamIDManager::GetPersonaName();
+
+            SteamPersonaManager::AddOrUpdateFriend(member, name);
+        }
+    }
+
+    void EnsureOwnerMemberUnlocked(SteamLobbyManager::NS2Lobby& lobby)
+    {
+        if (!lobby.OwnerID)
+            lobby.OwnerID = SteamIDManager::GetLocalSteamID();
+
+        const uint64_t ownerKey = Key(lobby.OwnerID);
+        bool ownerExists = false;
+        for (CSteamID member : lobby.Members)
+        {
+            if (Key(member) == ownerKey)
+            {
+                ownerExists = true;
+                break;
+            }
+        }
+
+        if (!ownerExists)
+            lobby.Members.insert(lobby.Members.begin(), lobby.OwnerID);
+
+        EnsureDefaultMemberDataUnlocked(lobby);
+        SyncLobbyMembersToPersonaUnlocked(lobby);
+    }
+
     uint32_t IPv4ToHostOrder(const std::string& host)
     {
         in_addr address{};
@@ -263,24 +331,16 @@ namespace
         lobby.Data["password_protected"] = record.PasswordProtected ? "1" : "0";
 
         if (lobby.Members.empty())
-        {
             lobby.Members.push_back(lobby.OwnerID);
 
-            if (record.Members > 1)
-                lobby.Members.push_back(SteamIDManager::GetLocalSteamID());
-        }
+        // Do not synthesize fake members from record.Members. Storm 4 dereferences
+        // lobby members aggressively; every member returned must be a real known SteamID.
+        lobby.Members.erase(
+            std::remove_if(lobby.Members.begin(), lobby.Members.end(), [](CSteamID member) { return Key(member) == 0; }),
+            lobby.Members.end());
 
-        int targetMembers = std::max(1, std::min(record.Members, lobby.MaxMembers));
-        while (static_cast<int>(lobby.Members.size()) < targetMembers)
-        {
-            uint64_t syntheticID = NormalizeUserSteamID(safeOwnerID + static_cast<uint64_t>(lobby.Members.size()) + 1);
-            lobby.Members.push_back(MakeID(syntheticID));
-        }
-
-        while (static_cast<int>(lobby.Members.size()) > targetMembers)
-            lobby.Members.pop_back();
-
-        EnsureDefaultMemberDataUnlocked(lobby);
+        EnsureOwnerMemberUnlocked(lobby);
+        lobby.Data["members"] = std::to_string(static_cast<int>(lobby.Members.size()));
     }
 
     std::vector<uint64_t> BuildVisibleLobbyListUnlocked()
@@ -430,7 +490,7 @@ namespace SteamLobbyManager
         lobby.Data["search_visible"] = "1";
 
         EnsureLocalMember(lobby);
-        EnsureDefaultMemberDataUnlocked(lobby);
+        EnsureOwnerMemberUnlocked(lobby);
 
         g_Lobbies[lobbyID] = lobby;
         g_CurrentLobbyID = lobbyID;
@@ -490,6 +550,9 @@ namespace SteamLobbyManager
         uint64_t id = Key(lobbyID);
         std::string roomCode;
         bool passwordProtected = false;
+        bool isRemoteLobby = false;
+        std::string remoteHost;
+        uint16_t remotePort = 0;
         bool revivedMaster = false;
 
         {
@@ -544,15 +607,22 @@ namespace SteamLobbyManager
             {
                 roomCode = LobbyRoomCode(it->second);
                 passwordProtected = IsPasswordProtected(it->second);
+                isRemoteLobby = Key(it->second.OwnerID) != SteamIDManager::GetSteamID64();
+                remoteHost = it->second.Host;
+                remotePort = it->second.GameServerPort;
             }
         }
 
         SteamOfflineServer::LobbyRecord accepted{};
         bool hasAccepted = false;
 
-        if (passwordProtected)
+        if (isRemoteLobby || passwordProtected)
         {
-            const bool joined = SteamOfflineServer::JoinByRoomCode(roomCode, password, accepted, 1500);
+            bool joined = false;
+            if (!roomCode.empty())
+                joined = SteamOfflineServer::JoinByRoomCode(roomCode, password, accepted, 900);
+            if (!joined && !remoteHost.empty())
+                joined = SteamOfflineServer::JoinByAddress(remoteHost, remotePort, password, accepted, 900);
 
             if (!joined)
             {
@@ -582,7 +652,7 @@ namespace SteamLobbyManager
             return false;
 
         EnsureLocalMember(it->second);
-        EnsureDefaultMemberDataUnlocked(it->second);
+        EnsureOwnerMemberUnlocked(it->second);
         g_CurrentLobbyID = id;
         SteamOfflineServer::MarkJoinedLobby(id);
         g_LastJoinError = "joined";
@@ -697,6 +767,65 @@ namespace SteamLobbyManager
     {
         LeaveLobby(MakeID(g_CurrentLobbyID));
     }
+
+    void ImportRemoteLobbyMember(CSteamID lobbyID, CSteamID member, const std::string& name, const std::string& host, uint16_t port)
+    {
+        const uint64_t id = Key(lobbyID);
+        const uint64_t memberKey = Key(member);
+        if (id == 0 || memberKey == 0)
+            return;
+
+        std::lock_guard<std::mutex> lock(g_Mutex);
+        NS2Lobby* lobby = GetMutableLobbyUnlocked(MakeID(id));
+        if (!lobby)
+            return;
+
+        bool exists = false;
+        for (CSteamID existing : lobby->Members)
+        {
+            if (Key(existing) == memberKey)
+            {
+                exists = true;
+                break;
+            }
+        }
+
+        const bool addedMember = !exists && static_cast<int>(lobby->Members.size()) < std::max(1, lobby->MaxMembers);
+        if (addedMember)
+            lobby->Members.push_back(member);
+
+        auto& data = lobby->MemberData[memberKey];
+        if (!name.empty())
+            data["name"] = name;
+        SteamPersonaManager::AddOrUpdateRemotePlayer(member, name.empty() ? "NS4 Player" : name);
+        if (data.find("LOBBY_MIC_DEVICE") == data.end())
+            data["LOBBY_MIC_DEVICE"] = "0";
+        data["host"] = host;
+        data["port"] = std::to_string(port ? port : SteamOfflineServer::GetPort());
+
+        EnsureOwnerMemberUnlocked(*lobby);
+        lobby->Data["members"] = std::to_string(static_cast<int>(lobby->Members.size()));
+        AdvertiseIfLocalLobby(*lobby);
+
+        Logger::Info("SteamLobbyManager imported remote lobby member " + std::to_string(static_cast<unsigned long long>(memberKey)) + " into lobby " + std::to_string(static_cast<unsigned long long>(id)));
+
+        if (addedMember)
+        {
+            LobbyChatUpdateResult chatUpdate{};
+            chatUpdate.m_ulSteamIDLobby = id;
+            chatUpdate.m_ulSteamIDUserChanged = memberKey;
+            chatUpdate.m_ulSteamIDMakingChange = memberKey;
+            chatUpdate.m_rgfChatMemberStateChange = 0x0001;
+            SteamCallbackManager::PushCallback(kCallbackLobbyChatUpdate, &chatUpdate, sizeof(chatUpdate));
+
+            LobbyDataUpdateResult dataUpdate{};
+            dataUpdate.m_ulSteamIDLobby = id;
+            dataUpdate.m_ulSteamIDMember = memberKey;
+            dataUpdate.m_bSuccess = 1;
+            SteamCallbackManager::PushCallback(kCallbackLobbyDataUpdate, &dataUpdate, sizeof(dataUpdate));
+        }
+    }
+
 
     CSteamID GetCurrentLobby()
     {
@@ -908,14 +1037,12 @@ namespace SteamLobbyManager
     int GetMemberCount(CSteamID lobbyID)
     {
         std::lock_guard<std::mutex> lock(g_Mutex);
-        const NS2Lobby* lobby = GetLobbyUnlocked(lobbyID);
+        NS2Lobby* lobby = GetMutableLobbyUnlocked(lobbyID);
         if (!lobby)
             return 0;
 
-        if (g_CurrentLobbyID == 0 || Key(lobbyID) != g_CurrentLobbyID)
-            return 0;
-
-        return std::max(1, static_cast<int>(lobby->Members.size()));
+        EnsureOwnerMemberUnlocked(*lobby);
+        return std::max(1, std::min(lobby->MaxMembers > 0 ? lobby->MaxMembers : 4, static_cast<int>(lobby->Members.size())));
     }
 
     int GetNumLobbyMembers(CSteamID lobbyID)
@@ -926,15 +1053,30 @@ namespace SteamLobbyManager
     CSteamID GetMemberByIndex(CSteamID lobbyID, int index)
     {
         std::lock_guard<std::mutex> lock(g_Mutex);
-        const NS2Lobby* lobby = GetLobbyUnlocked(lobbyID);
+        NS2Lobby* lobby = GetMutableLobbyUnlocked(lobbyID);
+
+        if (index < 0)
+            return 0;
 
         if (!lobby)
             return index == 0 ? SteamIDManager::GetLocalSteamID() : 0;
 
-        if (index < 0 || index >= static_cast<int>(lobby->Members.size()))
+        EnsureOwnerMemberUnlocked(*lobby);
+
+        if (lobby->Members.empty())
+            return index == 0 ? SteamIDManager::GetLocalSteamID() : 0;
+
+        if (index >= static_cast<int>(lobby->Members.size()))
             return 0;
 
-        return lobby->Members[index];
+        CSteamID member = lobby->Members[index];
+        if (!member)
+            member = (index == 0) ? (lobby->OwnerID ? lobby->OwnerID : SteamIDManager::GetLocalSteamID()) : 0;
+
+        if (member)
+            SteamPersonaManager::AddOrUpdateFriend(member);
+
+        return member;
     }
 
     CSteamID GetLobbyMemberByIndex(CSteamID lobbyID, int index)
@@ -954,6 +1096,9 @@ namespace SteamLobbyManager
             return;
 
         lobby->MemberData[Key(user)][key] = value;
+        if (key == "name" && user)
+            SteamPersonaManager::AddOrUpdateFriend(user, value);
+        EnsureOwnerMemberUnlocked(*lobby);
     }
 
     const char* GetMemberData(CSteamID lobbyID, CSteamID user, const std::string& key)

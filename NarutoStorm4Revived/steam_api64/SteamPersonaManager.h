@@ -14,6 +14,9 @@ namespace SteamPersonaManager
     uint64_t GetFriendByIndex64(int index);
 
     const char* GetFriendPersonaName(CSteamID steamID);
+    void AddOrUpdateRemotePlayer(CSteamID steamID, const std::string& name);
+    void AddOrUpdateFriend(CSteamID steamID, const std::string& name = std::string());
+    bool HasFriend(CSteamID steamID);
 
     bool SetRichPresence(const char* key, const char* value);
     bool SetRichPresence(const std::string& key, const std::string& value);

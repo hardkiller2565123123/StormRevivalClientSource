@@ -1,10 +1,17 @@
 #include "DX11OverlayInternal.h"
+#if defined(_M_IX86)
+#include "DX9Overlay.h"
+#endif
 #include "MinHook.h"
 
 namespace DX11Overlay
 {
     bool Init()
     {
+#if defined(_M_IX86)
+        return DX9Overlay::Init();
+#endif
+
         if (g_HookReady)
             return true;
 
@@ -60,6 +67,12 @@ namespace DX11Overlay
 
     void Shutdown()
     {
+#if defined(_M_IX86)
+        DX9Overlay::Shutdown();
+        g_HookReady = false;
+        return;
+#endif
+
         ShutdownImGui();
 
         if (g_OriginalPresent)

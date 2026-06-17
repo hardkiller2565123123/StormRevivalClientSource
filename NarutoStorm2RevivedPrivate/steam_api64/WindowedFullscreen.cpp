@@ -115,9 +115,33 @@ static void HookGameWindowProc(HWND hwnd)
         Logger::Error("Failed to hook game window procedure");
 }
 
+static bool IsBorderlessFullscreenApplied(HWND hwnd, const RECT& rect)
+{
+    if (!hwnd)
+        return false;
+
+    const LONG_PTR style = GetWindowLongPtrA(hwnd, GWL_STYLE);
+    const LONG_PTR exStyle = GetWindowLongPtrA(hwnd, GWL_EXSTYLE);
+
+    if ((style & (WS_CAPTION | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU)) != 0)
+        return false;
+
+    if ((exStyle & (WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE | WS_EX_WINDOWEDGE)) != 0)
+        return false;
+
+    RECT windowRect{};
+    if (!GetWindowRect(hwnd, &windowRect))
+        return false;
+
+    return windowRect.left == rect.left &&
+        windowRect.top == rect.top &&
+        windowRect.right == rect.right &&
+        windowRect.bottom == rect.bottom;
+}
+
 static void ApplyBorderlessFullscreen(HWND hwnd)
 {
-    if (!hwnd || g_Applied)
+    if (!hwnd)
         return;
 
     HMONITOR monitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
@@ -126,6 +150,11 @@ static void ApplyBorderlessFullscreen(HWND hwnd)
     monitorInfo.cbSize = sizeof(MONITORINFO);
 
     if (!GetMonitorInfoA(monitor, &monitorInfo))
+        return;
+
+    const RECT& rect = monitorInfo.rcMonitor;
+
+    if (g_Applied && IsBorderlessFullscreenApplied(hwnd, rect))
         return;
 
     LONG_PTR style = GetWindowLongPtrA(hwnd, GWL_STYLE);
@@ -145,7 +174,7 @@ static void ApplyBorderlessFullscreen(HWND hwnd)
     SetWindowLongPtrA(hwnd, GWL_STYLE, style);
     SetWindowLongPtrA(hwnd, GWL_EXSTYLE, exStyle);
 
-    const RECT& rect = monitorInfo.rcMonitor;
+    ShowWindow(hwnd, SW_RESTORE);
 
     SetWindowPos(
         hwnd,
@@ -160,12 +189,19 @@ static void ApplyBorderlessFullscreen(HWND hwnd)
 
     HookGameWindowProc(hwnd);
 
-    g_Applied = true;
-    g_BackgroundKeepAliveArmTick = GetTickCount();
-    g_BackgroundKeepAliveLogged = false;
+    if (!g_Applied)
+    {
+        g_BackgroundKeepAliveArmTick = GetTickCount();
+        g_BackgroundKeepAliveLogged = false;
+        Logger::Info("Windowed fullscreen applied to game window");
+        Logger::Info("Background keep-alive will arm after startup audio grace");
+    }
+    else
+    {
+        Logger::Info("Windowed fullscreen corrected after game window changed");
+    }
 
-    Logger::Info("Windowed fullscreen applied to game window");
-    Logger::Info("Background keep-alive will arm after startup audio grace");
+    g_Applied = true;
 }
 
 static DWORD WINAPI WindowedFullscreenThread(LPVOID)
@@ -179,13 +215,15 @@ static DWORD WINAPI WindowedFullscreenThread(LPVOID)
         if (hwnd)
         {
             ApplyBorderlessFullscreen(hwnd);
-            return 0;
+            Sleep(1000);
+            continue;
         }
 
         Sleep(500);
     }
 
-    Logger::Error("Failed to find game window for windowed fullscreen");
+    if (!g_Applied)
+        Logger::Error("Failed to find game window for windowed fullscreen");
     return 0;
 }
 

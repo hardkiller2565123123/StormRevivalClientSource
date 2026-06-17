@@ -103,7 +103,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="HookManager.cpp">
       <Filter>Core\hooks</Filter>
     </ClCompile>
@@ -248,9 +247,116 @@
     <ClCompile Include="SteamProxy.cpp">
       <Filter>Includes\Steam</Filter>
     </ClCompile>
+    <ClCompile Include="DlcContentLoader.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="InputFocusGuard.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="BGMManager.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="ccCmnCamera.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="ccCmnScreenManager.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="ccSceneManager.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="CharRelationParam.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonRender.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="ConditionPrmManager.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectX.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorGUI.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="FileParser.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="GuardEffectParam.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="GudoBallParam.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="HookFunctions.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaScripts.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="ModManager.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseLook.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="MovesetPlus.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="Offsets.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="OugiAwakeningParam.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="PartnerSlotParam.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="PatternScan.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="PlAnmList.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="PluginManager.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileManager.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecialConditionParam.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecialInteractionManager.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="StormAPIBridge.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="SusanooCondParam.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="TeamUltimateJutsuManager.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="UltimateStormAPI.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="StdInc.h" />
     <ClInclude Include="Logger.h">
       <Filter>Core\logger</Filter>
     </ClInclude>
@@ -962,12 +1068,144 @@
     <ClInclude Include="SteamProxy.h">
       <Filter>Includes\Steam</Filter>
     </ClInclude>
+    <ClInclude Include="DlcContentLoader.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="InputFocusGuard.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="BGMManager.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="ccCmnCamera.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="ccCmnCameraDirector.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="ccCmnScreenManager.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="ccGameObjSubDraw.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="ccPlayerMain.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="ccSceneManager.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="CharRelationParam.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonRender.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="ConditionPrmManager.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectX.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorGUI.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="FileParser.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="GuardEffectParam.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="GudoBallParam.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="HookFunctions.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaScripts.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="mem.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="Mod.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="ModManager.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseLook.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="MovesetPlus.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="Offsets.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="OugiAwakeningParam.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="PartnerSlotParam.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="PatternScan.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="PlAnmList.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="Plugin.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="PluginManager.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileManager.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="SpecialConditionParam.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="SpecialInteractionManager.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="StdInc.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="StormAPIBridge.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="SusanooCondParam.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="TeamUltimateJutsuManager.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="UltimateStormAPI.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="libMinHook.x64.lib">
-      <Filter>Includes\minhook</Filter>
-    </Library>
+    <Library Include="$(MinHookLibName)" />
+    <Library Include="$(MinHookLibName)" />
   </ItemGroup>
-  
 </Project>
-

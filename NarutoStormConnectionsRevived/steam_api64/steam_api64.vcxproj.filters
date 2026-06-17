@@ -14,9 +14,6 @@
     <Filter Include="Core\Network">
       <UniqueIdentifier>{f7f87cef-44a8-443d-81a5-5c6cfe1501a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Config">
-      <UniqueIdentifier>{b1892807-5f45-4125-97e4-1369ac57765d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core\Assets">
       <UniqueIdentifier>{d031a0c1-8d40-4c90-957d-3d9cbcde1521}</UniqueIdentifier>
     </Filter>
@@ -100,6 +97,9 @@
     </Filter>
     <Filter Include="Core\hooks\Runtime">
       <UniqueIdentifier>{69924677-4b24-4750-8992-5b41b5029b59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\input">
+      <UniqueIdentifier>{9ecfc21a-19d5-417d-998d-42e0a62fc9b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +247,15 @@
     </ClCompile>
     <ClCompile Include="SteamProxy.cpp">
       <Filter>Includes\Steam</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkStateBypass.cpp">
+      <Filter>Core\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="OnlineStorageBypass.cpp">
+      <Filter>Core\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="InputFocusGuard.cpp">
+      <Filter>Core\input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -962,12 +971,17 @@
     <ClInclude Include="SteamProxy.h">
       <Filter>Includes\Steam</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkStateBypass.h">
+      <Filter>Core\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="OnlineStorageBypass.h">
+      <Filter>Core\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="InputFocusGuard.h">
+      <Filter>Core\input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="libMinHook.x64.lib">
-      <Filter>Includes\minhook</Filter>
-    </Library>
+    <Library Include="$(MinHookLibName)" />
   </ItemGroup>
-  
 </Project>
-

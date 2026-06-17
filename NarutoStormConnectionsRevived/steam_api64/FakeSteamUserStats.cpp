@@ -652,6 +652,7 @@ public:
         result.m_bLeaderboardFound = 1;
         EnsureLocalLeaderboardRow(result.m_hSteamLeaderboard);
         RefreshLeaderboardLocal(result.m_hSteamLeaderboard, 100);
+        SteamCallbackManager::PushCallback(1104, &result, sizeof(result));
         return SteamCallResultManager::CreateCallResult(1104, &result, sizeof(result), true);
     }
 
@@ -665,6 +666,7 @@ public:
         result.m_bLeaderboardFound = 1;
         EnsureLocalLeaderboardRow(result.m_hSteamLeaderboard);
         RefreshLeaderboardLocal(result.m_hSteamLeaderboard, 100);
+        SteamCallbackManager::PushCallback(1104, &result, sizeof(result));
         return SteamCallResultManager::CreateCallResult(1104, &result, sizeof(result), true);
     }
 
@@ -729,6 +731,7 @@ public:
         result.m_hSteamLeaderboard = leaderboard ? leaderboard : kOfflineLeaderboard;
         result.m_hSteamLeaderboardEntries = StoreDownloadedRows(rows);
         result.m_cEntryCount = static_cast<int>(rows.size());
+        SteamCallbackManager::PushCallback(1105, &result, sizeof(result));
         return SteamCallResultManager::CreateCallResult(1105, &result, sizeof(result), true);
     }
 
@@ -772,6 +775,7 @@ public:
         result.m_hSteamLeaderboard = leaderboard ? leaderboard : kOfflineLeaderboard;
         result.m_hSteamLeaderboardEntries = StoreDownloadedRows(rows);
         result.m_cEntryCount = static_cast<int>(rows.size());
+        SteamCallbackManager::PushCallback(1105, &result, sizeof(result));
         return SteamCallResultManager::CreateCallResult(1105, &result, sizeof(result), true);
     }
 
@@ -810,6 +814,7 @@ public:
         result.m_bScoreChanged = 1;
         result.m_nGlobalRankNew = 1;
         result.m_nGlobalRankPrevious = 0;
+        SteamCallbackManager::PushCallback(1106, &result, sizeof(result));
         return SteamCallResultManager::CreateCallResult(1106, &result, sizeof(result), true);
     }
 

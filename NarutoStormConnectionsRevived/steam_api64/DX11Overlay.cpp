@@ -8,6 +8,8 @@ namespace DX11Overlay
         if (g_HookReady)
             return true;
 
+        g_DX11OverlayShuttingDown = false;
+
         IDXGISwapChain* dummySwapChain = nullptr;
 
         if (!CreateDummySwapChain(&dummySwapChain))
@@ -20,6 +22,9 @@ namespace DX11Overlay
 
         void* presentTarget = vtable[8];
         void* resizeTarget = vtable[13];
+
+        g_PresentHookTarget = presentTarget;
+        g_ResizeBuffersHookTarget = resizeTarget;
 
         dummySwapChain->Release();
 
@@ -60,15 +65,22 @@ namespace DX11Overlay
 
     void Shutdown()
     {
+        g_DX11OverlayShuttingDown = true;
+
+        if (g_PresentHookTarget)
+            MH_DisableHook(g_PresentHookTarget);
+
+        if (g_ResizeBuffersHookTarget)
+            MH_DisableHook(g_ResizeBuffersHookTarget);
+
         ShutdownImGui();
 
-        if (g_OriginalPresent)
-            MH_DisableHook(reinterpret_cast<void*>(g_OriginalPresent));
-
-        if (g_OriginalResizeBuffers)
-            MH_DisableHook(reinterpret_cast<void*>(g_OriginalResizeBuffers));
-
         g_HookReady = false;
+        g_PresentHookTarget = nullptr;
+        g_ResizeBuffersHookTarget = nullptr;
+        g_OriginalPresent = nullptr;
+        g_OriginalResizeBuffers = nullptr;
+
         Logger::Info("DX11 overlay shutdown");
     }
 }

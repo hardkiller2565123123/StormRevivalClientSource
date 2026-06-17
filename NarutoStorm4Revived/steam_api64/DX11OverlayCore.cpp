@@ -1,9 +1,295 @@
 #include "DX11OverlayInternal.h"
+#include "DX11Overlay.h"
 #include "FrameworkAddon.h"
+#include "StormAPIBridge.h"
+#include "Logger.h"
 #include "MinHook.h"
+
+#include <algorithm>
+#include <cmath>
+#include <string>
+#include <vector>
+
+#include <urlmon.h>
+#include <wincodec.h>
+
+#pragma comment(lib, "urlmon.lib")
+#pragma comment(lib, "windowscodecs.lib")
 
 namespace
 {
+    constexpr double kTargetFrameSeconds = 1.0 / 60.0;
+    constexpr wchar_t kStormApiAvatarUrl[] = L"https://avatars.githubusercontent.com/u/92672927?v=4";
+
+    LARGE_INTEGER g_FramePaceFrequency{};
+    LARGE_INTEGER g_LastPacedPresent{};
+    bool g_FramePacerReady = false;
+    bool g_TimerResolutionRaised = false;
+
+    ID3D11ShaderResourceView* g_StormApiAvatarView = nullptr;
+    bool g_StormApiAvatarLoadTried = false;
+
+    void RaiseTimerResolutionForPacing()
+    {
+        if (g_TimerResolutionRaised)
+            return;
+
+        HMODULE winmm = LoadLibraryA("winmm.dll");
+        if (!winmm)
+            return;
+
+        using TimeBeginPeriodFn = UINT(WINAPI*)(UINT);
+        TimeBeginPeriodFn timeBeginPeriodFn =
+            reinterpret_cast<TimeBeginPeriodFn>(GetProcAddress(winmm, "timeBeginPeriod"));
+
+        if (timeBeginPeriodFn && timeBeginPeriodFn(1) == 0)
+            g_TimerResolutionRaised = true;
+    }
+
+    void ResetFramePacer()
+    {
+        g_LastPacedPresent.QuadPart = 0;
+    }
+
+    void PaceFrameForLowLatency60()
+    {
+        if (g_GraphicsVsync || !g_GraphicsWindowedFullscreen)
+        {
+            ResetFramePacer();
+            return;
+        }
+
+        RaiseTimerResolutionForPacing();
+
+        if (!g_FramePacerReady)
+        {
+            QueryPerformanceFrequency(&g_FramePaceFrequency);
+            g_FramePacerReady = g_FramePaceFrequency.QuadPart > 0;
+        }
+
+        if (!g_FramePacerReady)
+            return;
+
+        LARGE_INTEGER now{};
+        QueryPerformanceCounter(&now);
+
+        if (g_LastPacedPresent.QuadPart == 0)
+        {
+            g_LastPacedPresent = now;
+            return;
+        }
+
+        const LONGLONG targetTicks =
+            static_cast<LONGLONG>(static_cast<double>(g_FramePaceFrequency.QuadPart) * kTargetFrameSeconds);
+
+        const LONGLONG targetPresent = g_LastPacedPresent.QuadPart + targetTicks;
+
+        while (now.QuadPart < targetPresent)
+        {
+            const double remainingMs =
+                static_cast<double>(targetPresent - now.QuadPart) * 1000.0 /
+                static_cast<double>(g_FramePaceFrequency.QuadPart);
+
+            if (remainingMs > 2.0)
+                Sleep(1);
+            else if (remainingMs > 0.25)
+                Sleep(0);
+            else
+                YieldProcessor();
+
+            QueryPerformanceCounter(&now);
+        }
+
+        if (now.QuadPart > targetPresent + (targetTicks * 4))
+            g_LastPacedPresent = now;
+        else
+            g_LastPacedPresent.QuadPart = targetPresent;
+    }
+
+    UINT EffectivePresentSyncInterval(UINT requestedSyncInterval)
+    {
+        if (g_GraphicsVsync)
+            return requestedSyncInterval > 0 ? requestedSyncInterval : 1;
+
+        return 0;
+    }
+
+    std::wstring GetExeFolderW()
+    {
+        wchar_t exePath[MAX_PATH]{};
+        GetModuleFileNameW(nullptr, exePath, MAX_PATH);
+
+        wchar_t* slash = wcsrchr(exePath, L'\\');
+        if (slash)
+            *slash = L'\0';
+
+        return exePath;
+    }
+
+    bool EnsureDirectoryW(const std::wstring& path)
+    {
+        DWORD attrs = GetFileAttributesW(path.c_str());
+        if (attrs != INVALID_FILE_ATTRIBUTES)
+            return (attrs & FILE_ATTRIBUTE_DIRECTORY) != 0;
+
+        return CreateDirectoryW(path.c_str(), nullptr) != FALSE ||
+               GetLastError() == ERROR_ALREADY_EXISTS;
+    }
+
+    bool FileExistsW(const std::wstring& path)
+    {
+        DWORD attrs = GetFileAttributesW(path.c_str());
+        return attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_DIRECTORY) == 0;
+    }
+
+    std::wstring GetStormApiAvatarPath()
+    {
+        const std::wstring base = GetExeFolderW();
+        const std::wstring revivedDir = base + L"\\NarutoStorm4Revived";
+        const std::wstring cacheDir = revivedDir + L"\\Cache";
+
+        EnsureDirectoryW(revivedDir);
+        EnsureDirectoryW(cacheDir);
+
+        return cacheDir + L"\\stormapi_theleonx_avatar.png";
+    }
+
+    bool DownloadStormApiAvatar(const std::wstring& path)
+    {
+        if (FileExistsW(path))
+            return true;
+
+        HRESULT hr = URLDownloadToFileW(
+            nullptr,
+            kStormApiAvatarUrl,
+            path.c_str(),
+            0,
+            nullptr);
+
+        return SUCCEEDED(hr) && FileExistsW(path);
+    }
+
+    bool LoadTextureFromPngWIC(const std::wstring& path, ID3D11ShaderResourceView** outSrv)
+    {
+        if (!g_Device || !outSrv)
+            return false;
+
+        *outSrv = nullptr;
+
+        HRESULT coInit = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+        if (FAILED(coInit) && coInit != RPC_E_CHANGED_MODE)
+            return false;
+
+        IWICImagingFactory* factory = nullptr;
+        IWICBitmapDecoder* decoder = nullptr;
+        IWICBitmapFrameDecode* frame = nullptr;
+        IWICFormatConverter* converter = nullptr;
+
+        HRESULT hr = CoCreateInstance(
+            CLSID_WICImagingFactory,
+            nullptr,
+            CLSCTX_INPROC_SERVER,
+            IID_PPV_ARGS(&factory));
+
+        if (SUCCEEDED(hr))
+        {
+            hr = factory->CreateDecoderFromFilename(
+                path.c_str(),
+                nullptr,
+                GENERIC_READ,
+                WICDecodeMetadataCacheOnLoad,
+                &decoder);
+        }
+
+        if (SUCCEEDED(hr))
+            hr = decoder->GetFrame(0, &frame);
+
+        if (SUCCEEDED(hr))
+            hr = factory->CreateFormatConverter(&converter);
+
+        if (SUCCEEDED(hr))
+        {
+            hr = converter->Initialize(
+                frame,
+                GUID_WICPixelFormat32bppRGBA,
+                WICBitmapDitherTypeNone,
+                nullptr,
+                0.0,
+                WICBitmapPaletteTypeCustom);
+        }
+
+        UINT width = 0;
+        UINT height = 0;
+
+        if (SUCCEEDED(hr))
+            hr = converter->GetSize(&width, &height);
+
+        std::vector<unsigned char> pixels;
+
+        if (SUCCEEDED(hr) && width > 0 && height > 0)
+        {
+            pixels.resize(static_cast<size_t>(width) * static_cast<size_t>(height) * 4);
+            hr = converter->CopyPixels(
+                nullptr,
+                width * 4,
+                static_cast<UINT>(pixels.size()),
+                pixels.data());
+        }
+
+        if (SUCCEEDED(hr))
+        {
+            D3D11_TEXTURE2D_DESC desc{};
+            desc.Width = width;
+            desc.Height = height;
+            desc.MipLevels = 1;
+            desc.ArraySize = 1;
+            desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+            desc.SampleDesc.Count = 1;
+            desc.Usage = D3D11_USAGE_DEFAULT;
+            desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+
+            D3D11_SUBRESOURCE_DATA data{};
+            data.pSysMem = pixels.data();
+            data.SysMemPitch = width * 4;
+
+            ID3D11Texture2D* texture = nullptr;
+            hr = g_Device->CreateTexture2D(&desc, &data, &texture);
+
+            if (SUCCEEDED(hr) && texture)
+            {
+                hr = g_Device->CreateShaderResourceView(texture, nullptr, outSrv);
+                texture->Release();
+            }
+        }
+
+        if (converter) converter->Release();
+        if (frame) frame->Release();
+        if (decoder) decoder->Release();
+        if (factory) factory->Release();
+
+        return SUCCEEDED(hr) && *outSrv;
+    }
+
+    void EnsureStormApiAvatarLoaded()
+    {
+        if (g_StormApiAvatarLoadTried || g_StormApiAvatarView || !g_Device)
+            return;
+
+        g_StormApiAvatarLoadTried = true;
+
+        const std::wstring avatarPath = GetStormApiAvatarPath();
+
+        if (!DownloadStormApiAvatar(avatarPath))
+        {
+            Logger::Error("StormAPI avatar download failed");
+            return;
+        }
+
+        if (LoadTextureFromPngWIC(avatarPath, &g_StormApiAvatarView))
+            Logger::Info("StormAPI avatar loaded from GitHub/cache");
+        else
+            Logger::Error("StormAPI avatar texture load failed");
+    }
 }
 
 void CleanupRenderTarget()
@@ -219,6 +505,8 @@ void ShutdownImGui()
     }
 
     CleanupRenderTarget();
+    SAFE_RELEASE(g_StormApiAvatarView);
+    g_StormApiAvatarLoadTried = false;
 
     SAFE_RELEASE(g_Context);
     SAFE_RELEASE(g_Device);
@@ -233,7 +521,7 @@ void DrawAlwaysStatusBar()
     ImGui::SetNextWindowBgAlpha(0.42f);
 
     ImGui::Begin(
-        "##NS2StatusOnly",
+        "##NS4StatusOnly",
         nullptr,
         ImGuiWindowFlags_NoDecoration |
         ImGuiWindowFlags_NoMove |
@@ -274,6 +562,112 @@ void DrawAlwaysStatusBar()
     ImGui::End();
 }
 
+
+void DrawStormAPINotification()
+{
+    if (!g_OverlayEnabled || !g_ImGuiReady)
+        return;
+
+    EnsureStormApiAvatarLoaded();
+
+    static double firstSeen = -1.0;
+    if (firstSeen < 0.0)
+        firstSeen = ImGui::GetTime();
+
+    const double elapsed = ImGui::GetTime() - firstSeen;
+    if (elapsed > 5.25)
+        return;
+
+    const float inT = static_cast<float>(std::min(1.0, elapsed / 0.34));
+    const float outT = elapsed < 4.05 ? 0.0f : static_cast<float>(std::min(1.0, (elapsed - 4.05) / 0.62));
+
+    const float easeIn = 1.0f - std::pow(1.0f - inT, 3.0f);
+    const float easeOut = outT * outT * (3.0f - 2.0f * outT);
+    const float alpha = std::max(0.0f, 1.0f - easeOut);
+    const float pulse = 0.5f + 0.5f * std::sin(static_cast<float>(elapsed * 9.5));
+
+    const float width = 430.0f;
+    const float height = 106.0f;
+    const float x = -width + 14.0f + (width + 28.0f) * easeIn - 36.0f * easeOut;
+    const float y = 58.0f;
+
+    ImGui::SetNextWindowPos(ImVec2(x, y), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(width, height), ImGuiCond_Always);
+    ImGui::SetNextWindowBgAlpha(0.0f);
+
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 20.0f);
+
+    ImGui::Begin("##StormApiTheLeonXToast", nullptr,
+        ImGuiWindowFlags_NoDecoration |
+        ImGuiWindowFlags_NoMove |
+        ImGuiWindowFlags_NoResize |
+        ImGuiWindowFlags_NoSavedSettings |
+        ImGuiWindowFlags_NoInputs |
+        ImGuiWindowFlags_NoFocusOnAppearing |
+        ImGuiWindowFlags_NoNav |
+        ImGuiWindowFlags_NoBringToFrontOnFocus);
+
+    ImDrawList* draw = ImGui::GetWindowDrawList();
+    const ImVec2 a = ImGui::GetWindowPos();
+    const ImVec2 s = ImGui::GetWindowSize();
+    const ImVec2 b(a.x + s.x, a.y + s.y);
+
+    auto col = [&](int r, int g, int bl, float mul)
+        {
+            return IM_COL32(r, g, bl, static_cast<int>(255.0f * alpha * mul));
+        };
+
+    draw->AddRectFilled(ImVec2(a.x + 7, a.y + 8), ImVec2(b.x + 7, b.y + 8), col(0, 0, 0, 0.42f), 22.0f);
+
+    draw->AddRectFilledMultiColor(
+        a,
+        b,
+        col(22, 72, 255, 0.96f),
+        col(145, 54, 255, 0.95f),
+        col(8, 15, 36, 0.98f),
+        col(13, 30, 60, 0.98f));
+
+    draw->AddRect(a, b, col(120, 235, 255, 0.95f), 20.0f, 0, 1.7f + pulse * 1.3f);
+    draw->AddRectFilled(ImVec2(a.x, a.y), ImVec2(a.x + 7.0f + pulse * 6.0f, b.y), col(75, 235, 255, 1.0f), 20.0f);
+
+    const ImVec2 orb(a.x + 54.0f, a.y + 53.0f);
+    const float glowRadius = 34.0f + pulse * 4.0f;
+    const float avatarRadius = 27.0f;
+
+    draw->AddCircleFilled(orb, glowRadius, col(90, 220, 255, 0.16f), 64);
+    draw->AddCircleFilled(orb, avatarRadius + 3.0f, col(10, 15, 32, 0.92f), 64);
+
+    if (g_StormApiAvatarView)
+    {
+        const ImVec2 imgMin(orb.x - avatarRadius, orb.y - avatarRadius);
+        const ImVec2 imgMax(orb.x + avatarRadius, orb.y + avatarRadius);
+
+        draw->AddImageRounded(
+            reinterpret_cast<ImTextureID>(g_StormApiAvatarView),
+            imgMin,
+            imgMax,
+            ImVec2(0, 0),
+            ImVec2(1, 1),
+            col(255, 255, 255, 1.0f),
+            avatarRadius);
+    }
+    else
+    {
+        draw->AddCircleFilled(orb, avatarRadius, col(35, 80, 190, 0.95f), 64);
+        draw->AddText(ImVec2(orb.x - 7.0f, orb.y - 12.0f), col(255, 255, 255, 1.0f), "S");
+    }
+
+    draw->AddCircle(orb, avatarRadius + 2.0f + pulse * 1.5f, col(190, 248, 255, 1.0f), 64, 2.5f);
+
+    draw->AddText(ImVec2(a.x + 98.0f, a.y + 16.0f), col(255, 255, 255, 1.0f), "Ultimate Storm API");
+    draw->AddText(ImVec2(a.x + 98.0f, a.y + 42.0f), col(224, 240, 255, 0.98f), "Created by TheLeonX");
+    draw->AddText(ImVec2(a.x + 98.0f, a.y + 66.0f), col(165, 225, 255, 0.95f), "Integrated with NarutoStorm4Revived");
+
+    ImGui::End();
+    ImGui::PopStyleVar(2);
+}
+
 void DrawImGui(IDXGISwapChain* swapChain)
 {
     if (!InitImGui(swapChain))
@@ -290,6 +684,7 @@ void DrawImGui(IDXGISwapChain* swapChain)
     ImGui::NewFrame();
 
     DrawAlwaysStatusBar();
+    DrawStormAPINotification();
     DrawAnimatedTopMenu();
 
     ImGui::Render();
@@ -309,7 +704,9 @@ HRESULT __stdcall PresentHook(IDXGISwapChain* swapChain, UINT syncInterval, UINT
     if (loginGateActive)
         Sleep(33);
 
-    return g_OriginalPresent(swapChain, loginGateActive ? 1 : syncInterval, flags);
+    PaceFrameForLowLatency60();
+
+    return g_OriginalPresent(swapChain, loginGateActive ? 1 : EffectivePresentSyncInterval(syncInterval), flags);
 }
 
 HRESULT __stdcall ResizeBuffersHook(

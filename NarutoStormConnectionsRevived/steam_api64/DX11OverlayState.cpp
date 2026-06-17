@@ -3,6 +3,9 @@
 
 PresentFn g_OriginalPresent = nullptr;
 ResizeBuffersFn g_OriginalResizeBuffers = nullptr;
+void* g_PresentHookTarget = nullptr;
+void* g_ResizeBuffersHookTarget = nullptr;
+bool g_DX11OverlayShuttingDown = false;
 
 bool g_HookReady = false;
 bool g_PresentSeen = false;

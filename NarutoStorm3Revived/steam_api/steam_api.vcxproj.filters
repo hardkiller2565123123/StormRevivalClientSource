@@ -113,6 +113,9 @@
     <ClCompile Include="DX11Overlay.cpp">
       <Filter>Core\Overlay</Filter>
     </ClCompile>
+    <ClCompile Include="DX9Overlay.cpp">
+      <Filter>Core\Overlay</Filter>
+    </ClCompile>
     <ClCompile Include="NetworkHooks.cpp">
       <Filter>Core\Network</Filter>
     </ClCompile>
@@ -186,6 +189,9 @@
       <Filter>Includes\imgui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_impl_dx11.cpp">
+      <Filter>Includes\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_dx9.cpp">
       <Filter>Includes\imgui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_impl_win32.cpp">
@@ -264,6 +270,9 @@
       <Filter>Includes\minhook</Filter>
     </ClInclude>
     <ClInclude Include="DX11Overlay.h">
+      <Filter>Core\Overlay</Filter>
+    </ClInclude>
+    <ClInclude Include="DX9Overlay.h">
       <Filter>Core\Overlay</Filter>
     </ClInclude>
     <ClInclude Include="NetworkHooks.h">
@@ -921,6 +930,9 @@
       <Filter>Includes\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui_impl_dx11.h">
+      <Filter>Includes\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_dx9.h">
       <Filter>Includes\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui_impl_win32.h">

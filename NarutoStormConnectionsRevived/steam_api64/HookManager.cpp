@@ -20,8 +20,13 @@ namespace HookManager
 
     void Shutdown()
     {
-        MH_DisableHook(MH_ALL_HOOKS);
-        MH_Uninitialize();
+        MH_STATUS disableStatus = MH_DisableHook(MH_ALL_HOOKS);
+        if (disableStatus != MH_OK && disableStatus != MH_ERROR_NOT_INITIALIZED)
+            Logger::Error("MH_DisableHook(MH_ALL_HOOKS) failed during shutdown");
+
+        MH_STATUS uninitStatus = MH_Uninitialize();
+        if (uninitStatus != MH_OK && uninitStatus != MH_ERROR_NOT_INITIALIZED)
+            Logger::Error("MH_Uninitialize failed during shutdown");
 
         Logger::Info("MinHook shutdown");
     }

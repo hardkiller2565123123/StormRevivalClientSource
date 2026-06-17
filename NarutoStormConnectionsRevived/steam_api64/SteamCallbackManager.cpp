@@ -3,6 +3,7 @@
 #include "SteamCallResultManager.h"
 #include "SteamDiagnostics.h"
 #include "SteamLobbyManager.h"
+#include "SteamIDManager.h"
 #include "Logger.h"
 
 namespace
@@ -107,35 +108,16 @@ namespace
 
     void MarkCallbackRegistered(void* callback, int callbackID)
     {
-        if (!callback)
-            return;
-
-        auto* base = reinterpret_cast<CallbackBaseShim*>(callback);
-
-        if (!IsWritableMemory(base, sizeof(CallbackBaseShim)))
-        {
-            Logger::Error("SteamCallbackManager skipped invalid register flag write");
-            return;
-        }
-
-        base->Flags |= kCallbackRegistered;
-        base->CallbackID = callbackID;
+        // NSC online-menu stability: do not write flags/id into game-owned
+        // Steam callback objects. Newer Steam SDK wrappers can have a different
+        // layout and touching those bytes can corrupt the object.
+        NSR_UNUSED(callback);
+        NSR_UNUSED(callbackID);
     }
 
     void MarkCallbackUnregistered(void* callback)
     {
-        if (!callback)
-            return;
-
-        auto* base = reinterpret_cast<CallbackBaseShim*>(callback);
-
-        if (!IsWritableMemory(base, sizeof(CallbackBaseShim)))
-        {
-            Logger::Error("SteamCallbackManager skipped invalid unregister flag write");
-            return;
-        }
-
-        base->Flags &= static_cast<uint8_t>(~kCallbackRegistered);
+        NSR_UNUSED(callback);
     }
 
     std::vector<unsigned char> BuildDispatchPayload(void* callback, const std::vector<unsigned char>& data)
@@ -168,6 +150,96 @@ namespace
         {
             OutputDebugStringA("SteamCallbackManager protected crash in callback dispatch\n");
             return false;
+        }
+    }
+
+
+
+    struct PersonaStateChangeResult
+    {
+        uint64_t m_ulSteamID;
+        int m_nChangeFlags;
+    };
+
+    struct LobbyEnterResult
+    {
+        uint64_t m_ulSteamIDLobby;
+        uint32_t m_rgfChatPermissions;
+        bool m_bLocked;
+        uint32_t m_EChatRoomEnterResponse;
+    };
+
+    struct LobbyDataUpdateResult
+    {
+        uint64_t m_ulSteamIDLobby;
+        uint64_t m_ulSteamIDMember;
+        uint8_t m_bSuccess;
+    };
+
+    struct LobbyChatUpdateResult
+    {
+        uint64_t m_ulSteamIDLobby;
+        uint64_t m_ulSteamIDUserChanged;
+        uint64_t m_ulSteamIDMakingChange;
+        uint32_t m_rgfChatMemberStateChange;
+    };
+
+    std::set<int> g_BootstrappedCallbacks;
+
+    void PushNoLock(int callbackID, const void* data, size_t size)
+    {
+        NS2CallbackMessage msg{};
+        msg.CallbackID = callbackID;
+        if (data && size)
+        {
+            msg.Data.resize(size);
+            std::memcpy(msg.Data.data(), data, size);
+        }
+        g_Queue.push(msg);
+    }
+
+    void QueueBootstrapForCallbackNoLock(int callbackID)
+    {
+        if (g_BootstrappedCallbacks.find(callbackID) != g_BootstrappedCallbacks.end())
+            return;
+
+        g_BootstrappedCallbacks.insert(callbackID);
+
+        const uint64_t localSteamID = SteamIDManager::GetSteamID64();
+        const uint64_t lobbyID = SteamLobbyManager::GetCurrentLobbyID();
+
+        if (callbackID == 304)
+        {
+            PersonaStateChangeResult persona{};
+            persona.m_ulSteamID = localSteamID;
+            persona.m_nChangeFlags = 0x7fffffff;
+            PushNoLock(304, &persona, sizeof(persona));
+        }
+        else if (callbackID == 504 && lobbyID != 0)
+        {
+            LobbyEnterResult enter{};
+            enter.m_ulSteamIDLobby = lobbyID;
+            enter.m_rgfChatPermissions = 0;
+            enter.m_bLocked = false;
+            enter.m_EChatRoomEnterResponse = 1;
+            PushNoLock(504, &enter, sizeof(enter));
+        }
+        else if (callbackID == 505 && lobbyID != 0)
+        {
+            LobbyDataUpdateResult update{};
+            update.m_ulSteamIDLobby = lobbyID;
+            update.m_ulSteamIDMember = lobbyID;
+            update.m_bSuccess = 1;
+            PushNoLock(505, &update, sizeof(update));
+        }
+        else if (callbackID == 506 && lobbyID != 0)
+        {
+            LobbyChatUpdateResult update{};
+            update.m_ulSteamIDLobby = lobbyID;
+            update.m_ulSteamIDUserChanged = localSteamID;
+            update.m_ulSteamIDMakingChange = localSteamID;
+            update.m_rgfChatMemberStateChange = 0x0001;
+            PushNoLock(506, &update, sizeof(update));
         }
     }
 
@@ -227,6 +299,7 @@ namespace SteamCallbackManager
         std::lock_guard<std::mutex> lock(g_Mutex);
         while (!g_Queue.empty()) g_Queue.pop();
         g_Callbacks.clear();
+        g_BootstrappedCallbacks.clear();
         Logger::Info("SteamCallbackManager initialized");
         return true;
     }
@@ -234,11 +307,44 @@ namespace SteamCallbackManager
     void RegisterCallback(void* callback, int callbackID)
     {
         std::lock_guard<std::mutex> lock(g_Mutex);
-        if (!callback) return;
-        g_Callbacks[callbackID].push_back(callback);
+
+        if (!callback)
+        {
+            Logger::Info("SteamAPI_RegisterCallback ignored null id=" + std::to_string(callbackID));
+            SteamDiagnostics::MarkSteam("RegisterCallbackNull", "id=" + std::to_string(callbackID));
+            return;
+        }
+
+        auto* base = reinterpret_cast<CallbackBaseShim*>(callback);
+        if (!HasReadableVTable(base))
+        {
+            Logger::Error(
+                "SteamAPI_RegisterCallback ignored invalid callback id=" +
+                std::to_string(callbackID) +
+                " callback=" +
+                PointerText(callback));
+            SteamDiagnostics::MarkSteam(
+                "RegisterCallbackInvalid",
+                "id=" + std::to_string(callbackID) + " callback=" + PointerText(callback));
+            return;
+        }
+
+        auto& list = g_Callbacks[callbackID];
+        if (std::find(list.begin(), list.end(), callback) == list.end())
+            list.push_back(callback);
+
         MarkCallbackRegistered(callback, callbackID);
-        Logger::Info("SteamAPI_RegisterCallback id=" + std::to_string(callbackID));
-        SteamDiagnostics::MarkSteam("RegisterCallback", "id=" + std::to_string(callbackID));
+        QueueBootstrapForCallbackNoLock(callbackID);
+
+        Logger::Info(
+            "SteamAPI_RegisterCallback id=" +
+            std::to_string(callbackID) +
+            " callback=" +
+            PointerText(callback) +
+            " safe_no_write=1");
+        SteamDiagnostics::MarkSteam(
+            "RegisterCallback",
+            "id=" + std::to_string(callbackID) + " callback=" + PointerText(callback) + " safe_no_write=1");
     }
 
     void UnregisterCallback(void* callback)

@@ -342,7 +342,7 @@ void __cdecl SteamAPI_Shutdown()
 
 extern "C" __declspec(dllexport) void __cdecl SteamAPI_RunCallbacks()
 {
-    SteamVersionLogger::LogCall("SteamAPI", "RunCallbacks");
+    // Hot path: NSC calls this constantly. Do not log every empty frame.
     SteamCallbackManager::RunCallbacks();
 }
 extern "C" __declspec(dllexport) void __cdecl SteamAPI_ReleaseCurrentThreadMemory() {}
@@ -350,8 +350,7 @@ extern "C" __declspec(dllexport) void __cdecl SteamAPI_ManualDispatch_Init() {}
 extern "C" __declspec(dllexport) void __cdecl SteamAPI_ManualDispatch_RunFrame(HSteamPipe pipe)
 {
     NSR_UNUSED(pipe);
-    SteamLobbyManager::Tick();
-    SteamCallResultManager::RunCompletedCallResults(64);
+    SteamCallbackManager::RunCallbacks();
 }
 extern "C" __declspec(dllexport) bool __cdecl SteamAPI_IsSteamRunning() { return true; }
 extern "C" __declspec(dllexport) bool __cdecl SteamAPI_IsSteamRunningOnSteamDeck() { return false; }
@@ -378,6 +377,11 @@ void __cdecl SteamAPI_UnregisterCallback(void* callback)
 extern "C" __declspec(dllexport)
 void __cdecl SteamAPI_RegisterCallResult(void* callback, SteamAPICall_t call)
 {
+    Logger::Info(
+        "[STEAM EXPORT] SteamAPI_RegisterCallResult callback=" +
+        std::to_string(reinterpret_cast<uintptr_t>(callback)) +
+        " call=" +
+        std::to_string(static_cast<unsigned long long>(call)));
     SteamCallResultManager::RegisterCallResult(callback, call);
 }
 
@@ -1939,7 +1943,27 @@ void* __cdecl SteamInternal_FindOrCreateGameServerInterface(HSteamUser user, con
 extern "C" __declspec(dllexport)
 void* __cdecl SteamInternal_ContextInit(void* context)
 {
-    return context;
+    // Steamworks SDK accessors pass:
+    //   void* ctx[3] = { init_function, callback_counter, cached_interface_ptr };
+    // The real steam_api64.dll calls init_function(&ctx[2]) when the cached
+    // interface is empty, then returns &ctx[2].
+    // Returning ctx directly makes the game read ctx[0] as the interface pointer,
+    // which is actually code memory. The next virtual call then crashes in the EXE
+    // with bytes like "ff 50 20" / call qword ptr [rax+20].
+    if (!context)
+        return nullptr;
+
+    void** ctx = reinterpret_cast<void**>(context);
+    using InitFn = void(__cdecl*)(void*);
+    InitFn init = reinterpret_cast<InitFn>(ctx[0]);
+
+    if (!ctx[2] && init)
+    {
+        SteamDiagnostics::MarkSteam("ContextInit", "initializing cached Steam interface");
+        init(&ctx[2]);
+    }
+
+    return &ctx[2];
 }
 
 extern "C" __declspec(dllexport)

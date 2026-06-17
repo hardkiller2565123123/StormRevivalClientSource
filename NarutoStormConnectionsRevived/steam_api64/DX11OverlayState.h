@@ -33,6 +33,9 @@ enum DX11OverlayTab
 
 extern PresentFn g_OriginalPresent;
 extern ResizeBuffersFn g_OriginalResizeBuffers;
+extern void* g_PresentHookTarget;
+extern void* g_ResizeBuffersHookTarget;
+extern bool g_DX11OverlayShuttingDown;
 
 extern bool g_HookReady;
 extern bool g_PresentSeen;

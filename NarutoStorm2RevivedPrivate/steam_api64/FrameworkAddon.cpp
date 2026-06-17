@@ -166,7 +166,7 @@ namespace FrameworkAddon
         if (!IsLoaded())
         {
             ImGui::Separator();
-            ImGui::TextWrapped("NS2FrameWork.dll is optional. The base client works without it.");
+            ImGui::TextWrapped("NS2FrameWork.dll is optional. The base client and online features work without it.");
             return;
         }
 
