@@ -11,3 +11,12 @@ struct SceneEntry {
 };
 static_assert(sizeof(SceneEntry) == 0x90, "SceneEntry size mismatch");
 #pragma pack(pop)
+
+namespace StageSlotExpansion
+{
+    void SetExtraCapacity(int extraSlots);
+    bool ExpandSceneList();
+    int CurrentCount();
+    int Capacity();
+    const char* LastStatus();
+}

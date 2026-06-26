@@ -1,0 +1,24 @@
+Known receive event registrations:
+
+Event 0  -> sub_1405B7204
+Event 1  -> sub_1405B3C28 or sub_1405B3E40
+Event 3  -> sub_1406B28DC
+Event 5  -> sub_1405B6DE4
+Event 6  -> sub_1405B6DE4
+Event 7  -> sub_1405B6DE4
+Event 8  -> sub_1405B6DE4
+Event 10 -> sub_1405B6DE4
+Event 14 -> sub_1405B6DE4
+
+Current guesses:
+0 = lobby/member update
+1 = player data sync
+3 = gameplay packet relay / packet type 16 relay
+5 = ready/state update
+6 = character select sync
+7 = stage/rule sync
+8 = battle settings sync
+10 = match start / transition
+14 = misc sync
+
+Need confirmation from sub_1406B39BC.

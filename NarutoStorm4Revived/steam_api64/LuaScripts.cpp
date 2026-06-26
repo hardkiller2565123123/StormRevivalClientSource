@@ -13,7 +13,7 @@
 using fn_tolua_isnumber = __int64(__fastcall*)(__int64 a1, int a2, int a3, __int64 a4);
 using fn_tolua_isnoobj = __int64(__fastcall*)(__int64 a1, int a2, __int64 a3);
 using fn_tolua_error = const char* (__fastcall*)(__int64 a1, __int64 a2, unsigned int* a); 
-using fn_tolua_function_NSC = __int64(__fastcall*)(__int64* a1, char* name, __int64 funcptr);
+using fn_tolua_function_NSC = __int64(__fastcall*)(__int64* a1, const char* name, __int64 funcptr);
 using fn_tolua_function_NS4 = __int64(__fastcall*)(__int64 a1, __int64 name, __int64 funcptr);
 using fn_tolua_open = __int64(__fastcall*)(__int64* a1);
 using fn_tolua_endmodule = __int64(__fastcall*)(__int64 a1);

@@ -1,0 +1,16 @@
+.vs/
+Build/
+x64/
+Debug/
+Release/
+*.user
+*.suo
+*.pdb
+*.ilk
+*.log
+Logs/
+steam_config.local.ini
+*.key
+*.secret
+.env
+.env.*

@@ -308,7 +308,7 @@ namespace
     }
 }
 
-class FakeSteamFriends final
+class FakeSteamFriends015 final
 {
 public:
     virtual const char* GetPersonaName()
@@ -650,13 +650,31 @@ public:
 
     virtual bool RequestUserInformation(CSteamID id, bool nameOnly)
     {
-        id = ResolveSteamIDArgument(id, "RequestUserInformation");
-        TraceFriends(
-            "RequestUserInformation",
-            std::to_string(static_cast<unsigned long long>(id)) + (nameOnly ? " nameOnly=1" : " nameOnly=0"));
+        // SteamFriends015 takes CSteamID by value. Do not treat bad values as pointers here.
+        // The Revolution crash report showed a garbage/pointer-looking value, which usually means
+        // the caller is on a sensitive vtable path. Pointer probing in this function can make that worse.
+        const uint64_t raw = static_cast<uint64_t>(id);
+        if (!IsLikelySteamID64(raw))
+        {
+            const CSteamID local = SteamIDManager::GetLocalSteamID();
+            TraceFriends(
+                "RequestUserInformationFallbackLocal",
+                "raw=" + SteamIDText(raw) + " fallbackLocal=" + SteamIDText(static_cast<uint64_t>(local)) +
+                    (nameOnly ? " nameOnly=1" : " nameOnly=0"));
+            id = local;
+        }
+        else
+        {
+            TraceFriends(
+                "RequestUserInformation",
+                SteamIDText(raw) + (nameOnly ? " nameOnly=1" : " nameOnly=0"));
+        }
+
         NSR_UNUSED(id);
         NSR_UNUSED(nameOnly);
-        Logger::Info("SteamFriends::RequestUserInformation");
+        Logger::Info("SteamFriends015::RequestUserInformation offline-cache-hit");
+
+        // false = persona/avatar data is already available; no async callback required.
         return false;
     }
 
@@ -1060,7 +1078,10 @@ public:
     }
 };
 
-static FakeSteamFriends g_Interface;
+static_assert(sizeof(CSteamID) == 8, "CSteamID must stay a flat 64-bit value for SteamFriends015 ABI");
+static_assert(sizeof(bool) == 1, "Steam bool ABI expects bool to be 1 byte");
+
+static FakeSteamFriends015 g_Friends015;
 
 void* FakeSteamInterfaces::Friends()
 {
@@ -1070,14 +1091,26 @@ void* FakeSteamInterfaces::Friends()
 void* FakeSteamInterfaces::FriendsForVersion(const char* version)
 {
     SteamVersionLogger::LogInterfaceRequest("FakeSteamInterfaces::Friends", "SteamFriends");
+
     const std::string requested = SafeVersionString(version, "SteamFriends015");
     const std::string upper = UpperInterfaceName(requested);
     SteamVersionLogger::LogInterfaceRequest("FakeSteamInterfaces::FriendsForVersion", requested.c_str());
 
-    if (upper.find("STEAMFRIENDS") != std::string::npos)
-        Logger::Info("SteamFriends: offline emulated interface returned for " + requested);
-    else
-        Logger::Info("SteamFriends: offline emulated interface returned");
+    // Naruto Storm Revolution requests SteamFriends015. Only expose the object as that ABI.
+    // Older/newer exported names may still resolve here, but they deliberately fall back to
+    // this single known-good offline ABI instead of pretending every Friends version is implemented.
+    if (upper == "STEAMFRIENDS015")
+    {
+        Logger::Info("SteamFriends015: offline emulated interface returned");
+        return &g_Friends015;
+    }
 
-    return &g_Interface;
+    if (upper.find("STEAMFRIENDS") != std::string::npos)
+    {
+        Logger::Error("Unsupported SteamFriends interface requested: " + requested + " -> using SteamFriends015 fallback");
+        return &g_Friends015;
+    }
+
+    Logger::Error("Invalid SteamFriends interface request: " + requested + " -> using SteamFriends015 fallback");
+    return &g_Friends015;
 }

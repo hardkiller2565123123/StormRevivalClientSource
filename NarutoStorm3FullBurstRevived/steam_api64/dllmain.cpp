@@ -1,4 +1,4 @@
-#include "StdInc.h"
+﻿#include "StdInc.h"
 
 #include "Logger.h"
 #include "SteamProxy.h"
@@ -91,6 +91,11 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID)
     {
         DisableThreadLibraryCalls(module);
         g_MainThread = CreateThread(nullptr, 0, MainThread, nullptr, 0, nullptr);
+        if (g_MainThread)
+        {
+            CloseHandle(g_MainThread);
+            g_MainThread = nullptr;
+        }
         break;
     }
     case DLL_PROCESS_DETACH:
@@ -108,4 +113,6 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID)
     }
     return TRUE;
 }
+
+
 

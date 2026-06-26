@@ -1,6 +1,8 @@
 #include "StdInc.h"
 #include "SteamDiagnostics.h"
 #include "Logger.h"
+#include "CrashHandler.h"
+#include "SupportBundle.h"
 
 #include <iomanip>
 
@@ -281,9 +283,15 @@ namespace
         SteamDiagnostics::Mark("Crash", "Unhandled exception", detail);
         Logger::Error("SteamDiagnostics captured exception: " + detail);
         Logger::Error("SteamDiagnostics previous breadcrumb: " + previousBreadcrumb);
+        const std::string dumpPath = CrashHandler::WriteMinidump(info, "vectored-exception");
+        if (!dumpPath.empty())
+            Logger::Error("SteamDiagnostics minidump: " + dumpPath);
         const std::string reportPath = SteamDiagnostics::WriteReport();
         if (!reportPath.empty())
             Logger::Error("SteamDiagnostics report: " + reportPath);
+        const std::string bundlePath = SupportBundle::Write("crash");
+        if (!bundlePath.empty())
+            Logger::Error("SteamDiagnostics support bundle: " + bundlePath);
         Logger::Flush();
 
         return EXCEPTION_CONTINUE_SEARCH;
@@ -321,6 +329,8 @@ namespace SteamDiagnostics
         g_LastException.clear();
         g_ExceptionCount = 0;
 
+        CrashHandler::Init();
+
         Logger::Info("SteamDiagnostics initialized");
         return true;
     }
@@ -336,6 +346,7 @@ namespace SteamDiagnostics
         }
 
         g_Breadcrumbs.clear();
+        CrashHandler::Shutdown();
     }
 
     void Mark(const char* category, const std::string& name, const std::string& detail)

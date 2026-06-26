@@ -30,7 +30,7 @@ public:
     static inline int ORIGINAL_COUNT;
     static inline BGMEntry* g_pNewBGMArray;
     static inline int g_NewBGMCountAllocated; // Total allocated slots
-    static inline int BGM_SLOT_COUNT = 500;
+    static inline int BGM_SLOT_COUNT = 1000;
     // Allocates memory within 2GB of the given base address.
     static LPVOID AllocNearModule(LPVOID base, SIZE_T size) {
         const uintptr_t TWO_GB = 0x80000000;

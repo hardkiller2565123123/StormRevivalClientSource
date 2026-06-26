@@ -96,6 +96,49 @@ namespace
             EndsWith(lower, ".ps1");
     }
 
+    bool IsDebugOrTuiRequest(const std::string& raw)
+    {
+        const std::string lower = Lower(raw);
+        static const char* tokens[] =
+        {
+            "no_release",
+            "norelease",
+            "debugmenu",
+            "debug_menu",
+            "ccdebugmenu",
+            "relivestoryepisodedebugmenu",
+            "debug",
+            "data\\tui",
+            "data/tui",
+            "\\tui\\",
+            "/tui/",
+            "tui"
+        };
+
+        for (const char* token : tokens)
+        {
+            if (lower.find(token) != std::string::npos)
+                return true;
+        }
+
+        return false;
+    }
+
+    std::vector<std::filesystem::path> BuildDebugTuiRoots()
+    {
+        const std::filesystem::path gameFolder = SteamConfig::GetGameFolder();
+        std::vector<std::filesystem::path> roots;
+
+        roots.push_back(gameFolder / "data" / "no_release");
+        roots.push_back(gameFolder / "data" / "tui");
+        roots.push_back(gameFolder / "NarutoStorm4Revived" / "mods" / "no_release");
+        roots.push_back(gameFolder / "NarutoStorm4Revived" / "mods" / "tui");
+        roots.push_back(gameFolder / "NarutoStorm4Revived" / "mods" / "DebugMenu");
+        roots.push_back(gameFolder / "NarutoStorm4Revived" / "mods" / "debug");
+
+        return roots;
+    }
+
     bool IsReadableGameContent(const std::string& path)
     {
         const std::string lower = Lower(path);
@@ -104,7 +147,7 @@ namespace
 
         static const char* exts[] =
         {
-            ".cpk", ".xfbin", ".gfx", ".nsh", ".nut", ".bin", ".swf", ".xml", ".tex", ".dds", ".png", ".txt", ".ini"
+            ".cpk", ".xfbin", ".gfx", ".nsh", ".nut", ".bin", ".swf", ".xml", ".tex", ".dds", ".png", ".txt", ".ini", ".json", ".csv", ".dat", ".lst", ".msg", ".lua"
         };
 
         for (const char* ext : exts)
@@ -127,10 +170,20 @@ namespace
 
     bool ShouldHandleRequest(const std::string& raw)
     {
-        if (raw.empty() || !SteamConfig::IsDlcUnlockEnabled())
+        if (raw.empty())
             return false;
 
         const std::string lower = Lower(raw);
+
+        // Debug/no_release/TUI content must stay mounted even when the DLC toggle is off.
+        // This is what lets retail NSUNS4 probe hidden DebugMenu/TUI assets through the
+        // same MinHook file hooks already used by the DLC/StormEvolution loader.
+        if (IsDebugOrTuiRequest(raw))
+            return true;
+
+        if (!SteamConfig::IsDlcUnlockEnabled())
+            return false;
+
         if (IsReadableGameContent(raw))
             return true;
 
@@ -213,6 +266,42 @@ namespace
 
         if (!relative.empty() && !relative.is_absolute())
         {
+            // Hidden debug/TUI mount layer. These paths are searched first so files in
+            // data/no_release, data/tui, NarutoStorm4Revived/mods/no_release, and
+            // NarutoStorm4Revived/mods/tui can satisfy DebugMenu/TUI file probes without
+            // copying them into the normal data tree.
+            for (const std::filesystem::path& root : BuildDebugTuiRoots())
+            {
+                if (IsBlockedSidecarFile(relative.string()))
+                    continue;
+
+                AddUnique(result, root / relative);
+                AddUnique(result, root / relative.filename());
+
+                std::filesystem::path stripped;
+                bool skipPrefix = false;
+                int consumed = 0;
+                for (const auto& part : relative)
+                {
+                    const std::string partLower = Lower(part.string());
+                    if (!skipPrefix && partLower == "data")
+                    {
+                        skipPrefix = true;
+                        consumed = 1;
+                        continue;
+                    }
+                    if (skipPrefix && consumed == 1 && (partLower == "no_release" || partLower == "tui"))
+                    {
+                        consumed = 2;
+                        continue;
+                    }
+                    stripped /= part;
+                }
+
+                if (consumed >= 2 && !stripped.empty())
+                    AddUnique(result, root / stripped);
+            }
+
             // StormEvolution loose-file override layer. This lets a release folder contain
             // data/evolution/*.cpk, data/ui/*.gfx, data/system/*.xfbin, etc. and have the
             // game read those files without needing them copied into the game root.
@@ -289,13 +378,20 @@ namespace
         if (IsReadableGameContent(normalized))
         {
             const std::string wantedName = Lower(std::filesystem::path(normalized).filename().string());
+
+            std::vector<std::filesystem::path> recursiveRoots;
             for (const std::string folderText : SteamConfig::GetEvolutionFolders())
             {
-                if (folderText.empty())
-                    continue;
+                if (!folderText.empty())
+                    recursiveRoots.push_back(folderText);
+            }
+            // Do NOT recursively scan data/no_release or data/tui here.
+            // Those folders contain thousands of dev-only loose files that can crash retail NSUNS4
+            // if globally mounted. Debug/TUI files are only used through direct path candidates above.
 
+            for (const std::filesystem::path& folder : recursiveRoots)
+            {
                 std::error_code ec;
-                const std::filesystem::path folder = folderText;
                 if (!std::filesystem::exists(folder, ec) || !std::filesystem::is_directory(folder, ec))
                     continue;
 
@@ -340,14 +436,25 @@ namespace
             return {};
 
         const std::filesystem::path relative = normalized;
+
+        std::vector<std::filesystem::path> roots;
         for (const std::string folder : SteamConfig::GetEvolutionFolders())
         {
-            if (folder.empty())
-                continue;
+            if (!folder.empty())
+                roots.push_back(folder);
+        }
+        // Keep this override layer limited to StormEvolution. Debug/TUI direct candidates
+        // are handled in BuildCandidates only when the request explicitly contains debug/no_release/tui.
 
-            const std::filesystem::path candidate = std::filesystem::path(folder) / relative;
+        for (const std::filesystem::path& folder : roots)
+        {
+            const std::filesystem::path candidate = folder / relative;
             if (!IsBlockedSidecarFile(candidate.string()) && ExistsPathA(candidate.string()))
                 return candidate.string();
+
+            const std::filesystem::path byName = folder / relative.filename();
+            if (!IsBlockedSidecarFile(byName.string()) && ExistsPathA(byName.string()))
+                return byName.string();
         }
 
         return {};
@@ -621,7 +728,16 @@ namespace DlcContentLoader
             Logger::Info("StormEvolution folder active: " + folder.string() + " files=" + std::to_string(count));
         }
 
-        Logger::Info(std::string("DLC content loader initialized ") + (ok ? "OK" : "WITH FAILURES"));
+        for (const std::filesystem::path& folder : BuildDebugTuiRoots())
+        {
+            std::error_code ec;
+            if (std::filesystem::exists(folder, ec) && std::filesystem::is_directory(folder, ec))
+                Logger::Info("Debug/TUI root active: " + folder.string());
+            else
+                Logger::Info("Debug/TUI root missing: " + folder.string());
+        }
+
+        Logger::Info(std::string("DLC/Debug/TUI content loader initialized ") + (ok ? "OK" : "WITH FAILURES"));
         return ok;
     }
 

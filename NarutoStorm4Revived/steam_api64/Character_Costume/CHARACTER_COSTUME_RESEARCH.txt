@@ -1,0 +1,29 @@
+Character / Costume / Unlock Research
+
+sub_1404B520C:
+loads 216-byte records and clones them into runtime storage.
+
+sub_1404B612C:
+push/insert 216-byte entries.
+
+sub_1401C9CFC:
+generates keys like sprintf("%s%04d", name, number). Strong lead for character costume/variant ids.
+
+sub_1401CA4D0:
+loads 96-byte records keyed by hash(name). Likely character metadata/select data.
+
+sub_14051956C:
+unlock/add item by name. Seen with COSTUME_MATERIAL_021 through COSTUME_MATERIAL_025.
+
+sub_14051EDC0:
+costume/material table containing COSTUME_MATERIAL_001 through 020 in groups of 5.
+
+sub_14050AA98:
+material progress flow:
+sub_14051EA54 -> sub_14051EDC0 -> sub_14050C37C -> sub_14050A3F8
+
+sub_14050C37C:
+finds material entry, likely 16-byte records.
+
+sub_14050A3F8:
+adds progress and clamps current value to max.

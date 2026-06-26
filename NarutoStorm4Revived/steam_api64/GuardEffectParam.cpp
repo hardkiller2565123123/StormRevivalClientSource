@@ -834,6 +834,17 @@ void __fastcall GuardEffectParam::hk_sub_1409D5040_SC(__int64 a1, int a2, int a3
 {
     {
         int i; // ebx
+        __int64 v27 = 0;
+        std::uintptr_t fn3480 = 0;
+        int v34 = 0;
+        int v35 = 0;
+        __int64 v36 = 0;
+        __int64 v37 = 0;
+        __int64 v39 = 0;
+        int v40 = 0;
+        unsigned int curState = 0;
+        uint32_t e64val = 0;
+        __int64 v47 = 0;
         //   
         constexpr std::uintptr_t BASE_SUB = 0x140000C00ULL;
 
@@ -1177,16 +1188,16 @@ void __fastcall GuardEffectParam::hk_sub_1409D5040_SC(__int64 a1, int a2, int a3
                                 if (div < static_cast<int>(threshold))
                                     v19 = 0;
                                 // v27 stored as LODWORD trick in asm; here we reuse mod
-                                __int64 v27 = static_cast<__int64>(mod);
+                                v27 = static_cast<__int64>(mod);
                             }
                         }
                     }
 
                     {
                         // if ((*(float (__fastcall **)(__int64, __int64))(*(_QWORD *)v26 + 3480i64))(v26, v27) < 49.0 || v19)
-                        auto fn3480 = *reinterpret_cast<std::uintptr_t*>(*reinterpret_cast<std::uintptr_t*>(v26) + 3480);
+                        fn3480 = *reinterpret_cast<std::uintptr_t*>(*reinterpret_cast<std::uintptr_t*>(v26) + 3480);
                         using fn3480_t = float(__fastcall*)(__int64, __int64);
-                        __int64 v27 = 0; // approximate - exact mod computed above if needed
+                        v27 = 0; // approximate - exact mod computed above if needed
                         if (reinterpret_cast<fn3480_t>(fn3480)(v26, v27) < 49.0f || v19)
                         {
                         LABEL_77:
@@ -1214,18 +1225,18 @@ void __fastcall GuardEffectParam::hk_sub_1409D5040_SC(__int64 a1, int a2, int a3
 
             if (!sub_1409EF570(a1 + 536) && !(unsigned int)(/*sub_1409EF8E0(a1+536,19)*/0))
             {
-                int v34 = *reinterpret_cast<int*>(a1 + 3684);
+                v34 = *reinterpret_cast<int*>(a1 + 3684);
                 if (v34 == 143)
                 {
-                    int v35 = sub_14098F8E0(a1);
-                    __int64 v36 = a1;
+                    v35 = sub_14098F8E0(a1);
+                    v36 = a1;
                     if (v35 != 950)
                     {
-                        unsigned int curState = sub_14098F8E0(a1);
+                        curState = sub_14098F8E0(a1);
                         if (curState == 102 || (curState == 101 && (unsigned int)sub_14098FD20(a1)))
                         {
-                            __int64 v37 = sub_14098F510(a1, 0x1B8u, 1);
-                            __int64 v39 = a1;
+                            v37 = sub_14098F510(a1, 0x1B8u, 1);
+                            v39 = a1;
                             if (v37)
                             {
                                 sub_140991940(a1, 950, /*v38*/0, 0xFFFFFFFF, 0, 0);
@@ -1249,14 +1260,14 @@ void __fastcall GuardEffectParam::hk_sub_1409D5040_SC(__int64 a1, int a2, int a3
                     unsigned int v43 = 947;
                     if (*reinterpret_cast<uint32_t*>(a1 + 3744) != 5) v43 = 939;
                     int v44 = sub_14098F8E0(a1);
-                    __int64 v36 = a1;
+                    v36 = a1;
                     if (v44 != static_cast<int>(v43))
                     {
-                        unsigned int curState = sub_14098F8E0(a1);
+                        curState = sub_14098F8E0(a1);
                         if (curState == 102 || (curState == 101 && (unsigned int)sub_14098FD20(a1)))
                         {
                             __int64 v45 = sub_14098F510(a1, v43, 1);
-                            __int64 v39 = a1;
+                            v39 = a1;
                             if (v45)
                             {
                                 sub_140991940(a1, v43, /*v46*/0, 0xFFFFFFFF, 0, 0);
@@ -1272,15 +1283,15 @@ void __fastcall GuardEffectParam::hk_sub_1409D5040_SC(__int64 a1, int a2, int a3
                 {
                     if ((unsigned int)(v34 - 178) > 1 || *reinterpret_cast<uint32_t*>(a1 + 71576) != 1)
                         goto LABEL_93;
-                    int v40 = sub_14098F8E0(a1);
-                    __int64 v36 = a1;
+                    v40 = sub_14098F8E0(a1);
+                    v36 = a1;
                     if (v40 != 936)
                     {
-                        unsigned int curState = sub_14098F8E0(a1);
+                        curState = sub_14098F8E0(a1);
                         if (curState == 102 || (curState == 101 && (unsigned int)sub_14098FD20(a1)))
                         {
                             __int64 v41 = sub_14098F510(a1, 0x3A8u, 1);
-                            __int64 v39 = a1;
+                            v39 = a1;
                             if (v41)
                             {
                                 sub_140991940(a1, 936, /*v42*/0, 0xFFFFFFFF, 0, 0);
@@ -1308,14 +1319,14 @@ void __fastcall GuardEffectParam::hk_sub_1409D5040_SC(__int64 a1, int a2, int a3
 
             if (*reinterpret_cast<uint32_t*>(a1 + 0xE64) != 86)
             {
-                uint32_t e64val = *reinterpret_cast<uint32_t*>(a1 + 0xE64);
+                e64val = *reinterpret_cast<uint32_t*>(a1 + 0xE64);
                 if (e64val == 140 || e64val == 141)
                     goto LABEL_117;
                 if (e64val != 203)
                 {
                     if (e64val != 262)
                     {
-                        __int64 v47 = *reinterpret_cast<__int64*>(a1 + 0x11600);
+                        v47 = *reinterpret_cast<__int64*>(a1 + 0x11600);
                         if (v47 == *reinterpret_cast<__int64*>(a1 + 0x11608))
                             goto LABEL_116;
                         while ((int)sub_14098F8A0(a1) < *reinterpret_cast<int*>(a1 + 0x11620))
@@ -1650,6 +1661,13 @@ void** __fastcall GuardEffectParam::hk_sub_1407AEBF8_S4(__int64 a1, int a2, __in
 {
     void* retaddr_local = nullptr;
     void** result = reinterpret_cast<void**>(&retaddr_local);
+    __int64 v36 = 0;
+    __int64 v39 = 0;
+    int modVal = 0;
+    unsigned char* globalPtr = nullptr;
+    int v55 = 0;
+    __int64 found = 0;
+    int curState = 0;
 
     constexpr std::uintptr_t BASE_SUB = 0x140000C00ULL;
 
@@ -1919,7 +1937,7 @@ void** __fastcall GuardEffectParam::hk_sub_1407AEBF8_S4(__int64 a1, int a2, __in
                 {
                     if (v5144 != 11)
                     {
-                        __int64 v36 = (*reinterpret_cast<__int64(__fastcall**)(__int64)>(*reinterpret_cast<__int64*>(a1) + 3464))(a1);
+                        v36 = (*reinterpret_cast<__int64(__fastcall**)(__int64)>(*reinterpret_cast<__int64*>(a1) + 3464))(a1);
                         if (v36)
                         {
                             unsigned int v37 = *reinterpret_cast<unsigned int*>(v36 + 0xCC0);
@@ -1931,8 +1949,8 @@ void** __fastcall GuardEffectParam::hk_sub_1407AEBF8_S4(__int64 a1, int a2, __in
                             }
                         }
 
-                        __int64 v39 = *reinterpret_cast<__int64*>(a1 + 0x151B8);
-                        int modVal = 0;
+                        v39 = *reinterpret_cast<__int64*>(a1 + 0x151B8);
+                        modVal = 0;
                         if (v39)
                         {
                             // call v39->vtable+24  : int fn(__int64)
@@ -1940,7 +1958,7 @@ void** __fastcall GuardEffectParam::hk_sub_1407AEBF8_S4(__int64 a1, int a2, __in
                             using fn24_t = int(__fastcall*)(__int64);
                             int v40 = reinterpret_cast<fn24_t>(fnptr)(v39);
 
-                            unsigned char* globalPtr = reinterpret_cast<unsigned char*>(Common::GetQwordPtr(0x1416663C8));
+                            globalPtr = reinterpret_cast<unsigned char*>(Common::GetQwordPtr(0x1416663C8));
                             int divider = 0xBB8u / *(globalPtr + 2370);
                             int value = *reinterpret_cast<int*>(a1 + 3280);
                             int mod = value % divider;
@@ -1961,7 +1979,7 @@ void** __fastcall GuardEffectParam::hk_sub_1407AEBF8_S4(__int64 a1, int a2, __in
                         if (!v33)
                         {
                             DeleteExceptionPtr(a1, 0);
-                            unsigned char* globalPtr = reinterpret_cast<unsigned char*>(Common::GetQwordPtr(0x1416663C8));
+                            globalPtr = reinterpret_cast<unsigned char*>(Common::GetQwordPtr(0x1416663C8));
                             int denom = 0xBB8u / *(globalPtr + 0x942);
                             int computedVal = *reinterpret_cast<int*>(a1 + 3280) / denom;
                             int modulo = computedVal % static_cast<int>(10.0f / (30.0f / static_cast<float>(*(globalPtr + 0x942))));
@@ -2021,8 +2039,8 @@ void** __fastcall GuardEffectParam::hk_sub_1407AEBF8_S4(__int64 a1, int a2, __in
 
             if ((*(unsigned int(__fastcall**)(__int64))(*reinterpret_cast<__int64*>(a1) + 4536))(a1))
             {
-                unsigned char* globalPtr = reinterpret_cast<unsigned char*>(Common::GetQwordPtr(0x1416663C8));
-                int v55 = *(globalPtr + 2370);
+                globalPtr = reinterpret_cast<unsigned char*>(Common::GetQwordPtr(0x1416663C8));
+                v55 = *(globalPtr + 2370);
                 if ((int)sub_14077DAF8(a1) >= static_cast<int>(20.0f / (30.0f / (float)v55)))
                     LABEL_134:
                 GuardEffectParam::sub_1407AFADC_S4(a1, 1);
@@ -2039,7 +2057,7 @@ void** __fastcall GuardEffectParam::hk_sub_1407AEBF8_S4(__int64 a1, int a2, __in
                 if (cur == 950) goto LABEL_95;
                 if ((unsigned int)sub_14077DB38(a1) != 102 && ((unsigned int)sub_14077DB38(a1) != 101 || !(unsigned int)sub_14077DD4C(a1)))
                     return reinterpret_cast<void**>(sub_1407B581C(a1));
-                __int64 found = sub_14077DA68(a1, 440, 1);
+                found = sub_14077DA68(a1, 440, 1);
                 if (found)
                 {
                     sub_14077E64C(a1, 440, 0, 0xFFFFFFFF, 0, 0);
@@ -2059,7 +2077,7 @@ void** __fastcall GuardEffectParam::hk_sub_1407AEBF8_S4(__int64 a1, int a2, __in
                     if (cur == (int)want) { call_vfunc_void_1arg(a1, 0xDB0, 0); return reinterpret_cast<void**>(sub_1407B581C(a1)); }
                     if ((unsigned int)sub_14077DB38(a1) != 102 && ((unsigned int)sub_14077DB38(a1) != 101 || !(unsigned int)sub_14077DD4C(a1)))
                         return reinterpret_cast<void**>(sub_1407B581C(a1));
-                    __int64 found = sub_14077DA68(a1, want, 1);
+                    found = sub_14077DA68(a1, want, 1);
                     if (found)
                     {
                         sub_14077E64C(a1, want, 0, 0xFFFFFFFF, 0, 0);
@@ -2075,7 +2093,7 @@ void** __fastcall GuardEffectParam::hk_sub_1407AEBF8_S4(__int64 a1, int a2, __in
                         call_vfunc_void_1arg(a1, 0xDB0, 0);
                         return reinterpret_cast<void**>(sub_1407B581C(a1));
                     }
-                    int curState = (int)sub_14077DB38(a1);
+                    curState = (int)sub_14077DB38(a1);
                     if (curState == 936)
                     {
                         if (!(unsigned int)sub_14077DD4C(a1))
@@ -2085,7 +2103,7 @@ void** __fastcall GuardEffectParam::hk_sub_1407AEBF8_S4(__int64 a1, int a2, __in
                     }
                     if ((unsigned int)sub_14077DB38(a1) != 102 && ((unsigned int)sub_14077DB38(a1) != 101 || !(unsigned int)sub_14077DD4C(a1)))
                         return reinterpret_cast<void**>(sub_1407B581C(a1));
-                    __int64 found = sub_14077DA68(a1, 936, 1);
+                    found = sub_14077DA68(a1, 936, 1);
                     if (found)
                     {
                         sub_14077E64C(a1, 936, 0, 0xFFFFFFFF, 0, 0);

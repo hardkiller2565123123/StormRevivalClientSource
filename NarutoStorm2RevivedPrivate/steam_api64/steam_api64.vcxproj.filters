@@ -103,6 +103,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CrashHandler.cpp">
+      <Filter>Core\logger</Filter>
+    </ClCompile>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="HookManager.cpp">
       <Filter>Core\hooks</Filter>
@@ -153,6 +156,9 @@
       <Filter>Includes\Steam</Filter>
     </ClCompile>
     <ClCompile Include="SteamConfig.cpp">
+      <Filter>Includes\Steam</Filter>
+    </ClCompile>
+    <ClCompile Include="SupportBundle.cpp">
       <Filter>Includes\Steam</Filter>
     </ClCompile>
     <ClCompile Include="SteamDiagnostics.cpp">
@@ -248,9 +254,15 @@
     <ClCompile Include="SteamProxy.cpp">
       <Filter>Includes\Steam</Filter>
     </ClCompile>
+    <ClCompile Include="InputFocusGuard.cpp">
+      <Filter>Core\logger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StdInc.h" />
+    <ClInclude Include="CrashHandler.h">
+      <Filter>Core\logger</Filter>
+    </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>Core\logger</Filter>
     </ClInclude>
@@ -890,6 +902,9 @@
     <ClInclude Include="SteamConfig.h">
       <Filter>Includes\Steam</Filter>
     </ClInclude>
+    <ClInclude Include="SupportBundle.h">
+      <Filter>Includes\Steam</Filter>
+    </ClInclude>
     <ClInclude Include="SteamDiagnostics.h">
       <Filter>Includes\Steam</Filter>
     </ClInclude>
@@ -962,12 +977,9 @@
     <ClInclude Include="SteamProxy.h">
       <Filter>Includes\Steam</Filter>
     </ClInclude>
+    <ClInclude Include="InputFocusGuard.h" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="libMinHook.x64.lib">
-      <Filter>Includes\minhook</Filter>
-    </Library>
+    <Library Include="$(MinHookLibName)" />
   </ItemGroup>
-  
 </Project>
-

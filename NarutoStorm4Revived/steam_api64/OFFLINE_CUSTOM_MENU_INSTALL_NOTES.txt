@@ -1,0 +1,23 @@
+This ZIP was patched for the OFFLINE steam_api64 build only.
+
+Goal:
+- Add new StormRevival menu options under Online Match.
+- Do not replace Store, BingoBook, or any existing stock option.
+
+Added:
+- OnlineMenu/CustomMenu/MainMenuOptionRegistry.*
+- OnlineMenu/CustomMenu/RealMenuOptionInjector.*
+- Updated CustomMenuEntry
+- Updated MenuActionHook
+- Updated Config defaults
+- Updated StormRevivalOnlineMenu install path
+- Updated vcxproj/vcxproj.filters
+
+Modes:
+100 StormRevival Settings
+101 StormRevival Status
+102 Unlock All stub
+
+Important:
+This adds the code-side custom options and does not replace existing stock modes.
+The actual visible row still requires the netbattlemainmenu option provider or SWF option list to be wired.

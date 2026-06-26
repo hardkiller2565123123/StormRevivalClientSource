@@ -2,14 +2,18 @@
   <Configurations>
     <Platform Name="x64" />
     <Platform Name="x86" />
-  </Configurations>  <Folder Name="/NS1/">    <Project Path="NarutoStorm1Revived/NS1FrameWork/NS1FrameWork.vcxproj" Id="160c05a4-05d8-4b28-8fe8-f1ba497bd721" />    <Project Path="NarutoStorm1Revived/steam_api64/steam_api64.vcxproj" Id="d262af8a-d686-4053-92e4-1f938978cf63" />  </Folder>
+  </Configurations>  <Folder Name="/documentation/" />  <Folder Name="/documentation/Core/">    <File Path="Documentation/Core/00_DOCUMENTATION_INDEX.h" />    <File Path="Documentation/Core/01_ALL_GAMES_STATUS.h" />    <File Path="Documentation/Core/02_COMBINED_ARCHITECTURE.h" />    <File Path="Documentation/Core/03_SOURCE_SCAN_INVENTORY.h" />  </Folder>  <Folder Name="/documentation/Development/">    <File Path="Documentation/Development/01_BUILD_GUIDE.h" />    <File Path="Documentation/Development/02_DEBUGGING_AND_CRASH_GUIDE.h" />    <File Path="Documentation/Development/03_CONTRIBUTING_AND_PROJECT_RULES.h" />  </Folder>  <Folder Name="/documentation/Games/">    <File Path="Documentation/Games/NarutoStorm1Revived.h" />    <File Path="Documentation/Games/NarutoStorm2RevivedPrivate.h" />    <File Path="Documentation/Games/NarutoStorm3FullBurstRevived.h" />    <File Path="Documentation/Games/NarutoStorm3Revived.h" />    <File Path="Documentation/Games/NarutoStorm4Revived.h" />    <File Path="Documentation/Games/NarutoStormConnectionsRevived.h" />    <File Path="Documentation/Games/NarutoStormRevolationRevived.h" />  </Folder>  <Folder Name="/documentation/Release/">    <File Path="Documentation/Release/01_ROADMAP.h" />    <File Path="Documentation/Release/02_KNOWN_ISSUES.h" />    <File Path="Documentation/Release/03_PUBLIC_PROJECT_DESCRIPTION.h" />  </Folder>  <Folder Name="/documentation/Systems/">    <File Path="Documentation/Systems/01_STEAM_API_EMULATION.h" />    <File Path="Documentation/Systems/02_NETWORKING_LOBBIES_MATCHMAKING.h" />    <File Path="Documentation/Systems/03_OVERLAY_DEBUG_UI.h" />    <File Path="Documentation/Systems/04_ASSET_TOOLKIT_MODDING.h" />    <File Path="Documentation/Systems/05_LUA_PATCHES_HOOKS.h" />    <File Path="Documentation/Systems/06_NS4_EXPANSION_AND_API_CONTROL_CENTER.h" />    <File Path="Documentation/Systems/07_RUNTIME_SLOT_SETTINGS.h" />    <File Path="Documentation/Systems/08_CHARACTER_SLOT_EXPANSION_RESEARCH.h" />  </Folder>  <Folder Name="/NS1/">    <Project Path="NarutoStorm1Revived/NS1FrameWork/NS1FrameWork.vcxproj" Id="160c05a4-05d8-4b28-8fe8-f1ba497bd721" />    <Project Path="NarutoStorm1Revived/steam_api64/steam_api64.vcxproj" Id="d262af8a-d686-4053-92e4-1f938978cf63" />  </Folder>
   <Folder Name="/NS2/">
     <Project Path="NarutoStorm2RevivedPrivate/NS2FrameWork/NS2FrameWork.vcxproj" Id="c2f8b4e3-3e5d-4a9b-8c4f-72f9d55ce901" />
     <Project Path="NarutoStorm2RevivedPrivate/steam_api64/steam_api64.vcxproj" Id="a36a5aaf-0f0c-4998-a6c7-3a583b9f4ca2" />
   </Folder>
   <Folder Name="/NS3/">
-    <Project Path="NarutoStorm3Revived/NS3FrameWork/NS3FrameWork.vcxproj" Id="cc3d7998-a7f5-4957-accf-1e2daaf61a7f" />
-    <Project Path="NarutoStorm3Revived/steam_api/steam_api.vcxproj" Id="4bbbe7c5-11e3-49bc-9d6d-0e8356edb5da" />
+    <Project Path="NarutoStorm3Revived/NS3FrameWork/NS3FrameWork.vcxproj" Id="cc3d7998-a7f5-4957-accf-1e2daaf61a7f">
+      <Platform Solution="Release|x64" Project="Win32" />
+    </Project>
+    <Project Path="NarutoStorm3Revived/steam_api/steam_api.vcxproj" Id="4bbbe7c5-11e3-49bc-9d6d-0e8356edb5da">
+      <Platform Solution="Release|x64" Project="Win32" />
+    </Project>
   </Folder>
   <Folder Name="/NS3FB/">
     <Project Path="NarutoStorm3FullBurstRevived/NS3FBFrameWork/NS3FBFrameWork.vcxproj" Id="30540477-3cf3-494b-aecb-ac95cdccaec8" />
@@ -24,7 +28,11 @@
     <Project Path="NarutoStormConnectionsRevived/steam_api64/steam_api64.vcxproj" Id="a3fb42e5-26f4-4beb-9d06-5e66ddd2a12e" />
   </Folder>
   <Folder Name="/NSR/">
-    <Project Path="NarutoStormRevolationRevived/NSRFrameWork/NSRFrameWork.vcxproj" Id="c097aef3-c5d5-43d7-8673-4280fad81d98" />
-    <Project Path="NarutoStormRevolationRevived/steam_api/steam_api.vcxproj" Id="ac3b2bef-bcdb-4e30-ad94-48494a350ecc" />
+    <Project Path="NarutoStormRevolationRevived/NSRFrameWork/NSRFrameWork.vcxproj" Id="c097aef3-c5d5-43d7-8673-4280fad81d98">
+      <Platform Solution="Release|x64" Project="Win32" />
+    </Project>
+    <Project Path="NarutoStormRevolationRevived/steam_api/steam_api.vcxproj" Id="ac3b2bef-bcdb-4e30-ad94-48494a350ecc">
+      <Platform Solution="Release|x64" Project="Win32" />
+    </Project>
   </Folder>
 </Solution>

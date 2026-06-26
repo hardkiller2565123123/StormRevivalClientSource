@@ -1,4 +1,5 @@
 #include "DX11OverlayInternal.h"
+#include "SteamStatsLocal.h"
 
 namespace
 {
@@ -297,18 +298,12 @@ void DrawGamePage()
 
         ImGui::Separator();
 
-        ImGui::Text("Game folder:");
-        ImGui::TextWrapped("%s", AssetBrowser::GetGameFolder().c_str());
-
-        ImGui::Text("Dump folder:");
-        ImGui::TextWrapped("%s", AssetBrowser::GetDumpFolder().c_str());
-
         ImGui::Text("Mods folder:");
         ImGui::TextWrapped("NarutoStorm4Revived\\mods");
 
         ImGui::Separator();
 
         ImGui::Text("Asset preload:");
-        ImGui::Text("%s", AssetPreloadManager::IsPreloading() ? "loading" : "idle/complete");
+        ImGui::Text("handled by NS4FrameWork asset tools");
     }
 }

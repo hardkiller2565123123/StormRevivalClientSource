@@ -1,8 +1,13 @@
-<Solution>
+﻿<Solution>
   <Configurations>
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
   <Project Path="NS3FBFrameWork/NS3FBFrameWork.vcxproj" Id="c4f8b4e3-3e5d-4a9b-8c4f-72f9d55ce901" />
   <Project Path="steam_api64/steam_api64.vcxproj" Id="5b9f6673-54df-44f1-b1d0-0c32337f93d6" />
+  <Folder Name="/Docs/">
+    <File Path="FRAMEWORK_PORT_PLAN.md" />
+  </Folder>
 </Solution>
+
+

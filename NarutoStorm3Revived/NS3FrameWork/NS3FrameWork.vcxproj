@@ -137,12 +137,16 @@
     <ClInclude Include="..\steam_api\imstb_rectpack.h" />
     <ClInclude Include="..\steam_api\imstb_textedit.h" />
     <ClInclude Include="..\steam_api\imstb_truetype.h" />
+    <ClInclude Include="..\steam_api\CrashHandler.h" />
     <ClInclude Include="..\steam_api\Logger.h" />
     <ClInclude Include="..\steam_api\MinHook.h" />
     <ClInclude Include="..\steam_api\StdInc.h" />
+    <ClInclude Include="..\steam_api\SteamDiagnostics.h" />
+    <ClInclude Include="..\steam_api\SupportBundle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FrameWorkApi.cpp" />
+    <ClCompile Include="..\steam_api\CrashHandler.cpp" />
     <ClCompile Include="..\steam_api\HookManager.cpp" />
     <ClCompile Include="..\steam_api\imgui.cpp" />
     <ClCompile Include="..\steam_api\imgui_draw.cpp" />
@@ -151,6 +155,8 @@
     <ClCompile Include="..\steam_api\imgui_tables.cpp" />
     <ClCompile Include="..\steam_api\imgui_widgets.cpp" />
     <ClCompile Include="..\steam_api\Logger.cpp" />
+    <ClCompile Include="..\steam_api\SteamDiagnostics.cpp" />
+    <ClCompile Include="..\steam_api\SupportBundle.cpp" />
     <ClCompile Include="AssetBackupManager.cpp" />
     <ClCompile Include="AssetBrowser.cpp" />
     <ClCompile Include="AssetBulkExtractor.cpp" />

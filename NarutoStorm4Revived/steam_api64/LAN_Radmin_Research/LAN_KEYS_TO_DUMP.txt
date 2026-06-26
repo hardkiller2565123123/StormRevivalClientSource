@@ -1,0 +1,12 @@
+Important string arrays / lobby keys to dump:
+
+off_1414BAA60  = 15 required keys checked before endless lobby proceeds
+off_1414BAAD8  = 6 required keys checked before endless lobby proceeds
+off_1414BE290  = 15 keys cleared by player match lobby
+off_1414BE308  = 6 keys cleared by player match lobby
+off_1414BEC60
+off_1414BECD8
+off_1414EBCB8  = 4 required keys checked/cleared by ccNetManager helpers
+
+These likely reveal:
+player name, host id, ready state, character/team selection, stage, rules, rank/region, match flags.

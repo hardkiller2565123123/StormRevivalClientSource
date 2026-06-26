@@ -44,7 +44,7 @@ void DrawDropdownPanel()
     float panelWidth = std::min(viewport->Size.x - x - 12.0f, 1280.0f);
     float panelHeight = viewport->Size.y - y - 28.0f;
 
-    if (g_SelectedTab == TAB_CLIENT || g_SelectedTab == TAB_ONLINE || IsFrameworkTopTab(g_SelectedTab))
+    if (g_SelectedTab == TAB_CLIENT || g_SelectedTab == TAB_ONLINE || g_SelectedTab == TAB_API || IsFrameworkTopTab(g_SelectedTab))
     {
         x = 12.0f;
         panelWidth = viewport->Size.x - 24.0f;
@@ -96,6 +96,12 @@ void DrawDropdownPanel()
             DrawLeftButton("Invites", 4);
             DrawLeftButton("Profile", 5);
             break;
+
+        case TAB_API:
+            DrawLeftButton("Feature Registry", 0);
+            DrawLeftButton("Slot Expansion", 1);
+            DrawLeftButton("Diagnostics", 2);
+            break;
         }
 
         ImGui::EndChild();
@@ -108,6 +114,7 @@ void DrawDropdownPanel()
     {
     case TAB_CLIENT: DrawClientPage(); break;
     case TAB_ONLINE: DrawOnlinePage(); break;
+    case TAB_API: DrawApiPage(); break;
     case TAB_GRAPHICS:
     case TAB_CONTROLS:
     case TAB_CAMERA:
@@ -168,6 +175,7 @@ void DrawAnimatedTopMenu()
 
     DrawTabButton("Client", TAB_CLIENT); ImGui::SameLine();
     DrawTabButton("LAN", TAB_ONLINE); ImGui::SameLine();
+    DrawTabButton("API", TAB_API); ImGui::SameLine();
 
     if (ShouldShowFrameworkTabs())
     {

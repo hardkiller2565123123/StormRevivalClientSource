@@ -1,4 +1,4 @@
-#include "DX11OverlayInternal.h"
+﻿#include "DX11OverlayInternal.h"
 #include "SteamCallbackManager.h"
 #include "SteamCallResultManager.h"
 #include "SteamConfig.h"
@@ -7,6 +7,7 @@
 #include "SteamLobbyManager.h"
 #include "SteamOfflineServer.h"
 #include "SteamVersionLogger.h"
+#include "SupportBundle.h"
 
 void DrawDebugPage()
 {
@@ -251,7 +252,23 @@ void DrawDebugPage()
         if (ImGui::Button("Write test log", ImVec2(180.0f, 24.0f)))
             Logger::Info("DX11 overlay: test log from debug tools");
 
+        ImGui::SameLine();
+        if (ImGui::Button("Write support bundle", ImVec2(220.0f, 24.0f)))
+        {
+            const std::string bundle = SupportBundle::Write("overlay-debug-tools");
+            Logger::Info(bundle.empty() ? "DX11 overlay: support bundle failed" : "DX11 overlay: support bundle written " + bundle);
+        }
+
+        if (ImGui::Button("Write diagnostics report", ImVec2(220.0f, 24.0f)))
+            SteamDiagnostics::WriteReport();
+
+        ImGui::Separator();
+        ImGui::TextWrapped("Last breadcrumb: %s", SteamDiagnostics::LastBreadcrumb().c_str());
+        ImGui::TextWrapped("Last exception: %s", SteamDiagnostics::LastException().c_str());
+
         if (ImGui::Button("Emergency disable overlay", ImVec2(220.0f, 24.0f)))
             g_OverlayEnabled = false;
     }
 }
+
+

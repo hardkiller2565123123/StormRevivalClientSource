@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
@@ -58,7 +58,8 @@ typedef int32_t ESteamAPIInitResult;
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dwrite.lib")
 
-#define NS2_VERSION "0.1.0"
+#define NS3FB_VERSION "0.2.0"
+#define NS2_VERSION NS3FB_VERSION
 
 #define NSR_UNUSED(x) (void)(x)
 
@@ -89,3 +90,5 @@ typedef int32_t ESteamAPIInitResult;
 #ifndef ARRAYSIZE
 #define ARRAYSIZE(x) (sizeof(x) / sizeof(x[0]))
 #endif
+
+

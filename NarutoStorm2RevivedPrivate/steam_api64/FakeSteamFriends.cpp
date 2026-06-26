@@ -650,13 +650,28 @@ public:
 
     virtual bool RequestUserInformation(CSteamID id, bool nameOnly)
     {
-        id = ResolveSteamIDArgument(id, "RequestUserInformation");
-        TraceFriends(
-            "RequestUserInformation",
-            std::to_string(static_cast<unsigned long long>(id)) + (nameOnly ? " nameOnly=1" : " nameOnly=0"));
+        // SteamFriends015 takes CSteamID by value. Do not pointer-probe garbage values here.
+        // Revolution crash logs showed a pointer-looking value immediately before an execute-null crash.
+        const uint64_t raw = static_cast<uint64_t>(id);
+        if (!IsLikelySteamID64(raw))
+        {
+            const CSteamID local = SteamIDManager::GetLocalSteamID();
+            TraceFriends(
+                "RequestUserInformationFallbackLocal",
+                "raw=" + SteamIDText(raw) + " fallbackLocal=" + SteamIDText(static_cast<uint64_t>(local)) +
+                    (nameOnly ? " nameOnly=1" : " nameOnly=0"));
+            id = local;
+        }
+        else
+        {
+            TraceFriends(
+                "RequestUserInformation",
+                SteamIDText(raw) + (nameOnly ? " nameOnly=1" : " nameOnly=0"));
+        }
+
         NSR_UNUSED(id);
         NSR_UNUSED(nameOnly);
-        Logger::Info("SteamFriends::RequestUserInformation");
+        Logger::Info("SteamFriends015::RequestUserInformation offline-cache-hit");
         return false;
     }
 

@@ -1,0 +1,44 @@
+gpSetting / Scenario Parser
+
+File:
+data/gp/setting/gpSetting.xfbin
+
+sub_14043FB28:
+loads gpSetting.xfbin, enumerates entries, calls sub_14043F208.
+
+sub_14043F208:
+allocates 0x108C scenario structure and parses XML-like scenario definitions.
+
+XML helpers:
+sub_1404B6284 = parse XML / build XML tree
+sub_1404B622C = free XML tree
+sub_1404B6B58 = get attribute by name
+sub_1404B6BC8 = get first child node by name
+sub_1404B6B90 = get next sibling node by name
+
+Fields:
+id
+Basic/Script/path
+Basic/battleParam
+Basic/bossLoading
+Basic/chapter
+World/world
+World/start
+Characters/Character/id
+Characters/Character/role = leader/support
+Characters/Character/skill
+Characters/Character/far = true
+Characters/Character/life
+Players/Player/Type/code
+Players/Player/Type/costume
+Players/Player/Type/role = leader/support_l/support_r
+Players/Player/Type/skill
+Players/Player/Type/awake
+Players/Player/Pos/x,y,z
+Players/Player/Dir/x,y,z
+Players/Player/Cpu/type
+Uis/Ui/name
+Files/File/name
+
+Important:
+sub_14052990C converts scenario character code strings to internal character IDs.

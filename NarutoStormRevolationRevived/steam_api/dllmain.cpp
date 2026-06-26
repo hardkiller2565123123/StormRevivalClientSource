@@ -64,17 +64,17 @@ static DWORD WINAPI MainThread(LPVOID)
 
     SteamFactoryRegistry::Dump();
 
-    if (!NetworkHooks::Init())
+//    if (!NetworkHooks::Init())
         Logger::Error("Network hooks failed to initialize");
 
-    if (!InputFocusGuard::Init())
+  //  if (!InputFocusGuard::Init())
         Logger::Error("Input focus guard failed to initialize");
 
-    if (!DX11Overlay::Init())
+  //  if (!DX11Overlay::Init())
         Logger::Error("DX11 overlay failed to initialize");
 
-    WindowedFullscreen::Init();
-    ModLoader::LoadMods();
+  //  WindowedFullscreen::Init();
+   // ModLoader::LoadMods();
 
     Logger::Info("NarutoStormRevolationRevived initialized");
     return 0;

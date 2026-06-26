@@ -201,6 +201,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CrashHandler.h" />
     <ClInclude Include="DX11Overlay.h" />
     <ClInclude Include="DX11OverlayInternal.h" />
     <ClInclude Include="DX11OverlayState.h" />
@@ -426,6 +427,7 @@
     <ClInclude Include="SteamConfig.h" />
     <ClInclude Include="SteamCoreForwarders.h" />
     <ClInclude Include="SteamDiagnostics.h" />
+    <ClInclude Include="SupportBundle.h" />
     <ClInclude Include="SteamFactoryRegistry.h" />
     <ClInclude Include="SteamIDManager.h" />
     <ClInclude Include="SteamInterfaceRouter.h" />
@@ -442,6 +444,7 @@
     <ClInclude Include="WindowedFullscreen.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CrashHandler.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="DX11Overlay.cpp" />
     <ClCompile Include="DX11OverlayCore.cpp" />
@@ -470,11 +473,13 @@
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="ModLoader.cpp" />
     <ClCompile Include="NetworkHooks.cpp" />
-    <ClCompile Include="OnlineCheckBypass.cpp" />    <ClCompile Include="SteamAuth.cpp" />
+    <ClCompile Include="OnlineCheckBypass.cpp" />
+    <ClCompile Include="SteamAuth.cpp" />
     <ClCompile Include="SteamCallbackManager.cpp" />
     <ClCompile Include="SteamCallResultManager.cpp" />
     <ClCompile Include="SteamConfig.cpp" />
     <ClCompile Include="SteamDiagnostics.cpp" />
+    <ClCompile Include="SupportBundle.cpp" />
     <ClCompile Include="SteamCoreForwarders.cpp" />
     <ClCompile Include="SteamFactoryRegistry.cpp" />
     <ClCompile Include="SteamIDManager.cpp" />
@@ -495,11 +500,7 @@
   <ItemGroup>
     <Library Include="$(MinHookLibName)" />
   </ItemGroup>
-  
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
-
-
-

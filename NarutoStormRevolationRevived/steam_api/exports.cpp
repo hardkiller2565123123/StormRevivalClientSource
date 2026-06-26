@@ -1164,7 +1164,27 @@ extern "C" __declspec(dllexport) void __cdecl SteamAPI_ISteamFriends_RequestFrie
 extern "C" __declspec(dllexport) bool __cdecl SteamAPI_ISteamFriends_RequestUserInformation(void* self, uint64_t steamIDUser, bool requireNameOnly)
 {
     NSR_UNUSED(self);
-    steamIDUser = ResolveFlatSteamID(steamIDUser, "RequestUserInformation");
+
+    // Flat API receives a 64-bit SteamID by value. Keep this function side-effect free
+    // and do not pointer-probe invalid values; offline mode already has local persona data.
+    if (!IsFlatLikelySteamID64(steamIDUser))
+    {
+        const uint64_t fallback = static_cast<uint64_t>(SteamIDManager::GetLocalSteamID());
+        SteamVersionLogger::LogCall(
+            "SteamFriendsFlat",
+            "RequestUserInformationFallbackLocal",
+            "raw=" + FlatSteamIDText(steamIDUser) + " fallbackLocal=" + FlatSteamIDText(fallback) +
+                (requireNameOnly ? " nameOnly=1" : " nameOnly=0"));
+        steamIDUser = fallback;
+    }
+    else
+    {
+        SteamVersionLogger::LogCall(
+            "SteamFriendsFlat",
+            "RequestUserInformation",
+            FlatSteamIDText(steamIDUser) + (requireNameOnly ? " nameOnly=1" : " nameOnly=0"));
+    }
+
     NSR_UNUSED(steamIDUser);
     NSR_UNUSED(requireNameOnly);
     return false;

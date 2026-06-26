@@ -69,7 +69,7 @@ __int64 MovesetPlus::sub_1405C3970Adress = 0;
 __int64 MovesetPlus::sub_140978B00Adress = 0;
 __int64 MovesetPlus::sub_1405C8F00Adress = 0;
 int MovesetPlus::PUCCI_AWA_COUNT[2] = { 0, 0};
-char* MovesetPlus::CHARACODE[2] = {"DUMMY", "DUMMY"};
+const char* MovesetPlus::CHARACODE[2] = {"DUMMY", "DUMMY"};
 MovesetPlus::orig_sub_14084E110_S4_t MovesetPlus::orig_sub_14084E110_S4 = nullptr;
 // Перегрузка, если массив превратился в указатель — нужно передать длину явно
 int MovesetPlus::findPlAnmIndex(const char* const* arr, size_t N, const std::string& param) {

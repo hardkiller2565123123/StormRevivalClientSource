@@ -1,0 +1,29 @@
+Lobby UI Research Summary
+
+Flash movie:
+netbattlelobby
+
+Calls/callbacks:
+Initialize
+CallCloseVoiceText
+CallGetVsOk
+getLock1
+SetStepEnd
+SelectNo
+SelectNo2
+MessageCall
+MatchingVoiceAnmLoop
+MatchingVoiceAnmOut
+
+Known functions:
+sub_1406734A8 = netbattlelobby Initialize
+sub_1406732AC = netbattlelobby finalize
+sub_140673374 = getLock1
+sub_140673438 = CallGetVsOk
+
+Player card/profile:
+sub_1406A5E7C = card/profile constructor
+sub_1406A5F18 = card/profile Initialize
+sub_1406A6060 = set owner scene
+sub_1406A6068 = SetAlwaysOpen
+sub_1406A60D4 = setCardInfo / RequestSetCardInfo builder

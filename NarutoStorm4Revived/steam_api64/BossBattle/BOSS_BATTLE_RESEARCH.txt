@@ -1,0 +1,39 @@
+Boss Battle Research
+
+sub_1406E4BC0:
+creates boss scene object from scene name.
+Allocates 0x708.
+Calls sub_1402140F4 constructor.
+Calls sub_140AB4550 to store scene name.
+
+sub_140AB4550:
+SetSceneName(object, name), stores string at object + 232 through sub_1401CB71C.
+
+Known scene names include:
+ccSceneBoss01Root
+ccSceneBoss01_Phase0
+ccSceneBoss01_Phase1
+ccSceneBoss02_1Root
+ccSceneBoss02_2Root
+ccSceneBoss03Root
+ccSceneBoss04Root
+ccSceneBoss05Root
+ccSceneBoss06Root
+ccSceneBoss07_1Root
+ccSceneBoss07_2Root
+ccSceneBoss08Root
+ccSceneBoss09Root
+ccSceneBoss10Root
+ccSceneBoss11Root
+ccSceneBoss12Root
+ccSceneBoss13Root
+ccSceneBoss14Root
+ccSceneBoss15Root
+ccSceneBossBattleFreeBattleRoot
+ccSceneBossBattleRetry
+ccSceneBossBattleResult
+
+Next:
+sub_1402140F4
+sub_1401CB71C
+Xrefs to ccSceneBossBattleFreeBattleRoot

@@ -1,137 +1,116 @@
-<p align="center">
+﻿<p align="center">
     <img src="https://cdn2.steamgriddb.com/hero/0bf727e907c5fc9d5356f11e4c45d613.png" alt="NarutoStorm3FullBurstRevived Banner">
 </p>
 
 # NarutoStorm3FullBurstRevived
 
-A community-driven preservation, research, modding, and enhancement project for **NARUTO SHIPPUDEN: Ultimate Ninja STORM 2** on PC.
+A community-driven preservation, offline-play, research, modding, and enhancement project for **NARUTO SHIPPUDEN: Ultimate Ninja STORM 3 Full Burst** on PC.
 
-NarutoStorm3FullBurstRevived aims to preserve the game, document its internal systems, improve compatibility with modern hardware, and provide tools and resources that make research and modding more accessible for the community.
-
----
-
-# About
-
-Released by CyberConnect2 and Bandai Namco Entertainment, Naruto Storm 2 remains one of the most iconic anime arena fighters ever created.
-
-Featuring cinematic boss battles, memorable story moments, and a unique visual style, the game continues to maintain an active fanbase years after release.
-
-NarutoStorm3FullBurstRevived exists to help preserve community knowledge, improve compatibility, document game systems, and provide tools for future research and modding efforts.
-
-The project focuses on:
-
-* Preservation
-* Research
-* Reverse Engineering
-* Documentation
-* Modding Support
-* Tool Development
-* Compatibility Improvements
-* Quality-of-Life Enhancements
-* Community Resources
+NarutoStorm3FullBurstRevived preserves community knowledge, improves modern Windows compatibility, and provides a framework for offline Steam emulation, runtime hooks, overlays, asset research, and modding tools.
 
 ---
 
-# Current Features
+## About
+
+Released by CyberConnect2 and Bandai Namco Entertainment, **Ultimate Ninja STORM 3 Full Burst** remains one of the most important entries in the Storm series, with cinematic story battles, a large roster, and a PC release that benefits from preservation and compatibility work.
+
+This project focuses on:
+
+* Offline preservation and play support
+* Steam API proxy/emulation research
+* Runtime hooking and diagnostics
+* Asset inspection and mod-loading tools
+* DX11 overlay tooling
+* Crash reports and support bundles
+* Quality-of-life improvements for modern PCs
+* Documentation for future research
+
+---
+
+## Current Features
+
+### Steam / Offline Layer
+
+* `steam_api64.dll` proxy framework
+* Local Steam persona and SteamID emulation
+* Local stats and remote-storage replacement
+* Local/offline lobby and matchmaking scaffolding
+* LAN-only safety defaults
+* Steam interface route diagnostics
+* Packet and callback logging tools
 
 ### Framework Features
 
-* Proxy DLL Framework
-* Runtime Hooking System
-* Debug Logging
-* Configuration System
-* DirectX 11 Overlay
-* ImGui Debug Menu
-* Performance Monitoring
-* Modern Windows Compatibility
-* Borderless Windowed Mode
-* Optional Debug Utilities
+* Runtime hook bootstrap
+* Patch manager
+* DX11 + ImGui overlay
+* Asset browser and inspection pages
+* CPK/archive research helpers
+* Lua manager and Lua hook scaffolding
+* Mod redirector and override manager
+* Windowed/borderless helpers
+* Crash handler with minidump generation
+* Support-bundle generation for testing
 
-### Research Features
+### Research / Modding Features
 
-* File Loading Analysis
-* Memory Research
-* Function Logging
-* Asset Discovery
-* Internal Structure Documentation
-* Game System Research
+* File loading telemetry
+* Asset discovery and reporting
+* Texture/model preview scaffolding
+* Asset conflict and duplicate scanning
+* Bulk extraction and backup helpers
+* Runtime game/file hook organization
+* Framework add-on entry points
 
-### Quality-of-Life Features
-
-* FPS Monitoring
-* Stability Improvements
-* Borderless Windowed Support
-* Better Debug Information
-* Modern OS Compatibility
-* Additional Logging Tools
-
-## Modding Support
-
-* Asset Extraction
-* Asset Inspection
-* Texture Research
-* Animation Research
-* Character Editing Research
-* Stage Editing Research
-* Save Editing Documentation
-* Mod Loading Support
-* Community Tools
-
-> Some features are still experimental and may contain placeholders while research continues.
+> Some systems are experimental while Storm 3-specific offsets and behavior are still being verified.
 
 ---
 
-## Research & Documentation
+## Recommended Test Flow
 
-The project actively documents:
-
-* Character Systems
-* Stages
-* Animations
-* Effects
-* Menus
-* Save Data
-* Memory Structures
-* Internal Functions
-* Rendering Systems
-* Audio Systems
-* Networking Research
-* Asset Containers
+1. Build the `steam_api64` project for the platform you are testing.
+2. Place the proxy DLL next to the Storm 3 Full Burst executable.
+3. Launch the game and keep the debug console open.
+4. Check `NarutoStorm3FullBurstRevived\Logs\NarutoStorm3FullBurstRevived.log`.
+5. Use the overlay debug page to write diagnostics or a support bundle when something breaks.
 
 ---
 
-# Contributing
+## Research & Documentation Targets
 
-Contributions are welcome.
+The project is intended to document and improve:
 
-Areas where help is always appreciated:
-
-* Documentation
-* Reverse Engineering
-* Testing
-* Research
-* Tool Development
-* Bug Reports
-* Compatibility Testing
-* Preservation Efforts
-
-Whether you're a programmer, researcher, modder, or longtime fan, your contributions can help preserve valuable knowledge about the game.
+* Character and costume systems
+* Stages and scene loading
+* Animation and effect containers
+* Menu and UI flow
+* Save data behavior
+* Steam API usage
+* Networking and lobby behavior
+* Rendering and overlay compatibility
+* Asset containers and mod overrides
 
 ---
 
-# Disclaimer
+## Contributing
 
-NarutoStorm3FullBurstRevived is an unofficial fan-made project created for preservation, research, educational, and modding purposes.
+Contributions are welcome, especially in these areas:
 
-## AI Assistance Notice
+* Storm 3 Full Burst offset verification
+* Compatibility testing
+* Reverse engineering notes
+* Asset format documentation
+* Crash logs and support bundles
+* Mod-loader testing
+* UI/overlay testing
 
-AI tools were used to assist in the development, documentation, and research of this project.
+---
 
-All content is reviewed and maintained by the project owner.
+## Disclaimer
 
-If you do not approve of AI-assisted development, you are free not to use or contribute to this project.
+NarutoStorm3FullBurstRevived is an unofficial fan-made project created for preservation, research, educational, offline-play, and modding purposes.
 
-DEPENDING ON THIS PROJECT AND IF I HAVE TIME I WILL PORT THIS EXISTING FRAMEWORK TO OTHER GAMES EXEPT FOR NARUTO SHINOBI STRIKER
+No copyrighted game assets, game files, or proprietary content are distributed through this repository. Users are expected to own a legitimate copy of the game.
 
 NarutoStorm3FullBurstRevived is not affiliated with, endorsed by, or sponsored by:
 
@@ -141,44 +120,26 @@ NarutoStorm3FullBurstRevived is not affiliated with, endorsed by, or sponsored b
 * Studio Pierrot
 * Masashi Kishimoto
 
-Users are expected to own a legitimate copy of the game.
+---
 
-No copyrighted game assets, game files, or proprietary content are distributed through this repository.
+## AI Assistance Notice
+
+AI tools were used to assist with development, documentation, and research. All content is reviewed and maintained by the project owner.
 
 ---
 
-# License
+## License
 
-Released under the MIT License.
-
-See the LICENSE file for additional information.
+Released under the MIT License. See the LICENSE file for details.
 
 ---
 
-# Links
+## Links
 
-## Game
+Game on Steam:
 
-Purchase the game on Steam:
-
-https://store.steampowered.com/app/234670/NARUTO_SHIPPUDEN_Ultimate_Ninja_STORM_2/
-
-## Repository
-
-Source code, documentation, research notes, and future releases will be available through this GitHub repository.
+https://store.steampowered.com/app/234670/NARUTO_SHIPPUDEN_Ultimate_Ninja_STORM_3_Full_Burst/
 
 ---
 
-# Special Thanks
-
-Special thanks to:
-
-* The Naruto Storm modding community
-* Preservation communities
-* Reverse engineering researchers
-* Open-source contributors
-* Everyone helping document and preserve older games
-
----
-
-*"Preserving the Hidden Leaf's legacy, one file at a time."*
+*Preserving Storm 3 Full Burst, one hook and one asset at a time.*

@@ -1,0 +1,43 @@
+Next IDA subs to dump
+
+LAN highest priority:
+sub_1406B39BC
+
+LAN packet/session:
+sub_140AE6300
+sub_140AE6380
+sub_140AE62F0
+sub_140AE63F0
+sub_140AE7A10
+sub_140AE7AD0
+sub_140AE7AA0
+sub_140AE7A40
+sub_140AE7B60
+sub_140AE8160
+
+LAN lobby keys:
+off_1414BAA60
+off_1414BAAD8
+off_1414BE290
+off_1414BE308
+off_1414BEC60
+off_1414BECD8
+off_1414EBCB8
+
+Match start:
+sub_1405C43F8
+sub_1405CBB10
+sub_1406B33B4
+sub_1406B45A8
+sub_140673438
+
+Scenario:
+sub_14052990C
+sub_14043FA2C
+sub_1404B6344
+sub_1404B6234
+
+Boss:
+sub_1402140F4
+sub_1401CB71C
+Xrefs to ccSceneBossBattleFreeBattleRoot

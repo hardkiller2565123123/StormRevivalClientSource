@@ -1,0 +1,20 @@
+Stage Research
+
+sub_1403B0074 = stage filter / stage variant loader
+
+Uses:
+data/stage/stageFilter.xfbin
+
+Known variants:
+BTL_NS4_si51c02
+BTL_NS4_si51c02_noon
+BTL_NS4_si51c02_evening
+
+sub_140A0FDB0:
+loads stage filter data and converts packed bytes into float parameters.
+
+sub_140A139F0:
+generic database lookup by hashed key / secondary key.
+
+sub_140A10150:
+returns &unk_141560900.

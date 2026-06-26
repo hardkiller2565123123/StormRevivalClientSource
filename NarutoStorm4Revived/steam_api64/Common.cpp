@@ -1743,7 +1743,7 @@ void __fastcall Common::sub_14072D5B0_NSC(__int64 a1) {
         }
         //Console::PrintErr("Pucci player: %dp, val: %d", i, (__int64)MovesetPlus::PUCCI_AWA_COUNT[i - 1]);
         flags_ref(arr2[0]) = 2;
-        char* code = MovesetPlus::CHARACODE[i - 1];
+        const char* code = MovesetPlus::CHARACODE[i - 1];
         bool visible = (code != nullptr && std::strcmp(code, "6pci01") == 0);
         arr2[0].extra = (__int64)visible;
         sub_14071F390(v1, reinterpret_cast<__int64>("battleGauge"), reinterpret_cast<__int64>(path),
@@ -1829,7 +1829,7 @@ __int64 __fastcall Common::sub_140641A90_NS4(int* a1) {
         }
         //Console::PrintErr("Pucci player: %dp, val: %d", i, (__int64)MovesetPlus::PUCCI_AWA_COUNT[i - 1]);
         flags_ref(arr2[0]) = 2;
-        char* code = MovesetPlus::CHARACODE[i - 1];
+        const char* code = MovesetPlus::CHARACODE[i - 1];
         bool visible = (code != nullptr && std::strcmp(code, "6pci01") == 0);
         arr2[0].extra = (__int64)visible;
         sub_14071F390(reinterpret_cast<__int64>(v1), reinterpret_cast<__int64>("battleGauge"), reinterpret_cast<__int64>(path),
@@ -2092,4 +2092,3 @@ void __fastcall Common::CtrlAct_PL_ACT_DMG_TO_DOWN(__int64 a1, int a2) {
         Common::orig_CtrlAct_PL_ACT_DMG_TO_DOWN(a1, a2);
     }
 }
-

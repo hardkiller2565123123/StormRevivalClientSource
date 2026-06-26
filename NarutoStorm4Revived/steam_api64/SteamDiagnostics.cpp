@@ -1,6 +1,9 @@
 #include "StdInc.h"
 #include "SteamDiagnostics.h"
 #include "Logger.h"
+#include "CrashHandler.h"
+#include "SupportBundle.h"
+#include "Storm4IdaRuntime.h"
 
 #include <iomanip>
 
@@ -281,9 +284,15 @@ namespace
         SteamDiagnostics::Mark("Crash", "Unhandled exception", detail);
         Logger::Error("SteamDiagnostics captured exception: " + detail);
         Logger::Error("SteamDiagnostics previous breadcrumb: " + previousBreadcrumb);
+        const std::string dumpPath = CrashHandler::WriteMinidump(info, "vectored-exception");
+        if (!dumpPath.empty())
+            Logger::Error("SteamDiagnostics minidump: " + dumpPath);
         const std::string reportPath = SteamDiagnostics::WriteReport();
         if (!reportPath.empty())
             Logger::Error("SteamDiagnostics report: " + reportPath);
+        const std::string bundlePath = SupportBundle::Write("crash");
+        if (!bundlePath.empty())
+            Logger::Error("SteamDiagnostics support bundle: " + bundlePath);
         Logger::Flush();
 
         return EXCEPTION_CONTINUE_SEARCH;
@@ -306,6 +315,30 @@ namespace
 
         return ss.str();
     }
+
+    std::string FormatStorm4IdaTarget(const Storm4IdaRuntime::KnownTarget& target)
+    {
+        const uintptr_t absolute = Storm4IdaRuntime::Absolute(target.Rva);
+        std::ostringstream ss;
+        ss
+            << target.Name
+            << " rva=0x"
+            << std::hex
+            << target.Rva
+            << " absolute=0x"
+            << absolute
+            << std::dec
+            << " kind="
+            << Storm4IdaRuntime::KindName(target.Kind)
+            << " present="
+            << (Storm4IdaRuntime::IsTargetPresent(target) ? "yes" : "no")
+            << " callableSignature="
+            << (target.SignatureKnown ? "known" : "unknown")
+            << " notes="
+            << target.Notes;
+
+        return ss.str();
+    }
 }
 
 namespace SteamDiagnostics
@@ -320,6 +353,8 @@ namespace SteamDiagnostics
         g_Breadcrumbs.clear();
         g_LastException.clear();
         g_ExceptionCount = 0;
+
+        CrashHandler::Init();
 
         Logger::Info("SteamDiagnostics initialized");
         return true;
@@ -336,6 +371,7 @@ namespace SteamDiagnostics
         }
 
         g_Breadcrumbs.clear();
+        CrashHandler::Shutdown();
     }
 
     void Mark(const char* category, const std::string& name, const std::string& detail)
@@ -410,6 +446,16 @@ namespace SteamDiagnostics
         out << "Last exception: " << LastException() << "\n";
         out << "Exception count: " << ExceptionCount() << "\n";
         out << "Last breadcrumb: " << LastBreadcrumb() << "\n\n";
+        out << "Storm 4 IDA runtime targets\n";
+        out << "Supported Storm 4 version: " << (Storm4IdaRuntime::IsSupportedStorm4Version() ? "yes" : "no") << "\n";
+        out << "UnlockCharacterCheck_Core callable: " << (Storm4IdaRuntime::UnlockCharacterCheckCore() ? "yes" : "no") << "\n";
+
+        size_t idaTargetCount = 0;
+        const Storm4IdaRuntime::KnownTarget* idaTargets = Storm4IdaRuntime::Targets(idaTargetCount);
+        for (size_t i = 0; i < idaTargetCount; ++i)
+            out << FormatStorm4IdaTarget(idaTargets[i]) << "\n";
+
+        out << "\n";
         out << "Recent breadcrumbs\n";
 
         for (const Breadcrumb& item : breadcrumbs)

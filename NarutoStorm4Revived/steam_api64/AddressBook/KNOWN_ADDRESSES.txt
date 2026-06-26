@@ -1,0 +1,53 @@
+Known Addresses / Labels
+
+Core Flash:
+sub_14060759C = RegisterFlashMovie
+sub_140607BA0 = InvokeFlashWithArgs
+sub_140607B5C = InvokeFlashNoArgs
+sub_140607B7C = InvokeFlashReturnValue
+sub_1406078CC = UnregisterFlashMovie
+sub_1401FD0AC = RegisterFlashCallbacks
+
+Online Main Menu:
+sub_140676250 = netbattlemainmenu Initialize
+sub_1406760F4 = GetMode
+sub_140676164 = GetModeBattele
+sub_1406761E0 = GetSelectLimitEventId
+
+Lobby:
+sub_1406734A8 = netbattlelobby Initialize
+sub_140673438 = CallGetVsOk
+sub_140673374 = getLock1
+
+LAN / Network:
+sub_1405B10CC = register receive callback
+sub_1406B36CC = construct receive ctrl owner
+sub_1406B3904 = start receive ctrl task
+sub_1406B37D4 = receive loop
+sub_1406B39BC = packet parser/dispatcher target
+sub_140AE6B60 = SendP2PPacket main/host
+sub_140AE69D0 = SendP2PPacket indexed peer
+sub_140AE6A90 = SendP2PPacket broadcast
+sub_140AE6670 = P2P/session valid check
+sub_140AE6720 = get member by index
+sub_140AE6010 = SteamID to persona name
+
+Scenario:
+sub_14043FB28 = gpSetting loader
+sub_14043F208 = scenario parser
+sub_1404B6284 = XML parser
+sub_1404B6B58 = XML attribute lookup
+sub_1404B6BC8 = first child lookup
+sub_1404B6B90 = next sibling lookup
+
+Stage:
+sub_1403B0074 = stage filter variant loader
+sub_140A0FDB0 = stage filter apply
+
+Combat:
+sub_14033BF30 = 152-byte combat record loader
+sub_14033C7E4 = push 152-byte combat record
+
+Boss:
+sub_1406E4BC0 = create boss scene object
+sub_140AB4550 = set scene name

@@ -26,6 +26,15 @@
 #include "InputFocusGuard.h"
 #include "DlcContentLoader.h"
 #include "StormAPIBridge.h"
+#include "SlotExpansionManager.h"
+#include "AudioPlayer.h"
+#include "OnlineMenu/StormRevivalOnlineMenu.h"
+#include "OnlineMenu/OnlineMenuHubStub.h"
+
+__int64 moduleBase = 0;
+__int64 moduleLength = 0;
+__int64 st_hModule = 0;
+__int64 datasection = 0;
 
 static HANDLE g_MainThread = nullptr;
 
@@ -35,6 +44,7 @@ static DWORD WINAPI MainThread(LPVOID)
         return 0;
 
     Logger::Info("NarutoStorm4Revived offline Steam layer loaded");
+
     SteamDiagnostics::Init();
     SteamDiagnostics::MarkSteam("Startup", "offline Steam layer loaded");
 
@@ -62,8 +72,12 @@ static DWORD WINAPI MainThread(LPVOID)
     SteamPersonaManager::Init();
     SteamStorageLocal::Init();
     SteamStatsLocal::Init();
+    TitleMusicOverride::Init();
+    SlotExpansionManager::Init();
     StormAPIBridge::Init();
     OnlineCheckBypass::Init();
+    StormRevival::OnlineMenu::Install();
+    Evo::OnlineMenuHubStub::Install();
 
     if (!DlcContentLoader::Init())
         Logger::Error("DLC content loader failed to initialize");
@@ -84,9 +98,6 @@ static DWORD WINAPI MainThread(LPVOID)
 
     Logger::Info("NarutoStorm4Revived initialized");
     return 0;
-
-
-
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID)
@@ -94,16 +105,21 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID)
     switch (reason)
     {
     case DLL_PROCESS_ATTACH:
-    {
         DisableThreadLibraryCalls(module);
+        st_hModule = reinterpret_cast<__int64>(module);
+        moduleBase = reinterpret_cast<__int64>(GetModuleHandleW(nullptr));
         g_MainThread = CreateThread(nullptr, 0, MainThread, nullptr, 0, nullptr);
         break;
-    }
+
     case DLL_PROCESS_DETACH:
-    {
         NetworkHooks::Shutdown();
         InputFocusGuard::Shutdown();
+
         DlcContentLoader::Shutdown();
+
+        TitleMusicOverride::Shutdown();
+        Evo::OnlineMenuHubStub::Uninstall();
+        StormRevival::OnlineMenu::Shutdown();
         OnlineCheckBypass::Shutdown();
         FakeSteamCore::Shutdown();
         DX11Overlay::Shutdown();
@@ -112,7 +128,6 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID)
         Logger::Shutdown();
         break;
     }
-    }
+
     return TRUE;
 }
-

@@ -23,7 +23,7 @@ public:
     static inline CharRelationEntryMem* g_pNewCharRelationArray = nullptr;
     static inline int ORIGINAL_COUNT = 0;
     static inline int g_NewCharRelationCountAllocated = 0;
-    static inline int CharRelation_SLOT_COUNT = 500;
+    static inline int CharRelation_SLOT_COUNT = 1000;
 
     //      2GB  base ( RIP-relative   ).
     static LPVOID AllocNearModule(LPVOID base, SIZE_T size) {

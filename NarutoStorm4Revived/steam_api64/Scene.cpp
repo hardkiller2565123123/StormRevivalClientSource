@@ -6,13 +6,16 @@
 #include "FileParser.h"
 #include <Psapi.h>
 #include "Offsets.h"
+#include <string>
+#include <cstdio>
 
 class SceneExpander {
 public:
     static inline int ORIGINAL_COUNT;
     static inline SceneEntry* g_pNewSceneArray;
     static inline int g_NewSceneCountAllocated;
-    static inline int SCENE_SLOT_COUNT = 128; // change if need more slots
+    static inline int SCENE_SLOT_COUNT = 512;
+    static inline uintptr_t g_SceneCountPatchAddress;
 
     // Allocates memory within 2GB of the given base address.
     static LPVOID AllocNearModule(LPVOID base, SIZE_T size) {
@@ -151,33 +154,107 @@ public:
         return true;
     }
 
+    static bool TryReadSceneCount(SceneEntry* sceneArray, int& outCount)
+    {
+        outCount = 0;
+        if (!sceneArray)
+            return false;
+
+        __try
+        {
+            const int safetyLimit = 465;
+            for (int i = 0; i < safetyLimit; ++i)
+            {
+                if (sceneArray[i].id == static_cast<uint32_t>(-1))
+                {
+                    outCount = i;
+                    return i > 0;
+                }
+
+            }
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            return false;
+        }
+
+        return false;
+    }
+
+    static bool TryResolveSceneArray(uintptr_t& outSceneArrayOffset, int& outOriginalCount, const char*& outVersionName)
+    {
+        struct Candidate
+        {
+            const char* version;
+            const char* label;
+            uintptr_t offset;
+            uintptr_t countPatchOffset;
+        };
+
+        const Candidate candidates[] = {
+            {"1.09", "Storm 4", offsetS4::OFF_SCENEARRAY, 0x6E43D2},
+            {"1.60", "Storm Connections", offsetSC::OFF_SCENEARRAY, 0x87AA71},
+        };
+
+        if (GameVersion)
+        {
+            for (const Candidate& candidate : candidates)
+            {
+                if (std::strcmp(GameVersion, candidate.version) == 0)
+                {
+                    SceneEntry* sceneArray = reinterpret_cast<SceneEntry*>(moduleBase + candidate.offset - 0xC00);
+                    if (TryReadSceneCount(sceneArray, outOriginalCount))
+                    {
+                        outSceneArrayOffset = candidate.offset;
+                        outVersionName = candidate.label;
+                        g_SceneCountPatchAddress = moduleBase + candidate.countPatchOffset;
+                        return true;
+                    }
+
+                    Console::PrintErr("Scene table for GameVersion %s was not readable.\n", GameVersion);
+                    return false;
+                }
+            }
+        }
+
+        for (const Candidate& candidate : candidates)
+        {
+            SceneEntry* sceneArray = reinterpret_cast<SceneEntry*>(moduleBase + candidate.offset - 0xC00);
+            if (TryReadSceneCount(sceneArray, outOriginalCount))
+            {
+                outSceneArrayOffset = candidate.offset;
+                outVersionName = candidate.label;
+                g_SceneCountPatchAddress = moduleBase + candidate.countPatchOffset;
+                Console::PrintOut("Scene table auto-detected as %s because GameVersion was %s.\n",
+                    candidate.label, GameVersion ? GameVersion : "(null)");
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     // Expands the vanilla Scene list by copying all entries until termination, allocating new array and patching code references.
     static void ExpandSceneList() {
+        if (SceneExpander::g_pNewSceneArray)
+        {
+            Console::PrintOut("Scene list is already expanded: current=%d, capacity=%d\n",
+                GetCurrentSceneCount(), SceneExpander::g_NewSceneCountAllocated);
+            return;
+        }
+
         uintptr_t SceneArrayOffset = 0;
         int originalCount = 0;
+        const char* resolvedVersionName = "Unknown";
 
-        // choose offset based on version  replace these checks with your actual GameVersion/offsets
-        if (GameVersion && std::strcmp(GameVersion, "1.60") == 0) {
-            //SceneArrayOffset = offsetScene::OFF_SCENEARRAY; // define in Offsets.h
-            SceneArrayOffset = offsetSC::OFF_SCENEARRAY;
-        }
-        else if (GameVersion && std::strcmp(GameVersion, "1.09") == 0) {
-           SceneArrayOffset = offsetS4::OFF_SCENEARRAY;
-        }
-        else {
-            Console::PrintErr("Unknown game version for scenes.\n");
+        if (!TryResolveSceneArray(SceneArrayOffset, originalCount, resolvedVersionName))
+        {
+            Console::PrintErr("Unable to resolve scene table for GameVersion %s.\n", GameVersion ? GameVersion : "(null)");
             return;
         }
 
         SceneEntry* pOriginal = reinterpret_cast<SceneEntry*>(moduleBase + SceneArrayOffset - 0xC00);
-        Console::PrintOut("Expanded Scene list: old array at 0x%p\n", pOriginal);
-        // count original
-        const int safety_limit = 465;
-        originalCount = 0;
-        for (; originalCount < safety_limit; ++originalCount) {
-            if (pOriginal[originalCount].id == -1)
-                break;
-        }
+        Console::PrintOut("Expanded Scene list: %s table at 0x%p\n", resolvedVersionName, pOriginal);
         SceneExpander::ORIGINAL_COUNT = originalCount;
         SceneExpander::g_NewSceneCountAllocated = originalCount + SCENE_SLOT_COUNT;
         size_t newSize = SceneExpander::g_NewSceneCountAllocated * sizeof(SceneEntry);
@@ -249,19 +326,15 @@ public:
         }
         Console::PrintOut("Added custom scene at index %d: id=%u, name=%s, func=0x%p\n", index, newEntry.id, newEntry.name, (void*)newEntry.start_func_ptr);
         int new_count = GetCurrentSceneCount();
-        if (GameVersion && std::strcmp(GameVersion, "1.60") == 0) {
-            PatchCountVar(moduleBase+0x87AA71, new_count);
-        }
-        else if (GameVersion && std::strcmp(GameVersion, "1.09") == 0) {
-            PatchCountVar(moduleBase + 0x6E43D2, new_count);
-        }
+        if (g_SceneCountPatchAddress)
+            PatchCountVar(g_SceneCountPatchAddress, new_count);
         
 
         return index;
     }
     static __int64 __fastcall ccSceneTestStart_Init(__int64 a1)
     {
-        using fn_sub_1404DFAD0 = __int64* (__fastcall*)(__int64 a1, char* a2, char* a3, char* a4, int a5);
+        using fn_sub_1404DFAD0 = __int64* (__fastcall*)(__int64 a1, const char* a2, const char* a3, const char* a4, int a5);
         auto sub_1404DFAD0 = reinterpret_cast<fn_sub_1404DFAD0>(moduleBase + 0x4DEED0);
         using fn_sub_140B02B70 = __int64(__fastcall*)(__int64 a1);
         auto sub_140B02B70 = reinterpret_cast<fn_sub_140B02B70>(moduleBase + 0xB01F70);
@@ -298,3 +371,59 @@ public:
         return v3;
     }
 };
+
+namespace
+{
+    const char* g_SceneExpansionStatus = "Scene expansion has not been requested.";
+    char g_SceneExpansionStatusBuffer[256] = {};
+}
+
+namespace StageSlotExpansion
+{
+    void SetExtraCapacity(int extraSlots)
+    {
+        if (SceneExpander::g_pNewSceneArray)
+            return;
+
+        if (extraSlots < 0)
+            extraSlots = 0;
+
+        if (extraSlots > 4096)
+            extraSlots = 4096;
+
+        SceneExpander::SCENE_SLOT_COUNT = extraSlots;
+    }
+
+    bool ExpandSceneList()
+    {
+        SceneExpander::ExpandSceneList();
+
+        if (SceneExpander::g_pNewSceneArray)
+        {
+            std::snprintf(g_SceneExpansionStatusBuffer, sizeof(g_SceneExpansionStatusBuffer),
+                "Scene list expanded: current=%d, capacity=%d.",
+                SceneExpander::GetCurrentSceneCount(),
+                SceneExpander::g_NewSceneCountAllocated);
+            g_SceneExpansionStatus = g_SceneExpansionStatusBuffer;
+            return true;
+        }
+
+        g_SceneExpansionStatus = "Scene expansion failed or game version was not detected.";
+        return false;
+    }
+
+    int CurrentCount()
+    {
+        return SceneExpander::GetCurrentSceneCount();
+    }
+
+    int Capacity()
+    {
+        return SceneExpander::g_NewSceneCountAllocated;
+    }
+
+    const char* LastStatus()
+    {
+        return g_SceneExpansionStatus;
+    }
+}

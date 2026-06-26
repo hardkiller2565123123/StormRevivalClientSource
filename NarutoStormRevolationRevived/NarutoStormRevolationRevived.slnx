@@ -3,6 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="NSRFrameWork/NSRFrameWork.vcxproj" Id="c7f8b4e3-3e5d-4a9b-8c4f-72f9d55ce901" />
+  <Project Path="NSRFrameWork/NSRFrameWork.vcxproj" Id="c097aef3-c5d5-43d7-8673-4280fad81d98" />
   <Project Path="steam_api/steam_api.vcxproj" Id="ac3b2bef-bcdb-4e30-ad94-48494a350ecc" />
 </Solution>

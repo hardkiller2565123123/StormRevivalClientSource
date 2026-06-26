@@ -79,7 +79,7 @@ public:
 	static void me_ChangePlayerParam(__int64 s, int param2, float value);
 
 	static int PUCCI_AWA_COUNT[2];
-	static char* CHARACODE[2];
+	static const char* CHARACODE[2];
 
 	typedef __int64(__fastcall* orig_UpgradeVerUnlocker_t)(__int64 a1, unsigned int a2);
 	static orig_UpgradeVerUnlocker_t orig_UpgradeVerUnlocker;

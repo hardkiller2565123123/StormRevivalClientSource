@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -17,7 +17,6 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  
     <ClCompile Include="BGMManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -27,21 +26,14 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Common.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="CommonRender.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="ConditionPrmManager.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Console.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="ConditionPrmManager.cpp" />
+    <ClCompile Include="Console.cpp" />
+    <ClCompile Include="DebugContentLoader.cpp" />
     <ClCompile Include="DirectX.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -51,57 +43,24 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="FileParser.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GuardEffectParam.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GudoBallParam.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="GuardEffectParam.cpp" />
+    <ClCompile Include="GudoBallParam.cpp" />
     <ClCompile Include="HookFunctions.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="LuaScripts.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="ModManager.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="LuaScripts.cpp" />
+    <ClCompile Include="ModManager.cpp" />
     <ClCompile Include="MouseLook.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="MovesetPlus.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Offsets.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="OugiAwakeningParam.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="PartnerSlotParam.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="MovesetPlus.cpp" />
+    <ClCompile Include="Offsets.cpp" />
+    <ClCompile Include="OugiAwakeningParam.cpp" />
+    <ClCompile Include="PartnerSlotParam.cpp" />
     <ClCompile Include="PatternScan.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="PlAnmList.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="PlAnmList.cpp" />
     <ClCompile Include="PluginManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -110,26 +69,26 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    <ClCompile Include="CharacterSlotExpansionManager.cpp" />
+    <ClCompile Include="Research\Character\CharacterResearch.cpp" />
+    <ClCompile Include="Research\Combat\CombatResearch.cpp" />
+    <ClCompile Include="Research\Core\ResearchDatabase.cpp" />
+    <ClCompile Include="Research\FreePlay\FreePlayResearch.cpp" />
+    <ClCompile Include="Research\OnlineMenu\OnlineMenuResearch.cpp">
+      <ObjectFileName>$(IntDir)Research\Research_OnlineMenu_OnlineMenuResearch.cpp.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="SpecialConditionParam.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="SpecialInteractionManager.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="SusanooCondParam.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="TeamUltimateJutsuManager.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Research\Settings\SettingsResearch.cpp" />
+    <ClCompile Include="Research\Shop\ShopUnlockResearch.cpp" />
+    <ClCompile Include="Research\Stage\StageResearch.cpp" />
+    <ClCompile Include="Research\Story\StoryResearch.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="RuntimeFeatureRegistry.cpp" />
+    <ClCompile Include="SlotExpansionManager.cpp" />
+    <ClCompile Include="Storm4IdaRuntime.cpp" />
+    <ClCompile Include="SpecialConditionParam.cpp" />
+    <ClCompile Include="SpecialInteractionManager.cpp" />
+    <ClCompile Include="SusanooCondParam.cpp" />
+    <ClCompile Include="TeamUltimateJutsuManager.cpp" />
     <ClCompile Include="UltimateStormAPI.cpp" />
     <ClCompile Include="ccCmnCamera.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -143,7 +102,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-</ItemGroup>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -203,8 +162,8 @@
     <MinHookLibName>libMinHook.x86.lib</MinHookLibName>
   </PropertyGroup>
   <PropertyGroup>
-    <OutDir>C:\Users\dylan\source\repos\NarutoRevival Offline Release\Build\ns4\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>C:\Users\dylan\source\repos\NarutoRevival Offline Release\Build\_obj\ns4\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)Build\ns4\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Build\_obj\ns4\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -237,7 +196,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;winmm.lib;psapi.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;$(ProjectDir)libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
@@ -265,7 +224,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;winmm.lib;psapi.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;$(ProjectDir)libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
@@ -291,7 +250,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;winmm.lib;psapi.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;$(ProjectDir)libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
@@ -319,7 +278,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;winmm.lib;psapi.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;$(ProjectDir)libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
@@ -327,9 +286,24 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CharacterSlotExpansionManager.h" />
+    <ClInclude Include="DebugContentLoader.h" />
     <ClInclude Include="DlcContentLoader.h" />
+    <ClInclude Include="CrashHandler.h" />
     <ClInclude Include="DX11Overlay.h" />
     <ClInclude Include="DX11OverlayInternal.h" />
+    <ClInclude Include="Research\Character\CharacterResearch.h" />
+    <ClInclude Include="Research\Combat\CombatResearch.h" />
+    <ClInclude Include="Research\Core\ResearchTypes.h" />
+    <ClInclude Include="Research\FreePlay\FreePlayResearch.h" />
+    <ClInclude Include="Research\OnlineMenu\OnlineMenuResearch.h" />
+    <ClInclude Include="Research\Settings\SettingsResearch.h" />
+    <ClInclude Include="Research\Shop\ShopUnlockResearch.h" />
+    <ClInclude Include="Research\Stage\StageResearch.h" />
+    <ClInclude Include="Research\Story\StoryResearch.h" />
+    <ClInclude Include="RuntimeFeatureRegistry.h" />
+    <ClInclude Include="SlotExpansionManager.h" />
+    <ClInclude Include="Storm4IdaRuntime.h" />
     <ClInclude Include="DX11OverlayState.h" />
     <ClInclude Include="FakeSteamBase.h" />
     <ClInclude Include="FakeSteamCore.h" />
@@ -553,6 +527,7 @@
     <ClInclude Include="SteamConfig.h" />
     <ClInclude Include="SteamCoreForwarders.h" />
     <ClInclude Include="SteamDiagnostics.h" />
+    <ClInclude Include="SupportBundle.h" />
     <ClInclude Include="SteamFactoryRegistry.h" />
     <ClInclude Include="SteamIDManager.h" />
     <ClInclude Include="SteamInterfaceRouter.h" />
@@ -606,6 +581,42 @@
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="ccCmnCamera.h" />
     <ClInclude Include="ccCmnCameraDirector.h" />
+    <ClInclude Include="AudioPlayer.h" />
+    <ClInclude Include="callbacks.h" />
+    <ClInclude Include="ccGeneralGameFunctions.h" />
+    <ClInclude Include="ccPlayer.h" />
+    <ClInclude Include="CpkLoader.h" />
+    <ClInclude Include="enet.h" />
+    <ClInclude Include="GameMath.h" />
+    <ClInclude Include="GraphicSettings.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="list.h" />
+    <ClInclude Include="LuaUtilities.h" />
+    <ClInclude Include="MergedExtra_Common.h" />
+    <ClInclude Include="MergedExtra_Console.h" />
+    <ClInclude Include="MergedExtra_DirectX.h" />
+    <ClInclude Include="MergedExtra_EditorGUI.h" />
+    <ClInclude Include="MergedExtra_FileParser.h" />
+    <ClInclude Include="MergedExtra_HookFunctions.h" />
+    <ClInclude Include="MergedExtra_Mod.h" />
+    <ClInclude Include="MergedExtra_ModManager.h" />
+    <ClInclude Include="MergedExtra_PatternScan.h" />
+    <ClInclude Include="MergedExtra_Plugin.h" />
+    <ClInclude Include="MergedExtra_Vector3.h" />
+    <ClInclude Include="MessageManager.h" />
+    <ClInclude Include="NS4Framework.h" />
+    <ClInclude Include="PartnerManager.h" />
+    <ClInclude Include="PatchManager.h" />
+    <ClInclude Include="protocol.h" />
+    <ClInclude Include="Savefile.h" />
+    <ClInclude Include="SpecialConditionManager.h" />
+    <ClInclude Include="enet_time.h" />
+    <ClInclude Include="types.h" />
+    <ClInclude Include="unix.h" />
+    <ClInclude Include="utility.h" />
+    <ClInclude Include="win32.h" />
+    <ClInclude Include="XfbinParser.h" />
+    <ClInclude Include="ztRpgMain.h" />
     <ClInclude Include="ccCmnScreenManager.h" />
     <ClInclude Include="ccGameObjSubDraw.h" />
     <ClInclude Include="ccPlayerMain.h" />
@@ -613,13 +624,17 @@
     <ClInclude Include="mem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CrashHandler.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="DlcContentLoader.cpp" />
     <ClCompile Include="DX11Overlay.cpp" />
     <ClCompile Include="DX11OverlayCore.cpp" />
     <ClCompile Include="DX11OverlayHelpers.cpp" />
     <ClCompile Include="DX11OverlayMenu.cpp" />
+    <ClCompile Include="DX11OverlayPageApi.cpp" />
     <ClCompile Include="DX11OverlayPageClient.cpp" />
+    <ClCompile Include="DX11OverlayPageDebug.cpp" />
+    <ClCompile Include="DX11OverlayPageGame.cpp" />
     <ClCompile Include="DX11OverlayPageOnline.cpp" />
     <ClCompile Include="DX11OverlayState.cpp" />
     <ClCompile Include="exports.cpp" />
@@ -642,11 +657,13 @@
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="ModLoader.cpp" />
     <ClCompile Include="NetworkHooks.cpp" />
-    <ClCompile Include="OnlineCheckBypass.cpp" />    <ClCompile Include="SteamAuth.cpp" />
+    <ClCompile Include="OnlineCheckBypass.cpp" />
+    <ClCompile Include="SteamAuth.cpp" />
     <ClCompile Include="SteamCallbackManager.cpp" />
     <ClCompile Include="SteamCallResultManager.cpp" />
     <ClCompile Include="SteamConfig.cpp" />
     <ClCompile Include="SteamDiagnostics.cpp" />
+    <ClCompile Include="SupportBundle.cpp" />
     <ClCompile Include="SteamCoreForwarders.cpp" />
     <ClCompile Include="SteamFactoryRegistry.cpp" />
     <ClCompile Include="SteamIDManager.cpp" />
@@ -664,15 +681,347 @@
     <ClCompile Include="SteamVersionLogger.cpp" />
     <ClCompile Include="StormAPIBridge.cpp" />
     <ClCompile Include="WindowedFullscreen.cpp" />
+    <ClCompile Include="AudioPlayer.cpp" />
+    <ClCompile Include="callbacks.c" />
+    <None Include="ccGeneralGameFunctions.cpp" />
+    <ClCompile Include="compress.c" />
+    <ClCompile Include="CpkLoader.cpp" />
+    <ClCompile Include="GameMath.cpp" />
+    <ClCompile Include="host.c" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="list.c" />
+    <ClCompile Include="LuaUtilities.cpp" />
+    <None Include="NS4Framework.cpp" />
+    <ClCompile Include="packet.c" />
+    <ClCompile Include="PartnerManager.cpp" />
+    <ClCompile Include="peer.c" />
+    <ClCompile Include="Plugin.cpp" />
+    <ClCompile Include="protocol.c" />
+    <None Include="Savefile.cpp" />
+    <ClCompile Include="SpecialConditionManager.cpp" />
+    <ClCompile Include="unix.c" />
+    <None Include="Vector3.cpp" />
+    <ClCompile Include="win32.c" />
+    <ClCompile Include="XfbinParser.cpp" />
+    <None Include="ztRpgMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgui_demo.cpp" />
+    <None Include="libMinHook.x64.lib" />
+    <None Include="enet64.lib" />
+    <None Include="MergedExtra_Console.cpp" />
+    <None Include="MergedExtra_DirectX.cpp" />
+    <None Include="MergedExtra_EditorGUI.cpp" />
+    <None Include="MergedExtra_FileParser.cpp" />
+    <None Include="MergedExtra_HookFunctions.cpp" />
+    <None Include="MergedExtra_PatternScan.cpp" />
+    <None Include="MergedNested_DX11OverlayPageClient.cpp" />
+    <None Include="MergedNested_InputFocusGuard.cpp" />
+    <None Include="lua\etc\all.c" />
+    <None Include="lua\etc\lua.hpp" />
+    <None Include="lua\etc\lua.ico" />
+    <None Include="lua\etc\lua.pc" />
+    <None Include="lua\etc\luavs.bat" />
+    <None Include="lua\etc\min.c" />
+    <None Include="lua\etc\noparser.c" />
+    <None Include="lua\etc\strict.lua" />
+    <None Include="lua\src\lapi.c" />
+    <None Include="lua\src\lapi.h" />
+    <None Include="lua\src\lauxlib.c" />
+    <None Include="lua\src\lauxlib.h" />
+    <None Include="lua\src\lbaselib.c" />
+    <None Include="lua\src\lcode.c" />
+    <None Include="lua\src\lcode.h" />
+    <None Include="lua\src\ldblib.c" />
+    <None Include="lua\src\ldebug.c" />
+    <None Include="lua\src\ldebug.h" />
+    <None Include="lua\src\ldo.c" />
+    <None Include="lua\src\ldo.h" />
+    <None Include="lua\src\ldump.c" />
+    <None Include="lua\src\lfunc.c" />
+    <None Include="lua\src\lfunc.h" />
+    <None Include="lua\src\lgc.c" />
+    <None Include="lua\src\lgc.h" />
+    <None Include="lua\src\linit.c" />
+    <None Include="lua\src\liolib.c" />
+    <None Include="lua\src\llex.c" />
+    <None Include="lua\src\llex.h" />
+    <None Include="lua\src\llimits.h" />
+    <None Include="lua\src\lmathlib.c" />
+    <None Include="lua\src\lmem.c" />
+    <None Include="lua\src\lmem.h" />
+    <None Include="lua\src\loadlib.c" />
+    <None Include="lua\src\lobject.c" />
+    <None Include="lua\src\lobject.h" />
+    <None Include="lua\src\lopcodes.c" />
+    <None Include="lua\src\lopcodes.h" />
+    <None Include="lua\src\loslib.c" />
+    <None Include="lua\src\lparser.c" />
+    <None Include="lua\src\lparser.h" />
+    <None Include="lua\src\lstate.c" />
+    <None Include="lua\src\lstate.h" />
+    <None Include="lua\src\lstring.c" />
+    <None Include="lua\src\lstring.h" />
+    <None Include="lua\src\lstrlib.c" />
+    <None Include="lua\src\ltable.c" />
+    <None Include="lua\src\ltable.h" />
+    <None Include="lua\src\ltablib.c" />
+    <None Include="lua\src\ltm.c" />
+    <None Include="lua\src\ltm.h" />
+    <None Include="lua\src\lua.c" />
+    <None Include="lua\src\lua.h" />
+    <None Include="lua\src\luac.c" />
+    <None Include="lua\src\luaconf.h" />
+    <None Include="lua\src\lualib.h" />
+    <None Include="lua\src\lundump.c" />
+    <None Include="lua\src\lundump.h" />
+    <None Include="lua\src\lvm.c" />
+    <None Include="lua\src\lvm.h" />
+    <None Include="lua\src\lzio.c" />
+    <None Include="lua\src\lzio.h" />
+    <None Include="lua\src\print.c" />
+    <None Include="lua\test\bisect.lua" />
+    <None Include="lua\test\cf.lua" />
+    <None Include="lua\test\echo.lua" />
+    <None Include="lua\test\env.lua" />
+    <None Include="lua\test\factorial.lua" />
+    <None Include="lua\test\fib.lua" />
+    <None Include="lua\test\fibfor.lua" />
+    <None Include="lua\test\globals.lua" />
+    <None Include="lua\test\hello.lua" />
+    <None Include="lua\test\life.lua" />
+    <None Include="lua\test\luac.lua" />
+    <None Include="lua\test\printf.lua" />
+    <None Include="lua\test\readonly.lua" />
+    <None Include="lua\test\sieve.lua" />
+    <None Include="lua\test\sort.lua" />
+    <None Include="lua\test\table.lua" />
+    <None Include="lua\test\trace-calls.lua" />
+    <None Include="lua\test\trace-globals.lua" />
+    <None Include="lua\test\xd.lua" />
+    <None Include="sdk_includes\*.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="$(MinHookLibName)" />
   </ItemGroup>
-  
+  <!-- BEGIN OnlineMenu Codex managed items -->
+  <ItemGroup>
+    <ClCompile Include="OnlineMenu\Addresses\UniversalAddressBook.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Addresses_UniversalAddressBook.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Buttons\MenuActionHookPlan.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Buttons_MenuActionHookPlan.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Buttons\SettingsButtonStub.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Buttons_SettingsButtonStub.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Config\OnlineMenuConfig.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Config_OnlineMenuConfig.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Core\SRLogger.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Core_SRLogger.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Core\VersionGuard.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Core_VersionGuard.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\CustomMenu\CustomMenuEntry.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_CustomMenu_CustomMenuEntry.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\CustomMenu\InGameSettingsPanel.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_CustomMenu_InGameSettingsPanel.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\CustomMenu\MainMenuOptionRegistry.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_CustomMenu_MainMenuOptionRegistry.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\CustomMenu\RealMenuOptionInjector.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_CustomMenu_RealMenuOptionInjector.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\CustomMenu\RuntimeButtonInjector.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_CustomMenu_RuntimeButtonInjector.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Dialogs\DialogExamples.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Dialogs_DialogExamples.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Flash\FlashBridge.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Flash_FlashBridge.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Flash\FlashCallLayer.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Flash_FlashCallLayer.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\FlashTracer\FlashTracer.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_FlashTracer_FlashTracer.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Help\HelpOverlayExamples.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Help_HelpOverlayExamples.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Hooks\MenuActionHook.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Hooks_MenuActionHook.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Hooks\MenuHookScaffold.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Hooks_MenuHookScaffold.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Hooks\OnlineMenuHookLogger.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Hooks_OnlineMenuHookLogger.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Hooks\OnlineMenuHookStubs.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Hooks_OnlineMenuHookStubs.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\IntegrationExample.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_IntegrationExample.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Leaderboard\FakeLeaderboardData.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Leaderboard_FakeLeaderboardData.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Leaderboard\LeaderboardHub.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Leaderboard_LeaderboardHub.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Leaderboard\LeaderboardStub.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Leaderboard_LeaderboardStub.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Lobby\LobbyStructures.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Lobby_LobbyStructures.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Lobby\NetBattleLobby.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Lobby_NetBattleLobby.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\MainMenu\NetBattleMainMenu.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_MainMenu_NetBattleMainMenu.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Matchmaking\MatchmakingHub.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Matchmaking_MatchmakingHub.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Models\LobbyStructures.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Models_LobbyStructures.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\NetworkTrace\NetworkTrace.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_NetworkTrace_NetworkTrace.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\News\NewsHub.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_News_NewsHub.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\News\NewsPanelStub.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_News_NewsPanelStub.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\OnlineMenuHubStub.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_OnlineMenuHubStub.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\OnlineMenuPatchStub.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_OnlineMenuPatchStub.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\OnlineMenuResearch.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_OnlineMenuResearch.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\PlayerList\PlayerInfo.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_PlayerList_PlayerInfo.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\PlayerList\PlayerListHub.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_PlayerList_PlayerListHub.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Research\LatestLobbyResearch.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Research_LatestLobbyResearch.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Research\ResearchNotes.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Research_ResearchNotes.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\RoomBrowser\RoomBrowserHub.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_RoomBrowser_RoomBrowserHub.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\RoomBrowser\RoomInfo.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_RoomBrowser_RoomInfo.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Settings\SettingsHub.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Settings_SettingsHub.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Settings\SettingsStub.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Settings_SettingsStub.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Statistics\BattleStatistics.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Statistics_BattleStatistics.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\Store\StoreReplacement.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_Store_StoreReplacement.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\StormRevivalOnlineMenu.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_StormRevivalOnlineMenu.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="OnlineMenu\VoiceStatus\VoiceStatusExamples.cpp">
+      <ObjectFileName>$(IntDir)OnlineMenu\OnlineMenu_VoiceStatus_VoiceStatusExamples.cpp.obj</ObjectFileName>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="OnlineMenu\Addresses\UniversalAddressBook.h" />
+    <ClInclude Include="OnlineMenu\Buttons\MenuActionHookPlan.h" />
+    <ClInclude Include="OnlineMenu\Config\OnlineMenuConfig.h" />
+    <ClInclude Include="OnlineMenu\Core\SRLogger.h" />
+    <ClInclude Include="OnlineMenu\Core\SRTypes.h" />
+    <ClInclude Include="OnlineMenu\Core\VersionGuard.h" />
+    <ClInclude Include="OnlineMenu\CustomMenu\CustomMenuEntry.h" />
+    <ClInclude Include="OnlineMenu\CustomMenu\InGameSettingsPanel.h" />
+    <ClInclude Include="OnlineMenu\CustomMenu\MainMenuOptionRegistry.h" />
+    <ClInclude Include="OnlineMenu\CustomMenu\RealMenuOptionInjector.h" />
+    <ClInclude Include="OnlineMenu\CustomMenu\RuntimeButtonInjector.h" />
+    <ClInclude Include="OnlineMenu\Dialogs\DialogExamples.h" />
+    <ClInclude Include="OnlineMenu\Flash\FlashBridge.h" />
+    <ClInclude Include="OnlineMenu\Flash\FlashCallLayer.h" />
+    <ClInclude Include="OnlineMenu\FlashTracer\FlashTracer.h" />
+    <ClInclude Include="OnlineMenu\Help\HelpOverlayExamples.h" />
+    <ClInclude Include="OnlineMenu\Hooks\MenuActionHook.h" />
+    <ClInclude Include="OnlineMenu\Hooks\MenuHookScaffold.h" />
+    <ClInclude Include="OnlineMenu\Hooks\OnlineMenuHookLogger.h" />
+    <ClInclude Include="OnlineMenu\Hooks\OnlineMenuHookStubs.h" />
+    <ClInclude Include="OnlineMenu\Hooks\RuntimeFlashHookPlan.h" />
+    <ClInclude Include="OnlineMenu\Leaderboard\FakeLeaderboardData.h" />
+    <ClInclude Include="OnlineMenu\Leaderboard\LeaderboardHub.h" />
+    <ClInclude Include="OnlineMenu\Leaderboard\LeaderboardStub.h" />
+    <ClInclude Include="OnlineMenu\Lobby\LobbyFlashNames.h" />
+    <ClInclude Include="OnlineMenu\Lobby\LobbyStructures.h" />
+    <ClInclude Include="OnlineMenu\Lobby\LobbySyncMap.h" />
+    <ClInclude Include="OnlineMenu\Lobby\NetBattleLobby.h" />
+    <ClInclude Include="OnlineMenu\MainMenu\NetBattleMainMenu.h" />
+    <ClInclude Include="OnlineMenu\Matchmaking\MatchmakingHub.h" />
+    <ClInclude Include="OnlineMenu\Models\LobbyStructures.h" />
+    <ClInclude Include="OnlineMenu\NetworkTrace\NetworkTrace.h" />
+    <ClInclude Include="OnlineMenu\News\NewsHub.h" />
+    <ClInclude Include="OnlineMenu\OnlineMenuHubStub.h" />
+    <ClInclude Include="OnlineMenu\OnlineMenuNotes.h" />
+    <ClInclude Include="OnlineMenu\OnlineMenuPatchStub.h" />
+    <ClInclude Include="OnlineMenu\OnlineMenuResearch.h" />
+    <ClInclude Include="OnlineMenu\PlayerList\PlayerInfo.h" />
+    <ClInclude Include="OnlineMenu\PlayerList\PlayerListHub.h" />
+    <ClInclude Include="OnlineMenu\Research\FunctionMap.h" />
+    <ClInclude Include="OnlineMenu\Research\FunctionNames.h" />
+    <ClInclude Include="OnlineMenu\Research\KnownAddresses.h" />
+    <ClInclude Include="OnlineMenu\Research\LatestLobbyResearch.h" />
+    <ClInclude Include="OnlineMenu\Research\Progress.h" />
+    <ClInclude Include="OnlineMenu\Research\ResearchNotes.h" />
+    <ClInclude Include="OnlineMenu\RoomBrowser\RoomBrowserHub.h" />
+    <ClInclude Include="OnlineMenu\RoomBrowser\RoomInfo.h" />
+    <ClInclude Include="OnlineMenu\Settings\SettingsHub.h" />
+    <ClInclude Include="OnlineMenu\Settings\SettingsStub.h" />
+    <ClInclude Include="OnlineMenu\Statistics\BattleStatistics.h" />
+    <ClInclude Include="OnlineMenu\Store\StoreReplacement.h" />
+    <ClInclude Include="OnlineMenu\StormRevivalOnlineMenu.h" />
+    <ClInclude Include="OnlineMenu\VoiceStatus\VoiceStatusExamples.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="OnlineMenu\AddressBook\KNOWN_ADDRESSES.txt" />
+    <None Include="OnlineMenu\BossBattle\BOSS_BATTLE_RESEARCH.txt" />
+    <None Include="OnlineMenu\Character_Costume\CHARACTER_COSTUME_RESEARCH.txt" />
+    <None Include="OnlineMenu\Combat\COMBAT_RESEARCH.txt" />
+    <None Include="OnlineMenu\LAN_Radmin_Research\LAN_EVENT_IDS.txt" />
+    <None Include="OnlineMenu\LAN_Radmin_Research\LAN_KEYS_TO_DUMP.txt" />
+    <None Include="OnlineMenu\LAN_Radmin_Research\LAN_RESEARCH_SUMMARY.txt" />
+    <None Include="OnlineMenu\LOBBY_UI_SUMMARY.txt" />
+    <None Include="OnlineMenu\manifest.json" />
+    <None Include="OnlineMenu\ONLINE_MENU_SUMMARY.txt" />
+    <None Include="OnlineMenu\OnlineMenu\LOBBY_UI_SUMMARY.txt" />
+    <None Include="OnlineMenu\OnlineMenu\ONLINE_MENU_SUMMARY.txt" />
+    <None Include="OnlineMenu\README_RESEARCH_INDEX.txt" />
+    <None Include="OnlineMenu\Scenario_GPSetting\GPSETTING_SCENARIO_PARSER.txt" />
+    <None Include="OnlineMenu\Stage\STAGE_RESEARCH.txt" />
+  </ItemGroup>
+  <!-- END OnlineMenu Codex managed items -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
-
-
-

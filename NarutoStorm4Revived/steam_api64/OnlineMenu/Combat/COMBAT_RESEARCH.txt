@@ -1,0 +1,26 @@
+Combat / Battle Parameter Research
+
+sub_1402D3BE4:
+loads 16-byte records and converts 30 FPS authored timing to runtime FPS.
+
+sub_1402D4330:
+loads 28-byte event records; calls sub_1402D4478.
+
+sub_1402D48B8:
+loads 28-byte event records; defaults missing ids to 77.
+
+sub_140304DE0:
+loads 28-byte records; calls sub_140304FD4.
+
+sub_14033BF30:
+loads 152-byte combat records and converts timing from authored 30 FPS.
+
+sub_14033C7E4:
+pushes 152-byte combat record.
+
+sub_140524D50:
+returns 30.
+
+ID mappers:
+sub_1402D4478 = maps small ids to 934-954
+sub_140304FD4 = maps small ids to 934/937/938/945/951/946/954

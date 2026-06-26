@@ -1,0 +1,42 @@
+Online Menu Research Summary
+
+Flash bridge:
+sub_14060759C = RegisterFlashMovie
+sub_140607BA0 = InvokeFlashWithArgs
+sub_140607B5C = InvokeFlashNoArgs
+sub_140607B7C = InvokeFlashReturnValue wrapper
+sub_1406078CC = UnregisterFlashMovie
+sub_140607A04 = Install ccUiFlash::Update callback
+sub_1401FD0AC = RegisterFlashCallbacks
+
+Main menu:
+Movie: netbattlemainmenu
+Root: _root.all_nut
+
+Confirmed calls:
+Initialize
+GetMode
+GetModeBattele
+GetSelectLimitEventId
+SetLock
+SetUnLock
+Restart
+SetBingoItem
+SetEventLock
+SetStepEnd
+SetStepLogin
+SetMatchingVoice
+MatchingVoiceAnmLoop
+MatchingVoiceAnmOut
+CallFinalize
+
+Functions:
+sub_140676250 = Initialize
+sub_140676054 = finalize
+sub_1406760F4 = GetMode
+sub_140676164 = GetModeBattele
+sub_1406761E0 = GetSelectLimitEventId
+sub_140676904 = SetBingoItem
+sub_14067699C = SetEventLock
+sub_140676A34 = Restart
+sub_140676A9C = SetUnLock

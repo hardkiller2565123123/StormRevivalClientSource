@@ -10,6 +10,11 @@ static bool g_LoggerInitialized = false;
 static std::string g_LastInfoLine;
 static uint32_t g_RepeatedInfoCount = 0;
 static uint32_t g_InfoLinesSinceFlush = 0;
+static Logger::Level g_MinimumLevel = Logger::Level::Trace;
+static std::string g_LogPath;
+static std::string g_LogsDirectory;
+static std::vector<std::string> g_RecentLines;
+static constexpr size_t kMaxRecentLines = 700;
 
 static std::string ToLowerString(std::string text)
 {
@@ -63,6 +68,33 @@ static bool IsRealGameProcess()
     return exe.size() > 4 && exe.substr(exe.size() - 4) == ".exe";
 }
 
+static std::string TimestampText()
+{
+    SYSTEMTIME st{};
+    GetLocalTime(&st);
+
+    char buffer[64]{};
+    sprintf_s(
+        buffer,
+        "%04u-%02u-%02u %02u:%02u:%02u.%03u",
+        st.wYear,
+        st.wMonth,
+        st.wDay,
+        st.wHour,
+        st.wMinute,
+        st.wSecond,
+        st.wMilliseconds);
+    return buffer;
+}
+
+static void PushRecent(const std::string& line)
+{
+    g_RecentLines.push_back(line);
+
+    if (g_RecentLines.size() > kMaxRecentLines)
+        g_RecentLines.erase(g_RecentLines.begin(), g_RecentLines.begin() + (g_RecentLines.size() - kMaxRecentLines));
+}
+
 static void InitConsole()
 {
     if (g_ConsoleReady)
@@ -86,6 +118,60 @@ static void InitConsole()
     g_ConsoleReady = true;
 }
 
+static bool ShouldWrite(Logger::Level level)
+{
+    return static_cast<int>(level) >= static_cast<int>(g_MinimumLevel);
+}
+
+static void WriteLine(Logger::Level level, const char* category, const std::string& text, bool flushNow)
+{
+    if (!ShouldWrite(level))
+        return;
+
+    std::lock_guard<std::mutex> lock(g_LogMutex);
+
+    std::string line = "[" + TimestampText() + "] [" + std::to_string(GetCurrentThreadId()) + "] [" + Logger::LevelName(level) + "]";
+    if (category && category[0])
+        line += " [" + std::string(category) + "]";
+    line += " " + text;
+
+    if (level == Logger::Level::Info && line == g_LastInfoLine)
+    {
+        ++g_RepeatedInfoCount;
+        return;
+    }
+
+    if (g_Log.is_open())
+    {
+        if (g_RepeatedInfoCount > 0)
+        {
+            const std::string repeated = "[" + TimestampText() + "] [" + std::to_string(GetCurrentThreadId()) + "] [INFO] previous message repeated " + std::to_string(g_RepeatedInfoCount) + " times";
+            g_Log << repeated << '\n';
+            PushRecent(repeated);
+            g_RepeatedInfoCount = 0;
+        }
+
+        g_Log << line << '\n';
+        PushRecent(line);
+
+        if (flushNow || ++g_InfoLinesSinceFlush >= 64)
+        {
+            g_Log.flush();
+            g_InfoLinesSinceFlush = 0;
+        }
+    }
+    else
+    {
+        PushRecent(line);
+    }
+
+    if (g_ConsoleReady)
+        std::cout << line << std::endl;
+
+    if (level == Logger::Level::Info)
+        g_LastInfoLine = line;
+}
+
 bool Logger::Init()
 {
     if (g_LoggerInitialized)
@@ -96,18 +182,16 @@ bool Logger::Init()
     std::string gameDir = GetGameDirectory();
     std::string baseDir = gameDir + "NarutoStormRevolationRevived";
 
-    std::string logsDir = baseDir + "\\Logs";
-
+    g_LogsDirectory = baseDir + "\\Logs";
 
     CreateDirectoryA(baseDir.c_str(), nullptr);
+    CreateDirectoryA(g_LogsDirectory.c_str(), nullptr);
 
-    CreateDirectoryA(logsDir.c_str(), nullptr);
+    g_LogPath = g_LogsDirectory + "\\NarutoStormRevolationRevived.log";
 
-    std::string logPath = logsDir + "\\NarutoStormRevolationRevived.log";
+    DeleteFileA(g_LogPath.c_str());
 
-    DeleteFileA(logPath.c_str());
-
-    g_Log.open(logPath, std::ios::out | std::ios::trunc);
+    g_Log.open(g_LogPath, std::ios::out | std::ios::trunc);
 
     if (!g_Log.is_open())
         return false;
@@ -119,7 +203,7 @@ bool Logger::Init()
     Info("Fresh log created");
     Info("Process: " + GetProcessPath());
     Info("Process name: " + GetProcessName());
-    Info("Log path: " + logPath);
+    Info("Log path: " + g_LogPath);
 
     return true;
 }
@@ -147,69 +231,34 @@ void Logger::Shutdown()
     g_InfoLinesSinceFlush = 0;
 }
 
+void Logger::Trace(const std::string& category, const std::string& text)
+{
+    WriteLine(Level::Trace, category.c_str(), text, false);
+}
+
 void Logger::Info(const std::string& text)
 {
-    std::lock_guard<std::mutex> lock(g_LogMutex);
+    WriteLine(Level::Info, nullptr, text, false);
+}
 
-    std::string line = "[INFO] " + text;
-
-    if (line == g_LastInfoLine)
-    {
-        ++g_RepeatedInfoCount;
-        return;
-    }
-
-    if (g_Log.is_open())
-    {
-        if (g_RepeatedInfoCount > 0)
-        {
-            g_Log << "[INFO] previous message repeated " << g_RepeatedInfoCount << " times\n";
-            g_RepeatedInfoCount = 0;
-        }
-
-        g_Log << line << '\n';
-
-        if (++g_InfoLinesSinceFlush >= 64)
-        {
-            g_Log.flush();
-            g_InfoLinesSinceFlush = 0;
-        }
-    }
-
-    if (g_ConsoleReady)
-    {
-        if (g_RepeatedInfoCount > 0)
-        {
-            std::cout << "[INFO] previous message repeated " << g_RepeatedInfoCount << " times" << std::endl;
-            g_RepeatedInfoCount = 0;
-        }
-
-        std::cout << line << std::endl;
-    }
-
-    g_LastInfoLine = line;
+void Logger::Warn(const std::string& text)
+{
+    WriteLine(Level::Warn, nullptr, text, false);
 }
 
 void Logger::Error(const std::string& text)
 {
-    std::lock_guard<std::mutex> lock(g_LogMutex);
+    WriteLine(Level::Error, nullptr, text, true);
+}
 
-    std::string line = "[ERROR] " + text;
+void Logger::Fatal(const std::string& text)
+{
+    WriteLine(Level::Fatal, nullptr, text, true);
+}
 
-    if (g_Log.is_open())
-    {
-        if (g_RepeatedInfoCount > 0)
-        {
-            g_Log << "[INFO] previous message repeated " << g_RepeatedInfoCount << " times\n";
-            g_RepeatedInfoCount = 0;
-        }
-
-        g_Log << line << '\n';
-        g_Log.flush();
-    }
-
-    if (g_ConsoleReady)
-        std::cout << line << std::endl;
+void Logger::Mark(const std::string& text)
+{
+    WriteLine(Level::Info, "MARK", text, true);
 }
 
 void Logger::Flush()
@@ -220,13 +269,105 @@ void Logger::Flush()
     {
         if (g_RepeatedInfoCount > 0)
         {
-            g_Log << "[INFO] previous message repeated " << g_RepeatedInfoCount << " times\n";
+            const std::string repeated = "[" + TimestampText() + "] [" + std::to_string(GetCurrentThreadId()) + "] [INFO] previous message repeated " + std::to_string(g_RepeatedInfoCount) + " times";
+            g_Log << repeated << '\n';
+            PushRecent(repeated);
             g_RepeatedInfoCount = 0;
         }
 
         g_Log.flush();
         g_InfoLinesSinceFlush = 0;
     }
+}
+
+void Logger::SetMinimumLevel(Level level)
+{
+    g_MinimumLevel = level;
+    Info(std::string("Logger minimum level set to ") + LevelName(level));
+}
+
+Logger::Level Logger::GetMinimumLevel()
+{
+    return g_MinimumLevel;
+}
+
+bool Logger::SetMinimumLevelFromText(const std::string& levelText)
+{
+    const std::string level = ToLowerString(levelText);
+    if (level == "trace" || level == "verbose" || level == "debug")
+    {
+        SetMinimumLevel(Level::Trace);
+        return true;
+    }
+    if (level == "info")
+    {
+        SetMinimumLevel(Level::Info);
+        return true;
+    }
+    if (level == "warn" || level == "warning")
+    {
+        SetMinimumLevel(Level::Warn);
+        return true;
+    }
+    if (level == "error")
+    {
+        SetMinimumLevel(Level::Error);
+        return true;
+    }
+    if (level == "fatal")
+    {
+        SetMinimumLevel(Level::Fatal);
+        return true;
+    }
+    return false;
+}
+
+const char* Logger::LevelName(Level level)
+{
+    switch (level)
+    {
+    case Level::Trace: return "TRACE";
+    case Level::Info: return "INFO";
+    case Level::Warn: return "WARN";
+    case Level::Error: return "ERROR";
+    case Level::Fatal: return "FATAL";
+    default: return "INFO";
+    }
+}
+
+std::string Logger::GetLogPath()
+{
+    std::lock_guard<std::mutex> lock(g_LogMutex);
+    return g_LogPath;
+}
+
+std::string Logger::GetLogsDirectory()
+{
+    std::lock_guard<std::mutex> lock(g_LogMutex);
+    return g_LogsDirectory;
+}
+
+std::vector<std::string> Logger::SnapshotRecent(size_t maxItems)
+{
+    std::lock_guard<std::mutex> lock(g_LogMutex);
+
+    if (maxItems == 0 || g_RecentLines.size() <= maxItems)
+        return g_RecentLines;
+
+    return std::vector<std::string>(g_RecentLines.end() - maxItems, g_RecentLines.end());
+}
+
+bool Logger::WriteRecentLines(const std::string& path, size_t maxItems)
+{
+    const std::vector<std::string> lines = SnapshotRecent(maxItems);
+    std::ofstream out(path, std::ios::out | std::ios::trunc);
+    if (!out.is_open())
+        return false;
+
+    for (const std::string& line : lines)
+        out << line << '\n';
+
+    return true;
 }
 
 void Logger::ExportInitialized(const char* exportName)

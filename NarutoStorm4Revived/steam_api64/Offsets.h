@@ -4,6 +4,15 @@
 #include <cstdint>
 #include <vector>
 
+// IDA string-anchor exports from the Storm 4 executable are kept in:
+//   IdaOffsets/Storm4IdaOffsetUsageGuide.h
+//   IdaOffsets/Storm4IdaStringOffsets_Actionable.h
+//   IdaOffsets/Storm4IdaStringOffsets_All.h
+//
+// Those generated files preserve the full IDA dump and group useful anchors by
+// system. They are search/reference material: convert a string VA to an RVA,
+// follow xrefs in IDA, then build a pattern-scanned runtime patch here.
+
 namespace offsetSC
 {
     extern const uintptr_t stageOffset;

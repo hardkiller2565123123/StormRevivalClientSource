@@ -90,8 +90,8 @@ public:
     static inline int ORIGINAL_COUNT;
     static inline ProjectileEntry* g_pNewProjectileArray;
     static inline int g_NewProjectileCountAllocated; // Total allocated slots
-    static inline int PROJECTILE_SLOT_COUNT = 200;
-    static __int64 __fastcall ProjectileExpander::sub_1409F0730(__int64 a1, __int64 a2)
+    static inline int PROJECTILE_SLOT_COUNT = 512;
+    static __int64 __fastcall sub_1409F0730(__int64 a1, __int64 a2)
     {
         //ProjectileNames::InitializeDefaults();
 

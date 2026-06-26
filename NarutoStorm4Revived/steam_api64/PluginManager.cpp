@@ -11,7 +11,6 @@
 #include "Common.h"
 #include "HookFunctions.h"
 
-
 void __stdcall Plugin::FreePlugin()
 {
 	Unload();

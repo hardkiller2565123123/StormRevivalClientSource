@@ -28,7 +28,8 @@ enum DX11OverlayTab
     TAB_ASSETS   = 6,
     TAB_MODS     = 7,
     TAB_PATCHES  = 8,
-    TAB_DEBUG    = 9
+    TAB_DEBUG    = 9,
+    TAB_API      = 10
 };
 
 extern PresentFn g_OriginalPresent;

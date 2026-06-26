@@ -41,7 +41,7 @@ __int64 BattleUtils::GetEnemyPointerAddress = 0;
 void HookFunctions::InitializeHooksAll()
 {
 	__int64 debug_str_address_NS4Debug = PatternScan::Scan("48xxxx48xxxxxx48xxxxxx4Cxxxxxx4Cxxxxxx535748xxxxxxxxxxxx48xxxx48xxxxxxxx33xx41xxxxxxxxxx48xxxxxxE8xxxxxxxx");
-	if (GetPrivateProfileInt("General", "enable_debug", 1, config_path.c_str()) == 1 && debug_str_address_NS4Debug > 1)
+	if (GetPrivateProfileIntA("General", "enable_debug", 1, config_path.c_str()) == 1 && debug_str_address_NS4Debug > 1)
 	{
 		Console::PrintOutW("UltimateStormAPI:: Found Debug Strings S4\n");
 		HookFunctions::Hook((void*)(debug_str_address_NS4Debug), Common::DebugString, 15);
@@ -441,7 +441,7 @@ void HookFunctions::InitializeHooksS4()
 		reinterpret_cast<LPVOID>(&LuaScript::Hooked_ns2_tolua_ccRegistScript_open),
 		reinterpret_cast<LPVOID*>(&LuaScript::orig_ns2_tolua_ccRegistScript_open));
 
-	if (GetPrivateProfileInt("General", "skip_opening", 1, config_path.c_str()) == 1)
+	if (GetPrivateProfileIntA("General", "skip_opening", 1, config_path.c_str()) == 1)
 	{
 		//Skip Intro
 		Common::PatchMemoryAtOffsetInt32(0x862D62, 0x63);
@@ -589,7 +589,7 @@ void HookFunctions::InitializeHooksSC()
 {
 
 	__int64 debug_str_address = PatternScan::Scan("48xxxxxxxx4Cxxxxxxxx4CxxxxxxxxC30Fxxxx33xx4Cxxxx44xxxx85xx74xx908Bxx4Dxxxxxx83xxxx83xxxxD3xx41xxxx41xxxxxxxxxxxx33xx41xxxxxx85xx75xxC3");
-	if (GetPrivateProfileInt("General", "enable_debug", 1, config_path.c_str()) == 1 && debug_str_address > 1)
+	if (GetPrivateProfileIntA("General", "enable_debug", 1, config_path.c_str()) == 1 && debug_str_address > 1)
 	{
 		Console::PrintOutW("UltimateStormAPI:: Found Debug Strings SC\n");
 		HookFunctions::Hook((void*)(debug_str_address), Common::DebugString, 15);
@@ -1095,7 +1095,7 @@ void HookFunctions::InitializeHooksSC()
 		reinterpret_cast<LPVOID*>(&LuaScript::orig_ns2_tolua_ccRegistScript_open));
 
 	//Skip Intro 
-	if (GetPrivateProfileInt("General", "skip_opening", 1, config_path.c_str()) == 1)
+	if (GetPrivateProfileIntA("General", "skip_opening", 1, config_path.c_str()) == 1)
 	{
 		Common::PatchMemoryAtOffsetInt32(0xAD16F1, 0x80);
 	}

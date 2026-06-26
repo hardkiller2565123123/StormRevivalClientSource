@@ -64,3 +64,4 @@ bool CreateDummySwapChain(IDXGISwapChain** outSwapChain);
 // Pages
 void DrawClientPage();
 void DrawOnlinePage();
+void DrawApiPage();

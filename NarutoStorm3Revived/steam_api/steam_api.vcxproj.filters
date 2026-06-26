@@ -103,6 +103,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CrashHandler.cpp">
+      <Filter>Core\logger</Filter>
+    </ClCompile>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="HookManager.cpp">
       <Filter>Core\hooks</Filter>
@@ -156,6 +159,9 @@
       <Filter>Includes\Steam</Filter>
     </ClCompile>
     <ClCompile Include="SteamConfig.cpp">
+      <Filter>Includes\Steam</Filter>
+    </ClCompile>
+    <ClCompile Include="SupportBundle.cpp">
       <Filter>Includes\Steam</Filter>
     </ClCompile>
     <ClCompile Include="SteamDiagnostics.cpp">
@@ -257,6 +263,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StdInc.h" />
+    <ClInclude Include="CrashHandler.h">
+      <Filter>Core\logger</Filter>
+    </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>Core\logger</Filter>
     </ClInclude>
@@ -897,6 +906,9 @@
       <Filter>Includes\Steam</Filter>
     </ClInclude>
     <ClInclude Include="SteamConfig.h">
+      <Filter>Includes\Steam</Filter>
+    </ClInclude>
+    <ClInclude Include="SupportBundle.h">
       <Filter>Includes\Steam</Filter>
     </ClInclude>
     <ClInclude Include="SteamDiagnostics.h">

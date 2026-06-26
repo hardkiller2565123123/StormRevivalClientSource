@@ -1,0 +1,24 @@
+LAN / Radmin Research Summary
+
+Current understanding:
+- Radmin provides the LAN/VPN IP layer only.
+- The game still expects internal lobby, peer, packet, and event systems.
+- Critical missing piece: sub_1406B39BC packet parser/dispatcher.
+
+Confirmed:
+sub_1405B10CC = register receive callback by event id
+sub_1406B36CC = construct ccNetTCPReceiveCtrl owner
+sub_1406B3904 = start ccNetTCPReceiveCtrl::Ctrl task/thread
+sub_1406B37D4 = receive loop
+sub_140AE6B60 = SteamNetworking SendP2PPacket main/host wrapper
+sub_140AE69D0 = SteamNetworking SendP2PPacket indexed-peer wrapper
+sub_140AE6A90 = SteamNetworking SendP2PPacket broadcast wrapper
+sub_140AE6670 = P2P/session valid check
+sub_140AE6720 = get lobby/session member by index
+sub_140AE6010 = SteamID to persona name
+sub_1406B2818 = required lobby key check
+sub_1406B2834 = manager/session-ready check
+sub_1406B2850 = checks 4 required keys from off_1414EBCB8
+sub_1406B2AD0 = clear/remove lobby key through sub_1409A3E40
+sub_1406B2A78 = clear 4 keys from off_1414EBCB8
+sub_1406B3B00 = unregister receive callback by event id

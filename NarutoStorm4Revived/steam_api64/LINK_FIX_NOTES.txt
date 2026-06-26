@@ -1,0 +1,15 @@
+Link fix applied.
+
+Fixed:
+- LNK2001 unresolved external symbol:
+  StormRevival::OnlineMenu::Hooks::ShutdownHooks()
+
+Cause:
+- StormRevivalOnlineMenu.cpp referenced Hooks::ShutdownHooks()
+- MenuHookScaffold.cpp was missing from the Visual Studio project or the function body was not present.
+
+Patched:
+- OnlineMenu/Hooks/MenuHookScaffold.h
+- OnlineMenu/Hooks/MenuHookScaffold.cpp
+- steam_api64.vcxproj
+- steam_api64.vcxproj.filters
