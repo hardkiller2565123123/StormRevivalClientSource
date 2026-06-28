@@ -1,4 +1,3 @@
-#include "StdInc.h"
 #include "AssetHexEditor.h"
 #include "AssetPreviewResolver.h"
 #include "AssetOverrideManager.h"

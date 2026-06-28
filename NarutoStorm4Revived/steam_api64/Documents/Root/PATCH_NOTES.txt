@@ -1,0 +1,38 @@
+NarutoStorm4Revived Quiet Logs + Base EXE Crash Safe Update
+
+What this update changes:
+1. Quiet logs by default:
+   - Removes repetitive Steam interface/call spam.
+   - Removes OnlineMenu research/progress wall spam.
+   - Removes full hook-plan spam unless debug logging is enabled.
+   - Keeps lifecycle logs, hook summaries, storage read/write, network init, version guard, and crash info.
+
+2. Base EXE crash safety:
+   - The uploaded log shows this EXE is unsupported by the fixed-address profile.
+   - OnlineMenu hooks were already skipped correctly.
+   - Crash still happened after SlotExpansionManager applied stage/scene expansion.
+   - This update adds a global RuntimeSafetyGate so unsupported EXEs cannot run unsafe memory patchers.
+
+3. Unsafe-on-unknown-EXE systems now gated:
+   - SlotExpansionManager runtime auto-apply
+   - character roster/runtime patching
+   - any fixed-address hook group
+   - menu mutation/store replacement/custom modes
+
+Keep allowed on unsupported EXE:
+   - offline Steam emulation
+   - save storage
+   - LAN discovery socket
+   - network allow/block hooks
+   - DX11 overlay
+   - crash diagnostics
+   - DLC file-system forwarding only if it does not patch executable memory
+
+Recommended config:
+   log_level=normal
+   log_steam_calls=0
+   log_steam_interfaces=0
+   log_hook_plan=0
+   log_online_menu_research=0
+   safe_mode_unknown_exe=1
+   slot_expansion_auto_apply=0

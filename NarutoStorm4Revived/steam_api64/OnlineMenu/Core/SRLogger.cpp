@@ -1,5 +1,5 @@
 #include "SRLogger.h"
-#include "../../Logger.h"
+#include "Logger.h"
 #include <windows.h>
 namespace StormRevival::OnlineMenu::Log {
 static void Out(const char* level, const std::string& msg)

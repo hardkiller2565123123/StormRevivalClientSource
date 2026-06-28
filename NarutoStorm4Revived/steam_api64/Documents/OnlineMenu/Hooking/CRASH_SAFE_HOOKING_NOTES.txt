@@ -1,0 +1,27 @@
+Crash-safe hook setup for this build
+===================================
+
+What changed:
+- UI/Scaleform hooks remain enabled.
+- StageResourceHooks are compiled but disabled by default.
+- ScenarioHooks are compiled but disabled by default.
+- SceneHooks are compiled but disabled by default.
+- All hook addresses used by the new hook layer are centralized in:
+  OnlineMenu/Hooking/UniversalHookAddresses.h
+- Address scan reports were generated in:
+  OnlineMenu/Hooking/AddressScanReport.md/json/csv
+
+Why:
+The last crash happened after broad Resource/Scenario hooks attached. Those functions are hot
+startup paths, and the detour signatures/logging are not proven safe yet.
+
+Next test:
+1. Build steam_api64.
+2. Launch the game.
+3. Check that the log shows only FlashBridge hooks as [Hook OK].
+4. If stable, enable one group at a time in HookGroups.cpp.
+
+Re-enable order:
+1. SceneHooks only.
+2. StageResourceHooks with DatabaseLookup still commented/removed.
+3. ScenarioHooks last, one hook at a time.

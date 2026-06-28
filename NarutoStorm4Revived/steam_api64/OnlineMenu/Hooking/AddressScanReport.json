@@ -1,0 +1,6632 @@
+[
+  {
+    "file": "ccCmnScreenManager.h",
+    "line": 12,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "ccCmnScreenManager.h",
+    "line": 16,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "ccSceneManager.h",
+    "line": 11,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "ccSceneManager.h",
+    "line": 15,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 337,
+    "token": "sub_140868D60"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 362,
+    "token": "sub_1401CA8F8"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 365,
+    "token": "sub_1401CA8F8"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 443,
+    "token": "sub_14093C7D0"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 907,
+    "token": "sub_140643E70"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 928,
+    "token": "sub_14063F338"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 967,
+    "token": "sub_1400FEC40"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 969,
+    "token": "sub_1400FECE0"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1120,
+    "token": "sub_14071EF30"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1123,
+    "token": "sub_14071EE00"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1125,
+    "token": "sub_14051E8F0"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1128,
+    "token": "sub_1408575E0"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1143,
+    "token": "sub_1400B0F40"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1146,
+    "token": "sub_14071F020"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1158,
+    "token": "sub_14051E8F0"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1174,
+    "token": "sub_1408575E0"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1266,
+    "token": "sub_14071EF30"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1296,
+    "token": "sub_14071EF30"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1336,
+    "token": "sub_14073AAF0"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1337,
+    "token": "sub_14073AAF0"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1349,
+    "token": "sub_14071F020"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1359,
+    "token": "sub_140747120"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1374,
+    "token": "sub_14071EE40"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1382,
+    "token": "sub_140744E10"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1384,
+    "token": "sub_14071EE40"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1395,
+    "token": "sub_14071EE40"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1407,
+    "token": "sub_14071EE40"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1430,
+    "token": "sub_140744E10"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1435,
+    "token": "sub_140739220"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1469,
+    "token": "sub_140744AF0"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1670,
+    "token": "sub_14071F110"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1672,
+    "token": "sub_14071F110"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1682,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1684,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1698,
+    "token": "sub_14071F390"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1729,
+    "token": "sub_14071F390"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1749,
+    "token": "sub_14071F390"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1755,
+    "token": "sub_1400FEC40"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1763,
+    "token": "sub_1400FECE0"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1784,
+    "token": "sub_14071F390"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1798,
+    "token": "sub_1400FEC40"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1815,
+    "token": "sub_14071F390"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1817,
+    "token": "sub_1400FECE0"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1821,
+    "token": "sub_1400FEC40"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1835,
+    "token": "sub_14071F390"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1837,
+    "token": "sub_1400FECE0"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1922,
+    "token": "sub_1409FF490"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1933,
+    "token": "sub_140645960"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1934,
+    "token": "sub_140645960"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1946,
+    "token": "sub_140645960"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1947,
+    "token": "sub_140645960"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1956,
+    "token": "sub_14083B360"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1959,
+    "token": "sub_140A01E20"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 1960,
+    "token": "sub_140A01E20"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 2012,
+    "token": "sub_1407A8A58"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 2019,
+    "token": "sub_14052A414"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 2026,
+    "token": "sub_140529BEC"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 2028,
+    "token": "sub_14052A414"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 2032,
+    "token": "sub_140529BEC"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 2061,
+    "token": "sub_1407BF574"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 2063,
+    "token": "sub_1407A87BC"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 2067,
+    "token": "sub_1407A8A58"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 2075,
+    "token": "sub_1407BF574"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 2079,
+    "token": "sub_1407A87BC"
+  },
+  {
+    "file": "Common.cpp",
+    "line": 2081,
+    "token": "sub_1407A8A58"
+  },
+  {
+    "file": "Common.h",
+    "line": 62,
+    "token": "sub_14066DBD0"
+  },
+  {
+    "file": "Common.h",
+    "line": 63,
+    "token": "sub_1405674F0"
+  },
+  {
+    "file": "Common.h",
+    "line": 92,
+    "token": "sub_140643E70"
+  },
+  {
+    "file": "Common.h",
+    "line": 97,
+    "token": "sub_140744AF0"
+  },
+  {
+    "file": "Common.h",
+    "line": 101,
+    "token": "sub_14093C7D0"
+  },
+  {
+    "file": "Common.h",
+    "line": 105,
+    "token": "sub_140739220"
+  },
+  {
+    "file": "Common.h",
+    "line": 125,
+    "token": "sub_14071EF30"
+  },
+  {
+    "file": "Common.h",
+    "line": 145,
+    "token": "sub_14071EE00"
+  },
+  {
+    "file": "Common.h",
+    "line": 150,
+    "token": "sub_140747120"
+  },
+  {
+    "file": "Common.h",
+    "line": 156,
+    "token": "sub_14063F338"
+  },
+  {
+    "file": "Common.h",
+    "line": 193,
+    "token": "sub_1409FF490"
+  },
+  {
+    "file": "Common.h",
+    "line": 198,
+    "token": "sub_14083B360"
+  },
+  {
+    "file": "Common.h",
+    "line": 200,
+    "token": "sub_1400FEC40"
+  },
+  {
+    "file": "Common.h",
+    "line": 201,
+    "token": "sub_1400FECE0"
+  },
+  {
+    "file": "Common.h",
+    "line": 216,
+    "token": "sub_14066DBD0"
+  },
+  {
+    "file": "Common.h",
+    "line": 218,
+    "token": "sub_140868D60"
+  },
+  {
+    "file": "Common.h",
+    "line": 242,
+    "token": "0x140000000"
+  },
+  {
+    "file": "Common.h",
+    "line": 248,
+    "token": "0x140000000"
+  },
+  {
+    "file": "Common.h",
+    "line": 253,
+    "token": "0x140000000"
+  },
+  {
+    "file": "Common.h",
+    "line": 260,
+    "token": "0x140000000"
+  },
+  {
+    "file": "Common.h",
+    "line": 267,
+    "token": "0x140000000"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 62,
+    "token": "sub_140A47CF0"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 63,
+    "token": "sub_140A47CF0"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 70,
+    "token": "sub_140A01D60"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 71,
+    "token": "sub_140A01D60"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 80,
+    "token": "sub_140A01AA0"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 81,
+    "token": "sub_140A01AA0"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 82,
+    "token": "sub_140A01AA0"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 102,
+    "token": "sub_14056C3D4"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 103,
+    "token": "sub_14056C3D4"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 132,
+    "token": "sub_14056C34C"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 133,
+    "token": "sub_14056C34C"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 160,
+    "token": "sub_140A32AB0"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 161,
+    "token": "sub_140A32AB0"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 206,
+    "token": "sub_14056C34C"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 207,
+    "token": "sub_14056C34C"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 218,
+    "token": "sub_14056C34C"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 219,
+    "token": "sub_14056C34C"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 226,
+    "token": "sub_14056C3D4"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 227,
+    "token": "sub_14056C3D4"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 238,
+    "token": "sub_14056BE84"
+  },
+  {
+    "file": "CpkLoader.cpp",
+    "line": 239,
+    "token": "sub_14056BE84"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 140,
+    "token": "sub_1409D4DE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 141,
+    "token": "sub_1409D4DE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 143,
+    "token": "sub_14050C520"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 144,
+    "token": "sub_14050C520"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 312,
+    "token": "sub_1409D4DE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 313,
+    "token": "sub_1409D4DE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 315,
+    "token": "sub_14050C520"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 316,
+    "token": "sub_14050C520"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 484,
+    "token": "sub_1405F7E10"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 499,
+    "token": "sub_1400B6920"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 503,
+    "token": "sub_1400B3830"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 507,
+    "token": "sub_1409BAF60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 511,
+    "token": "sub_1409D6FC0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 519,
+    "token": "sub_1409DCC60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 523,
+    "token": "sub_1409DCDB0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 527,
+    "token": "sub_1409D4DE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 531,
+    "token": "sub_14050C520"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 551,
+    "token": "sub_140B533A0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 575,
+    "token": "sub_1405F7E10"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 713,
+    "token": "sub_1400B6920"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 714,
+    "token": "sub_1400B3830"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 767,
+    "token": "sub_1409D6FC0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 771,
+    "token": "sub_1409DCC60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 774,
+    "token": "sub_1409BAF60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 775,
+    "token": "sub_1409BAF60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 776,
+    "token": "sub_1409BAF60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 777,
+    "token": "sub_1409BAF60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 778,
+    "token": "sub_1409BAF60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 779,
+    "token": "sub_1409BAF60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 780,
+    "token": "sub_1409BAF60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 781,
+    "token": "sub_1409BAF60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 782,
+    "token": "sub_1409BAF60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 783,
+    "token": "sub_1409BAF60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 790,
+    "token": "sub_1409BAF60"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 794,
+    "token": "sub_1409DCDB0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 800,
+    "token": "sub_1409D4DE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 815,
+    "token": "sub_14050C520"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 854,
+    "token": "sub_140991940"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 858,
+    "token": "sub_1408394E0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 862,
+    "token": "sub_1409D6FC0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 866,
+    "token": "sub_1409D6220"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 870,
+    "token": "sub_14098F8E0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 874,
+    "token": "sub_14098FD20"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 878,
+    "token": "sub_1409BCC50"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 882,
+    "token": "sub_140A33210"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 886,
+    "token": "sub_1409EF570"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 890,
+    "token": "sub_1409D6C40"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 894,
+    "token": "sub_140A3C2D0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 898,
+    "token": "sub_1409BD3B0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 902,
+    "token": "sub_1409A34B0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 906,
+    "token": "sub_1405F42F0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 910,
+    "token": "sub_1405E9580"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 914,
+    "token": "sub_14098F510"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 918,
+    "token": "sub_14098F8A0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 922,
+    "token": "sub_140AC4880"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 926,
+    "token": "sub_140AC49D0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 930,
+    "token": "sub_140A31210"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 934,
+    "token": "sub_1409BB050"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 938,
+    "token": "sub_1409CF930"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 942,
+    "token": "sub_1409DCEE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 946,
+    "token": "sub_140B533A0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 950,
+    "token": "sub_140B53940"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 976,
+    "token": "sub_140991940"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 985,
+    "token": "sub_1408394E0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1005,
+    "token": "sub_1409D6FC0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1068,
+    "token": "sub_140AC4880"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1083,
+    "token": "sub_14098F8E0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1083,
+    "token": "sub_14098FD20"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1084,
+    "token": "sub_140991940"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1087,
+    "token": "sub_1409BCC50"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1091,
+    "token": "sub_140A33210"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1093,
+    "token": "sub_1409EF570"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1094,
+    "token": "sub_1409D6C40"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1143,
+    "token": "sub_140AC49D0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1144,
+    "token": "sub_140A31210"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1146,
+    "token": "sub_1409BB050"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1161,
+    "token": "sub_1409CF930"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1207,
+    "token": "sub_1409DCEE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1210,
+    "token": "sub_1409BD3B0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1218,
+    "token": "sub_1409DCEE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1226,
+    "token": "sub_1409EF570"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1226,
+    "token": "sub_1409EF8E0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1231,
+    "token": "sub_14098F8E0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1235,
+    "token": "sub_14098F8E0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1236,
+    "token": "sub_14098FD20"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1238,
+    "token": "sub_14098F510"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1242,
+    "token": "sub_140991940"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1243,
+    "token": "sub_1409DCEE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1252,
+    "token": "sub_1409DCEE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1262,
+    "token": "sub_14098F8E0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1266,
+    "token": "sub_14098F8E0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1267,
+    "token": "sub_14098FD20"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1269,
+    "token": "sub_14098F510"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1273,
+    "token": "sub_140991940"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1274,
+    "token": "sub_1409DCEE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1286,
+    "token": "sub_14098F8E0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1290,
+    "token": "sub_14098F8E0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1291,
+    "token": "sub_14098FD20"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1293,
+    "token": "sub_14098F510"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1297,
+    "token": "sub_140991940"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1298,
+    "token": "sub_1409DCEE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1304,
+    "token": "sub_1409DCEE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1308,
+    "token": "sub_14098FD20"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1316,
+    "token": "sub_1409DCEE0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1332,
+    "token": "sub_14098F8A0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1344,
+    "token": "sub_14098F8E0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1347,
+    "token": "sub_14098F510"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1348,
+    "token": "sub_140991940"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1350,
+    "token": "sub_140991940"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1363,
+    "token": "sub_14098F8A0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1368,
+    "token": "sub_140A3C2D0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1371,
+    "token": "sub_1409BD3B0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1372,
+    "token": "sub_1409A34B0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1373,
+    "token": "sub_1405F42F0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1374,
+    "token": "sub_1405E9580"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1378,
+    "token": "sub_14098F510"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1381,
+    "token": "sub_14098F510"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1385,
+    "token": "sub_140991940"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1389,
+    "token": "sub_14098F510"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1390,
+    "token": "sub_140991940"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1398,
+    "token": "sub_140B533A0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1401,
+    "token": "sub_140B53940"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1403,
+    "token": "sub_140B53940"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1421,
+    "token": "sub_1409DCEB0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1423,
+    "token": "0x1409DCEB0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1425,
+    "token": "sub_1409DCEB0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1450,
+    "token": "sub_1409DCEB0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1461,
+    "token": "sub_1409DCEB0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1497,
+    "token": "sub_14055D040"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1500,
+    "token": "sub_140A0D810"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1503,
+    "token": "sub_1405583A8"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1506,
+    "token": "sub_140A0D850"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1509,
+    "token": "sub_1407B03B4"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1512,
+    "token": "sub_140A017F0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1515,
+    "token": "sub_1407B5664"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1518,
+    "token": "sub_14079B88C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1521,
+    "token": "sub_1407B5714"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1524,
+    "token": "sub_14047ED14"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1527,
+    "token": "sub_1407B05BC"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1549,
+    "token": "sub_14055D040"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1563,
+    "token": "sub_140A0D810"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1564,
+    "token": "sub_1405583A8"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1589,
+    "token": "sub_140A0D850"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1595,
+    "token": "sub_140A0D850"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1600,
+    "token": "sub_1407B03B4"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1601,
+    "token": "sub_140A017F0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1607,
+    "token": "sub_1407B5664"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1612,
+    "token": "sub_14079B88C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1615,
+    "token": "sub_1407B5714"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1617,
+    "token": "sub_140A0D850"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1622,
+    "token": "sub_1407B05BC"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1640,
+    "token": "sub_14047ED14"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1659,
+    "token": "sub_1407AEBF8"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1676,
+    "token": "sub_14077E64C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1679,
+    "token": "sub_1406B5D14"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1682,
+    "token": "sub_1407B03B4"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1685,
+    "token": "sub_14077DB38"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1688,
+    "token": "sub_14077DD4C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1691,
+    "token": "sub_14079C53C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1694,
+    "token": "sub_1407ED2B4"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1697,
+    "token": "sub_1407C0B7C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1700,
+    "token": "sub_1407B0190"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1703,
+    "token": "sub_14085B488"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1706,
+    "token": "sub_14085B588"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1709,
+    "token": "sub_1407EBEC8"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1712,
+    "token": "sub_14079B950"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1715,
+    "token": "sub_1407ABFB4"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1718,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1721,
+    "token": "sub_14077DA68"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1724,
+    "token": "sub_14077DAF8"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1727,
+    "token": "sub_1407F3FFC"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1730,
+    "token": "sub_14078B070"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1733,
+    "token": "sub_14055A48C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1736,
+    "token": "sub_140554764"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1742,
+    "token": "sub_1407C0DD8"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1785,
+    "token": "sub_14077E64C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1795,
+    "token": "sub_1406B5D14"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1811,
+    "token": "sub_1407B03B4"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1864,
+    "token": "sub_14085B488"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1879,
+    "token": "sub_14077DB38"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1879,
+    "token": "sub_14077DD4C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1880,
+    "token": "sub_14077E64C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1882,
+    "token": "sub_14079C53C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1886,
+    "token": "sub_1407ED2B4"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1888,
+    "token": "sub_1407C0B7C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1889,
+    "token": "sub_1407B0190"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1904,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1908,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1919,
+    "token": "sub_14085B588"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1920,
+    "token": "sub_1407EBEC8"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1923,
+    "token": "sub_14079B950"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1927,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1992,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 1998,
+    "token": "sub_1407ABFB4"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2009,
+    "token": "sub_1407C0B7C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2009,
+    "token": "sub_1407C0DD8"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2010,
+    "token": "sub_1407C0B7C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2010,
+    "token": "sub_1407C0DD8"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2019,
+    "token": "sub_14077DB38"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2021,
+    "token": "sub_14077DA68"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2022,
+    "token": "sub_14077E64C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2024,
+    "token": "sub_14077E64C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2026,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2033,
+    "token": "sub_14077DAF8"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2036,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2044,
+    "token": "sub_14077DAF8"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2048,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2056,
+    "token": "sub_14077DB38"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2058,
+    "token": "sub_14077DB38"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2058,
+    "token": "sub_14077DD4C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2059,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2060,
+    "token": "sub_14077DA68"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2063,
+    "token": "sub_14077E64C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2065,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2068,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2076,
+    "token": "sub_14077DB38"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2077,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2078,
+    "token": "sub_14077DB38"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2078,
+    "token": "sub_14077DD4C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2079,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2080,
+    "token": "sub_14077DA68"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2083,
+    "token": "sub_14077E64C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2084,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2087,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2094,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2096,
+    "token": "sub_14077DB38"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2099,
+    "token": "sub_14077DD4C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2100,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2102,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2104,
+    "token": "sub_14077DB38"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2104,
+    "token": "sub_14077DD4C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2105,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2106,
+    "token": "sub_14077DA68"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2109,
+    "token": "sub_14077E64C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2110,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2113,
+    "token": "sub_1407B581C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2120,
+    "token": "sub_1407F3FFC"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2123,
+    "token": "sub_14078B070"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2124,
+    "token": "sub_14055A48C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2125,
+    "token": "sub_140554764"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2130,
+    "token": "sub_14077DA68"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2132,
+    "token": "sub_14077E64C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2138,
+    "token": "sub_14077E64C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2142,
+    "token": "sub_14077DA68"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2143,
+    "token": "sub_14077E64C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2149,
+    "token": "sub_14077DA68"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2151,
+    "token": "sub_14077E64C"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2170,
+    "token": "sub_1409DCEB0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2172,
+    "token": "0x1407B57EC"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2174,
+    "token": "sub_1407B57EC"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2199,
+    "token": "sub_1409DCEB0"
+  },
+  {
+    "file": "GuardEffectParam.cpp",
+    "line": 2210,
+    "token": "sub_1407B57EC"
+  },
+  {
+    "file": "GudoBallParam.cpp",
+    "line": 20,
+    "token": "sub_1405F6930"
+  },
+  {
+    "file": "GudoBallParam.cpp",
+    "line": 21,
+    "token": "sub_1405F6930"
+  },
+  {
+    "file": "GudoBallParam.cpp",
+    "line": 23,
+    "token": "sub_1405F72D0"
+  },
+  {
+    "file": "GudoBallParam.cpp",
+    "line": 24,
+    "token": "sub_1405F72D0"
+  },
+  {
+    "file": "GudoBallParam.cpp",
+    "line": 65,
+    "token": "sub_1405F6930"
+  },
+  {
+    "file": "GudoBallParam.cpp",
+    "line": 66,
+    "token": "sub_1405F6930"
+  },
+  {
+    "file": "GudoBallParam.cpp",
+    "line": 68,
+    "token": "sub_1405F72D0"
+  },
+  {
+    "file": "GudoBallParam.cpp",
+    "line": 69,
+    "token": "sub_1405F72D0"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 253,
+    "token": "sub_1409B94C0"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 266,
+    "token": "sub_140605050"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 402,
+    "token": "sub_140868D60"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 459,
+    "token": "sub_140643E70"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 493,
+    "token": "sub_14063F338"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 554,
+    "token": "sub_1409FF490"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 579,
+    "token": "sub_140590818"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 584,
+    "token": "sub_14093C7D0"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 805,
+    "token": "sub_1409B94C0"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 923,
+    "token": "sub_140605050"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 1014,
+    "token": "sub_1409F0730"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 1052,
+    "token": "sub_140868D60"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 1111,
+    "token": "sub_140643E70"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 1128,
+    "token": "sub_140747120"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 1209,
+    "token": "sub_1409FF490"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 1215,
+    "token": "sub_14083B360"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 1226,
+    "token": "sub_140661ED0"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 1231,
+    "token": "sub_140744AF0"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 1238,
+    "token": "sub_140739220"
+  },
+  {
+    "file": "HookFunctions.cpp",
+    "line": 1244,
+    "token": "sub_14093C7D0"
+  },
+  {
+    "file": "imgui.cpp",
+    "line": 2400,
+    "token": "0x14015C4F"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 113,
+    "token": "sub_1404BF150"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 118,
+    "token": "sub_1404BF150"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 123,
+    "token": "sub_14086C080"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 124,
+    "token": "sub_14086C080"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 145,
+    "token": "sub_1406D9230"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 150,
+    "token": "sub_1406D9230"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 168,
+    "token": "sub_1404BF150"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 178,
+    "token": "sub_14086C0A0"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 183,
+    "token": "sub_14086C0A0"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 204,
+    "token": "sub_14086C0A0"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 209,
+    "token": "sub_14086C0A0"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 501,
+    "token": "sub_140A3F4A0"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 502,
+    "token": "sub_140A3F4A0"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 507,
+    "token": "sub_1407F5B18"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 508,
+    "token": "sub_1407F5B18"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 519,
+    "token": "sub_140A3F4A0"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 520,
+    "token": "sub_140A3F4A0"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 525,
+    "token": "sub_1407F5B18"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 526,
+    "token": "sub_1407F5B18"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 602,
+    "token": "sub_140AB7020"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 609,
+    "token": "sub_140AB7020"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 620,
+    "token": "sub_14085526C"
+  },
+  {
+    "file": "LuaScripts.cpp",
+    "line": 627,
+    "token": "sub_14085526C"
+  },
+  {
+    "file": "MergedExtra_Common.h",
+    "line": 22,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "MergedExtra_Common.h",
+    "line": 29,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "MergedExtra_DirectX.cpp",
+    "line": 201,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "ModManager.cpp",
+    "line": 25,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "ModManager.cpp",
+    "line": 26,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "ModManager.cpp",
+    "line": 43,
+    "token": "sub_14071F110"
+  },
+  {
+    "file": "ModManager.cpp",
+    "line": 44,
+    "token": "sub_14071F110"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 282,
+    "token": "sub_140AD3AE0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 284,
+    "token": "sub_140AD3AE0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 288,
+    "token": "sub_140AD3AE0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 290,
+    "token": "sub_140AD3AE0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 297,
+    "token": "sub_140AD3AE0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 299,
+    "token": "sub_140AD3AE0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 303,
+    "token": "sub_140AD3AE0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 305,
+    "token": "sub_140AD3AE0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 534,
+    "token": "sub_1400B1B00"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 539,
+    "token": "sub_1400B1B00"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 544,
+    "token": "sub_1401CB71C"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 549,
+    "token": "sub_1401CB71C"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 563,
+    "token": "sub_1400B1B00"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 568,
+    "token": "sub_1400B1B00"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 573,
+    "token": "sub_1401CB71C"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 578,
+    "token": "sub_1401CB71C"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 644,
+    "token": "sub_1404BF150"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 645,
+    "token": "sub_14086C080"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 649,
+    "token": "sub_1404BF150"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 652,
+    "token": "sub_14086C080"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 657,
+    "token": "sub_1406D9230"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 659,
+    "token": "sub_1406D9230"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1185,
+    "token": "sub_140643C10"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1186,
+    "token": "sub_140643C10"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1210,
+    "token": "sub_140AB7930"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1220,
+    "token": "sub_1405E5D10"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1223,
+    "token": "sub_1405E5CEC"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1232,
+    "token": "sub_140722544"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1239,
+    "token": "sub_140580448"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1240,
+    "token": "sub_140580448"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1290,
+    "token": "sub_14073C2E8"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1291,
+    "token": "sub_14073C2E8"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1317,
+    "token": "sub_14099A610"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1318,
+    "token": "sub_14099A610"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1319,
+    "token": "sub_14099AEF0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1320,
+    "token": "sub_14099AEF0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1909,
+    "token": "sub_1405674F0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1910,
+    "token": "sub_1405674F0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1914,
+    "token": "sub_1404E18B0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1915,
+    "token": "sub_1404E18B0"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1920,
+    "token": "sub_140567580"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1921,
+    "token": "sub_140567580"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1930,
+    "token": "sub_140AB7020"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1937,
+    "token": "sub_140AB7020"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1948,
+    "token": "sub_14085526C"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1955,
+    "token": "sub_14085526C"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1973,
+    "token": "sub_1405AD390"
+  },
+  {
+    "file": "MovesetPlus.cpp",
+    "line": 1975,
+    "token": "sub_1405AD390"
+  },
+  {
+    "file": "ProjectileManager.cpp",
+    "line": 94,
+    "token": "sub_1409F0730"
+  },
+  {
+    "file": "Scene.cpp",
+    "line": 338,
+    "token": "sub_1404DFAD0"
+  },
+  {
+    "file": "Scene.cpp",
+    "line": 340,
+    "token": "sub_140B02B70"
+  },
+  {
+    "file": "Scene.cpp",
+    "line": 343,
+    "token": "sub_1404DFAD0"
+  },
+  {
+    "file": "Scene.cpp",
+    "line": 344,
+    "token": "sub_140B02B70"
+  },
+  {
+    "file": "Scene.cpp",
+    "line": 355,
+    "token": "sub_1406A6EB0"
+  },
+  {
+    "file": "SpecialInteractionManager.cpp",
+    "line": 118,
+    "token": "sub_140A15A00"
+  },
+  {
+    "file": "SpecialInteractionManager.cpp",
+    "line": 153,
+    "token": "sub_1409BB1B0"
+  },
+  {
+    "file": "SpecialInteractionManager.cpp",
+    "line": 250,
+    "token": "sub_1405F0060"
+  },
+  {
+    "file": "SpecialInteractionManager.cpp",
+    "line": 394,
+    "token": "sub_1405F0060"
+  },
+  {
+    "file": "SpecialInteractionManager.cpp",
+    "line": 402,
+    "token": "sub_140981F60"
+  },
+  {
+    "file": "SpecialInteractionManager.cpp",
+    "line": 610,
+    "token": "sub_1405F0060"
+  },
+  {
+    "file": "SpecialInteractionManager.h",
+    "line": 11,
+    "token": "sub_1405F0060"
+  },
+  {
+    "file": "Storm4IdaRuntime.cpp",
+    "line": 7,
+    "token": "0x140000000"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 490,
+    "token": "sub_140661ED0"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 498,
+    "token": "sub_140662100"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 500,
+    "token": "sub_140661F60"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 502,
+    "token": "sub_140586480"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 504,
+    "token": "sub_140662100"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 514,
+    "token": "sub_140661F60"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 515,
+    "token": "sub_140586480"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 523,
+    "token": "sub_140590818"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 531,
+    "token": "sub_140662100"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 533,
+    "token": "sub_140661F60"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 535,
+    "token": "sub_140586480"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 537,
+    "token": "sub_140662100"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 547,
+    "token": "sub_140661F60"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.cpp",
+    "line": 548,
+    "token": "sub_140586480"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.h",
+    "line": 11,
+    "token": "sub_140661ED0"
+  },
+  {
+    "file": "TeamUltimateJutsuManager.h",
+    "line": 16,
+    "token": "sub_140590818"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 115,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 120,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 130,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 135,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 142,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 146,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 150,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 157,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 161,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 165,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 174,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 178,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 185,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 189,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 196,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 201,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 206,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 211,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 216,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 235,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 240,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 247,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 252,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 260,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 265,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 331,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 335,
+    "token": "0x140000C00"
+  },
+  {
+    "file": "Utilities.h",
+    "line": 646,
+    "token": "0x140000000"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 4,
+    "token": "sub_14060759C"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 5,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 6,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 7,
+    "token": "sub_140607B7C"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 8,
+    "token": "sub_1406078CC"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 9,
+    "token": "sub_1401FD0AC"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 12,
+    "token": "sub_140676250"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 13,
+    "token": "sub_1406760F4"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 14,
+    "token": "sub_140676164"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 15,
+    "token": "sub_1406761E0"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 18,
+    "token": "sub_1406734A8"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 19,
+    "token": "sub_140673438"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 20,
+    "token": "sub_140673374"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 23,
+    "token": "sub_1405B10CC"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 24,
+    "token": "sub_1406B36CC"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 25,
+    "token": "sub_1406B3904"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 26,
+    "token": "sub_1406B37D4"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 27,
+    "token": "sub_1406B39BC"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 28,
+    "token": "sub_140AE6B60"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 29,
+    "token": "sub_140AE69D0"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 30,
+    "token": "sub_140AE6A90"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 31,
+    "token": "sub_140AE6670"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 32,
+    "token": "sub_140AE6720"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 33,
+    "token": "sub_140AE6010"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 36,
+    "token": "sub_14043FB28"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 37,
+    "token": "sub_14043F208"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 38,
+    "token": "sub_1404B6284"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 39,
+    "token": "sub_1404B6B58"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 40,
+    "token": "sub_1404B6BC8"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 41,
+    "token": "sub_1404B6B90"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 44,
+    "token": "sub_1403B0074"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 45,
+    "token": "sub_140A0FDB0"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 48,
+    "token": "sub_14033BF30"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 49,
+    "token": "sub_14033C7E4"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 52,
+    "token": "sub_1406E4BC0"
+  },
+  {
+    "file": "AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 53,
+    "token": "sub_140AB4550"
+  },
+  {
+    "file": "BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 3,
+    "token": "sub_1406E4BC0"
+  },
+  {
+    "file": "BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 6,
+    "token": "sub_1402140F4"
+  },
+  {
+    "file": "BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 7,
+    "token": "sub_140AB4550"
+  },
+  {
+    "file": "BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 9,
+    "token": "sub_140AB4550"
+  },
+  {
+    "file": "BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 10,
+    "token": "sub_1401CB71C"
+  },
+  {
+    "file": "BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 37,
+    "token": "sub_1402140F4"
+  },
+  {
+    "file": "BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 38,
+    "token": "sub_1401CB71C"
+  },
+  {
+    "file": "Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 3,
+    "token": "sub_1404B520C"
+  },
+  {
+    "file": "Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 6,
+    "token": "sub_1404B612C"
+  },
+  {
+    "file": "Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 9,
+    "token": "sub_1401C9CFC"
+  },
+  {
+    "file": "Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 12,
+    "token": "sub_1401CA4D0"
+  },
+  {
+    "file": "Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 15,
+    "token": "sub_14051956C"
+  },
+  {
+    "file": "Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 18,
+    "token": "sub_14051EDC0"
+  },
+  {
+    "file": "Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 21,
+    "token": "sub_14050AA98"
+  },
+  {
+    "file": "Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 23,
+    "token": "sub_14051EA54"
+  },
+  {
+    "file": "Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 23,
+    "token": "sub_14051EDC0"
+  },
+  {
+    "file": "Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 23,
+    "token": "sub_14050C37C"
+  },
+  {
+    "file": "Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 23,
+    "token": "sub_14050A3F8"
+  },
+  {
+    "file": "Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 25,
+    "token": "sub_14050C37C"
+  },
+  {
+    "file": "Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 28,
+    "token": "sub_14050A3F8"
+  },
+  {
+    "file": "Combat/COMBAT_RESEARCH.txt",
+    "line": 3,
+    "token": "sub_1402D3BE4"
+  },
+  {
+    "file": "Combat/COMBAT_RESEARCH.txt",
+    "line": 6,
+    "token": "sub_1402D4330"
+  },
+  {
+    "file": "Combat/COMBAT_RESEARCH.txt",
+    "line": 7,
+    "token": "sub_1402D4478"
+  },
+  {
+    "file": "Combat/COMBAT_RESEARCH.txt",
+    "line": 9,
+    "token": "sub_1402D48B8"
+  },
+  {
+    "file": "Combat/COMBAT_RESEARCH.txt",
+    "line": 12,
+    "token": "sub_140304DE0"
+  },
+  {
+    "file": "Combat/COMBAT_RESEARCH.txt",
+    "line": 13,
+    "token": "sub_140304FD4"
+  },
+  {
+    "file": "Combat/COMBAT_RESEARCH.txt",
+    "line": 15,
+    "token": "sub_14033BF30"
+  },
+  {
+    "file": "Combat/COMBAT_RESEARCH.txt",
+    "line": 18,
+    "token": "sub_14033C7E4"
+  },
+  {
+    "file": "Combat/COMBAT_RESEARCH.txt",
+    "line": 21,
+    "token": "sub_140524D50"
+  },
+  {
+    "file": "Combat/COMBAT_RESEARCH.txt",
+    "line": 25,
+    "token": "sub_1402D4478"
+  },
+  {
+    "file": "Combat/COMBAT_RESEARCH.txt",
+    "line": 26,
+    "token": "sub_140304FD4"
+  },
+  {
+    "file": "IdaOffsets/Storm4IdaOffsetUsageGuide.h",
+    "line": 15,
+    "token": "0x140000000"
+  },
+  {
+    "file": "IdaOffsets/Storm4IdaOffsetUsageGuide.h",
+    "line": 16,
+    "token": "0x140000000"
+  },
+  {
+    "file": "IdaOffsets/Storm4IdaStringOffsets_Actionable.h",
+    "line": 5,
+    "token": "0x140000000"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 3,
+    "token": "sub_1405B7204"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 4,
+    "token": "sub_1405B3C28"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 4,
+    "token": "sub_1405B3E40"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 5,
+    "token": "sub_1406B28DC"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 6,
+    "token": "sub_1405B6DE4"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 7,
+    "token": "sub_1405B6DE4"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 8,
+    "token": "sub_1405B6DE4"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 9,
+    "token": "sub_1405B6DE4"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 10,
+    "token": "sub_1405B6DE4"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 11,
+    "token": "sub_1405B6DE4"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 24,
+    "token": "sub_1406B39BC"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 6,
+    "token": "sub_1406B39BC"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 9,
+    "token": "sub_1405B10CC"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 10,
+    "token": "sub_1406B36CC"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 11,
+    "token": "sub_1406B3904"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 12,
+    "token": "sub_1406B37D4"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 13,
+    "token": "sub_140AE6B60"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 14,
+    "token": "sub_140AE69D0"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 15,
+    "token": "sub_140AE6A90"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 16,
+    "token": "sub_140AE6670"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 17,
+    "token": "sub_140AE6720"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 18,
+    "token": "sub_140AE6010"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 19,
+    "token": "sub_1406B2818"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 20,
+    "token": "sub_1406B2834"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 21,
+    "token": "sub_1406B2850"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 22,
+    "token": "sub_1406B2AD0"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 22,
+    "token": "sub_1409A3E40"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 23,
+    "token": "sub_1406B2A78"
+  },
+  {
+    "file": "LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 24,
+    "token": "sub_1406B3B00"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 4,
+    "token": "sub_1406B39BC"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 7,
+    "token": "sub_140AE6300"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 8,
+    "token": "sub_140AE6380"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 9,
+    "token": "sub_140AE62F0"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 10,
+    "token": "sub_140AE63F0"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 11,
+    "token": "sub_140AE7A10"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 12,
+    "token": "sub_140AE7AD0"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 13,
+    "token": "sub_140AE7AA0"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 14,
+    "token": "sub_140AE7A40"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 15,
+    "token": "sub_140AE7B60"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 16,
+    "token": "sub_140AE8160"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 28,
+    "token": "sub_1405C43F8"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 29,
+    "token": "sub_1405CBB10"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 30,
+    "token": "sub_1406B33B4"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 31,
+    "token": "sub_1406B45A8"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 32,
+    "token": "sub_140673438"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 35,
+    "token": "sub_14052990C"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 36,
+    "token": "sub_14043FA2C"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 37,
+    "token": "sub_1404B6344"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 38,
+    "token": "sub_1404B6234"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 41,
+    "token": "sub_1402140F4"
+  },
+  {
+    "file": "Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 42,
+    "token": "sub_1401CB71C"
+  },
+  {
+    "file": "OnlineMenu/IntegrationExample.cpp",
+    "line": 17,
+    "token": "0x140607BA0"
+  },
+  {
+    "file": "OnlineMenu/IntegrationExample.cpp",
+    "line": 18,
+    "token": "0x140607B5C"
+  },
+  {
+    "file": "OnlineMenu/IntegrationExample.cpp",
+    "line": 19,
+    "token": "0x140607B7C"
+  },
+  {
+    "file": "OnlineMenu/IntegrationExample.cpp",
+    "line": 20,
+    "token": "0x140607CBC"
+  },
+  {
+    "file": "OnlineMenu/IntegrationExample.cpp",
+    "line": 21,
+    "token": "0x14060759C"
+  },
+  {
+    "file": "OnlineMenu/IntegrationExample.cpp",
+    "line": 24,
+    "token": "sub_140675FB4"
+  },
+  {
+    "file": "OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 19,
+    "token": "sub_1406734A8"
+  },
+  {
+    "file": "OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 20,
+    "token": "sub_1406732AC"
+  },
+  {
+    "file": "OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 21,
+    "token": "sub_140673374"
+  },
+  {
+    "file": "OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 22,
+    "token": "sub_140673438"
+  },
+  {
+    "file": "OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 25,
+    "token": "sub_1406A5E7C"
+  },
+  {
+    "file": "OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 26,
+    "token": "sub_1406A5F18"
+  },
+  {
+    "file": "OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 27,
+    "token": "sub_1406A6060"
+  },
+  {
+    "file": "OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 28,
+    "token": "sub_1406A6068"
+  },
+  {
+    "file": "OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 29,
+    "token": "sub_1406A60D4"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuHubStub.cpp",
+    "line": 17,
+    "token": "sub_1406DF984"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuHubStub.cpp",
+    "line": 286,
+    "token": "sub_1406DF984"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuNotes.h",
+    "line": 10,
+    "token": "sub_1405C0890"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuNotes.h",
+    "line": 11,
+    "token": "sub_140676250"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuNotes.h",
+    "line": 12,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuNotes.h",
+    "line": 12,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuNotes.h",
+    "line": 13,
+    "token": "sub_1406A5F38"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuNotes.h",
+    "line": 14,
+    "token": "sub_140671D48"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 11,
+    "token": "sub_140676250"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 13,
+    "token": "sub_140676A68"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 15,
+    "token": "sub_140676A18"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 17,
+    "token": "sub_140676250"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 19,
+    "token": "sub_140676250"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 21,
+    "token": "sub_140676250"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 23,
+    "token": "sub_1406A5F18"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 23,
+    "token": "sub_1406A5F38"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 25,
+    "token": "sub_1406A60D4"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 27,
+    "token": "sub_1406A60D4"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 29,
+    "token": "sub_140671D28"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 29,
+    "token": "sub_140671D48"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 31,
+    "token": "sub_140672320"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 33,
+    "token": "sub_140672384"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenuResearch.cpp",
+    "line": 35,
+    "token": "sub_140671DC0"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 4,
+    "token": "sub_14060759C"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 5,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 6,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 7,
+    "token": "sub_140607B7C"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 8,
+    "token": "sub_1406078CC"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 9,
+    "token": "sub_140607A04"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 10,
+    "token": "sub_1401FD0AC"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 34,
+    "token": "sub_140676250"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 35,
+    "token": "sub_140676054"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 36,
+    "token": "sub_1406760F4"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 37,
+    "token": "sub_140676164"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 38,
+    "token": "sub_1406761E0"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 39,
+    "token": "sub_140676904"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 40,
+    "token": "sub_14067699C"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 41,
+    "token": "sub_140676A34"
+  },
+  {
+    "file": "OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 42,
+    "token": "sub_140676A9C"
+  },
+  {
+    "file": "Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 6,
+    "token": "sub_14043FB28"
+  },
+  {
+    "file": "Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 7,
+    "token": "sub_14043F208"
+  },
+  {
+    "file": "Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 9,
+    "token": "sub_14043F208"
+  },
+  {
+    "file": "Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 13,
+    "token": "sub_1404B6284"
+  },
+  {
+    "file": "Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 14,
+    "token": "sub_1404B622C"
+  },
+  {
+    "file": "Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 15,
+    "token": "sub_1404B6B58"
+  },
+  {
+    "file": "Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 16,
+    "token": "sub_1404B6BC8"
+  },
+  {
+    "file": "Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 17,
+    "token": "sub_1404B6B90"
+  },
+  {
+    "file": "Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 44,
+    "token": "sub_14052990C"
+  },
+  {
+    "file": "Stage/STAGE_RESEARCH.txt",
+    "line": 3,
+    "token": "sub_1403B0074"
+  },
+  {
+    "file": "Stage/STAGE_RESEARCH.txt",
+    "line": 13,
+    "token": "sub_140A0FDB0"
+  },
+  {
+    "file": "Stage/STAGE_RESEARCH.txt",
+    "line": 16,
+    "token": "sub_140A139F0"
+  },
+  {
+    "file": "Stage/STAGE_RESEARCH.txt",
+    "line": 19,
+    "token": "sub_140A10150"
+  },
+  {
+    "file": "Research/Character/CharacterResearch.h",
+    "line": 4,
+    "token": "sub_1401C9CFC"
+  },
+  {
+    "file": "Research/Combat/CombatResearch.h",
+    "line": 5,
+    "token": "sub_14033BF30"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 31,
+    "token": "sub_14060759C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 31,
+    "token": "0x14060759C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 32,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 32,
+    "token": "0x140607BA0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 33,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 33,
+    "token": "0x140607B5C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 33,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 34,
+    "token": "sub_140607B7C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 34,
+    "token": "0x140607B7C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 34,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 35,
+    "token": "sub_1406078CC"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 35,
+    "token": "0x1406078CC"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 36,
+    "token": "sub_1401FD0AC"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 36,
+    "token": "0x1401FD0AC"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 37,
+    "token": "sub_140676250"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 37,
+    "token": "0x140676250"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 38,
+    "token": "sub_1406760F4"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 38,
+    "token": "0x1406760F4"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 39,
+    "token": "sub_140676164"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 39,
+    "token": "0x140676164"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 40,
+    "token": "sub_1406761E0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 40,
+    "token": "0x1406761E0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 41,
+    "token": "sub_1406722A0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 41,
+    "token": "0x1406722A0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 46,
+    "token": "sub_1406734A8"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 46,
+    "token": "0x1406734A8"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 47,
+    "token": "sub_140673438"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 47,
+    "token": "0x140673438"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 48,
+    "token": "sub_140673374"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 48,
+    "token": "0x140673374"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 49,
+    "token": "sub_1406B3DCC"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 49,
+    "token": "0x1406B3DCC"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 50,
+    "token": "sub_140AE6010"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 50,
+    "token": "0x140AE6010"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 51,
+    "token": "sub_140AE6670"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 51,
+    "token": "0x140AE6670"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 52,
+    "token": "sub_140AE6720"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 52,
+    "token": "0x140AE6720"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 53,
+    "token": "sub_1406A60D4"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 53,
+    "token": "0x1406A60D4"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 58,
+    "token": "sub_140A03D30"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 58,
+    "token": "0x140A03D30"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 59,
+    "token": "sub_140A139F0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 59,
+    "token": "0x140A139F0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 60,
+    "token": "sub_140AAFB10"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 60,
+    "token": "0x140AAFB10"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 61,
+    "token": "sub_140AAFA50"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 61,
+    "token": "0x140AAFA50"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 62,
+    "token": "sub_140A01EB0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 62,
+    "token": "0x140A01EB0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 67,
+    "token": "sub_1403B0074"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 67,
+    "token": "0x1403B0074"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 68,
+    "token": "sub_140A0FDB0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 68,
+    "token": "0x140A0FDB0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 69,
+    "token": "sub_140A10150"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 69,
+    "token": "0x140A10150"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 70,
+    "token": "sub_14043FB28"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 70,
+    "token": "0x14043FB28"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 71,
+    "token": "sub_14043F208"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 71,
+    "token": "0x14043F208"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 76,
+    "token": "sub_1404B520C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 76,
+    "token": "0x1404B520C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 77,
+    "token": "sub_1404B5418"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 77,
+    "token": "0x1404B5418"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 77,
+    "token": "sub_1404B520C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 78,
+    "token": "sub_1404B612C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 78,
+    "token": "0x1404B612C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 79,
+    "token": "sub_1404B9C0C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 79,
+    "token": "0x1404B9C0C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 80,
+    "token": "sub_1401C9590"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 80,
+    "token": "0x1401C9590"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 81,
+    "token": "sub_1401C9CFC"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 81,
+    "token": "0x1401C9CFC"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 82,
+    "token": "sub_1401CA4D0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 82,
+    "token": "0x1401CA4D0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 83,
+    "token": "sub_1401CCC48"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 83,
+    "token": "0x1401CCC48"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 84,
+    "token": "sub_1401CD508"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 84,
+    "token": "0x1401CD508"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 86,
+    "token": "sub_14051956C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 86,
+    "token": "0x14051956C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 87,
+    "token": "sub_14050AA98"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 87,
+    "token": "0x14050AA98"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 88,
+    "token": "sub_14051EA54"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 88,
+    "token": "0x14051EA54"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 89,
+    "token": "sub_14051EDC0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 89,
+    "token": "0x14051EDC0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 90,
+    "token": "sub_14050C37C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 90,
+    "token": "0x14050C37C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 91,
+    "token": "sub_14050A3F8"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 91,
+    "token": "0x14050A3F8"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 96,
+    "token": "sub_14068E778"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 96,
+    "token": "0x14068E778"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 97,
+    "token": "sub_140604588"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 97,
+    "token": "0x140604588"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 98,
+    "token": "sub_140595D24"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 98,
+    "token": "0x140595D24"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 99,
+    "token": "sub_140595C64"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 99,
+    "token": "0x140595C64"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 100,
+    "token": "sub_1405967C8"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 100,
+    "token": "0x1405967C8"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 105,
+    "token": "sub_1402D3BE4"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 105,
+    "token": "0x1402D3BE4"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 106,
+    "token": "sub_1402D4330"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 106,
+    "token": "0x1402D4330"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 107,
+    "token": "sub_1402D48B8"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 107,
+    "token": "0x1402D48B8"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 108,
+    "token": "sub_140304DE0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 108,
+    "token": "0x140304DE0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 109,
+    "token": "sub_14033BF30"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 109,
+    "token": "0x14033BF30"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 144,
+    "token": "sub_1403B0074"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 144,
+    "token": "sub_140A0FDB0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 145,
+    "token": "sub_14043FB28"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 145,
+    "token": "sub_14043F208"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 146,
+    "token": "sub_14068E778"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 147,
+    "token": "sub_140604588"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 148,
+    "token": "sub_14050AA98"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 148,
+    "token": "sub_14051EDC0"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 149,
+    "token": "sub_1402D3BE4"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 149,
+    "token": "sub_14033BF30"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 150,
+    "token": "sub_1404B520C"
+  },
+  {
+    "file": "Research/Core/ResearchDatabase.cpp",
+    "line": 150,
+    "token": "sub_1401C9CFC"
+  },
+  {
+    "file": "Research/FreePlay/FreePlayResearch.h",
+    "line": 3,
+    "token": "sub_14043FB28"
+  },
+  {
+    "file": "Research/FreePlay/FreePlayResearch.h",
+    "line": 4,
+    "token": "sub_14043F208"
+  },
+  {
+    "file": "Research/Shop/ShopUnlockResearch.h",
+    "line": 4,
+    "token": "sub_14051EDC0"
+  },
+  {
+    "file": "Research/Shop/ShopUnlockResearch.h",
+    "line": 5,
+    "token": "sub_14050A3F8"
+  },
+  {
+    "file": "Research/Stage/StageResearch.h",
+    "line": 5,
+    "token": "sub_140A0FDB0"
+  },
+  {
+    "file": "Research/Story/StoryResearch.h",
+    "line": 4,
+    "token": "sub_140595D24"
+  },
+  {
+    "file": "Research/Story/StoryResearch.h",
+    "line": 4,
+    "token": "sub_140595C64"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 4,
+    "token": "sub_14060759C"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 5,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 6,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 7,
+    "token": "sub_140607B7C"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 8,
+    "token": "sub_1406078CC"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 9,
+    "token": "sub_1401FD0AC"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 12,
+    "token": "sub_140676250"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 13,
+    "token": "sub_1406760F4"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 14,
+    "token": "sub_140676164"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 15,
+    "token": "sub_1406761E0"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 18,
+    "token": "sub_1406734A8"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 19,
+    "token": "sub_140673438"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 20,
+    "token": "sub_140673374"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 23,
+    "token": "sub_1405B10CC"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 24,
+    "token": "sub_1406B36CC"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 25,
+    "token": "sub_1406B3904"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 26,
+    "token": "sub_1406B37D4"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 27,
+    "token": "sub_1406B39BC"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 28,
+    "token": "sub_140AE6B60"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 29,
+    "token": "sub_140AE69D0"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 30,
+    "token": "sub_140AE6A90"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 31,
+    "token": "sub_140AE6670"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 32,
+    "token": "sub_140AE6720"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 33,
+    "token": "sub_140AE6010"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 36,
+    "token": "sub_14043FB28"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 37,
+    "token": "sub_14043F208"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 38,
+    "token": "sub_1404B6284"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 39,
+    "token": "sub_1404B6B58"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 40,
+    "token": "sub_1404B6BC8"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 41,
+    "token": "sub_1404B6B90"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 44,
+    "token": "sub_1403B0074"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 45,
+    "token": "sub_140A0FDB0"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 48,
+    "token": "sub_14033BF30"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 49,
+    "token": "sub_14033C7E4"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 52,
+    "token": "sub_1406E4BC0"
+  },
+  {
+    "file": "OnlineMenu/AddressBook/KNOWN_ADDRESSES.txt",
+    "line": 53,
+    "token": "sub_140AB4550"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 27,
+    "token": "sub_14060759C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 27,
+    "token": "0x14060759C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 28,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 28,
+    "token": "0x140607BA0"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 29,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 29,
+    "token": "0x140607B5C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 30,
+    "token": "sub_140607B7C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 30,
+    "token": "0x140607B7C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 31,
+    "token": "sub_1406078CC"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 31,
+    "token": "0x1406078CC"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 32,
+    "token": "sub_140607A04"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 32,
+    "token": "0x140607A04"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 33,
+    "token": "sub_1401FD0AC"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 33,
+    "token": "0x1401FD0AC"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 35,
+    "token": "sub_140676250"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 35,
+    "token": "0x140676250"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 36,
+    "token": "sub_140676054"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 36,
+    "token": "0x140676054"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 37,
+    "token": "sub_1406760F4"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 37,
+    "token": "0x1406760F4"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 38,
+    "token": "sub_140676164"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 38,
+    "token": "0x140676164"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 39,
+    "token": "sub_1406761D4"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 39,
+    "token": "0x1406761D4"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 40,
+    "token": "sub_1406761D8"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 40,
+    "token": "0x1406761D8"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 41,
+    "token": "sub_1406761E0"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 41,
+    "token": "0x1406761E0"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 42,
+    "token": "sub_140676904"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 42,
+    "token": "0x140676904"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 43,
+    "token": "sub_14067699C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 43,
+    "token": "0x14067699C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 44,
+    "token": "sub_140676A34"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 44,
+    "token": "0x140676A34"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 45,
+    "token": "sub_140676A9C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 45,
+    "token": "0x140676A9C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 47,
+    "token": "sub_1405C17B4"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 47,
+    "token": "0x1405C17B4"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 48,
+    "token": "sub_1405C1910"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 48,
+    "token": "0x1405C1910"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 49,
+    "token": "sub_1405C2FFC"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 49,
+    "token": "0x1405C2FFC"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 50,
+    "token": "sub_1405C3064"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 50,
+    "token": "0x1405C3064"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 51,
+    "token": "sub_1405C33FC"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 51,
+    "token": "0x1405C33FC"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 52,
+    "token": "sub_1405C343C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 52,
+    "token": "0x1405C343C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 54,
+    "token": "sub_140671C94"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 54,
+    "token": "0x140671C94"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 55,
+    "token": "sub_140671D28"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 55,
+    "token": "0x140671D28"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 56,
+    "token": "sub_1406722A0"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 56,
+    "token": "0x1406722A0"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 57,
+    "token": "sub_140672320"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 57,
+    "token": "0x140672320"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 58,
+    "token": "sub_140672384"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 58,
+    "token": "0x140672384"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 60,
+    "token": "sub_1406A5E7C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 60,
+    "token": "0x1406A5E7C"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 61,
+    "token": "sub_1406A5F18"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 61,
+    "token": "0x1406A5F18"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 62,
+    "token": "sub_1406A6060"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 62,
+    "token": "0x1406A6060"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 63,
+    "token": "sub_1406A6068"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 63,
+    "token": "0x1406A6068"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 64,
+    "token": "sub_1406A60D4"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 64,
+    "token": "0x1406A60D4"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 66,
+    "token": "sub_1406B3DCC"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 66,
+    "token": "0x1406B3DCC"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 67,
+    "token": "sub_140AE6010"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 67,
+    "token": "0x140AE6010"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 68,
+    "token": "sub_140AE6670"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 68,
+    "token": "0x140AE6670"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 69,
+    "token": "sub_140AE6720"
+  },
+  {
+    "file": "OnlineMenu/Addresses/UniversalAddressBook.h",
+    "line": 69,
+    "token": "0x140AE6720"
+  },
+  {
+    "file": "OnlineMenu/BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 3,
+    "token": "sub_1406E4BC0"
+  },
+  {
+    "file": "OnlineMenu/BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 6,
+    "token": "sub_1402140F4"
+  },
+  {
+    "file": "OnlineMenu/BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 7,
+    "token": "sub_140AB4550"
+  },
+  {
+    "file": "OnlineMenu/BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 9,
+    "token": "sub_140AB4550"
+  },
+  {
+    "file": "OnlineMenu/BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 10,
+    "token": "sub_1401CB71C"
+  },
+  {
+    "file": "OnlineMenu/BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 37,
+    "token": "sub_1402140F4"
+  },
+  {
+    "file": "OnlineMenu/BossBattle/BOSS_BATTLE_RESEARCH.txt",
+    "line": 38,
+    "token": "sub_1401CB71C"
+  },
+  {
+    "file": "OnlineMenu/Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 3,
+    "token": "sub_1404B520C"
+  },
+  {
+    "file": "OnlineMenu/Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 6,
+    "token": "sub_1404B612C"
+  },
+  {
+    "file": "OnlineMenu/Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 9,
+    "token": "sub_1401C9CFC"
+  },
+  {
+    "file": "OnlineMenu/Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 12,
+    "token": "sub_1401CA4D0"
+  },
+  {
+    "file": "OnlineMenu/Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 15,
+    "token": "sub_14051956C"
+  },
+  {
+    "file": "OnlineMenu/Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 18,
+    "token": "sub_14051EDC0"
+  },
+  {
+    "file": "OnlineMenu/Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 21,
+    "token": "sub_14050AA98"
+  },
+  {
+    "file": "OnlineMenu/Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 23,
+    "token": "sub_14051EA54"
+  },
+  {
+    "file": "OnlineMenu/Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 23,
+    "token": "sub_14051EDC0"
+  },
+  {
+    "file": "OnlineMenu/Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 23,
+    "token": "sub_14050C37C"
+  },
+  {
+    "file": "OnlineMenu/Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 23,
+    "token": "sub_14050A3F8"
+  },
+  {
+    "file": "OnlineMenu/Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 25,
+    "token": "sub_14050C37C"
+  },
+  {
+    "file": "OnlineMenu/Character_Costume/CHARACTER_COSTUME_RESEARCH.txt",
+    "line": 28,
+    "token": "sub_14050A3F8"
+  },
+  {
+    "file": "OnlineMenu/Combat/COMBAT_RESEARCH.txt",
+    "line": 3,
+    "token": "sub_1402D3BE4"
+  },
+  {
+    "file": "OnlineMenu/Combat/COMBAT_RESEARCH.txt",
+    "line": 6,
+    "token": "sub_1402D4330"
+  },
+  {
+    "file": "OnlineMenu/Combat/COMBAT_RESEARCH.txt",
+    "line": 7,
+    "token": "sub_1402D4478"
+  },
+  {
+    "file": "OnlineMenu/Combat/COMBAT_RESEARCH.txt",
+    "line": 9,
+    "token": "sub_1402D48B8"
+  },
+  {
+    "file": "OnlineMenu/Combat/COMBAT_RESEARCH.txt",
+    "line": 12,
+    "token": "sub_140304DE0"
+  },
+  {
+    "file": "OnlineMenu/Combat/COMBAT_RESEARCH.txt",
+    "line": 13,
+    "token": "sub_140304FD4"
+  },
+  {
+    "file": "OnlineMenu/Combat/COMBAT_RESEARCH.txt",
+    "line": 15,
+    "token": "sub_14033BF30"
+  },
+  {
+    "file": "OnlineMenu/Combat/COMBAT_RESEARCH.txt",
+    "line": 18,
+    "token": "sub_14033C7E4"
+  },
+  {
+    "file": "OnlineMenu/Combat/COMBAT_RESEARCH.txt",
+    "line": 21,
+    "token": "sub_140524D50"
+  },
+  {
+    "file": "OnlineMenu/Combat/COMBAT_RESEARCH.txt",
+    "line": 25,
+    "token": "sub_1402D4478"
+  },
+  {
+    "file": "OnlineMenu/Combat/COMBAT_RESEARCH.txt",
+    "line": 26,
+    "token": "sub_140304FD4"
+  },
+  {
+    "file": "OnlineMenu/Dialogs/DialogExamples.h",
+    "line": 7,
+    "token": "sub_140659358"
+  },
+  {
+    "file": "OnlineMenu/Dialogs/DialogExamples.h",
+    "line": 8,
+    "token": "sub_140659780"
+  },
+  {
+    "file": "OnlineMenu/Dialogs/DialogExamples.h",
+    "line": 9,
+    "token": "sub_1406595F4"
+  },
+  {
+    "file": "OnlineMenu/Dialogs/DialogExamples.h",
+    "line": 10,
+    "token": "sub_1406594DC"
+  },
+  {
+    "file": "OnlineMenu/Flash/FlashCallLayer.cpp",
+    "line": 26,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "OnlineMenu/Flash/FlashCallLayer.cpp",
+    "line": 33,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "OnlineMenu/Flash/FlashCallLayer.h",
+    "line": 11,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "OnlineMenu/Flash/FlashCallLayer.h",
+    "line": 12,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "OnlineMenu/Flash/FlashCallLayer.h",
+    "line": 13,
+    "token": "sub_140607B7C"
+  },
+  {
+    "file": "OnlineMenu/Flash/FlashCallLayer.h",
+    "line": 14,
+    "token": "sub_140607CBC"
+  },
+  {
+    "file": "OnlineMenu/Flash/FlashCallLayer.h",
+    "line": 15,
+    "token": "sub_14060759C"
+  },
+  {
+    "file": "OnlineMenu/FlashTracer/FlashTracer.cpp",
+    "line": 8,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "OnlineMenu/FlashTracer/FlashTracer.cpp",
+    "line": 8,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "OnlineMenu/FlashTracer/FlashTracer.cpp",
+    "line": 8,
+    "token": "sub_14060759C"
+  },
+  {
+    "file": "OnlineMenu/Help/HelpOverlayExamples.cpp",
+    "line": 9,
+    "token": "sub_14066A9A0"
+  },
+  {
+    "file": "OnlineMenu/Help/HelpOverlayExamples.cpp",
+    "line": 10,
+    "token": "sub_14066AE94"
+  },
+  {
+    "file": "OnlineMenu/Help/HelpOverlayExamples.cpp",
+    "line": 21,
+    "token": "sub_14066AC9C"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 10,
+    "token": "0x140607BA0"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 11,
+    "token": "0x140607B5C"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 12,
+    "token": "0x140607B7C"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 13,
+    "token": "0x14060759C"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 14,
+    "token": "0x1406078CC"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 15,
+    "token": "0x1401FD0AC"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 17,
+    "token": "0x140676250"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 18,
+    "token": "0x1406760F4"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 19,
+    "token": "0x140676164"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 20,
+    "token": "0x1406761E0"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 21,
+    "token": "0x1405C0AA0"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 22,
+    "token": "0x1405C17B4"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 23,
+    "token": "0x1405C3064"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 25,
+    "token": "0x140671D28"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 26,
+    "token": "0x1406722A0"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 28,
+    "token": "0x1406734A8"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 29,
+    "token": "0x1406732AC"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 30,
+    "token": "0x140673374"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookLogger.cpp",
+    "line": 31,
+    "token": "0x140673438"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookStubs.cpp",
+    "line": 12,
+    "token": "0x140607BA0"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookStubs.cpp",
+    "line": 13,
+    "token": "0x140607B5C"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookStubs.cpp",
+    "line": 14,
+    "token": "0x140607B7C"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookStubs.cpp",
+    "line": 15,
+    "token": "0x1401FD0AC"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookStubs.cpp",
+    "line": 16,
+    "token": "0x1406760F4"
+  },
+  {
+    "file": "OnlineMenu/Hooks/OnlineMenuHookStubs.cpp",
+    "line": 17,
+    "token": "0x140676164"
+  },
+  {
+    "file": "OnlineMenu/Hooks/RuntimeFlashHookPlan.h",
+    "line": 9,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "OnlineMenu/Hooks/RuntimeFlashHookPlan.h",
+    "line": 19,
+    "token": "sub_1406760F4"
+  },
+  {
+    "file": "OnlineMenu/Hooks/RuntimeFlashHookPlan.h",
+    "line": 29,
+    "token": "sub_14060759C"
+  },
+  {
+    "file": "OnlineMenu/Hooks/RuntimeFlashHookPlan.h",
+    "line": 30,
+    "token": "sub_1401FD0AC"
+  },
+  {
+    "file": "OnlineMenu/Hooks/RuntimeFlashHookPlan.h",
+    "line": 31,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "OnlineMenu/Hooks/RuntimeFlashHookPlan.h",
+    "line": 32,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "OnlineMenu/Hooks/RuntimeFlashHookPlan.h",
+    "line": 33,
+    "token": "sub_1406760F4"
+  },
+  {
+    "file": "OnlineMenu/Hooks/RuntimeFlashHookPlan.h",
+    "line": 34,
+    "token": "sub_140676164"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 3,
+    "token": "sub_1405B7204"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 4,
+    "token": "sub_1405B3C28"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 4,
+    "token": "sub_1405B3E40"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 5,
+    "token": "sub_1406B28DC"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 6,
+    "token": "sub_1405B6DE4"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 7,
+    "token": "sub_1405B6DE4"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 8,
+    "token": "sub_1405B6DE4"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 9,
+    "token": "sub_1405B6DE4"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 10,
+    "token": "sub_1405B6DE4"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 11,
+    "token": "sub_1405B6DE4"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_EVENT_IDS.txt",
+    "line": 24,
+    "token": "sub_1406B39BC"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 6,
+    "token": "sub_1406B39BC"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 9,
+    "token": "sub_1405B10CC"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 10,
+    "token": "sub_1406B36CC"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 11,
+    "token": "sub_1406B3904"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 12,
+    "token": "sub_1406B37D4"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 13,
+    "token": "sub_140AE6B60"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 14,
+    "token": "sub_140AE69D0"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 15,
+    "token": "sub_140AE6A90"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 16,
+    "token": "sub_140AE6670"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 17,
+    "token": "sub_140AE6720"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 18,
+    "token": "sub_140AE6010"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 19,
+    "token": "sub_1406B2818"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 20,
+    "token": "sub_1406B2834"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 21,
+    "token": "sub_1406B2850"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 22,
+    "token": "sub_1406B2AD0"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 22,
+    "token": "sub_1409A3E40"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 23,
+    "token": "sub_1406B2A78"
+  },
+  {
+    "file": "OnlineMenu/LAN_Radmin_Research/LAN_RESEARCH_SUMMARY.txt",
+    "line": 24,
+    "token": "sub_1406B3B00"
+  },
+  {
+    "file": "OnlineMenu/Lobby/LobbySyncMap.h",
+    "line": 8,
+    "token": "sub_140674688"
+  },
+  {
+    "file": "OnlineMenu/Lobby/LobbySyncMap.h",
+    "line": 31,
+    "token": "sub_140674E74"
+  },
+  {
+    "file": "OnlineMenu/Lobby/LobbySyncMap.h",
+    "line": 35,
+    "token": "sub_140674688"
+  },
+  {
+    "file": "OnlineMenu/Lobby/LobbySyncMap.h",
+    "line": 36,
+    "token": "sub_140674E74"
+  },
+  {
+    "file": "OnlineMenu/Lobby/LobbySyncMap.h",
+    "line": 37,
+    "token": "sub_140674CD4"
+  },
+  {
+    "file": "OnlineMenu/Lobby/LobbySyncMap.h",
+    "line": 38,
+    "token": "sub_14067518C"
+  },
+  {
+    "file": "OnlineMenu/Lobby/LobbySyncMap.h",
+    "line": 39,
+    "token": "sub_14067501C"
+  },
+  {
+    "file": "OnlineMenu/Lobby/LobbySyncMap.h",
+    "line": 40,
+    "token": "sub_140675364"
+  },
+  {
+    "file": "OnlineMenu/Lobby/LobbySyncMap.h",
+    "line": 41,
+    "token": "sub_140673D98"
+  },
+  {
+    "file": "OnlineMenu/Lobby/LobbySyncMap.h",
+    "line": 42,
+    "token": "sub_140673D18"
+  },
+  {
+    "file": "OnlineMenu/Lobby/LobbySyncMap.h",
+    "line": 43,
+    "token": "sub_140675494"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 4,
+    "token": "sub_1406B39BC"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 7,
+    "token": "sub_140AE6300"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 8,
+    "token": "sub_140AE6380"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 9,
+    "token": "sub_140AE62F0"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 10,
+    "token": "sub_140AE63F0"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 11,
+    "token": "sub_140AE7A10"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 12,
+    "token": "sub_140AE7AD0"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 13,
+    "token": "sub_140AE7AA0"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 14,
+    "token": "sub_140AE7A40"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 15,
+    "token": "sub_140AE7B60"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 16,
+    "token": "sub_140AE8160"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 28,
+    "token": "sub_1405C43F8"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 29,
+    "token": "sub_1405CBB10"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 30,
+    "token": "sub_1406B33B4"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 31,
+    "token": "sub_1406B45A8"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 32,
+    "token": "sub_140673438"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 35,
+    "token": "sub_14052990C"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 36,
+    "token": "sub_14043FA2C"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 37,
+    "token": "sub_1404B6344"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 38,
+    "token": "sub_1404B6234"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 41,
+    "token": "sub_1402140F4"
+  },
+  {
+    "file": "OnlineMenu/Next_IDA_Targets/NEXT_SUBS_TO_DUMP.txt",
+    "line": 42,
+    "token": "sub_1401CB71C"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 19,
+    "token": "sub_1406734A8"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 20,
+    "token": "sub_1406732AC"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 21,
+    "token": "sub_140673374"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 22,
+    "token": "sub_140673438"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 25,
+    "token": "sub_1406A5E7C"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 26,
+    "token": "sub_1406A5F18"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 27,
+    "token": "sub_1406A6060"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 28,
+    "token": "sub_1406A6068"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/LOBBY_UI_SUMMARY.txt",
+    "line": 29,
+    "token": "sub_1406A60D4"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 4,
+    "token": "sub_14060759C"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 5,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 6,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 7,
+    "token": "sub_140607B7C"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 8,
+    "token": "sub_1406078CC"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 9,
+    "token": "sub_140607A04"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 10,
+    "token": "sub_1401FD0AC"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 34,
+    "token": "sub_140676250"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 35,
+    "token": "sub_140676054"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 36,
+    "token": "sub_1406760F4"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 37,
+    "token": "sub_140676164"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 38,
+    "token": "sub_1406761E0"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 39,
+    "token": "sub_140676904"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 40,
+    "token": "sub_14067699C"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 41,
+    "token": "sub_140676A34"
+  },
+  {
+    "file": "OnlineMenu/OnlineMenu/ONLINE_MENU_SUMMARY.txt",
+    "line": 42,
+    "token": "sub_140676A9C"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 5,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 6,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 7,
+    "token": "sub_14060759C"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 8,
+    "token": "sub_140674688"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 9,
+    "token": "sub_140674E74"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 10,
+    "token": "sub_140675494"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 11,
+    "token": "sub_14067518C"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 12,
+    "token": "sub_14067501C"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 13,
+    "token": "sub_140674CD4"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 14,
+    "token": "sub_140673D98"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 15,
+    "token": "sub_140673D18"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 16,
+    "token": "sub_1406749F4"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 17,
+    "token": "sub_140674B20"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 18,
+    "token": "sub_140AE7A40"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 19,
+    "token": "sub_140AE7AA0"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 20,
+    "token": "sub_140AE8160"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 21,
+    "token": "sub_140AE7EC0"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 22,
+    "token": "sub_140AE8250"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 23,
+    "token": "sub_140AE7B00"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 24,
+    "token": "sub_140AE7B30"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 25,
+    "token": "sub_140AE7B90"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 26,
+    "token": "sub_1405B76BC"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 27,
+    "token": "sub_1405B44F0"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 28,
+    "token": "sub_1405B4420"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 29,
+    "token": "sub_1405B776C"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 30,
+    "token": "sub_1405C3B30"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 31,
+    "token": "sub_140AE43C0"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 32,
+    "token": "sub_140AE4460"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 33,
+    "token": "sub_1405C572C"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionMap.h",
+    "line": 34,
+    "token": "sub_1405C5B0C"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 14,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 15,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 16,
+    "token": "sub_14060759C"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 17,
+    "token": "sub_1406734A8"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 18,
+    "token": "sub_140674688"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 19,
+    "token": "sub_140674E74"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 20,
+    "token": "sub_140675494"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 21,
+    "token": "sub_14067518C"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 22,
+    "token": "sub_14067501C"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 23,
+    "token": "sub_140674CD4"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 24,
+    "token": "sub_140673D98"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 25,
+    "token": "sub_140673D18"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 26,
+    "token": "sub_1406749F4"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 27,
+    "token": "sub_140674C58"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 28,
+    "token": "sub_140674200"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 29,
+    "token": "sub_140675364"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 30,
+    "token": "sub_140673E48"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 31,
+    "token": "sub_140AE6670"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 32,
+    "token": "sub_140AE6720"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 33,
+    "token": "sub_140AEB5B0"
+  },
+  {
+    "file": "OnlineMenu/Research/FunctionNames.h",
+    "line": 34,
+    "token": "sub_140673408"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 5,
+    "token": "0x140607BA0"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 6,
+    "token": "0x140607B5C"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 7,
+    "token": "0x14060759C"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 8,
+    "token": "0x1401FD0AC"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 10,
+    "token": "0x1406734A8"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 11,
+    "token": "0x140674688"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 12,
+    "token": "0x140674E74"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 13,
+    "token": "0x140675494"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 14,
+    "token": "0x14067518C"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 15,
+    "token": "0x14067501C"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 16,
+    "token": "0x140674CD4"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 17,
+    "token": "0x140673D98"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 18,
+    "token": "0x140673D18"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 19,
+    "token": "0x1406749F4"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 20,
+    "token": "0x140674B20"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 21,
+    "token": "0x140673BB0"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 23,
+    "token": "0x140AE7A40"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 24,
+    "token": "0x140AE7AA0"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 25,
+    "token": "0x140AE8160"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 26,
+    "token": "0x140AE7EC0"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 27,
+    "token": "0x140AE8250"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 28,
+    "token": "0x140AE7B00"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 29,
+    "token": "0x140AE7B30"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 30,
+    "token": "0x140AE7B90"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 31,
+    "token": "0x140AE7AD0"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 32,
+    "token": "0x140AE7A10"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 34,
+    "token": "0x1405B76BC"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 35,
+    "token": "0x1405B44F0"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 36,
+    "token": "0x1405B4420"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 37,
+    "token": "0x1405B776C"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 38,
+    "token": "0x1405C3B30"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 40,
+    "token": "0x1406B1524"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 41,
+    "token": "0x1406B163C"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 42,
+    "token": "0x1406B17A4"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 43,
+    "token": "0x1406B2E84"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 44,
+    "token": "0x1406B4D44"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 45,
+    "token": "0x1406B4224"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 46,
+    "token": "0x1406B5260"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 48,
+    "token": "0x140AE43C0"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 49,
+    "token": "0x140AE4460"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 50,
+    "token": "0x1405C572C"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 51,
+    "token": "0x1405C5B0C"
+  },
+  {
+    "file": "OnlineMenu/Research/KnownAddresses.h",
+    "line": 52,
+    "token": "0x140565488"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 49,
+    "token": "sub_140675494"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 50,
+    "token": "sub_1406749F4"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 51,
+    "token": "sub_140674C58"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 52,
+    "token": "sub_140AEB470"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 53,
+    "token": "sub_140674200"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 54,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 55,
+    "token": "sub_14060759C"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 56,
+    "token": "sub_140870220"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 57,
+    "token": "sub_1409A6298"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 58,
+    "token": "sub_140607254"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 59,
+    "token": "sub_140AE7B00"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 60,
+    "token": "sub_140AE7B90"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 61,
+    "token": "sub_14060685C"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 62,
+    "token": "sub_1405B76BC"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 63,
+    "token": "sub_1406B33B4"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 64,
+    "token": "sub_1406B2850"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 65,
+    "token": "sub_1406B2834"
+  },
+  {
+    "file": "OnlineMenu/Research/LatestLobbyResearch.cpp",
+    "line": 66,
+    "token": "sub_1406B20F8"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 20,
+    "token": "sub_140AE6670"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 21,
+    "token": "sub_140AE6720"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 22,
+    "token": "sub_140673408"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 23,
+    "token": "sub_140AE7B60"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 24,
+    "token": "sub_140AE7AA0"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 25,
+    "token": "sub_140AE7A40"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 26,
+    "token": "sub_140AE8160"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 27,
+    "token": "sub_1405C014C"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 28,
+    "token": "sub_1405B5A74"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 29,
+    "token": "sub_1406B20F8"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 30,
+    "token": "sub_1406B2834"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 31,
+    "token": "sub_1406B2850"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 32,
+    "token": "sub_1406B2AD0"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 33,
+    "token": "sub_1406B2A78"
+  },
+  {
+    "file": "OnlineMenu/Research/ResearchNotes.cpp",
+    "line": 34,
+    "token": "sub_1406B3B00"
+  },
+  {
+    "file": "OnlineMenu/Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 6,
+    "token": "sub_14043FB28"
+  },
+  {
+    "file": "OnlineMenu/Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 7,
+    "token": "sub_14043F208"
+  },
+  {
+    "file": "OnlineMenu/Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 9,
+    "token": "sub_14043F208"
+  },
+  {
+    "file": "OnlineMenu/Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 13,
+    "token": "sub_1404B6284"
+  },
+  {
+    "file": "OnlineMenu/Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 14,
+    "token": "sub_1404B622C"
+  },
+  {
+    "file": "OnlineMenu/Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 15,
+    "token": "sub_1404B6B58"
+  },
+  {
+    "file": "OnlineMenu/Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 16,
+    "token": "sub_1404B6BC8"
+  },
+  {
+    "file": "OnlineMenu/Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 17,
+    "token": "sub_1404B6B90"
+  },
+  {
+    "file": "OnlineMenu/Scenario_GPSetting/GPSETTING_SCENARIO_PARSER.txt",
+    "line": 44,
+    "token": "sub_14052990C"
+  },
+  {
+    "file": "OnlineMenu/Stage/STAGE_RESEARCH.txt",
+    "line": 3,
+    "token": "sub_1403B0074"
+  },
+  {
+    "file": "OnlineMenu/Stage/STAGE_RESEARCH.txt",
+    "line": 13,
+    "token": "sub_140A0FDB0"
+  },
+  {
+    "file": "OnlineMenu/Stage/STAGE_RESEARCH.txt",
+    "line": 16,
+    "token": "sub_140A139F0"
+  },
+  {
+    "file": "OnlineMenu/Stage/STAGE_RESEARCH.txt",
+    "line": 19,
+    "token": "sub_140A10150"
+  },
+  {
+    "file": "OnlineMenu/Hooking/FlashBridgeHooks.cpp",
+    "line": 63,
+    "token": "sub_140607BA0"
+  },
+  {
+    "file": "OnlineMenu/Hooking/FlashBridgeHooks.cpp",
+    "line": 64,
+    "token": "sub_140607B5C"
+  },
+  {
+    "file": "OnlineMenu/Hooking/FlashBridgeHooks.cpp",
+    "line": 65,
+    "token": "sub_140607B7C"
+  },
+  {
+    "file": "OnlineMenu/Hooking/FlashBridgeHooks.cpp",
+    "line": 66,
+    "token": "sub_14060759C"
+  },
+  {
+    "file": "OnlineMenu/Hooking/FlashBridgeHooks.cpp",
+    "line": 67,
+    "token": "sub_1406078CC"
+  },
+  {
+    "file": "OnlineMenu/Hooking/StageResourceHooks.cpp",
+    "line": 24,
+    "token": "sub_1403B0074"
+  },
+  {
+    "file": "OnlineMenu/Hooking/StageResourceHooks.cpp",
+    "line": 37,
+    "token": "sub_140A139F0"
+  },
+  {
+    "file": "OnlineMenu/Hooking/StageResourceHooks.cpp",
+    "line": 49,
+    "token": "sub_1403B0074"
+  },
+  {
+    "file": "OnlineMenu/Hooking/StageResourceHooks.cpp",
+    "line": 50,
+    "token": "sub_140A03D30"
+  },
+  {
+    "file": "OnlineMenu/Hooking/StageResourceHooks.cpp",
+    "line": 51,
+    "token": "sub_140A139F0"
+  },
+  {
+    "file": "OnlineMenu/Hooking/StageResourceHooks.cpp",
+    "line": 52,
+    "token": "sub_140A0FDB0"
+  },
+  {
+    "file": "OnlineMenu/Hooking/ScenarioHooks.cpp",
+    "line": 26,
+    "token": "sub_14043FB28"
+  },
+  {
+    "file": "OnlineMenu/Hooking/ScenarioHooks.cpp",
+    "line": 38,
+    "token": "sub_1404B6284"
+  },
+  {
+    "file": "OnlineMenu/Hooking/ScenarioHooks.cpp",
+    "line": 59,
+    "token": "sub_14043FB28"
+  },
+  {
+    "file": "OnlineMenu/Hooking/ScenarioHooks.cpp",
+    "line": 60,
+    "token": "sub_14043F208"
+  },
+  {
+    "file": "OnlineMenu/Hooking/ScenarioHooks.cpp",
+    "line": 61,
+    "token": "sub_1404B6284"
+  },
+  {
+    "file": "OnlineMenu/Hooking/ScenarioHooks.cpp",
+    "line": 62,
+    "token": "sub_1404B6B58"
+  },
+  {
+    "file": "OnlineMenu/Hooking/ScenarioHooks.cpp",
+    "line": 63,
+    "token": "sub_1404B6BC8"
+  },
+  {
+    "file": "OnlineMenu/Hooking/ScenarioHooks.cpp",
+    "line": 64,
+    "token": "sub_1404B6B90"
+  },
+  {
+    "file": "OnlineMenu/Hooking/SceneHooks.cpp",
+    "line": 32,
+    "token": "sub_1406E4BC0"
+  },
+  {
+    "file": "OnlineMenu/Hooking/SceneHooks.cpp",
+    "line": 33,
+    "token": "sub_140AB4550"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 22,
+    "token": "0x14060759C"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 23,
+    "token": "0x140607BA0"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 24,
+    "token": "0x140607B5C"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 25,
+    "token": "0x140607B7C"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 26,
+    "token": "0x1406078CC"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 27,
+    "token": "0x1401FD0AC"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 32,
+    "token": "0x140676250"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 33,
+    "token": "0x140676054"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 34,
+    "token": "0x1406760F4"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 35,
+    "token": "0x140676164"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 36,
+    "token": "0x1406761E0"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 37,
+    "token": "0x140676904"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 38,
+    "token": "0x14067699C"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 39,
+    "token": "0x140676A34"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 40,
+    "token": "0x140676A9C"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 41,
+    "token": "0x1405C17B4"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 42,
+    "token": "0x1405C3064"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 47,
+    "token": "0x1403B0074"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 48,
+    "token": "0x140A0FDB0"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 49,
+    "token": "0x140941E90"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 50,
+    "token": "0x140941AB0"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 55,
+    "token": "0x140A03D30"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 56,
+    "token": "0x140A139F0"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 57,
+    "token": "0x140136C6C"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 62,
+    "token": "0x14043FB28"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 63,
+    "token": "0x14043F208"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 64,
+    "token": "0x1404B6284"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 65,
+    "token": "0x1404B6B58"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 66,
+    "token": "0x1404B6BC8"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 67,
+    "token": "0x1404B6B90"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 68,
+    "token": "0x14052990C"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 73,
+    "token": "0x1406E4BC0"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 74,
+    "token": "0x140AB4550"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 79,
+    "token": "0x1406734A8"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 80,
+    "token": "0x1406732AC"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 81,
+    "token": "0x140673374"
+  },
+  {
+    "file": "OnlineMenu/Hooking/UniversalHookAddresses.h",
+    "line": 82,
+    "token": "0x140673438"
+  }
+]

@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <cstdio>
 
-#include "../MinHook.h"
+#include "MinHook.h"
 
 namespace Evo
 {

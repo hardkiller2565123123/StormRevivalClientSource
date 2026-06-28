@@ -3,6 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="NS4FrameWork/NS4FrameWork.vcxproj" Id="c5f8b4e3-3e5d-4a9b-8c4f-72f9d55ce901" />
+  <Project Path="NS4FrameWork/NS4FrameWork.vcxproj" Id="3abc9545-948a-4a24-83cb-106a67ea256d" />
   <Project Path="steam_api64/steam_api64.vcxproj" Id="68030e86-2d3c-4cb9-943c-e317b28fbe1b" />
 </Solution>

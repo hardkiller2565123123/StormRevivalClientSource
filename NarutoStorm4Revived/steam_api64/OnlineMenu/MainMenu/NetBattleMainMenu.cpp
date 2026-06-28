@@ -44,4 +44,13 @@ namespace StormRevival::OnlineMenu::MainMenu
         Flash::CallString(ui, Target, "ReplaceMenuText", "Store:Settings");
     }
 
+    void RenameStoreButtonToOpenArchive(GamePtr ui)
+    {
+        Flash::CallString(ui, Target, "SetStoreText", "OpenArchive");
+        Flash::CallString(ui, Target, "SetStoreLabel", "OpenArchive");
+        Flash::CallString(ui, Target, "SetButtonText", "OpenArchive");
+        Flash::CallString(ui, Target, "ReplaceMenuText", "Store:OpenArchive");
+        Flash::CallString(ui, Target, "ReplaceMenuText", "General Store Bandai:OpenArchive");
+    }
+
 }

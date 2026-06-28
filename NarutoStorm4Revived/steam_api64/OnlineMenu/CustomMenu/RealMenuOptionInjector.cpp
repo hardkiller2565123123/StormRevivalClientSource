@@ -2,6 +2,7 @@
 #include "MainMenuOptionRegistry.h"
 #include "InGameSettingsPanel.h"
 #include "../Flash/FlashBridge.h"
+#include "../OpenArchive/OpenArchiveHub.h"
 #include "../Core/SRLogger.h"
 
 namespace StormRevival::OnlineMenu::CustomMenu
@@ -50,8 +51,7 @@ namespace StormRevival::OnlineMenu::CustomMenu
         switch (mode)
         {
         case 100:
-            ShowSettingsPanel();
-            Flash::CallText(menuUi, Flash::NetBattleMainMenu, "MessageCall", "StormRevival Settings");
+            OpenArchive::Show(menuUi);
             return true;
 
         case 101:
@@ -60,6 +60,21 @@ namespace StormRevival::OnlineMenu::CustomMenu
 
         case 102:
             Flash::CallText(menuUi, Flash::NetBattleMainMenu, "MessageCall", "Unlock All is a visible stub only.");
+            return true;
+
+        case 103:
+            OpenArchive::Show(menuUi);
+            Flash::CallText(menuUi, Flash::NetBattleMainMenu, "MessageCall", "Private LAN Match");
+            return true;
+
+        case 104:
+            OpenArchive::Show(menuUi);
+            Flash::CallText(menuUi, Flash::NetBattleMainMenu, "MessageCall", "Custom Stages");
+            return true;
+
+        case 105:
+            OpenArchive::Show(menuUi);
+            Flash::CallText(menuUi, Flash::NetBattleMainMenu, "MessageCall", "Character Tools");
             return true;
 
         default:

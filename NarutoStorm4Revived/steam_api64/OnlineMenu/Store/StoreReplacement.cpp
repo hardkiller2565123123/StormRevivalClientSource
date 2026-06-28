@@ -1,6 +1,6 @@
 #include "StoreReplacement.h"
 #include "../MainMenu/NetBattleMainMenu.h"
-#include "../Settings/SettingsHub.h"
+#include "../OpenArchive/OpenArchiveHub.h"
 #include "../Core/SRLogger.h"
 
 namespace StormRevival::OnlineMenu::Store
@@ -9,13 +9,14 @@ namespace StormRevival::OnlineMenu::Store
     {
         /*
             Offline build behavior:
-            - The stock Store button is reused as the Settings entry.
+            - The stock Store button is reused as the OpenArchive entry.
             - No Steam store / external browser is opened.
             - The visible label is attempted through Flash method calls. If the stock
-              SWF ignores those calls, the click still routes to Settings.
+              SWF ignores those calls, the click still routes to OpenArchive.
         */
-        Log::Info("StoreReplacement installed. Store button is routed to StormRevival Settings.");
-        Log::Info("Store label rename target: Store -> Settings.");
+        Log::Info("StoreReplacement installed. Store button is routed to OpenArchive.");
+        Log::Info("Store label rename target: Store -> OpenArchive.");
+        OpenArchive::Install();
     }
 
     bool ShouldBlockSteamStore()
@@ -25,8 +26,8 @@ namespace StormRevival::OnlineMenu::Store
 
     void ShowStoreReplacement(GamePtr ui)
     {
-        Log::Info("Store button selected; opening StormRevival Settings instead.");
-        MainMenu::RenameStoreButtonToSettings(ui);
-        Settings::Show(ui);
+        Log::Info("Store button selected; opening OpenArchive custom menu instead.");
+        MainMenu::RenameStoreButtonToOpenArchive(ui);
+        OpenArchive::Show(ui);
     }
 }

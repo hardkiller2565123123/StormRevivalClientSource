@@ -30,13 +30,25 @@
 #include "AudioPlayer.h"
 #include "OnlineMenu/StormRevivalOnlineMenu.h"
 #include "OnlineMenu/OnlineMenuHubStub.h"
+#include "RuntimeSafetyGate.h"
+#include "QuietLogFilter.h"
+
 
 __int64 moduleBase = 0;
 __int64 moduleLength = 0;
 __int64 st_hModule = 0;
 __int64 datasection = 0;
+HMODULE g_hModule = nullptr;
+std::string game;
+bool isDebug = false;
 
 static HANDLE g_MainThread = nullptr;
+
+static void InitializeRuntimeSafetyAndLogging()
+{
+    StormRevival::QuietLogFilter::Initialize();
+    StormRevival::RuntimeSafetyGate::Initialize();
+}
 
 static DWORD WINAPI MainThread(LPVOID)
 {
@@ -61,6 +73,7 @@ static DWORD WINAPI MainThread(LPVOID)
     }
 
     SteamConfig::Init();
+    InitializeRuntimeSafetyAndLogging();
     SteamIDManager::Init();
     SteamSessionManager::Init();
     SteamLobbyManager::Init();
@@ -106,6 +119,7 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID)
     {
     case DLL_PROCESS_ATTACH:
         DisableThreadLibraryCalls(module);
+        g_hModule = module;
         st_hModule = reinterpret_cast<__int64>(module);
         moduleBase = reinterpret_cast<__int64>(GetModuleHandleW(nullptr));
         g_MainThread = CreateThread(nullptr, 0, MainThread, nullptr, 0, nullptr);

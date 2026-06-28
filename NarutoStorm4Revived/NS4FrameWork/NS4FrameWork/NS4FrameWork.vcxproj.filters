@@ -47,103 +47,120 @@
       <UniqueIdentifier>{07cb9f42-54a9-4e52-a251-d8586de79590}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="DevToolsManager.cpp" />
-    <ClCompile Include="..\steam_api64\CrashHandler.cpp">
+    <ClCompile Include="..\..\steam_api64\Core\CrashHandler.cpp">
       <Filter>Steam Shared Diagnostics</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\SteamDiagnostics.cpp">
+    <ClCompile Include="..\..\steam_api64\Steam\SteamDiagnostics.cpp">
       <Filter>Steam Shared Diagnostics</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\Storm4IdaRuntime.cpp">
+    <ClCompile Include="..\..\steam_api64\IDA\Storm4IdaRuntime.cpp">
       <Filter>Steam Shared Diagnostics</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\SupportBundle.cpp">
+    <ClCompile Include="..\..\steam_api64\Framework\SupportBundle.cpp">
       <Filter>Steam Shared Diagnostics</Filter>
     </ClCompile>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{9ef79fb4-441d-468d-ada7-b1d4d379a069}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{9d56b742-96a5-4d54-9802-770b36d10688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Steam Shared\Rendering">
+      <UniqueIdentifier>{ce439ff2-306f-494c-b19f-ab48f9f0e1d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{56cdd544-e917-4b95-92c2-c104a8b67972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{fe6fc0ec-ef4d-4fa9-ae6f-ba2411ef153c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Documentation">
+      <UniqueIdentifier>{ec4f9fa8-6403-4dcc-8d18-acd6e16db819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\..\steam_api64">
+      <UniqueIdentifier>{947da3ff-99c9-46cc-a805-34c787264d44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FrameWorkApi.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\HookManager.cpp">
+    <ClCompile Include="..\..\steam_api64\Core\HookManager.cpp">
       <Filter>Core\Hooks</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\Logger.cpp">
+    <ClCompile Include="..\..\steam_api64\Core\Logger.cpp">
       <Filter>Core\Logging</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\imgui.cpp">
+    <ClCompile Include="..\..\steam_api64\Rendering\imgui.cpp">
       <Filter>ThirdParty\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\imgui_draw.cpp">
+    <ClCompile Include="..\..\steam_api64\Rendering\imgui_draw.cpp">
       <Filter>ThirdParty\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\imgui_impl_dx11.cpp">
+    <ClCompile Include="..\..\steam_api64\Rendering\imgui_impl_dx11.cpp">
       <Filter>ThirdParty\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\imgui_impl_win32.cpp">
+    <ClCompile Include="..\..\steam_api64\Rendering\imgui_impl_win32.cpp">
       <Filter>ThirdParty\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\imgui_tables.cpp">
+    <ClCompile Include="..\..\steam_api64\Rendering\imgui_tables.cpp">
       <Filter>ThirdParty\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\imgui_widgets.cpp">
+    <ClCompile Include="..\..\steam_api64\Rendering\imgui_widgets.cpp">
       <Filter>ThirdParty\ImGui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\steam_api64\HookManager.h">
+    <ClInclude Include="..\..\steam_api64\Core\HookManager.h">
       <Filter>Core\Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\Logger.h">
+    <ClInclude Include="..\..\steam_api64\Core\Logger.h">
       <Filter>Core\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\StdInc.h">
+    <ClInclude Include="..\..\steam_api64\Core\StdInc.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\MinHook.h">
+    <ClInclude Include="..\..\steam_api64\Game\MinHook.h">
       <Filter>ThirdParty\MinHook</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\imconfig.h">
+    <ClInclude Include="..\..\steam_api64\Game\imconfig.h">
       <Filter>ThirdParty\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\imgui.h">
+    <ClInclude Include="..\..\steam_api64\Rendering\imgui.h">
       <Filter>ThirdParty\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\imgui_impl_dx11.h">
+    <ClInclude Include="..\..\steam_api64\Rendering\imgui_impl_dx11.h">
       <Filter>ThirdParty\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\imgui_impl_win32.h">
+    <ClInclude Include="..\..\steam_api64\Rendering\imgui_impl_win32.h">
       <Filter>ThirdParty\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\imgui_internal.h">
+    <ClInclude Include="..\..\steam_api64\Rendering\imgui_internal.h">
       <Filter>ThirdParty\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\imstb_rectpack.h">
+    <ClInclude Include="..\..\steam_api64\Rendering\imstb_rectpack.h">
       <Filter>ThirdParty\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\imstb_textedit.h">
+    <ClInclude Include="..\..\steam_api64\Rendering\imstb_textedit.h">
       <Filter>ThirdParty\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\imstb_truetype.h">
+    <ClInclude Include="..\..\steam_api64\Rendering\imstb_truetype.h">
       <Filter>ThirdParty\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\CrashHandler.h">
+    <ClInclude Include="..\..\steam_api64\Core\CrashHandler.h">
       <Filter>Steam Shared Diagnostics</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\SteamDiagnostics.h">
+    <ClInclude Include="..\..\steam_api64\Steam\SteamDiagnostics.h">
       <Filter>Steam Shared Diagnostics</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\Storm4IdaRuntime.h">
+    <ClInclude Include="..\..\steam_api64\IDA\Storm4IdaRuntime.h">
       <Filter>Steam Shared Diagnostics</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\SupportBundle.h">
+    <ClInclude Include="..\..\steam_api64\Framework\SupportBundle.h">
       <Filter>Steam Shared Diagnostics</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\steam_api64\libMinHook.x64.lib">
-      <Filter>ThirdParty\MinHook</Filter>
-    </Library>
-  </ItemGroup>
+  <ItemGroup></ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX11OverlayInternal.h" />
     <ClInclude Include="AssetNuccDecoder.h" />
@@ -153,18 +170,6 @@
     <ClInclude Include="DevToolsManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Asset*.cpp">
-      <Filter>Framework\Assets</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime*.cpp">
-      <Filter>Framework\Runtime</Filter>
-    </ClCompile>
-    <ClCompile Include="DX11OverlayPage*.cpp">
-      <Filter>Framework\Overlay</Filter>
-    </ClCompile>
-    <ClCompile Include="Lua*.cpp">
-      <Filter>Framework\Lua</Filter>
-    </ClCompile>
     <ClCompile Include="ModRedirector.cpp">
       <Filter>Framework\Mods</Filter>
     </ClCompile>
@@ -176,15 +181,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Asset*.h">
-      <Filter>Framework\Assets</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime*.h">
-      <Filter>Framework\Runtime</Filter>
-    </ClInclude>
-    <ClInclude Include="Lua*.h">
-      <Filter>Framework\Lua</Filter>
-    </ClInclude>
     <ClInclude Include="ModRedirector.h">
       <Filter>Framework\Mods</Filter>
     </ClInclude>
@@ -194,10 +190,255 @@
     <ClInclude Include="XfbinInspector.h">
       <Filter>Framework\Archive</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="*.txt">
+    <ClCompile Include="AssetAudioPreview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetBackupManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetBrowser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetBulkExtractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetConflictScanner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetDecodePipeline.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetDuplicateFinder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetFavorites.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetHash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetHexEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetModelViewer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetNotification.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetOverrideManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetPackageCreator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetPreloadManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetPreview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetPreviewResolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetRelations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetReport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetSearchFilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetTaskQueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetTextureInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetTexturePreview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetToolkitUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11OverlayHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11OverlayPageAssets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11OverlayPageCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11OverlayPageControls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11OverlayPageGraphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11OverlayPageLua.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11OverlayPageMods.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11OverlayPagePatches.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\steam_api64\Rendering\DX11OverlayState.cpp">
+      <Filter>Steam Shared\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaHooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NS2Config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NS2Offsets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OverlayConsole.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PatchManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RuntimeAssetTelemetry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RuntimeDeveloperTools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RuntimeFileHooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RuntimeGameHooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RuntimeHookAddresses.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RuntimeHookBootstrap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClInclude Include="AssetAudioPreview.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetBackupManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetBrowser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetBulkExtractor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetConflictScanner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetDecodePipeline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetDuplicateFinder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetFavorites.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetHash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetHexEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetModelViewer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetNotification.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetOverrideManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetPackageCreator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetPreloadManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetPreview.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetPreviewResolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetRelations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetReport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetSearchFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetTaskQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetTextureInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetTexturePreview.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetToolkitUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaHooks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NS2Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NS2Offsets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OverlayConsole.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PatchManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeAssetTelemetry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeDeveloperTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeFileHooks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeGameHooks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeHookAddresses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeHookBootstrap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <None Include="BIG_DEVTOOLS_UPDATE_README.txt">
       <Filter>Documentation</Filter>
     </None>
+    <Library Include="..\..\steam_api64\Lib\$(MinHookLibName)">
+      <Filter>..\..\steam_api64</Filter>
+    </Library>
   </ItemGroup>
+  <ItemGroup></ItemGroup>
 </Project>

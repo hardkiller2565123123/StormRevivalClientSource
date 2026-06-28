@@ -1,0 +1,28 @@
+StormRevival OnlineMenu version gate + pattern scanner update
+
+What changed:
+- Unknown/base NSUNS4.exe no longer uses fixed 0x140... hook addresses by default.
+- Fixed-address hooks require either a verified CRC profile or this config override:
+
+  [OnlineMenu]
+  online_menu_allow_fixed_addresses=1
+
+- Unsupported EXEs skip CustomMenu, StoreReplacement, synthetic modes 100/101/102, and menu mutation.
+- The universal hook registry can now resolve hooks by IDA-style byte signatures.
+- Put verified signatures in:
+
+  OnlineMenu\Hooking\UniversalHookPatterns.h
+
+Pattern format:
+  "48 89 5C 24 ?? 57 48 83 EC ??"
+
+Boot expectation on unsupported/base EXE:
+- Steam/offline layer loads.
+- VersionGuard logs supported=no.
+- Hook registry skips fixed addresses unless a pattern exists.
+- StoreReplacement/custom menu injection stays off.
+- Game should no longer crash from mismatched fixed addresses.
+
+When using Evolution custom EXE:
+- If it is known-good but not CRC-whitelisted yet, either add its CRC to VersionGuard.cpp or temporarily set online_menu_allow_fixed_addresses=1.
+- After you dump stable byte signatures, remove the override and use patterns instead.

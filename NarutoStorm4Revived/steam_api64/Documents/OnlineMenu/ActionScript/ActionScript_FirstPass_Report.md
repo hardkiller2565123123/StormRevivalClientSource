@@ -1,0 +1,146 @@
+# ActionScript Archive First Pass
+
+Files indexed: 2078
+
+## Category hits
+- nut: 743
+- net: 91
+- select: 26
+- menu: 22
+- stage: 14
+- font: 12
+- btn: 10
+- map: 8
+- result: 8
+- cursor: 6
+- setting: 6
+- option: 4
+- adv: 2
+- pause: 2
+- world: 2
+- battle: 0
+- lobby: 0
+- online: 0
+- shop: 0
+
+## Top UI / gameplay script candidates
+- `WorldMapParam.as` score=14 methods=1 cats=world,map
+- `WorldMapParam_2.as` score=14 methods=1 cats=world,map
+- `nut_menu.as` score=12 methods=27 cats=menu,select,nut
+- `nut_menu_2.as` score=12 methods=27 cats=menu,select,nut
+- `UiSelect.as` score=10 methods=33 cats=select
+- `UiSelect_2.as` score=10 methods=33 cats=select
+- `nut_stage_image.as` score=10 methods=20 cats=stage,select,nut
+- `nut_stage_image_2.as` score=10 methods=20 cats=stage,select,nut
+- `SplitMiddleMapParam.as` score=9 methods=4 cats=map
+- `SplitMiddleMapParam_2.as` score=9 methods=4 cats=map
+- `StageUtil.as` score=9 methods=3 cats=stage
+- `StageUtil_2.as` score=9 methods=3 cats=stage
+- `all_stage_logo_index.as` score=8 methods=7 cats=stage
+- `all_stage_logo_index_2.as` score=8 methods=7 cats=stage
+- `net_match_menu.as` score=8 methods=32 cats=menu,net,select
+- `net_match_menu_2.as` score=8 methods=32 cats=menu,net,select
+- `nut_menu_3.as` score=8 methods=6 cats=menu,nut
+- `nut_menu_3_2.as` score=8 methods=6 cats=menu,nut
+- `nut_stagesel.as` score=8 methods=13 cats=net,stage,nut
+- `nut_stagesel_2.as` score=8 methods=13 cats=net,stage,nut
+- `AdvEventParam.as` score=7 methods=1 cats=adv
+- `AdvEventParam_2.as` score=7 methods=1 cats=adv
+- `KeyboardSettingParam.as` score=7 methods=1 cats=select,setting
+- `KeyboardSettingParam_2.as` score=7 methods=1 cats=select,setting
+- `SingleMiddleMapParam.as` score=7 methods=1 cats=map
+- `SingleMiddleMapParam_2.as` score=7 methods=1 cats=map
+- `anm_menubar_5.as` score=7 methods=3 cats=menu
+- `anm_menubar_5_2.as` score=7 methods=3 cats=menu
+- `anm_stage_image00_10.as` score=7 methods=2 cats=stage
+- `anm_stage_image00_10_2.as` score=7 methods=2 cats=stage
+- `menu_param.as` score=7 methods=2 cats=menu,select
+- `menu_param_2.as` score=7 methods=2 cats=menu,select
+- `nut_map_sw_2.as` score=7 methods=4 cats=map,nut
+- `nut_map_sw_2_2.as` score=7 methods=4 cats=map,nut
+- `nut_menu_4.as` score=7 methods=5 cats=menu,nut
+- `nut_menu_4_2.as` score=7 methods=5 cats=menu,nut
+- `nut_setting.as` score=7 methods=1 cats=setting,nut
+- `nut_setting_2.as` score=7 methods=1 cats=setting,nut
+- `smb_menu_4.as` score=7 methods=3 cats=menu
+- `smb_menu_4_2.as` score=7 methods=3 cats=menu
+- `smb_menu_5.as` score=7 methods=3 cats=menu
+- `smb_menu_5_2.as` score=7 methods=3 cats=menu
+- `smb_menu_off.as` score=7 methods=1 cats=menu
+- `smb_menu_off_2.as` score=7 methods=1 cats=menu
+- `smb_menu_on.as` score=7 methods=1 cats=menu
+- `smb_menu_on_2.as` score=7 methods=1 cats=menu
+- `nut_bingo.as` score=5 methods=20 cats=select,nut
+- `nut_bingo_2.as` score=5 methods=20 cats=select,nut
+- `nut_lst.as` score=5 methods=23 cats=net,nut
+- `nut_ranking.as` score=5 methods=17 cats=nut
+- `nut_ranking_2.as` score=5 methods=17 cats=nut
+- `tournament_action.as` score=5 methods=65 cats=select
+- `tournament_action_2.as` score=5 methods=65 cats=select
+- `InputPadKeyCode.as` score=3 methods=39 cats=
+- `InputPadKeyCode_2.as` score=3 methods=39 cats=
+- `anm_font.as` score=3 methods=43 cats=font
+- `anm_font_2.as` score=3 methods=43 cats=font
+- `anm_list_bar.as` score=3 methods=7 cats=
+- `anm_list_bar_2.as` score=3 methods=7 cats=
+- `anm_lst_base.as` score=3 methods=10 cats=
+- `anm_lst_base_2.as` score=3 methods=10 cats=
+- `anm_set.as` score=3 methods=6 cats=
+- `anm_set00.as` score=3 methods=20 cats=net
+- `anm_set00_2.as` score=3 methods=20 cats=net
+- `anm_set_2.as` score=3 methods=6 cats=
+- `nut_help_b.as` score=3 methods=14 cats=stage,nut
+- `nut_help_b_2.as` score=3 methods=14 cats=stage,nut
+- `nut_info_btl.as` score=3 methods=7 cats=nut
+- `nut_info_btl_2.as` score=3 methods=7 cats=nut
+- `nut_link.as` score=3 methods=13 cats=nut
+- `nut_link_2.as` score=3 methods=13 cats=nut
+- `nut_namebar00.as` score=3 methods=8 cats=nut
+- `nut_namebar00_2.as` score=3 methods=8 cats=nut
+- `nut_namebar01.as` score=3 methods=18 cats=net,nut
+- `nut_namebar01_2.as` score=3 methods=18 cats=net,nut
+- `nut_ougifin.as` score=3 methods=22 cats=net,nut
+- `nut_ougifin_2.as` score=3 methods=22 cats=net,nut
+- `nut_search.as` score=3 methods=14 cats=select,nut
+- `nut_search_2.as` score=3 methods=14 cats=select,nut
+- `nut_slot.as` score=3 methods=12 cats=nut
+- `nut_slot_2.as` score=3 methods=12 cats=nut
+- `nut_win.as` score=3 methods=8 cats=nut
+- `nut_win_2.as` score=3 methods=8 cats=nut
+- `nut_xcmn_win00.as` score=3 methods=27 cats=nut
+- `nut_xcmn_win00_2.as` score=3 methods=27 cats=nut
+- `patch_nut.as` score=3 methods=21 cats=net,stage,nut
+- `patch_nut_2.as` score=3 methods=21 cats=net,stage,nut
+- `smb_kwrm_base.as` score=3 methods=8 cats=
+- `smb_kwrm_base_2.as` score=3 methods=8 cats=
+- `smb_kwrm_sel.as` score=3 methods=9 cats=
+- `smb_kwrm_sel_2.as` score=3 methods=9 cats=
+- `smb_ougifin_base.as` score=3 methods=11 cats=net
+- `smb_ougifin_base_2.as` score=3 methods=11 cats=net
+- `smb_ougifin_sel.as` score=3 methods=10 cats=
+- `smb_ougifin_sel_2.as` score=3 methods=10 cats=
+- `smb_txt.as` score=3 methods=7 cats=
+- `smb_txt_2.as` score=3 methods=7 cats=
+- `start_list_base.as` score=3 methods=14 cats=net
+- `start_list_base_2.as` score=3 methods=14 cats=net
+- `HistParam.as` score=2 methods=3 cats=
+- `HistParam_2.as` score=2 methods=3 cats=
+- `smb_list.as` score=2 methods=2 cats=
+- `smb_list_2.as` score=2 methods=2 cats=
+- `Animator3D.as` score=1 methods=8 cats=
+- `Animator3D_2.as` score=1 methods=8 cats=
+- `AnimatorBase.as` score=1 methods=24 cats=pause
+- `AnimatorBase_2.as` score=1 methods=24 cats=pause
+- `Color.as` score=1 methods=7 cats=
+- `ColorMatrix.as` score=1 methods=7 cats=
+- `ColorMatrix_2.as` score=1 methods=7 cats=
+- `Color_2.as` score=1 methods=7 cats=
+- `DynamicMatrix.as` score=1 methods=12 cats=
+- `DynamicMatrix_2.as` score=1 methods=12 cats=
+- `ExtendLoader.as` score=1 methods=19 cats=net
+- `ExtendLoader_2.as` score=1 methods=19 cats=net
+- `FontParam.as` score=1 methods=18 cats=select,option,font
+- `FontParam_2.as` score=1 methods=18 cats=select,option,font
+- `KeyHelpCode.as` score=1 methods=8 cats=select
+- `KeyHelpCode_2.as` score=1 methods=8 cats=select
+- `KeyframeBase.as` score=1 methods=7 cats=

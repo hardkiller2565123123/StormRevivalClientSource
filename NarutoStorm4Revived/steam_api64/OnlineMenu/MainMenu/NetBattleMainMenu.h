@@ -15,4 +15,5 @@ namespace StormRevival::OnlineMenu::MainMenu
     void VoiceOut(GamePtr ui);
     void SetVoiceText(GamePtr ui, const char* text);
     void RenameStoreButtonToSettings(GamePtr ui);
+    void RenameStoreButtonToOpenArchive(GamePtr ui);
 }
