@@ -871,9 +871,16 @@ namespace
 
         AssetToolkitUI::DrawToolkitPage();
 
+        ImGui::Separator();
+        if (ImGui::CollapsingHeader("Stage Editor / F2 Tools", ImGuiTreeNodeFlags_DefaultOpen))
+            StageEditor::DrawEmbeddedTools();
 
         ImGui::Separator();
-        ImGui::TextWrapped("V2 adds native CPK dumping, override creation, package creation, hash info, hex safe edits, better filters, notifications, and asset reports.");
+        if (ImGui::CollapsingHeader("Engine Research / Runtime Wrappers", ImGuiTreeNodeFlags_DefaultOpen))
+            EngineResearchUI::DrawPanel();
+
+        ImGui::Separator();
+        ImGui::TextWrapped("V2 adds native CPK dumping, override creation, package creation, hash info, hex safe edits, better filters, notifications, asset reports, and a safe engine research runtime map.");
     }
 }
 
@@ -890,6 +897,13 @@ void DrawAssetsPage()
     if (g_SelectedSubPage == 13)
     {
         DrawToolsPage();
+        return;
+    }
+
+    if (g_SelectedSubPage == 14)
+    {
+        StageEditor::SetOpen(true);
+        StageEditor::DrawEmbeddedTools();
         return;
     }
 

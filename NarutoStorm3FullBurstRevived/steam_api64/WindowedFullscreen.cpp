@@ -61,6 +61,56 @@ static LRESULT CALLBACK GameWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARA
     return CallWindowProcA(g_OriginalWndProc, hwnd, msg, wParam, lParam);
 }
 
+static bool IsConsoleOrToolWindow(HWND hwnd)
+{
+    if (!hwnd)
+        return true;
+
+    if (hwnd == GetConsoleWindow())
+        return true;
+
+    char className[128]{};
+    GetClassNameA(hwnd, className, sizeof(className));
+
+    if (strcmp(className, "ConsoleWindowClass") == 0)
+        return true;
+
+    const LONG_PTR exStyle = GetWindowLongPtrA(hwnd, GWL_EXSTYLE);
+    if ((exStyle & WS_EX_TOOLWINDOW) != 0)
+        return true;
+
+    return false;
+}
+
+static bool LooksLikeGameWindow(HWND hwnd)
+{
+    if (!hwnd || IsConsoleOrToolWindow(hwnd))
+        return false;
+
+    if (!IsWindowVisible(hwnd))
+        return false;
+
+    char title[256]{};
+    GetWindowTextA(hwnd, title, sizeof(title));
+
+    if (strlen(title) <= 0)
+        return false;
+
+    if (strstr(title, "Debug Console") || strstr(title, "cmd.exe") || strstr(title, "Command Prompt"))
+        return false;
+
+    if (!(strstr(title, "NARUTO") || strstr(title, "Naruto") || strstr(title, "NSUNS") || strstr(title, "Storm")))
+        return false;
+
+    RECT rc{};
+    if (!GetWindowRect(hwnd, &rc))
+        return false;
+
+    const int width = rc.right - rc.left;
+    const int height = rc.bottom - rc.top;
+    return width >= 640 && height >= 360;
+}
+
 static BOOL CALLBACK EnumWindowsCallback(HWND hwnd, LPARAM)
 {
     DWORD windowProcessId = 0;
@@ -69,26 +119,8 @@ static BOOL CALLBACK EnumWindowsCallback(HWND hwnd, LPARAM)
     if (windowProcessId != GetCurrentProcessId())
         return TRUE;
 
-    if (!IsWindowVisible(hwnd))
+    if (!LooksLikeGameWindow(hwnd))
         return TRUE;
-
-    char title[256]{};
-    GetWindowTextA(hwnd, title, sizeof(title));
-
-    if (strlen(title) <= 0)
-        return TRUE;
-
-    if (strstr(title, "NarutoStorm3FullBurstRevived Debug Console"))
-        return TRUE;
-
-    if (strstr(title, "NARUTO") ||
-        strstr(title, "Naruto") ||
-        strstr(title, "NSUNS") ||
-        strstr(title, "Storm"))
-    {
-        g_GameWindow = hwnd;
-        return FALSE;
-    }
 
     g_GameWindow = hwnd;
     return FALSE;
@@ -142,6 +174,9 @@ static bool IsBorderlessFullscreenApplied(HWND hwnd, const RECT& rect)
 static void ApplyBorderlessFullscreen(HWND hwnd)
 {
     if (!hwnd)
+        return;
+
+    if (IsConsoleOrToolWindow(hwnd) || !LooksLikeGameWindow(hwnd))
         return;
 
     HMONITOR monitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);

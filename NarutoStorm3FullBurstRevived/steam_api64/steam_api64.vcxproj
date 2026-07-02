@@ -209,6 +209,9 @@
     <ClInclude Include="FakeSteamCore.h" />
     <ClInclude Include="FakeSteamInterfaces.h" />
     <ClInclude Include="FrameworkAddon.h" />
+    <ClInclude Include="StageEditorTools.h" />
+    <ClInclude Include="StageRuntimeHookPlan.h" />
+    <ClInclude Include="BlankStageTools.h" />
     <ClInclude Include="HookManager.h" />
     <ClInclude Include="InputFocusGuard.h" />
     <ClInclude Include="imconfig.h" />
@@ -476,6 +479,9 @@
     <ClCompile Include="OnlineCheckBypass.cpp" />
     <ClCompile Include="SteamAuth.cpp" />
     <ClCompile Include="SteamCallbackManager.cpp" />
+    <ClCompile Include="StageEditorTools.cpp" />
+    <ClCompile Include="StageRuntimeHookPlan.cpp" />
+    <ClCompile Include="BlankStageTools.cpp" />
     <ClCompile Include="SteamCallResultManager.cpp" />
     <ClCompile Include="SteamConfig.cpp" />
     <ClCompile Include="SteamDiagnostics.cpp" />

@@ -70,9 +70,19 @@ namespace
         value.erase(std::remove(value.begin(), value.end(), '"'), value.end());
         std::replace(value.begin(), value.end(), '/', static_cast<char>(std::filesystem::path::preferred_separator));
 
-        const size_t simPrefix = value.find("sim:");
-        if (simPrefix != std::string::npos)
-            value.erase(simPrefix, 4);
+        static const char* virtualPrefixes[] =
+        {
+            "sim:",
+            "disc:",
+            "rom:"
+        };
+
+        for (const char* prefix : virtualPrefixes)
+        {
+            const size_t prefixIndex = Lower(value).find(prefix);
+            if (prefixIndex != std::string::npos)
+                value.erase(prefixIndex, std::char_traits<char>::length(prefix));
+        }
 
         while (!value.empty() && (value.front() == '\\' || value.front() == '/'))
             value.erase(value.begin());
@@ -139,6 +149,17 @@ namespace
         return roots;
     }
 
+    std::vector<std::filesystem::path> BuildPatchedRoots()
+    {
+        const std::filesystem::path gameFolder = SteamConfig::GetGameFolder();
+        std::vector<std::filesystem::path> roots;
+
+        roots.push_back(gameFolder / "patched");
+        roots.push_back(gameFolder / "NarutoStorm4Revived" / "patched");
+
+        return roots;
+    }
+
     bool IsReadableGameContent(const std::string& path)
     {
         const std::string lower = Lower(path);
@@ -147,7 +168,8 @@ namespace
 
         static const char* exts[] =
         {
-            ".cpk", ".xfbin", ".gfx", ".nsh", ".nut", ".bin", ".swf", ".xml", ".tex", ".dds", ".png", ".txt", ".ini", ".json", ".csv", ".dat", ".lst", ".msg", ".lua"
+            ".cpk", ".xfbin", ".gfx", ".nsh", ".nut", ".bin", ".swf", ".xml", ".tex", ".dds", ".png", ".txt", ".ini", ".json", ".csv", ".dat", ".lst", ".msg", ".lua",
+            ".mp3", ".wav", ".ogg", ".flac", ".adx", ".hca", ".acb", ".awb", ".mp4", ".mkv", ".avi", ".wmv", ".webm", ".usm", ".m2v", ".bik"
         };
 
         for (const char* ext : exts)
@@ -181,11 +203,11 @@ namespace
         if (IsDebugOrTuiRequest(raw))
             return true;
 
-        if (!SteamConfig::IsDlcUnlockEnabled())
-            return false;
-
         if (IsReadableGameContent(raw))
             return true;
+
+        if (!SteamConfig::IsDlcUnlockEnabled())
+            return false;
 
         static const char* requiredTokens[] =
         {
@@ -230,7 +252,19 @@ namespace
             "neteventcharaselectparam",
             "netrankparam",
             "netbattlematchingwindow",
-            "netbattlesessionselect"
+            "netbattlesessionselect",
+            "launch",
+            "movie",
+            "demo",
+            "event",
+            "sound",
+            "audio",
+            "voice",
+            "bgm",
+            "se_",
+            "adx",
+            "awb",
+            "acb"
         };
 
         for (const char* token : requiredTokens)
@@ -252,6 +286,78 @@ namespace
             out.push_back(value);
     }
 
+    std::filesystem::path MakeRelativeOverridePath(const std::string& normalized)
+    {
+        std::filesystem::path relative = normalized;
+        if (!relative.is_absolute())
+            return relative;
+
+        std::error_code ec;
+        std::filesystem::path fromGame = std::filesystem::relative(relative, SteamConfig::GetGameFolder(), ec);
+        if (!ec && !fromGame.empty())
+        {
+            const std::string text = fromGame.string();
+            if (text.rfind("..", 0) != 0)
+                return fromGame;
+        }
+
+        return {};
+    }
+
+    void AddMediaReplacementVariants(std::vector<std::string>& out, const std::filesystem::path& path)
+    {
+        if (path.empty() || !path.has_filename())
+            return;
+
+        static const char* mediaExts[] =
+        {
+            ".mp4", ".mp3", ".wav", ".ogg", ".flac", ".adx", ".hca", ".acb", ".awb", ".usm", ".mkv", ".avi", ".wmv", ".webm", ".m2v", ".bik"
+        };
+
+        for (const char* ext : mediaExts)
+        {
+            std::filesystem::path variant = path;
+            variant.replace_extension(ext);
+            AddUnique(out, variant);
+        }
+    }
+
+    void AddPatchedCandidates(std::vector<std::string>& out, const std::filesystem::path& relative)
+    {
+        if (relative.empty() || relative.is_absolute() || IsBlockedSidecarFile(relative.string()))
+            return;
+
+        for (const std::filesystem::path& root : BuildPatchedRoots())
+        {
+            const std::filesystem::path direct = root / relative;
+            AddUnique(out, direct);
+            AddMediaReplacementVariants(out, direct);
+
+            std::filesystem::path withoutData;
+            bool skippedData = false;
+            for (const auto& part : relative)
+            {
+                if (!skippedData && Lower(part.string()) == "data")
+                {
+                    skippedData = true;
+                    continue;
+                }
+                withoutData /= part;
+            }
+
+            if (skippedData && !withoutData.empty())
+            {
+                const std::filesystem::path stripped = root / withoutData;
+                AddUnique(out, stripped);
+                AddMediaReplacementVariants(out, stripped);
+            }
+
+            const std::filesystem::path byName = root / relative.filename();
+            AddUnique(out, byName);
+            AddMediaReplacementVariants(out, byName);
+        }
+    }
+
     std::vector<std::string> BuildCandidates(const std::string& raw)
     {
         std::vector<std::string> result;
@@ -266,6 +372,10 @@ namespace
 
         if (!relative.empty() && !relative.is_absolute())
         {
+            // User patched loose-file layer. Mirror the CPK path under "patched" and
+            // it wins before StormEvolution, DLC folders, or original game folders.
+            AddPatchedCandidates(result, relative);
+
             // Hidden debug/TUI mount layer. These paths are searched first so files in
             // data/no_release, data/tui, NarutoStorm4Revived/mods/no_release, and
             // NarutoStorm4Revived/mods/tui can satisfy DebugMenu/TUI file probes without
@@ -380,6 +490,11 @@ namespace
             const std::string wantedName = Lower(std::filesystem::path(normalized).filename().string());
 
             std::vector<std::filesystem::path> recursiveRoots;
+            for (const std::filesystem::path& patchedRoot : BuildPatchedRoots())
+            {
+                if (!patchedRoot.empty())
+                    recursiveRoots.push_back(patchedRoot);
+            }
             for (const std::string folderText : SteamConfig::GetEvolutionFolders())
             {
                 if (!folderText.empty())
@@ -426,6 +541,28 @@ namespace
         return {};
     }
 
+    std::string FindPatchedOverride(const std::string& raw)
+    {
+        if (!ShouldHandleRequest(raw))
+            return {};
+
+        const std::string normalized = NormalizeGamePath(raw);
+        const std::filesystem::path relative = MakeRelativeOverridePath(normalized);
+        if (relative.empty() || relative.is_absolute() || !IsReadableGameContent(normalized))
+            return {};
+
+        std::vector<std::string> candidates;
+        AddPatchedCandidates(candidates, relative);
+
+        for (const std::string& candidate : candidates)
+        {
+            if (!IsBlockedSidecarFile(candidate) && ExistsPathA(candidate))
+                return candidate;
+        }
+
+        return {};
+    }
+
     std::string FindStormEvolutionOverride(const std::string& raw)
     {
         if (!ShouldHandleRequest(raw))
@@ -467,13 +604,19 @@ namespace
 
         g_InHook = true;
 
-        const std::string overridePath = FindStormEvolutionOverride(fileName);
+        std::string overridePath = FindPatchedOverride(fileName);
+        std::string overrideLabel = "Patched";
+        if (overridePath.empty())
+        {
+            overridePath = FindStormEvolutionOverride(fileName);
+            overrideLabel = "StormEvolution";
+        }
         if (!overridePath.empty())
         {
             HANDLE overrideHandle = oCreateFileA(overridePath.c_str(), desiredAccess, shareMode, security, creationDisposition, flags, templateFile);
             if (overrideHandle != INVALID_HANDLE_VALUE)
             {
-                Logger::Info(std::string("StormEvolution override CreateFileA: ") + fileName + " -> " + overridePath);
+                Logger::Info(overrideLabel + std::string(" override CreateFileA: ") + fileName + " -> " + overridePath);
                 g_InHook = false;
                 return overrideHandle;
             }
@@ -510,14 +653,20 @@ namespace
         g_InHook = true;
 
         const std::string rawForOverride = WideToUtf8(fileName);
-        const std::string overridePath = FindStormEvolutionOverride(rawForOverride);
+        std::string overridePath = FindPatchedOverride(rawForOverride);
+        std::string overrideLabel = "Patched";
+        if (overridePath.empty())
+        {
+            overridePath = FindStormEvolutionOverride(rawForOverride);
+            overrideLabel = "StormEvolution";
+        }
         const std::wstring overridePathW = Utf8ToWide(overridePath);
         if (!overridePathW.empty())
         {
             HANDLE overrideHandle = oCreateFileW(overridePathW.c_str(), desiredAccess, shareMode, security, creationDisposition, flags, templateFile);
             if (overrideHandle != INVALID_HANDLE_VALUE)
             {
-                Logger::Info(std::string("StormEvolution override CreateFileW: ") + rawForOverride + " -> " + overridePath);
+                Logger::Info(overrideLabel + std::string(" override CreateFileW: ") + rawForOverride + " -> " + overridePath);
                 g_InHook = false;
                 return overrideHandle;
             }
@@ -554,6 +703,18 @@ namespace
             return oGetFileAttributesA(fileName);
 
         g_InHook = true;
+        const std::string overridePath = FindPatchedOverride(fileName);
+        if (!overridePath.empty())
+        {
+            DWORD patchedAttrs = oGetFileAttributesA(overridePath.c_str());
+            if (patchedAttrs != INVALID_FILE_ATTRIBUTES)
+            {
+                Logger::Info(std::string("Patched override GetFileAttributesA: ") + fileName + " -> " + overridePath);
+                g_InHook = false;
+                return patchedAttrs;
+            }
+        }
+
         DWORD attrs = oGetFileAttributesA(fileName);
         DWORD originalError = GetLastError();
 
@@ -583,6 +744,20 @@ namespace
             return oGetFileAttributesW(fileName);
 
         g_InHook = true;
+        const std::string rawForOverride = WideToUtf8(fileName);
+        const std::string overridePath = FindPatchedOverride(rawForOverride);
+        const std::wstring overridePathW = Utf8ToWide(overridePath);
+        if (!overridePathW.empty())
+        {
+            DWORD patchedAttrs = oGetFileAttributesW(overridePathW.c_str());
+            if (patchedAttrs != INVALID_FILE_ATTRIBUTES)
+            {
+                Logger::Info(std::string("Patched override GetFileAttributesW: ") + rawForOverride + " -> " + overridePath);
+                g_InHook = false;
+                return patchedAttrs;
+            }
+        }
+
         DWORD attrs = oGetFileAttributesW(fileName);
         DWORD originalError = GetLastError();
 
@@ -728,6 +903,34 @@ namespace DlcContentLoader
             Logger::Info("StormEvolution folder active: " + folder.string() + " files=" + std::to_string(count));
         }
 
+        for (const std::filesystem::path& folder : BuildPatchedRoots())
+        {
+            std::error_code ec;
+            if (!std::filesystem::exists(folder, ec) || !std::filesystem::is_directory(folder, ec))
+            {
+                Logger::Info("Patched root missing: " + folder.string());
+                continue;
+            }
+
+            int count = 0;
+            for (std::filesystem::recursive_directory_iterator it(folder, std::filesystem::directory_options::skip_permission_denied, ec), end; it != end; it.increment(ec))
+            {
+                if (ec) { ec.clear(); continue; }
+                if (!it->is_regular_file(ec))
+                    continue;
+
+                const std::string item = it->path().string();
+                if (IsBlockedSidecarFile(item))
+                    continue;
+
+                ++count;
+                if (count <= 50)
+                    Logger::Info("Patched content registered: " + item);
+            }
+
+            Logger::Info("Patched root active: " + folder.string() + " files=" + std::to_string(count));
+        }
+
         for (const std::filesystem::path& folder : BuildDebugTuiRoots())
         {
             std::error_code ec;
@@ -737,7 +940,7 @@ namespace DlcContentLoader
                 Logger::Info("Debug/TUI root missing: " + folder.string());
         }
 
-        Logger::Info(std::string("DLC/Debug/TUI content loader initialized ") + (ok ? "OK" : "WITH FAILURES"));
+        Logger::Info(std::string("DLC/Patched/Debug/TUI content loader initialized ") + (ok ? "OK" : "WITH FAILURES"));
         return ok;
     }
 

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version='1.0' encoding='utf-8'?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -202,15 +202,14 @@
     <ClCompile Include="RuntimeHookAddresses.cpp" />
     <ClCompile Include="RuntimeHookBootstrap.cpp" />
     <ClCompile Include="XfbinInspector.cpp" />
-  </ItemGroup>
+  <ClCompile Include="EngineAddressMap.cpp" /><ClCompile Include="EngineXfbinRuntime.cpp" /><ClCompile Include="EngineResearchUI.cpp" /><ClCompile Include="StageEditor.cpp" /><ClCompile Include="EngineRuntimeResearch.cpp" /><ClCompile Include="EngineStageObjectResearch.cpp" /><ClCompile Include="EngineBlankStageResearch.cpp" /></ItemGroup>
   <ItemGroup>
     <Library Include="..\steam_api64\$(MinHookLibName)" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX11OverlayInternal.h" />
-  </ItemGroup>
+  <ClInclude Include="EngineAddressMap.h" /><ClInclude Include="EngineXfbinRuntime.h" /><ClInclude Include="EngineResearchUI.h" /><ClInclude Include="StageEditor.h" /><ClInclude Include="EngineRuntimeResearch.h" /><ClInclude Include="EngineStageObjectResearch.h" /><ClInclude Include="EngineBlankStageResearch.h" /></ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
-

@@ -34,6 +34,7 @@ namespace
         AssetBackupManager::Init();
         AssetBulkExtractor::Init();
         RuntimeHookBootstrap::Init();
+        StageEditor::Init();
         AssetPreloadManager::Init();
         AssetTaskQueue::Init();
 
@@ -130,6 +131,7 @@ namespace
         case FW_ASSETS:
             DrawLeftButton("Browser", 0);
             DrawLeftButton("Stages", 1);
+            DrawLeftButton("Stage Editor", 14);
             DrawLeftButton("Characters", 2);
             DrawLeftButton("Models", 3);
             DrawLeftButton("Textures", 4);
@@ -200,9 +202,25 @@ namespace
     }
 }
 
+
+extern "C" __declspec(dllexport) void __cdecl Framework_OnClientFrame()
+{
+    EnsureInitialized();
+    StageEditor::PollHotkeys();
+    StageEditor::DrawWindow();
+}
+
+extern "C" __declspec(dllexport) int __cdecl Framework_WantsInputCapture()
+{
+    EnsureInitialized();
+    return StageEditor::WantsInputCapture() ? 1 : 0;
+}
+
 extern "C" __declspec(dllexport) void __cdecl Framework_OnClientGui()
 {
     EnsureInitialized();
+    StageEditor::PollHotkeys();
+    StageEditor::DrawWindow();
 
     ImGui::Text("NS3FBFrameWork.dll Options");
     ImGui::Separator();

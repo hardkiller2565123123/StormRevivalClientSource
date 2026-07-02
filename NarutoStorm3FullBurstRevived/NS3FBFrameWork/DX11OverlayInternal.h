@@ -37,6 +37,9 @@
 #include "AssetTaskQueue.h"
 #include "NS2Offsets.h"
 #include "RuntimeHookBootstrap.h"
+#include "EngineResearchUI.h"
+#include "StageEditor.h"
+#include "EngineStageObjectResearch.h"
 
 #include "imgui.h"
 

@@ -1,5 +1,6 @@
 #include "DX11OverlayInternal.h"
 #include "FrameworkAddon.h"
+#include "StageEditorTools.h"
 #include "MinHook.h"
 
 namespace
@@ -131,7 +132,11 @@ bool CreateRenderTarget(IDXGISwapChain* swapChain)
 
 LRESULT CALLBACK OverlayWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    if (g_MenuOpen && g_ImGuiReady)
+    const bool frameworkWantsInput = FrameworkAddon::WantsInputCapture();
+    const bool stageEditorWantsInput = StageEditorTools::WantsInputCapture();
+    const bool overlayInputActive = (g_MenuOpen || frameworkWantsInput || stageEditorWantsInput) && g_ImGuiReady;
+
+    if (overlayInputActive)
     {
         ImGuiIO& io = ImGui::GetIO();
         io.MouseDrawCursor = g_DrawMouseCursor;
@@ -139,7 +144,7 @@ LRESULT CALLBACK OverlayWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam))
             return TRUE;
 
-        if (g_BlockGameInputWhenOpen)
+        if (g_BlockGameInputWhenOpen || frameworkWantsInput || stageEditorWantsInput)
         {
             switch (msg)
             {
@@ -351,7 +356,7 @@ void DrawAlwaysStatusBar()
     if (g_StatusShowHotkey)
     {
         if (!text.empty()) text += " | ";
-        text += "F1";
+        text += "F1 Menu / F2 Stage Editor / F3 Framework";
     }
 
     ImGui::TextUnformatted(text.c_str());
@@ -373,7 +378,13 @@ void DrawImGui(IDXGISwapChain* swapChain)
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
+    const bool frameworkWantsInput = FrameworkAddon::WantsInputCapture();
+    const bool stageEditorWantsInput = StageEditorTools::WantsInputCapture();
+    ImGui::GetIO().MouseDrawCursor = g_DrawMouseCursor && (g_MenuOpen || frameworkWantsInput || stageEditorWantsInput);
+
     DrawAlwaysStatusBar();
+    FrameworkAddon::DrawFrameOverlay();
+    StageEditorTools::DrawFrame();
     DrawAnimatedTopMenu();
 
     ImGui::Render();

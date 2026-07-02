@@ -1,4 +1,5 @@
 #include "DX11OverlayInternal.h"
+#include "StageEditorTools.h"
 
 bool ActiveCheckbox(const char* label, bool* value, const char* help)
 {
@@ -59,6 +60,8 @@ void UpdateFps()
 
 void UpdateHotkeys()
 {
+    StageEditorTools::UpdateHotkeys();
+
     bool f1Down = (GetAsyncKeyState(VK_F1) & 0x8000) != 0;
 
     if (f1Down && !g_F1WasDown)

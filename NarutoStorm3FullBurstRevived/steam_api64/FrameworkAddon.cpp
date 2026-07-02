@@ -14,6 +14,8 @@ namespace
     using BindImGuiContextFn = void(__cdecl*)(ImGuiContext*);
     using BindClientRenderStateFn = void(__cdecl*)(ID3D11Device*, ID3D11DeviceContext*, HWND, int);
     using DrawGuiFn = void(__cdecl*)();
+    using DrawFrameFn = void(__cdecl*)();
+    using WantsInputCaptureFn = int(__cdecl*)();
     using DrawTabFn = void(__cdecl*)(int);
     using ShutdownFn = void(__cdecl*)();
 
@@ -23,6 +25,8 @@ namespace
     BindImGuiContextFn g_BindImGuiContext = nullptr;
     BindClientRenderStateFn g_BindClientRenderState = nullptr;
     DrawGuiFn g_DrawGui = nullptr;
+    DrawFrameFn g_DrawFrame = nullptr;
+    WantsInputCaptureFn g_WantsInputCapture = nullptr;
     DrawTabFn g_DrawTab = nullptr;
     ShutdownFn g_Shutdown = nullptr;
     bool g_LoadAttempted = false;
@@ -116,6 +120,8 @@ namespace FrameworkAddon
         g_BindClientRenderState = reinterpret_cast<BindClientRenderStateFn>(RequiredProc("Framework_BindClientRenderState"));
         g_DrawGui = reinterpret_cast<DrawGuiFn>(RequiredProc("Framework_OnClientGui"));
         g_DrawTab = reinterpret_cast<DrawTabFn>(GetProcAddress(g_Module, "Framework_OnClientTab"));
+        g_DrawFrame = reinterpret_cast<DrawFrameFn>(GetProcAddress(g_Module, "Framework_OnClientFrame"));
+        g_WantsInputCapture = reinterpret_cast<WantsInputCaptureFn>(GetProcAddress(g_Module, "Framework_WantsInputCapture"));
         g_Shutdown = reinterpret_cast<ShutdownFn>(GetProcAddress(g_Module, "Framework_OnClientShutdown"));
 
         if (!g_GetApiVersion || !g_BindImGuiContext || !g_BindClientRenderState || !g_DrawGui)
@@ -195,6 +201,29 @@ namespace FrameworkAddon
             g_DrawGui();
     }
 
+
+    void DrawFrameOverlay()
+    {
+        EnsureLoaded();
+
+        if (!IsLoaded() || !g_DrawFrame)
+            return;
+
+        g_BindImGuiContext(ImGui::GetCurrentContext());
+        g_BindClientRenderState(g_Device, g_Context, g_GameWindow, g_CurrentFps);
+        g_DrawFrame();
+    }
+
+    bool WantsInputCapture()
+    {
+        EnsureLoaded();
+
+        if (!IsLoaded() || !g_WantsInputCapture)
+            return false;
+
+        return g_WantsInputCapture() != 0;
+    }
+
     void Shutdown()
     {
         if (g_Shutdown)
@@ -210,6 +239,8 @@ namespace FrameworkAddon
         g_BindClientRenderState = nullptr;
         g_DrawGui = nullptr;
         g_DrawTab = nullptr;
+        g_DrawFrame = nullptr;
+        g_WantsInputCapture = nullptr;
         g_Shutdown = nullptr;
         g_LoadAttempted = false;
         g_Status = "Not loaded";

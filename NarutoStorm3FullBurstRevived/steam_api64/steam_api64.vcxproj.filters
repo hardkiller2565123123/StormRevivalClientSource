@@ -254,6 +254,15 @@
     <ClCompile Include="SteamProxy.cpp">
       <Filter>Includes\Steam</Filter>
     </ClCompile>
+    <ClCompile Include="StageEditorTools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StageRuntimeHookPlan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BlankStageTools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StdInc.h" />
@@ -979,6 +988,15 @@
     <Library Include="libMinHook.x64.lib">
       <Filter>Includes\minhook</Filter>
     </Library>
+    <ClInclude Include="StageEditorTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StageRuntimeHookPlan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlankStageTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   
 </Project>

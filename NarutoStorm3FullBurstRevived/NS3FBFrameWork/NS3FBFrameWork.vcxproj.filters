@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version='1.0' encoding='utf-8'?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <ItemGroup>
     <Filter Include="Core">
       <UniqueIdentifier>{6e54d174-9f93-4051-8d85-99710ae80d5d}</UniqueIdentifier>
@@ -19,7 +19,7 @@
     <Filter Include="ThirdParty\MinHook">
       <UniqueIdentifier>{461c81f0-7e45-46d3-86b3-bd0df4cc0881}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
+  <Filter Include="Engine Research"><UniqueIdentifier>{8AE975E2-A80E-4D16-A2E4-84F85416EAB0}</UniqueIdentifier></Filter></ItemGroup>
   <ItemGroup>
     <ClCompile Include="FrameWorkApi.cpp">
       <Filter>Core</Filter>
@@ -57,7 +57,7 @@
     <ClCompile Include="..\steam_api64\SupportBundle.cpp">
       <Filter>Steam Shared Diagnostics</Filter>
     </ClCompile>
-  </ItemGroup>
+  <ClCompile Include="EngineAddressMap.cpp"><Filter>Engine Research</Filter></ClCompile><ClCompile Include="EngineXfbinRuntime.cpp"><Filter>Engine Research</Filter></ClCompile><ClCompile Include="EngineResearchUI.cpp"><Filter>Engine Research</Filter></ClCompile><ClCompile Include="StageEditor.cpp"><Filter>Engine Research</Filter></ClCompile><ClCompile Include="EngineRuntimeResearch.cpp"><Filter>Engine Research</Filter></ClCompile><ClCompile Include="EngineStageObjectResearch.cpp"><Filter>Engine Research</Filter></ClCompile></ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\steam_api64\HookManager.h">
       <Filter>Core\Hooks</Filter>
@@ -112,5 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX11OverlayInternal.h" />
-  </ItemGroup>
+  <ClInclude Include="EngineAddressMap.h"><Filter>Engine Research</Filter></ClInclude><ClInclude Include="EngineXfbinRuntime.h"><Filter>Engine Research</Filter></ClInclude><ClInclude Include="EngineResearchUI.h"><Filter>Engine Research</Filter></ClInclude><ClInclude Include="StageEditor.h"><Filter>Engine Research</Filter></ClInclude><ClInclude Include="EngineRuntimeResearch.h"><Filter>Engine Research</Filter></ClInclude><ClInclude Include="EngineStageObjectResearch.h"><Filter>Engine Research</Filter></ClInclude>  <ClCompile Include="EngineBlankStageResearch.cpp" />
+</ItemGroup>
 </Project>

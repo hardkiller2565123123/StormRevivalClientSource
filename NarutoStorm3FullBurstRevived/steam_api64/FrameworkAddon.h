@@ -11,5 +11,7 @@ namespace FrameworkAddon
     bool Load();
     void DrawClientPanel();
     void DrawTabPanel(int tab);
+    void DrawFrameOverlay();
+bool WantsInputCapture();
     void Shutdown();
 }

@@ -988,6 +988,9 @@
     <ClInclude Include="OnlineMenu\OpenArchive\OpenArchiveHub.h">
       <Filter>OnlineMenu\OpenArchive</Filter>
     </ClInclude>
+    <ClInclude Include="Tutorials\PatchingCPK\Movies\Movie2\Movie2.h" />
+    <ClInclude Include="Tutorials\PatchingCPK\Movies\Movie3\Movie3.h" />
+    <ClInclude Include="Tutorials\PatchingCPK\Movies\Movie1\Movie1.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Documents\OnlineMenu\ActionScript\ActionScript_FirstPass_Report.md" />
@@ -7408,5 +7411,8 @@
     <None Include="ThirdParty\lua\doc\readme.html">
       <Filter>ThirdParty\lua\doc</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="$(MinHookLibName)" />
   </ItemGroup>
 </Project>

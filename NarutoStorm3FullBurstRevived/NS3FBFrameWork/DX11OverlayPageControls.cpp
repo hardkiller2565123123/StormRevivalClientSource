@@ -36,6 +36,7 @@ void DrawControlsPage()
         ImGui::Separator();
 
         ImGui::Text("Open menu: F1");
+        ImGui::Text("Open Stage Editor: F2");
         HelpMarker("Press F1 once to open the overlay menu and press it again to close it.");
 
         if (ImGui::Button("Refresh controllers", ImVec2(190.0f, 25.0f)))
