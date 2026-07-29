@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{c2f8b4e3-3e5d-4a9b-8c4f-72f9d55ce901}</ProjectGuid>
+    <ProjectGuid>{C70A05BD-E421-42B8-B1D1-CA5925685A89}</ProjectGuid>
     <RootNamespace>NS2FrameWork</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -77,7 +77,7 @@
     <MinHookLibName>libMinHook.x86.lib</MinHookLibName>
   </PropertyGroup>
   <PropertyGroup>
-    <OutDir>C:\Users\dylan\source\repos\NarutoRevival Offline Release\Build\ns2\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>C:\Users\dylan\source\repos\StormRevivalClientSource\Build\ns1</OutDir>
     <IntDir>C:\Users\dylan\source\repos\NarutoRevival Offline Release\Build\_obj\ns2\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup>
@@ -213,5 +213,3 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
-
-

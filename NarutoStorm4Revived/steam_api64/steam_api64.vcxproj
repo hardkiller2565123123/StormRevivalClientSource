@@ -499,7 +499,7 @@
     <MinHookLibName>libMinHook.x86.lib</MinHookLibName>
   </PropertyGroup>
   <PropertyGroup>
-    <OutDir>$(SolutionDir)Build\ns4\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>C:\Users\dylan\source\repos\StormRevivalClientSource\Build\ns4</OutDir>
     <IntDir>$(SolutionDir)Build\_obj\ns4\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

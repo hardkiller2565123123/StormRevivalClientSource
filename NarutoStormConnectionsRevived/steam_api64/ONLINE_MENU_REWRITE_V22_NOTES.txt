@@ -1,0 +1,44 @@
+Storm Connections Online Menu Rewrite v22
+========================================
+
+Changes in this package:
+
+1. F2 menu fix
+   - RuntimeEditorOverlay is now initialized from dllmain.cpp.
+   - F2 is polled by a standalone input thread using GetAsyncKeyState(VK_F2).
+   - The F2 menu draw is called every DX11 frame after ImGui::NewFrame().
+   - The game window input blocker now respects either F1 menu or F2 menu being open.
+
+2. Online gate force hooks
+   - sub_140B53350 forced true  (+720 profile exists)
+   - sub_140B53240 forced true  (+888 profile ready)
+   - sub_140B531C0 forced false (+832 busy/info gate must be false for online-ready path)
+   - sub_140B51230 forced true  (selected profile/title valid)
+   - sub_140B53340 forced true  (+944 fallback profile)
+
+3. Error blocker suppression
+   - sub_1408305A0 is logged.
+   - networkmode_452 is suppressed so it does not throw the not-connected blocker during testing.
+
+4. Automatch logging
+   - sub_1411173F0  RequestLobbyList/search start
+   - sub_141116100  LobbyMatchList callback
+   - sub_141118C30  CreateLobby state machine
+   - sub_141118DB0  JoinLobby state machine
+   - sub_141117DD0  cancel/cleanup
+
+5. Existing online menu state tracing remains
+   - sub_14060A4A0
+   - sub_14060A7A0
+   - sub_14060F720
+   - sub_14060FA30
+   - sub_14060FD10
+
+What to look for in the next log:
+   [ONLINE-GATE]
+   [ONLINE-ERROR]
+   [NETMENU]
+   [AUTOMATCH]
+
+If [ONLINE-GATE] logs appear but [AUTOMATCH] still never appears, the remaining blocker is between
+sub_14060A4A0/sub_14060A7A0 and sub_140170560.

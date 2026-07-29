@@ -1,0 +1,14 @@
+Storm API v34 F2 Control Center update
+
+Changed RuntimeEditorOverlay.cpp:
+- Replaced scattered research/function tabs with a cleaner Control Center layout.
+- Added Native UI tab with organized mapped systems:
+  Text, Flash, Dialog, Fade, Select, Help, Sound, Input, String, FlashValue.
+- Added mapped native function table with system filter.
+- Added native dialog studio controls using PopupManager / real ccUiFlashDialog path.
+- Added quick controls for popup close, welcome popup, title.wav play/fade/stop.
+- Added audio status and file path display.
+- Kept character runtime scaffold controls and moved them into Characters / Runtime.
+- Kept Resources / Mods tab.
+
+No known online bootstrap, popup manager, or audio redirect files were removed.

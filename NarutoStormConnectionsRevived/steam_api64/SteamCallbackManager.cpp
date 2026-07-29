@@ -24,6 +24,38 @@ namespace
     std::map<int, std::vector<void*>> g_Callbacks;
     std::queue<NS2CallbackMessage> g_Queue;
 
+    // Some NSC online-menu Steam responses can be produced before the game
+    // has registered the matching callback object, or before it starts polling
+    // that menu state. Keep the latest successful result for important Steam
+    // online callbacks and replay it when the callback registers. This does
+    // not remove any feature; it only prevents one-shot offline-emulated
+    // callbacks from being missed.
+    std::map<int, NS2CallbackMessage> g_LastStickyCallbacks;
+
+    bool IsStickyCallbackID(int callbackID)
+    {
+        switch (callbackID)
+        {
+        case 163:  // GetAuthSessionTicketResponse_t
+        case 304:  // PersonaStateChange_t
+        case 504:  // LobbyEnter_t
+        case 505:  // LobbyDataUpdate_t
+        case 506:  // LobbyChatUpdate_t
+        case 510:  // LobbyMatchList_t
+        case 513:  // LobbyCreated_t
+        case 1101: // UserStatsReceived_t
+        case 1102: // UserStatsStored_t
+        case 1103: // UserAchievementStored_t
+        case 1104: // LeaderboardFindResult_t
+        case 1105: // LeaderboardScoresDownloaded_t
+        case 1106: // LeaderboardScoreUploaded_t
+        case 1107: // NumberOfCurrentPlayers_t
+            return true;
+        default:
+            return false;
+        }
+    }
+
     std::string PointerText(const void* ptr)
     {
         std::ostringstream ss;
@@ -299,6 +331,7 @@ namespace SteamCallbackManager
         std::lock_guard<std::mutex> lock(g_Mutex);
         while (!g_Queue.empty()) g_Queue.pop();
         g_Callbacks.clear();
+        g_LastStickyCallbacks.clear();
         g_BootstrappedCallbacks.clear();
         Logger::Info("SteamCallbackManager initialized");
         return true;
@@ -336,6 +369,21 @@ namespace SteamCallbackManager
         MarkCallbackRegistered(callback, callbackID);
         QueueBootstrapForCallbackNoLock(callbackID);
 
+        auto stickyIt = g_LastStickyCallbacks.find(callbackID);
+        if (stickyIt != g_LastStickyCallbacks.end())
+        {
+            g_Queue.push(stickyIt->second);
+            Logger::Info(
+                "SteamAPI_RegisterCallback replayed sticky callback id=" +
+                std::to_string(callbackID) +
+                " bytes=" +
+                std::to_string(static_cast<unsigned long long>(stickyIt->second.Data.size())));
+            SteamDiagnostics::MarkSteam(
+                "ReplayStickyCallback",
+                "id=" + std::to_string(callbackID) +
+                " bytes=" + std::to_string(static_cast<unsigned long long>(stickyIt->second.Data.size())));
+        }
+
         Logger::Info(
             "SteamAPI_RegisterCallback id=" +
             std::to_string(callbackID) +
@@ -370,6 +418,10 @@ namespace SteamCallbackManager
             msg.Data.resize(size);
             std::memcpy(msg.Data.data(), data, size);
         }
+
+        if (IsStickyCallbackID(callbackID))
+            g_LastStickyCallbacks[callbackID] = msg;
+
         g_Queue.push(msg);
         SteamDiagnostics::MarkSteam(
             "PushCallback",

@@ -1,0 +1,12 @@
+V25 build/link fix
+==================
+
+Fixed LNK2001 unresolved external CharacterRuntimeEditor::FunctionMap by adding CharacterRuntimeEditor.cpp and CharacterRuntimeEditor.h to steam_api64.vcxproj.
+
+Kept startup popup behavior:
+- Startup welcome popup is scheduled 5 seconds after PopupManager init.
+- Popup lasts 10 seconds.
+- Input close is disabled for the timed startup popup.
+- F2 popup/editor support is still kept.
+
+If Visual Studio still shows stale project state, right-click project -> Reload Project, then Clean/Rebuild.

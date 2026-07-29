@@ -1,0 +1,12 @@
+V28 online menu patch
+
+What changed from v27:
+- Kept startup popup, F2 runtime editor, multi-popup runtime, and all existing features.
+- Moved OnlineCheckBypass::Init() much earlier in dllmain, directly after HookManager::Init().
+- Removed the later duplicate OnlineCheckBypass::Init() call.
+- Reason: latest TXT/log showed online hooks installed successfully, but only after the game had already passed early online/ranking setup. That made the NetBattleMainMenu hooks too late to force the transition.
+- ForceConnectedState now also keeps the root profile pointers warm: +720 true, +888 true, +832 false, matching sub_140B53350/sub_140B53240/sub_140B531C0.
+
+Expected log order:
+- OnlineCheckBypass v28 EARLY... should appear before RuntimeEditorOverlay/HookText/PopupManager startup work finishes.
+- If it still does not enter online menu, next IDA target should be the real caller that chooses Ranking vs NetBattle menu before sub_140609F10.

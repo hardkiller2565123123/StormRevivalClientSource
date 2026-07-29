@@ -7,6 +7,7 @@
 
 namespace
 {
+    //Gobal Stage States Dont Change.
     BlankStageTools::State g_State =
     {
         false,
@@ -26,7 +27,7 @@ namespace
         false
     };
 
-
+    //Tells Game Were To Point Stuff
     bool IsReasonablePointer(std::uintptr_t p)
     {
         return p > 0x10000ull && p < 0x0000800000000000ull;
@@ -71,14 +72,17 @@ namespace
         }
     }
 }
-
+//Just here To hold All Props stuff For a Blank Stage. This is used for testing and modding.
 namespace BlankStageTools
 {
+
+    //Just Checks Prop States.
     State& GetState()
     {
         return g_State;
     }
 
+	//Just Sets The Mode For The Blank Stage.
     void SetMode(Mode mode)
     {
         g_State.mode = mode;
@@ -95,7 +99,7 @@ namespace BlankStageTools
             << " keepBossAndCamera=" << g_State.keepBossAndCamera;
         Logger::Info(oss.str());
     }
-
+    //Reset Objects
     void ResetCounters()
     {
         g_State.skippedStageObjects = 0;
@@ -103,18 +107,19 @@ namespace BlankStageTools
         g_State.skippedRandomMobs = 0;
     }
 
+    //Updates Live Counter With All Activate Objects in Stage.
     void UpdateActiveCounts(unsigned int stageObjectCount, unsigned int mobObjectCount)
     {
         g_State.activeStageObjects = stageObjectCount;
         g_State.activeMobObjects = mobObjectCount;
     }
-
+    //Hooks The Stages To Get Objects Names Values Ect.
     void ArmRealHookMode(bool armed)
     {
         g_State.realHookModeArmed = armed;
         Logger::Info(armed ? "BlankStage: real hook mode armed." : "BlankStage: real hook mode disarmed.");
     }
-
+	//Checks If Stage Should Skips Objects Spawn depending if Something Breaking Ect.
     bool ShouldSkipStageObjectSpawn(std::uintptr_t callerAddress)
     {
         (void)callerAddress;
@@ -125,7 +130,7 @@ namespace BlankStageTools
             Logger::Info("BlankStage: would skip StageObjectManager_SpawnObjectFromDescriptor call.");
         return true;
     }
-
+    //Check If Stage Should Skip Dummy Spawn If Functally Working.
     bool ShouldSkipMobDummySpawn(std::uintptr_t callerAddress)
     {
         (void)callerAddress;
@@ -137,6 +142,7 @@ namespace BlankStageTools
         return true;
     }
 
+    //Just Skips The Random Version Of The Function Above This One. Dont Know Why It Exist But Its Here.
     bool ShouldSkipRandomMobSpawn(std::uintptr_t callerAddress)
     {
         (void)callerAddress;
@@ -148,7 +154,7 @@ namespace BlankStageTools
         return true;
     }
 
-
+    //Just Count All The Active Vectors And Were They Point To.
     unsigned int CountVectorPointers(std::uintptr_t vectorBase)
     {
         if (!IsReasonablePointer(vectorBase))
@@ -170,7 +176,7 @@ namespace BlankStageTools
         return CountPointerRange(begin, end);
 #endif
     }
-
+    //Generate A List Of All Object Actve. 
     unsigned int CountStageObjectList(std::uintptr_t stageObjectListBase)
     {
         if (!IsReasonablePointer(stageObjectListBase))
@@ -217,7 +223,7 @@ namespace BlankStageTools
                     continue;
                 }
 
-                // Confirmed flags from StageObjectList_UpdateAll/DrawAll:
+                
                 // raw + 448 = update flag, raw + 452 = draw flag.
                 *reinterpret_cast<int*>(raw + 448) = enabled ? 1 : 0;
                 *reinterpret_cast<int*>(raw + 452) = enabled ? 1 : 0;
@@ -234,6 +240,7 @@ namespace BlankStageTools
         return out;
     }
 
+    //Just Logs Random Stuff.
     void LogPlan()
     {
         Logger::Info("BlankStage hook plan:");

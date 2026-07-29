@@ -25,6 +25,28 @@ namespace
     std::vector<SteamCallResultManager::CallResultRecord> g_Results;
     std::map<SteamAPICall_t, std::vector<void*>> g_Registered;
 
+    bool IsOnlineMenuCallResult(int callbackID)
+    {
+        switch (callbackID)
+        {
+        case 154:  // EncryptedAppTicketResponse_t
+        case 163:  // GetAuthSessionTicketResponse_t mirror
+        case 510:  // LobbyMatchList_t
+        case 513:  // LobbyCreated_t
+        case 504:  // LobbyEnter_t
+        case 1101: // UserStatsReceived_t
+        case 1104: // LeaderboardFindResult_t
+        case 1105: // LeaderboardScoresDownloaded_t
+        case 1106: // LeaderboardScoreUploaded_t
+        case 1107: // NumberOfCurrentPlayers_t
+        case 1110: // GlobalAchievementPercentagesReady_t
+        case 1111: // LeaderboardUGCSet_t
+            return true;
+        default:
+            return false;
+        }
+    }
+
     struct SteamAPICallCompletedResult
     {
         SteamAPICall_t m_hAsyncCall;
@@ -255,9 +277,7 @@ namespace SteamCallResultManager
         // CCallResult object. Also mirror important successful async results as
         // regular callbacks so the menu state machine cannot time out waiting
         // for Steam to advance.
-        if (callbackID == 1104 || callbackID == 1105 || callbackID == 1106 ||
-            callbackID == 510 || callbackID == 513 || callbackID == 504 ||
-            callbackID == 163)
+        if (IsOnlineMenuCallResult(callbackID))
         {
             if (data && size > 0)
                 SteamCallbackManager::PushCallback(callbackID, data, size);

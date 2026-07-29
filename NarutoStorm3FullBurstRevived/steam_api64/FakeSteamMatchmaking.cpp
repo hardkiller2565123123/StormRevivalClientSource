@@ -367,49 +367,40 @@ public:
 
     virtual SteamAPICall_t CreateLobby(int lobbyType, int maxMembers)
     {
-        TraceMatchmaking(
-            "CreateLobby",
-            "type=" + std::to_string(lobbyType) + " max=" + std::to_string(maxMembers));
-        Logger::Info(
-            "SteamMatchmaking::CreateLobby type=" +
-            std::to_string(lobbyType) +
-            " max=" +
-            std::to_string(maxMembers));
-        SteamDiagnostics::MarkOnline(
-            "MatchmakingCreateLobby",
-            "type=" +
-            std::to_string(lobbyType) +
-            " max=" +
-            std::to_string(maxMembers));
+        TraceMatchmaking("CreateLobby", "type=" + std::to_string(lobbyType) + " max=" + std::to_string(maxMembers));
+        Logger::Info("SteamMatchmaking::CreateLobby type=" + std::to_string(lobbyType) + " max=" + std::to_string(maxMembers));
 
         CSteamID lobbyID = SteamLobbyManager::CreateLobby(lobbyType, maxMembers);
         SteamSessionManager::JoinLobby(lobbyID);
-
         g_LastLobbyListResult = lobbyID;
 
-        LobbyCreatedResult result{};
-        result.m_eResult = 1;
-        result.m_ulSteamIDLobby = lobbyID;
+        const uint64_t localSteamID = SteamIDManager::GetSteamID64();
+        const uint32_t accountID = static_cast<uint32_t>(localSteamID & 0xFFFFFFFFu);
 
-        LobbyEnterResult enterResult{};
-        enterResult.m_ulSteamIDLobby = lobbyID;
-        enterResult.m_rgfChatPermissions = 0;
-        enterResult.m_bLocked = false;
-        enterResult.m_EChatRoomEnterResponse = 1;
+        SteamLobbyManager::SetData(lobbyID, "1000", std::to_string(accountID));
+        SteamLobbyManager::SetData(lobbyID, "1001", "Naruto Storm Lobby");
+        SteamLobbyManager::SetData(lobbyID, "1002", "Waiting");
 
-        Logger::Info("SteamMatchmaking created lobby id=" + std::to_string(lobbyID));
-        SteamDiagnostics::MarkOnline(
-            "MatchmakingLobbyCreated",
-            "id=" +
-            std::to_string(static_cast<unsigned long long>(lobbyID)));
+        LobbyCreatedResult created{};
+        created.m_eResult = 1;
+        created.m_ulSteamIDLobby = lobbyID;
+
+        LobbyEnterResult enter{};
+        enter.m_ulSteamIDLobby = lobbyID;
+        enter.m_rgfChatPermissions = 0;
+        enter.m_bLocked = false;
+        enter.m_EChatRoomEnterResponse = 1;
 
         const SteamAPICall_t call = SteamCallResultManager::CreateCallResult(
             kCallbackLobbyCreated,
-            &result,
-            sizeof(result),
+            &created,
+            sizeof(created),
             true);
-        SteamCallbackManager::PushCallback(kCallbackLobbyCreated, &result, sizeof(result));
-        SteamCallbackManager::PushCallback(kCallbackLobbyEnter, &enterResult, sizeof(enterResult));
+
+        SteamCallbackManager::PushCallback(kCallbackLobbyCreated, &created, sizeof(created));
+        SteamCallbackManager::PushCallback(kCallbackLobbyEnter, &enter, sizeof(enter));
+
+        Logger::Info("SteamMatchmaking created lobby id=" + std::to_string((uint64_t)lobbyID) + " data[1000]=" + std::to_string(accountID));
         Logger::Flush();
         return call;
     }
@@ -417,26 +408,26 @@ public:
     virtual SteamAPICall_t JoinLobby(CSteamID lobbyID)
     {
         TraceMatchmaking("JoinLobby", LobbyDetail(lobbyID));
-        Logger::Info("SteamMatchmaking::JoinLobby " + std::to_string(lobbyID));
-        SteamDiagnostics::MarkOnline(
-            "MatchmakingJoinLobby",
-            "id=" +
-            std::to_string(static_cast<unsigned long long>(lobbyID)));
+        Logger::Info("SteamMatchmaking::JoinLobby " + std::to_string((uint64_t)lobbyID));
 
         bool joined = SteamLobbyManager::JoinLobby(lobbyID);
-        if (joined)
-            SteamSessionManager::JoinLobby(lobbyID);
 
-        LobbyEnterResult result{};
-        result.m_ulSteamIDLobby = lobbyID;
-        result.m_rgfChatPermissions = 0;
-        result.m_bLocked = false;
-        result.m_EChatRoomEnterResponse = joined ? 1 : 4;
+        if (joined)
+        {
+            SteamSessionManager::JoinLobby(lobbyID);
+            RequestLobbyData(lobbyID);
+        }
+
+        LobbyEnterResult enter{};
+        enter.m_ulSteamIDLobby = lobbyID;
+        enter.m_rgfChatPermissions = 0;
+        enter.m_bLocked = false;
+        enter.m_EChatRoomEnterResponse = joined ? 1 : 4;
 
         const SteamAPICall_t call = SteamCallResultManager::CreateCallResult(
             kCallbackLobbyEnter,
-            &result,
-            sizeof(result),
+            &enter,
+            sizeof(enter),
             true);
 
         if (joined)
@@ -449,7 +440,9 @@ public:
             SteamCallbackManager::PushCallback(kCallbackLobbyChatUpdate, &chatUpdate, sizeof(chatUpdate));
         }
 
-        SteamCallbackManager::PushCallback(kCallbackLobbyEnter, &result, sizeof(result));
+        SteamCallbackManager::PushCallback(kCallbackLobbyEnter, &enter, sizeof(enter));
+
+        Logger::Info("SteamMatchmaking::JoinLobby result=" + std::to_string(joined ? 1 : 0));
         Logger::Flush();
         return call;
     }
@@ -479,16 +472,22 @@ public:
 
     virtual int GetNumLobbyMembers(CSteamID lobbyID)
     {
-        TraceMatchmaking("GetNumLobbyMembers", LobbyDetail(lobbyID));
-        Logger::Info("SteamMatchmaking::GetNumLobbyMembers");
-        return SteamLobbyManager::GetMemberCount(lobbyID);
+        const int count = SteamLobbyManager::GetMemberCount(lobbyID);
+
+        TraceMatchmaking("GetNumLobbyMembers", LobbyDetail(lobbyID) + " count=" + std::to_string(count));
+        Logger::Info("SteamMatchmaking::GetNumLobbyMembers lobby=" + std::to_string((uint64_t)lobbyID) + " count=" + std::to_string(count));
+
+        return count;
     }
 
     CSteamID GetLobbyMemberByIndexValue(CSteamID lobbyID, int member)
     {
-        TraceMatchmaking("GetLobbyMemberByIndex", LobbyDetail(lobbyID) + " index=" + std::to_string(member));
-        Logger::Info("SteamMatchmaking::GetLobbyMemberByIndex");
-        return SteamLobbyManager::GetMemberByIndex(lobbyID, member);
+        CSteamID id = SteamLobbyManager::GetMemberByIndex(lobbyID, member);
+
+        TraceMatchmaking("GetLobbyMemberByIndex", LobbyDetail(lobbyID) + " index=" + std::to_string(member) + " id=" + std::to_string((uint64_t)id));
+        Logger::Info("SteamMatchmaking::GetLobbyMemberByIndex lobby=" + std::to_string((uint64_t)lobbyID) + " index=" + std::to_string(member) + " id=" + std::to_string((uint64_t)id));
+
+        return id;
     }
 
     virtual CSteamID* GetLobbyMemberByIndex(CSteamID* outUserID, CSteamID lobbyID, int member)
@@ -499,9 +498,15 @@ public:
     virtual const char* GetLobbyData(CSteamID lobbyID, const char* key)
     {
         const std::string safeKey = SafeCString(key);
-        TraceMatchmaking("GetLobbyData", LobbyDetail(lobbyID) + " key=" + DisplayCString(key));
-        Logger::Info("SteamMatchmaking::GetLobbyData " + (safeKey.empty() ? "<empty>" : safeKey));
-        return SteamLobbyManager::GetData(lobbyID, safeKey);
+
+        const char* value = SteamLobbyManager::GetData(lobbyID, safeKey);
+        if (!value)
+            value = "";
+
+        TraceMatchmaking("GetLobbyData", LobbyDetail(lobbyID) + " key=" + (safeKey.empty() ? "<empty>" : safeKey) + " value=" + value);
+        Logger::Info("SteamMatchmaking::GetLobbyData " + (safeKey.empty() ? "<empty>" : safeKey) + "=" + value);
+
+        return value;
     }
 
     virtual bool SetLobbyData(CSteamID lobbyID, const char* key, const char* value)
@@ -528,23 +533,24 @@ public:
         char* value,
         int valueSize)
     {
-        TraceMatchmaking("GetLobbyDataByIndex", LobbyDetail(lobbyID) + " index=" + std::to_string(index));
-        Logger::Info("SteamMatchmaking::GetLobbyDataByIndex");
-
         std::string keyText;
         std::string valueText;
 
-        if (!SteamLobbyManager::GetDataByIndex(lobbyID, index, keyText, valueText))
+        const bool ok = SteamLobbyManager::GetDataByIndex(lobbyID, index, keyText, valueText);
+
+        if (!ok)
         {
             SafeCopyCString(key, keySize, std::string());
             SafeCopyCString(value, valueSize, std::string());
 
+            Logger::Info("SteamMatchmaking::GetLobbyDataByIndex lobby=" + std::to_string((uint64_t)lobbyID) + " index=" + std::to_string(index) + " failed");
             return false;
         }
 
         SafeCopyCString(key, keySize, keyText);
         SafeCopyCString(value, valueSize, valueText);
 
+        Logger::Info("SteamMatchmaking::GetLobbyDataByIndex lobby=" + std::to_string((uint64_t)lobbyID) + " index=" + std::to_string(index) + " " + keyText + "=" + valueText);
         return true;
     }
 
@@ -619,21 +625,22 @@ public:
     virtual bool RequestLobbyData(CSteamID lobbyID)
     {
         TraceMatchmaking("RequestLobbyData", LobbyDetail(lobbyID));
-        Logger::Info("SteamMatchmaking::RequestLobbyData " + std::to_string(lobbyID));
-        SteamDiagnostics::MarkOnline(
-            "RequestLobbyData",
-            "id=" +
-            std::to_string(static_cast<unsigned long long>(lobbyID)));
-        SteamLobbyManager::RefreshNetworkLobbies(20);
+        Logger::Info("SteamMatchmaking::RequestLobbyData " + std::to_string((uint64_t)lobbyID));
+
+        const char* key1000 = SteamLobbyManager::GetData(lobbyID, "1000");
+        const bool success = key1000 && key1000[0] && std::atoi(key1000) != 0;
 
         LobbyDataUpdateResult result{};
         result.m_ulSteamIDLobby = lobbyID;
         result.m_ulSteamIDMember = lobbyID;
-        result.m_bSuccess = 1;
+        result.m_bSuccess = success ? 1 : 0;
+
+        Logger::Info("SteamMatchmaking::RequestLobbyData success=" + std::to_string(result.m_bSuccess) + " 1000=" + std::string(key1000 ? key1000 : "<null>"));
 
         SteamCallbackManager::PushCallback(kCallbackLobbyDataUpdate, &result, sizeof(result));
         Logger::Flush();
-        return true;
+
+        return success;
     }
 
     virtual void SetLobbyGameServer(

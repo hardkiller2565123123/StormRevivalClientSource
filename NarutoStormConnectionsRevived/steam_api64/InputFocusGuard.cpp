@@ -2,6 +2,8 @@
 #include "InputFocusGuard.h"
 #include "HookManager.h"
 #include "Logger.h"
+#include "Overlay/RuntimeEditorOverlay.h"
+#include "DX11OverlayState.h"
 
 #include <Xinput.h>
 
@@ -55,13 +57,13 @@ namespace
 
     DWORD WINAPI XInputGetStateHook(DWORD userIndex, XINPUT_STATE* state)
     {
-        if (!GameHasForeground())
+        if (!GameHasForeground() || g_MenuOpen || RuntimeEditorOverlay::IsOpen())
         {
             if (state)
                 std::memset(state, 0, sizeof(*state));
 
             if (!g_LoggedBlocked.exchange(true))
-                Logger::Info("InputFocusGuard blocking controller input for background instance");
+                Logger::Info("InputFocusGuard blocking controller input while background/overlay is active");
 
             return ERROR_DEVICE_NOT_CONNECTED;
         }

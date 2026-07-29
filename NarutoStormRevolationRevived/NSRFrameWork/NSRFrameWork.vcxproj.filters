@@ -48,15 +48,54 @@
     <ClCompile Include="..\steam_api\imgui_widgets.cpp">
       <Filter>ThirdParty\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api\CrashHandler.cpp">
-      <Filter>Steam Shared Diagnostics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\steam_api\SteamDiagnostics.cpp">
-      <Filter>Steam Shared Diagnostics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\steam_api\SupportBundle.cpp">
-      <Filter>Steam Shared Diagnostics</Filter>
-    </ClCompile>
+    <ClCompile Include="..\steam_api\CrashHandler.cpp" />
+    <ClCompile Include="..\steam_api\SteamDiagnostics.cpp" />
+    <ClCompile Include="..\steam_api\SupportBundle.cpp" />
+    <ClCompile Include="AssetBackupManager.cpp" />
+    <ClCompile Include="AssetBrowser.cpp" />
+    <ClCompile Include="AssetBulkExtractor.cpp" />
+    <ClCompile Include="AssetConflictScanner.cpp" />
+    <ClCompile Include="AssetDuplicateFinder.cpp" />
+    <ClCompile Include="AssetFavorites.cpp" />
+    <ClCompile Include="AssetHash.cpp" />
+    <ClCompile Include="AssetHexEditor.cpp" />
+    <ClCompile Include="AssetModelViewer.cpp" />
+    <ClCompile Include="AssetNotification.cpp" />
+    <ClCompile Include="AssetOverrideManager.cpp" />
+    <ClCompile Include="AssetPackageCreator.cpp" />
+    <ClCompile Include="AssetPreloadManager.cpp" />
+    <ClCompile Include="AssetPreview.cpp" />
+    <ClCompile Include="AssetPreviewResolver.cpp" />
+    <ClCompile Include="AssetRelations.cpp" />
+    <ClCompile Include="AssetReport.cpp" />
+    <ClCompile Include="AssetSearchFilter.cpp" />
+    <ClCompile Include="AssetTaskQueue.cpp" />
+    <ClCompile Include="AssetTextureInfo.cpp" />
+    <ClCompile Include="AssetTexturePreview.cpp" />
+    <ClCompile Include="AssetToolkitUI.cpp" />
+    <ClCompile Include="CpkArchive.cpp" />
+    <ClCompile Include="DX11OverlayHelpers.cpp" />
+    <ClCompile Include="DX11OverlayPageAssets.cpp" />
+    <ClCompile Include="DX11OverlayPageCamera.cpp" />
+    <ClCompile Include="DX11OverlayPageControls.cpp" />
+    <ClCompile Include="DX11OverlayPageGraphics.cpp" />
+    <ClCompile Include="DX11OverlayPageLua.cpp" />
+    <ClCompile Include="DX11OverlayPageMods.cpp" />
+    <ClCompile Include="DX11OverlayPagePatches.cpp" />
+    <ClCompile Include="..\steam_api\DX11OverlayState.cpp" />
+    <ClCompile Include="LuaHooks.cpp" />
+    <ClCompile Include="LuaManager.cpp" />
+    <ClCompile Include="ModRedirector.cpp" />
+    <ClCompile Include="NS2Config.cpp" />
+    <ClCompile Include="NS2Offsets.cpp" />
+    <ClCompile Include="OverlayConsole.cpp" />
+    <ClCompile Include="PatchManager.cpp" />
+    <ClCompile Include="RuntimeAssetTelemetry.cpp" />
+    <ClCompile Include="RuntimeFileHooks.cpp" />
+    <ClCompile Include="RuntimeGameHooks.cpp" />
+    <ClCompile Include="RuntimeHookAddresses.cpp" />
+    <ClCompile Include="RuntimeHookBootstrap.cpp" />
+    <ClCompile Include="XfbinInspector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\steam_api\HookManager.h">
@@ -95,20 +134,12 @@
     <ClInclude Include="..\steam_api\imstb_truetype.h">
       <Filter>ThirdParty\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api\CrashHandler.h">
-      <Filter>Steam Shared Diagnostics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\steam_api\SteamDiagnostics.h">
-      <Filter>Steam Shared Diagnostics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\steam_api\SupportBundle.h">
-      <Filter>Steam Shared Diagnostics</Filter>
-    </ClInclude>
+    <ClInclude Include="..\steam_api\CrashHandler.h" />
+    <ClInclude Include="..\steam_api\SteamDiagnostics.h" />
+    <ClInclude Include="..\steam_api\SupportBundle.h" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\steam_api\libMinHook.x86.lib">
-      <Filter>ThirdParty\MinHook</Filter>
-    </Library>
+    <Library Include="..\steam_api\$(MinHookLibName)" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX11OverlayInternal.h" />

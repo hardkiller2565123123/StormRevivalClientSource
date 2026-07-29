@@ -1,0 +1,7 @@
+Current update includes:
+- PopupManager unique native names to avoid stale Scaleform/native popup reuse.
+- Recursive mods folder resource indexing and redirect notes.
+- Scaleform SWF cache map: ccUiFlash -> GetOrLoadMovie -> QueueMovieLoad -> cache insert.
+- XFBIN doc manager/load queue map.
+- Scene/script notes for ccPlayMovie / ccPlayIA.
+- Online master server IDA pull list at ../ONLINE_MASTER_SERVER_IDA_NEXT.md.

@@ -25,18 +25,18 @@ int CpkLoader::LoadCpkInitial()
 	int v9; // eax@16
 	//const char *v11; // [sp+20h] [bp-188h]@12
 	//int v12; // [sp+28h] [bp-180h]@12
-	void *Memory; // [sp+30h] [bp-178h]@5
-	int v14; // [sp+38h] [bp-170h]@5
-	const char *v15; // [sp+40h] [bp-168h]@5
-	unsigned __int64 v16; // [sp+48h] [bp-160h]@5
-	const char *v17; // [sp+50h] [bp-158h]@5
-	int v18; // [sp+58h] [bp-150h]@5
-	const char *v19; // [sp+60h] [bp-148h]@5
-	int v20; // [sp+68h] [bp-140h]@5
-	const char *v21; // [sp+70h] [bp-138h]@5
-	int v22; // [sp+78h] [bp-130h]@5
-	const char *v23; // [sp+80h] [bp-128h]@5
-	int v24; // [sp+88h] [bp-120h]@5
+	void *Memory = nullptr; // [sp+30h] [bp-178h]@5
+	int v14 = 0; // [sp+38h] [bp-170h]@5
+	const char *v15 = nullptr; // [sp+40h] [bp-168h]@5
+	unsigned __int64 v16 = 15; // [sp+48h] [bp-160h]@5
+	const char *v17 = nullptr; // [sp+50h] [bp-158h]@5
+	int v18 = 0; // [sp+58h] [bp-150h]@5
+	const char *v19 = nullptr; // [sp+60h] [bp-148h]@5
+	int v20 = 0; // [sp+68h] [bp-140h]@5
+	const char *v21 = nullptr; // [sp+70h] [bp-138h]@5
+	int v22 = 0; // [sp+78h] [bp-130h]@5
+	const char *v23 = nullptr; // [sp+80h] [bp-128h]@5
+	int v24 = 0; // [sp+88h] [bp-120h]@5
 	__int64 *v25; // [sp+90h] [bp-118h]@4
 	signed int v26; // [sp+98h] [bp-110h]@4
 	__int64 v27; // [sp+A0h] [bp-108h]@4
@@ -74,12 +74,12 @@ int CpkLoader::LoadCpkInitial()
 			// 0xA01080
 			typedef signed __int64(__fastcall * nuccMemoryType__Function01)(__int64 a);
 			nuccMemoryType__Function01 nuccMemoryType__Function01_f = (nuccMemoryType__Function01)(moduleBase + 0xA01080);
-			nuccMemoryType__Function01(v9);
+			nuccMemoryType__Function01_f(v9);
 
 			// 0xA00EA0
 			typedef void(__fastcall * sub_140A01AA0)(__int64 a);
 			sub_140A01AA0 sub_140A01AA0_f = (sub_140A01AA0)(moduleBase + 0xA00EA0);
-			sub_140A01AA0(v8);
+			sub_140A01AA0_f((__int64)v8);
 
 			// 0xA01050
 			typedef signed __int64(__fastcall * nuccMemoryUnknown__PopCurrent)();

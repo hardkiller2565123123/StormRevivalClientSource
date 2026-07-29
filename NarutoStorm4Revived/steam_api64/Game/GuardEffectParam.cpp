@@ -107,7 +107,7 @@ GuardEffectParamEntry* GetGuardEffectEntry(uint32_t charID, uint32_t mode)
 __int64 __fastcall GuardEffectParam::sub_1409D6220_SC(__int64 a1, int a2)
 {
     __int64 result;
-    char* v8; // rdx
+    char* v8 = *reinterpret_cast<char**>(a1 + 0x12040); // rdx
     __int64 v4; // rcx
     const char* startEffect; // rcx
     const char* loopEffect; // rcx
@@ -1478,7 +1478,7 @@ GuardEffectParam::orig_sub_1407AFADC_t GuardEffectParam::orig_sub_1407AFADC = nu
 __int64 __fastcall GuardEffectParam::sub_1407AFADC_S4(__int64 a1, __int64 a2)
 {
     __int64 result;
-    char* v8; // rdx
+    char* v8 = *reinterpret_cast<char**>(a1 + 0x14E18); // rdx
     __int64 v4; // rcx
     const char* startEffect; // rcx
     const char* loopEffect; // rcx

@@ -4,5 +4,6 @@
 
 namespace WindowedFullscreen
 {
-    void Init();
+    bool Init();
+    void Shutdown();
 }

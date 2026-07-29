@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <ItemGroup>
     <Filter Include="Core">
@@ -19,7 +19,10 @@
     <Filter Include="ThirdParty\MinHook">
       <UniqueIdentifier>{461c81f0-7e45-46d3-86b3-bd0df4cc0881}</UniqueIdentifier>
     </Filter>
-  <Filter Include="Engine Research"><UniqueIdentifier>{8AE975E2-A80E-4D16-A2E4-84F85416EAB0}</UniqueIdentifier></Filter></ItemGroup>
+    <Filter Include="Engine Research">
+      <UniqueIdentifier>{8AE975E2-A80E-4D16-A2E4-84F85416EAB0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FrameWorkApi.cpp">
       <Filter>Core</Filter>
@@ -48,16 +51,73 @@
     <ClCompile Include="..\steam_api64\imgui_widgets.cpp">
       <Filter>ThirdParty\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\CrashHandler.cpp">
-      <Filter>Steam Shared Diagnostics</Filter>
+    <ClCompile Include="EngineAddressMap.cpp">
+      <Filter>Engine Research</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\SteamDiagnostics.cpp">
-      <Filter>Steam Shared Diagnostics</Filter>
+    <ClCompile Include="EngineXfbinRuntime.cpp">
+      <Filter>Engine Research</Filter>
     </ClCompile>
-    <ClCompile Include="..\steam_api64\SupportBundle.cpp">
-      <Filter>Steam Shared Diagnostics</Filter>
+    <ClCompile Include="EngineResearchUI.cpp">
+      <Filter>Engine Research</Filter>
     </ClCompile>
-  <ClCompile Include="EngineAddressMap.cpp"><Filter>Engine Research</Filter></ClCompile><ClCompile Include="EngineXfbinRuntime.cpp"><Filter>Engine Research</Filter></ClCompile><ClCompile Include="EngineResearchUI.cpp"><Filter>Engine Research</Filter></ClCompile><ClCompile Include="StageEditor.cpp"><Filter>Engine Research</Filter></ClCompile><ClCompile Include="EngineRuntimeResearch.cpp"><Filter>Engine Research</Filter></ClCompile><ClCompile Include="EngineStageObjectResearch.cpp"><Filter>Engine Research</Filter></ClCompile></ItemGroup>
+    <ClCompile Include="StageEditor.cpp">
+      <Filter>Engine Research</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineRuntimeResearch.cpp">
+      <Filter>Engine Research</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineStageObjectResearch.cpp">
+      <Filter>Engine Research</Filter>
+    </ClCompile>
+    <ClCompile Include="..\steam_api64\CrashHandler.cpp" />
+    <ClCompile Include="..\steam_api64\SteamDiagnostics.cpp" />
+    <ClCompile Include="..\steam_api64\SupportBundle.cpp" />
+    <ClCompile Include="AssetBackupManager.cpp" />
+    <ClCompile Include="AssetBrowser.cpp" />
+    <ClCompile Include="AssetBulkExtractor.cpp" />
+    <ClCompile Include="AssetConflictScanner.cpp" />
+    <ClCompile Include="AssetDuplicateFinder.cpp" />
+    <ClCompile Include="AssetFavorites.cpp" />
+    <ClCompile Include="AssetHash.cpp" />
+    <ClCompile Include="AssetHexEditor.cpp" />
+    <ClCompile Include="AssetModelViewer.cpp" />
+    <ClCompile Include="AssetNotification.cpp" />
+    <ClCompile Include="AssetOverrideManager.cpp" />
+    <ClCompile Include="AssetPackageCreator.cpp" />
+    <ClCompile Include="AssetPreloadManager.cpp" />
+    <ClCompile Include="AssetPreview.cpp" />
+    <ClCompile Include="AssetPreviewResolver.cpp" />
+    <ClCompile Include="AssetRelations.cpp" />
+    <ClCompile Include="AssetReport.cpp" />
+    <ClCompile Include="AssetSearchFilter.cpp" />
+    <ClCompile Include="AssetTaskQueue.cpp" />
+    <ClCompile Include="AssetTextureInfo.cpp" />
+    <ClCompile Include="AssetTexturePreview.cpp" />
+    <ClCompile Include="AssetToolkitUI.cpp" />
+    <ClCompile Include="CpkArchive.cpp" />
+    <ClCompile Include="DX11OverlayHelpers.cpp" />
+    <ClCompile Include="DX11OverlayPageAssets.cpp" />
+    <ClCompile Include="DX11OverlayPageCamera.cpp" />
+    <ClCompile Include="DX11OverlayPageControls.cpp" />
+    <ClCompile Include="DX11OverlayPageGraphics.cpp" />
+    <ClCompile Include="DX11OverlayPageLua.cpp" />
+    <ClCompile Include="DX11OverlayPageMods.cpp" />
+    <ClCompile Include="DX11OverlayPagePatches.cpp" />
+    <ClCompile Include="..\steam_api64\DX11OverlayState.cpp" />
+    <ClCompile Include="LuaHooks.cpp" />
+    <ClCompile Include="LuaManager.cpp" />
+    <ClCompile Include="ModRedirector.cpp" />
+    <ClCompile Include="NS2Config.cpp" />
+    <ClCompile Include="NS2Offsets.cpp" />
+    <ClCompile Include="OverlayConsole.cpp" />
+    <ClCompile Include="PatchManager.cpp" />
+    <ClCompile Include="RuntimeAssetTelemetry.cpp" />
+    <ClCompile Include="RuntimeFileHooks.cpp" />
+    <ClCompile Include="RuntimeGameHooks.cpp" />
+    <ClCompile Include="RuntimeHookAddresses.cpp" />
+    <ClCompile Include="RuntimeHookBootstrap.cpp" />
+    <ClCompile Include="XfbinInspector.cpp" />
+  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\steam_api64\HookManager.h">
       <Filter>Core\Hooks</Filter>
@@ -95,23 +155,34 @@
     <ClInclude Include="..\steam_api64\imstb_truetype.h">
       <Filter>ThirdParty\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="..\steam_api64\CrashHandler.h">
-      <Filter>Steam Shared Diagnostics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\steam_api64\SteamDiagnostics.h">
-      <Filter>Steam Shared Diagnostics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\steam_api64\SupportBundle.h">
-      <Filter>Steam Shared Diagnostics</Filter>
-    </ClInclude>
+    <ClInclude Include="..\steam_api64\CrashHandler.h" />
+    <ClInclude Include="..\steam_api64\SteamDiagnostics.h" />
+    <ClInclude Include="..\steam_api64\SupportBundle.h" />
+    <ClInclude Include="EngineBlankStageResearch.h" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\steam_api64\libMinHook.x64.lib">
-      <Filter>ThirdParty\MinHook</Filter>
-    </Library>
+    <Library Include="..\steam_api64\$(MinHookLibName)" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX11OverlayInternal.h" />
-  <ClInclude Include="EngineAddressMap.h"><Filter>Engine Research</Filter></ClInclude><ClInclude Include="EngineXfbinRuntime.h"><Filter>Engine Research</Filter></ClInclude><ClInclude Include="EngineResearchUI.h"><Filter>Engine Research</Filter></ClInclude><ClInclude Include="StageEditor.h"><Filter>Engine Research</Filter></ClInclude><ClInclude Include="EngineRuntimeResearch.h"><Filter>Engine Research</Filter></ClInclude><ClInclude Include="EngineStageObjectResearch.h"><Filter>Engine Research</Filter></ClInclude>  <ClCompile Include="EngineBlankStageResearch.cpp" />
-</ItemGroup>
+    <ClInclude Include="EngineAddressMap.h">
+      <Filter>Engine Research</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineXfbinRuntime.h">
+      <Filter>Engine Research</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineResearchUI.h">
+      <Filter>Engine Research</Filter>
+    </ClInclude>
+    <ClInclude Include="StageEditor.h">
+      <Filter>Engine Research</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineRuntimeResearch.h">
+      <Filter>Engine Research</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineStageObjectResearch.h">
+      <Filter>Engine Research</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineBlankStageResearch.cpp" />
+  </ItemGroup>
 </Project>

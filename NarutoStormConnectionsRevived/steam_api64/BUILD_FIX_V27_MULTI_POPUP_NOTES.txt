@@ -1,0 +1,21 @@
+V27 MULTI-POPUP RUNTIME FIX
+===========================
+
+This build keeps the startup popup, F2 runtime editor, online-menu hooks, and all existing features.
+
+Fixed popup runtime behavior:
+- PopupManager no longer uses one global g_CurrentDialog that replaces every popup.
+- Each popup gets its own request id and unique Scaleform window name:
+  StormRevivalF2Popup_<id>, StormRevivalApiWelcome_<id>, etc.
+- Multiple popup threads can exist at once without closing/replacing each other.
+- Closing one popup only closes that popup id.
+- Runtime F2 "Spawn popup" can be clicked repeatedly.
+- "Small Storm API popup" can also be spawned repeatedly.
+- Close button closes all active runtime popups manually.
+
+Expected log lines:
+- PopupManager initialized with independent multi-popup runtime
+- PopupManager: opened custom popup id=N window=StormRevivalF2Popup_N
+- PopupManager: closing reason=timer/input/manual id=N window=...
+
+If NSC itself refuses to visually stack more than one ccUiFlashDialog on screen, the log will still show independent dialogs being created. In that case the next IDA target is the dialog/root layer registration function that owns duplicate movie/window instances.

@@ -366,6 +366,9 @@ extern "C" __declspec(dllexport)
 void __cdecl SteamAPI_RegisterCallback(void* callback, int callbackId)
 {
     SteamCallbackManager::RegisterCallback(callback, callbackId);
+    // Flush once after registration so sticky/bootstrapped online callbacks
+    // cannot sit until the next frame while the game state machine times out.
+    SteamCallbackManager::RunCallbacks();
 }
 
 extern "C" __declspec(dllexport)
@@ -383,6 +386,7 @@ void __cdecl SteamAPI_RegisterCallResult(void* callback, SteamAPICall_t call)
         " call=" +
         std::to_string(static_cast<unsigned long long>(call)));
     SteamCallResultManager::RegisterCallResult(callback, call);
+    SteamCallbackManager::RunCallbacks();
 }
 
 extern "C" __declspec(dllexport)

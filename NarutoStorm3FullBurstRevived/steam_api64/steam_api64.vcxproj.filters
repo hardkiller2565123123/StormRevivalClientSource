@@ -101,6 +101,12 @@
     <Filter Include="Core\hooks\Runtime">
       <UniqueIdentifier>{69924677-4b24-4750-8992-5b41b5029b59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{395bb467-c336-4efc-b844-edb595c811fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Text">
+      <UniqueIdentifier>{b0db9cc6-2d2c-40fb-a915-2d6bb79fee9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrashHandler.cpp">
@@ -254,14 +260,20 @@
     <ClCompile Include="SteamProxy.cpp">
       <Filter>Includes\Steam</Filter>
     </ClCompile>
+    <ClCompile Include="BlankStageTools.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
+    <ClCompile Include="InputFocusGuard.cpp">
+      <Filter>Sort Later</Filter>
+    </ClCompile>
     <ClCompile Include="StageEditorTools.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Sort Later</Filter>
     </ClCompile>
     <ClCompile Include="StageRuntimeHookPlan.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Sort Later</Filter>
     </ClCompile>
-    <ClCompile Include="BlankStageTools.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="HookText.cpp">
+      <Filter>Systems\Text</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -983,21 +995,24 @@
     <ClInclude Include="SteamProxy.h">
       <Filter>Includes\Steam</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="libMinHook.x64.lib">
-      <Filter>Includes\minhook</Filter>
-    </Library>
+    <ClInclude Include="BlankStageTools.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
+    <ClInclude Include="InputFocusGuard.h">
+      <Filter>Sort Later</Filter>
+    </ClInclude>
     <ClInclude Include="StageEditorTools.h">
-      <Filter>Header Files</Filter>
+      <Filter>Sort Later</Filter>
     </ClInclude>
     <ClInclude Include="StageRuntimeHookPlan.h">
-      <Filter>Header Files</Filter>
+      <Filter>Sort Later</Filter>
     </ClInclude>
-    <ClInclude Include="BlankStageTools.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HookText.h">
+      <Filter>Systems\Text</Filter>
     </ClInclude>
   </ItemGroup>
-  
+  <ItemGroup>
+    <Library Include="$(MinHookLibName)" />
+    <Library Include="$(MinHookLibName)" />
+  </ItemGroup>
 </Project>
-

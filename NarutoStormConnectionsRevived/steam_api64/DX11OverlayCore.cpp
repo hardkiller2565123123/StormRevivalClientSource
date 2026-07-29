@@ -2,6 +2,7 @@
 #include "FrameworkAddon.h"
 #include "MinHook.h"
 #include "WindowedFullscreen.h"
+#include "Overlay/RuntimeEditorOverlay.h"
 
 namespace
 {
@@ -132,7 +133,7 @@ bool CreateRenderTarget(IDXGISwapChain* swapChain)
 
 LRESULT CALLBACK OverlayWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    if (g_MenuOpen && g_ImGuiReady)
+    if ((g_MenuOpen || RuntimeEditorOverlay::IsOpen()) && g_ImGuiReady)
     {
         ImGuiIO& io = ImGui::GetIO();
         io.MouseDrawCursor = g_DrawMouseCursor;
@@ -156,6 +157,15 @@ LRESULT CALLBACK OverlayWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             case WM_KEYDOWN:
             case WM_KEYUP:
             case WM_CHAR:
+            case WM_SYSKEYDOWN:
+            case WM_SYSKEYUP:
+            case WM_INPUT:
+            case WM_XBUTTONDOWN:
+            case WM_XBUTTONUP:
+            case WM_LBUTTONDBLCLK:
+            case WM_RBUTTONDBLCLK:
+            case WM_MBUTTONDBLCLK:
+            case WM_XBUTTONDBLCLK:
                 return TRUE;
             }
         }
@@ -352,7 +362,7 @@ void DrawAlwaysStatusBar()
     if (g_StatusShowHotkey)
     {
         if (!text.empty()) text += " | ";
-        text += "F1";
+        text += "F1 / F2";
     }
 
     ImGui::TextUnformatted(text.c_str());
@@ -376,6 +386,7 @@ void DrawImGui(IDXGISwapChain* swapChain)
 
     DrawAlwaysStatusBar();
     DrawAnimatedTopMenu();
+    RuntimeEditorOverlay::Update();
 
     ImGui::Render();
 

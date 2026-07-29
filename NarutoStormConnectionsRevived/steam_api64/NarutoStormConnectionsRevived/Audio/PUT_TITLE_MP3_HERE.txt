@@ -1,0 +1,11 @@
+Put your menu music here as one of these names:
+
+  title.mp3
+  tittle.mp3
+
+The DLL also checks these fallback paths:
+  NarutoStormConnectionsRevived/title.mp3
+  NarutoStormConnectionsRevived/tittle.mp3
+  NarutoStormConnectionsRevived/Audio Title.mp3
+  Audio/title.mp3
+  Audio/tittle.mp3

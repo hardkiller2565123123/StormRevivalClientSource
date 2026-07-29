@@ -77,7 +77,7 @@
     <MinHookLibName>libMinHook.x86.lib</MinHookLibName>
   </PropertyGroup>
   <PropertyGroup>
-    <OutDir>C:\Users\dylan\source\repos\NarutoRevival Offline Release\Build\nsc\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>C:\Users\dylan\source\repos\StormRevivalClientSource\Build\nsc</OutDir>
     <IntDir>C:\Users\dylan\source\repos\NarutoRevival Offline Release\Build\_obj\nsc\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -111,7 +111,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;winmm.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;$(ProjectDir)libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
@@ -139,7 +139,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;winmm.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;$(ProjectDir)libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
@@ -165,7 +165,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;winmm.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;$(ProjectDir)libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
@@ -193,7 +193,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;user32.lib;winhttp.lib;winmm.lib;$(MinHookLibName);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;$(ProjectDir)libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
@@ -201,6 +201,8 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AudioCueRedirector.h" />
+    <ClInclude Include="CustomAudioPlayer.h" />
     <ClInclude Include="CrashHandler.h" />
     <ClInclude Include="DX11Overlay.h" />
     <ClInclude Include="DX11OverlayInternal.h" />
@@ -210,6 +212,7 @@
     <ClInclude Include="FakeSteamInterfaces.h" />
     <ClInclude Include="FrameworkAddon.h" />
     <ClInclude Include="HookManager.h" />
+    <ClInclude Include="HookText.h" />
     <ClInclude Include="InputFocusGuard.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui.h" />
@@ -222,10 +225,22 @@
     <ClInclude Include="Logger.h" />
     <ClInclude Include="NetworkStateBypass.h" />
     <ClInclude Include="OnlineStorageBypass.h" />
+    <ClInclude Include="RuntimeUiOptions.h" />
     <ClInclude Include="MinHook.h" />
     <ClInclude Include="ModLoader.h" />
     <ClInclude Include="NetworkHooks.h" />
     <ClInclude Include="OnlineCheckBypass.h" />
+    <ClInclude Include="ClassicSelectTheme.h" />
+    <ClInclude Include="CharacterRuntimeEditor.h" />
+    <ClInclude Include="Overlay\DX11OverlayPageResources.h" />
+    <ClInclude Include="Overlay\RuntimeEditorOverlay.h" />
+    <ClInclude Include="PopupInternals.h" />
+    <ClInclude Include="PopupManager.h" />
+    <ClInclude Include="PopupReverseMap.h" />
+    <ClInclude Include="PopupTypes.h" />
+    <ClInclude Include="Reverse\ResourceReverseMap.h" />
+    <ClInclude Include="Runtime\ResourceRedirector.h" />
+    <ClInclude Include="Runtime\ResourceTypes.h" />
     <ClInclude Include="sdk_includes\isteamapplist.h" />
     <ClInclude Include="sdk_includes\isteamapps.h" />
     <ClInclude Include="sdk_includes\isteamapps001.h" />
@@ -446,6 +461,8 @@
     <ClInclude Include="WindowedFullscreen.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AudioCueRedirector.cpp" />
+    <ClCompile Include="CustomAudioPlayer.cpp" />
     <ClCompile Include="CrashHandler.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="DX11Overlay.cpp" />
@@ -465,6 +482,7 @@
     <ClCompile Include="FakeSteamUserStats.cpp" />
     <ClCompile Include="FrameworkAddon.cpp" />
     <ClCompile Include="HookManager.cpp" />
+    <ClCompile Include="HookText.cpp" />
     <ClCompile Include="InputFocusGuard.cpp" />
     <ClCompile Include="imgui.cpp" />
     <ClCompile Include="imgui_draw.cpp" />
@@ -478,6 +496,15 @@
     <ClCompile Include="NetworkStateBypass.cpp" />
     <ClCompile Include="OnlineCheckBypass.cpp" />
     <ClCompile Include="OnlineStorageBypass.cpp" />
+    <ClCompile Include="RuntimeUiOptions.cpp" />
+    <ClCompile Include="ClassicSelectTheme.cpp" />
+    <ClCompile Include="CharacterRuntimeEditor.cpp" />
+    <ClCompile Include="Overlay\DX11OverlayPageResources.cpp" />
+    <ClCompile Include="Overlay\RuntimeEditorOverlay.cpp" />
+    <ClCompile Include="PopupInternals.cpp" />
+    <ClCompile Include="PopupManager.cpp" />
+    <ClCompile Include="Reverse\ResourceReverseMap.cpp" />
+    <ClCompile Include="Runtime\ResourceRedirector.cpp" />
     <ClCompile Include="SteamAuth.cpp" />
     <ClCompile Include="SteamCallbackManager.cpp" />
     <ClCompile Include="SteamCallResultManager.cpp" />
@@ -504,11 +531,7 @@
   <ItemGroup>
     <Library Include="$(MinHookLibName)" />
   </ItemGroup>
-  
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
-
-
-

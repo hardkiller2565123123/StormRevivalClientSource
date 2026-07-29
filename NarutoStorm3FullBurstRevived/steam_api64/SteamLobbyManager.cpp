@@ -410,6 +410,7 @@ namespace SteamLobbyManager
         NS2Lobby lobby{};
         lobby.LobbyID = MakeID(lobbyID);
         lobby.OwnerID = SteamIDManager::GetLocalSteamID();
+        lobby.GameServerID = lobby.OwnerID;
         lobby.MaxMembers = maxMembers > 0 ? maxMembers : 4;
         lobby.Joinable = true;
         lobby.PrivateLobby = false;
@@ -422,7 +423,6 @@ namespace SteamLobbyManager
         lobby.Data["server"] = "offline-lan";
         lobby.Data["host"] = lobby.Host;
         lobby.Data["port"] = std::to_string(lobby.GameServerPort);
-        lobby.Data["members"] = std::to_string(lobby.MaxMembers);
         lobby.Data["room"] = SteamOfflineServer::GenerateRoomCode(lobbyID);
         lobby.Data["room_code"] = lobby.Data["room"];
         lobby.Data["password_protected"] = "0";
@@ -431,6 +431,9 @@ namespace SteamLobbyManager
 
         EnsureLocalMember(lobby);
         EnsureDefaultMemberDataUnlocked(lobby);
+
+        lobby.Data["members"] = std::to_string(lobby.Members.size());
+        lobby.Data["max_members"] = std::to_string(lobby.MaxMembers);
 
         g_Lobbies[lobbyID] = lobby;
         g_CurrentLobbyID = lobbyID;
@@ -823,19 +826,19 @@ namespace SteamLobbyManager
 
     bool SetData(CSteamID lobbyID, const std::string& key, const std::string& value)
     {
-        if (key.empty())
-            return false;
-
         std::lock_guard<std::mutex> lock(g_Mutex);
-        NS2Lobby* lobby = GetMutableLobbyUnlocked(lobbyID);
 
+        NS2Lobby* lobby = GetMutableLobbyUnlocked(lobbyID);
         if (!lobby)
             return false;
 
         lobby->Data[key] = value;
+
+        lobby->Data["members"] = std::to_string(lobby->Members.size());
+        lobby->Data["max_members"] = std::to_string(lobby->MaxMembers);
+
         AdvertiseIfLocalLobby(*lobby);
-        const bool sensitive = key.find("password") != std::string::npos;
-        SteamDiagnostics::MarkOnline("SetLobbyData", key + "=" + (sensitive ? "<hidden>" : value));
+
         return true;
     }
 

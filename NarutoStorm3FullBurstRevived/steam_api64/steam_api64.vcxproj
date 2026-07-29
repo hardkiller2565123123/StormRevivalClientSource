@@ -77,7 +77,7 @@
     <MinHookLibName>libMinHook.x86.lib</MinHookLibName>
   </PropertyGroup>
   <PropertyGroup>
-    <OutDir>C:\Users\dylan\source\repos\NarutoRevival Offline Release\Build\ns3fb\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>C:\Users\dylan\source\repos\StormRevivalClientSource\Build\ns3fb</OutDir>
     <IntDir>C:\Users\dylan\source\repos\NarutoRevival Offline Release\Build\_obj\ns3fb\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -209,6 +209,7 @@
     <ClInclude Include="FakeSteamCore.h" />
     <ClInclude Include="FakeSteamInterfaces.h" />
     <ClInclude Include="FrameworkAddon.h" />
+    <ClInclude Include="HookText.h" />
     <ClInclude Include="StageEditorTools.h" />
     <ClInclude Include="StageRuntimeHookPlan.h" />
     <ClInclude Include="BlankStageTools.h" />
@@ -466,6 +467,7 @@
     <ClCompile Include="FakeSteamUserStats.cpp" />
     <ClCompile Include="FrameworkAddon.cpp" />
     <ClCompile Include="HookManager.cpp" />
+    <ClCompile Include="HookText.cpp" />
     <ClCompile Include="InputFocusGuard.cpp" />
     <ClCompile Include="imgui.cpp" />
     <ClCompile Include="imgui_draw.cpp" />
@@ -506,13 +508,7 @@
   <ItemGroup>
     <Library Include="$(MinHookLibName)" />
   </ItemGroup>
-  
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
-
-
-
-
-

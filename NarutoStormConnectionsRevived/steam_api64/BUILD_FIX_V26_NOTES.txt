@@ -1,0 +1,7 @@
+V26 build fix
+
+- Keeps startup popup and F2 editor/popup features.
+- Fixes LNK2001 RuntimeUiOptions::Mutable by adding RuntimeUiOptions.cpp and RuntimeUiOptions.h to steam_api64.vcxproj.
+- This is a build-only project-file fix; no popup/menu feature was removed.
+
+If another LNK2001 appears from RuntimeEditorOverlay.obj, it means another helper .cpp exists in the folder but is not included in the Visual Studio project.

@@ -1,0 +1,14 @@
+V24 build fix
+=============
+Fixed compile error:
+  PopupManager.cpp(149): 'delayMs' is not a member of PopupTypes::CustomPopupConfig
+
+Cause:
+  PopupManager was updated to support delayed custom popups, but PopupTypes.h only had delayMs on TimedPopupConfig.
+
+Patch:
+  Added int delayMs = 0; to PopupTypes::CustomPopupConfig.
+  Removed automatic startup popup from dllmain.cpp so the game does not show a popup before the menu path.
+
+Expected log:
+  PopupManager initialized. Auto startup popup disabled; use F2 Popup Studio or timed trigger.

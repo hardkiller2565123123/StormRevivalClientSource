@@ -981,5 +981,6 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="$(MinHookLibName)" />
+    <Library Include="$(MinHookLibName)" />
   </ItemGroup>
 </Project>

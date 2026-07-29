@@ -101,6 +101,11 @@
     <Filter Include="Core\input">
       <UniqueIdentifier>{9ecfc21a-19d5-417d-998d-42e0a62fc9b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{fef0f261-db26-49cf-b213-776dded5bd74}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="CharacterRuntimeEditor.h" />
+    <ClInclude Include="RuntimeUiOptions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrashHandler.cpp">
@@ -262,6 +267,38 @@
     </ClCompile>
     <ClCompile Include="InputFocusGuard.cpp">
       <Filter>Core\input</Filter>
+    </ClCompile>
+    <ClCompile Include="HookText.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="PopupManager.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="PopupInternals.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassicSelectTheme.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Overlay\DX11OverlayPageResources.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Overlay\RuntimeEditorOverlay.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Reverse\ResourceReverseMap.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ResourceRedirector.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioCueRedirector.cpp" />
+    <ClCompile Include="CustomAudioPlayer.cpp" />
+    <ClCompile Include="RuntimeUiOptions.cpp">
+      <Filter>Core\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterRuntimeEditor.cpp">
+      <Filter>Core\logger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -992,8 +1029,47 @@
     <ClInclude Include="InputFocusGuard.h">
       <Filter>Core\input</Filter>
     </ClInclude>
+    <ClInclude Include="HookText.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="PopupManager.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="PopupTypes.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="PopupReverseMap.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="PopupInternals.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassicSelectTheme.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Overlay\DX11OverlayPageResources.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Overlay\RuntimeEditorOverlay.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Reverse\ResourceReverseMap.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ResourceRedirector.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ResourceTypes.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioCueRedirector.h" />
+    <ClInclude Include="CustomAudioPlayer.h" />
   </ItemGroup>
   <ItemGroup>
+    <Library Include="$(MinHookLibName)" />
+    <Library Include="$(MinHookLibName)" />
+    <Library Include="$(MinHookLibName)" />
+    <Library Include="$(MinHookLibName)" />
     <Library Include="$(MinHookLibName)" />
   </ItemGroup>
 </Project>

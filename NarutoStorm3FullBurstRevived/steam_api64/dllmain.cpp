@@ -7,6 +7,7 @@
 #include "DX11Overlay.h"
 #include "WindowedFullscreen.h"
 #include "ModLoader.h"
+#include "HookText.h"
 
 #include "SteamConfig.h"
 #include "SteamIDManager.h"
@@ -33,20 +34,26 @@ static DWORD WINAPI MainThread(LPVOID)
         return 0;
 
     Logger::Info("NarutoStorm3FullBurstRevived offline Steam layer loaded");
+
     SteamDiagnostics::Init();
     SteamDiagnostics::MarkSteam("Startup", "offline Steam layer loaded");
 
     if (!SteamProxy::Init())
     {
         Logger::Error("Steam proxy failed to initialize");
+        Logger::Shutdown();
         return 0;
     }
 
     if (!HookManager::Init())
     {
         Logger::Error("Hook manager failed to initialize");
+        SteamDiagnostics::Shutdown();
+        Logger::Shutdown();
         return 0;
     }
+
+    WindowedFullscreen::Init();
 
     SteamConfig::Init();
     SteamIDManager::Init();
@@ -64,6 +71,9 @@ static DWORD WINAPI MainThread(LPVOID)
 
     SteamFactoryRegistry::Dump();
 
+    if (!HookText::Install())
+        Logger::Error("HookText failed to initialize");
+
     if (!NetworkHooks::Init())
         Logger::Error("Network hooks failed to initialize");
 
@@ -73,14 +83,11 @@ static DWORD WINAPI MainThread(LPVOID)
     if (!DX11Overlay::Init())
         Logger::Error("DX11 overlay failed to initialize");
 
-    WindowedFullscreen::Init();
     ModLoader::LoadMods();
 
     Logger::Info("NarutoStorm3FullBurstRevived initialized");
+    Logger::Flush();
     return 0;
-
-
-
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID)
@@ -88,8 +95,8 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID)
     switch (reason)
     {
     case DLL_PROCESS_ATTACH:
-    {
         DisableThreadLibraryCalls(module);
+
         g_MainThread = CreateThread(nullptr, 0, MainThread, nullptr, 0, nullptr);
         if (g_MainThread)
         {
@@ -97,9 +104,10 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID)
             g_MainThread = nullptr;
         }
         break;
-    }
+
     case DLL_PROCESS_DETACH:
-    {
+        WindowedFullscreen::Shutdown();
+        HookText::Shutdown();
         NetworkHooks::Shutdown();
         InputFocusGuard::Shutdown();
         OnlineCheckBypass::Shutdown();
@@ -110,9 +118,6 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID)
         Logger::Shutdown();
         break;
     }
-    }
+
     return TRUE;
 }
-
-
-

@@ -260,6 +260,9 @@
     <ClCompile Include="SteamProxy.cpp">
       <Filter>Includes\Steam</Filter>
     </ClCompile>
+    <ClCompile Include="InputFocusGuard.cpp">
+      <Filter>Core\logger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StdInc.h" />
@@ -986,12 +989,9 @@
     <ClInclude Include="SteamProxy.h">
       <Filter>Includes\Steam</Filter>
     </ClInclude>
+    <ClInclude Include="InputFocusGuard.h" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="libMinHook.x86.lib">
-      <Filter>Includes\minhook</Filter>
-    </Library>
+    <Library Include="$(MinHookLibName)" />
   </ItemGroup>
-  
 </Project>
-

@@ -1,0 +1,23 @@
+V30 - launch online force bootstrap
+
+Kept existing popup, F2 editor, multi-popup runtime, Steam emulation, and menu hooks.
+No features removed.
+
+What changed:
+- Steam emulation managers now initialize before OnlineCheckBypass and before UI/popup setup.
+- OnlineCheckBypass now applies a launch-level online bootstrap immediately during Init.
+- Watchdog forces online/profile/menu-ready state every 100ms during the first 60 seconds, then every 1 second after.
+- Forces global online flag object fields +88/+92/+96 to 1 when available.
+- Forces framework online profile pointers +720/+776/+888/+944 non-null and +832 not busy when available.
+- Forces net manager ready bit +1585296 and fills backend/fes pointer slots only if they are null.
+- Net top poll/online/offline path hooks now also call the launch online force.
+
+Log lines to look for:
+- OnlineCheckBypass v30 LAUNCH online-force
+- [ONLINE-LAUNCH-FORCE] reason=init-before-hooks
+- [ONLINE-LAUNCH-FORCE] reason=startup-watchdog
+- [NETMENU] sub_14060F720 / sub_14060FA30 / sub_14060FD10 if those paths are reached
+
+If it still does not enter the online menu:
+- The log should now show whether sub_14060F720 / sub_14060FA30 / sub_14060FD10 ever executes.
+- If none execute, next target is the earlier title/main-menu scene transition function, not Steam.

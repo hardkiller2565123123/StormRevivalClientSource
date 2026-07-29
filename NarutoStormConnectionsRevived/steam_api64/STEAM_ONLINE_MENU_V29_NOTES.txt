@@ -1,0 +1,19 @@
+V29 Steam-side online menu patch
+
+What I found in the custom Steam files:
+- The online bypass hooks are installing, but the Steam emulation can still affect the menu because NSC depends on Steam callbacks/call-results for stats, auth tickets, leaderboard, and lobby/matchmaking state.
+- Important callbacks like UserStatsReceived, LeaderboardFindResult, LobbyMatchList, LobbyCreated, LobbyEnter, and AuthTicket are one-shot messages. If the game registers/polls late, the result can be missed and the menu state can fall back to online-error/locked flow.
+
+What changed:
+- SteamCallbackManager now keeps sticky copies of important online callbacks.
+- When NSC registers a callback late, the latest sticky result is replayed.
+- SteamCallResultManager mirrors more online-menu call results as callbacks too.
+- SteamAPI_RegisterCallback and SteamAPI_RegisterCallResult flush callbacks immediately once after registration.
+- Kept startup popup, F2 runtime menu, and multi-popup behavior intact.
+
+Log lines to check:
+- ReplayStickyCallback
+- SteamAPI_RegisterCallback replayed sticky callback
+- ImmediateCallResultDispatch
+- [NETMENU] sub_140609F10 NetBattleMainMenu INIT PRE/POST
+- [NETMENU-FORCE]

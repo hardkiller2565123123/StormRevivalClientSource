@@ -1,0 +1,27 @@
+Storm API / NarutoStormConnectionsRevived v33 - F2 Native UI Research Integration
+
+Kept existing features:
+- Startup popup stays enabled.
+- F2 runtime editor stays enabled.
+- Runtime UI toggles stay enabled.
+- Online/menu bootstrap stays unchanged.
+- Custom title.wav replacement stays included with fade-out and 30% volume scaling.
+
+Added to F2 menu:
+- Native UI Map tab
+  - Text/hash system names
+  - Flash/Scaleform call wrapper names
+  - Dialog/popup function names and fields
+  - Select/Yes-No window function names and result offset
+  - Fade, help-button, and UI sound wrappers
+- Native Structs tab
+  - NuccString SSO layout
+  - FlashValue type flags
+  - FlashObject movie tree/current movie offsets
+  - DialogWindow offsets
+  - SelectWindow offsets
+  - SoundManager atom pointer note
+
+Updated audio files:
+- AudioCueRedirector.cpp uses cue 203 -> Audio\\title.wav
+- CustomAudioPlayer.cpp uses waveOut, PCM WAV loader, 30% volume, fade-out on next cue

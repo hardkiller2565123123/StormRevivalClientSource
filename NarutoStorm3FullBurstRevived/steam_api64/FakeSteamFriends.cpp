@@ -311,6 +311,8 @@ namespace
 class FakeSteamFriends final
 {
 public:
+
+    //Gets Your Name. Nothing Else Stop Looking Go.
     virtual const char* GetPersonaName()
     {
         TraceFriends("GetPersonaName");
@@ -318,6 +320,7 @@ public:
         return SteamPersonaManager::GetPersonaName();
     }
 
+	//This Function Look Complicated But Its Just Setting Your Name. Dont Change It.
     virtual SteamAPICall_t SetPersonaName(const char* name)
     {
         TraceFriends("SetPersonaName", name ? name : "null");
@@ -333,6 +336,7 @@ public:
         return SteamCallResultManager::CreateCallResult(347, &result, sizeof(result), true);
     }
 
+    //Check Your Name Out. Your Name Is looking Hot.
     virtual int GetPersonaState()
     {
         TraceFriends("GetPersonaState");
@@ -340,69 +344,131 @@ public:
         return 1;
     }
 
+    //Litterly Just Check If you have Friends.
     virtual int GetFriendCount(int flags)
     {
         TraceFriends("GetFriendCount", "flags=" + std::to_string(flags));
-        NSR_UNUSED(flags);
         Logger::Info("SteamFriends::GetFriendCount");
-        return 0;
+
+        const int count = SteamPersonaManager::GetFriendCount();
+        return count > 0 ? count : 1;
     }
 
-    CSteamID GetFriendByIndexValue(int index, int flags)
+    //Storm 3 Calls Friends Count 4 for multiplayer Dont Change Or It Crashes on Player Connect.
+    virtual void GetFriendByIndex(CSteamID* outSteamID, int index, int flags)
     {
-        TraceFriends("GetFriendByIndex", "index=" + std::to_string(index) + " flags=" + std::to_string(flags));
-        NSR_UNUSED(flags);
-        Logger::Info("SteamFriends::GetFriendByIndex");
-        return SteamPersonaManager::GetFriendByIndex(index);
+        TraceFriends(
+            "GetFriendByIndex_OUT",
+            "index=" + std::to_string(index) + " flags=" + std::to_string(flags));
+
+        Logger::Info("SteamFriends::GetFriendByIndex_OUT");
+
+        if (!outSteamID)
+            return;
+
+        CSteamID id = SteamPersonaManager::GetFriendByIndex(index);
+
+        if (!IsLikelySteamID64(static_cast<uint64_t>(id)))
+            id = SteamIDManager::GetLocalSteamID();
+
+        *outSteamID = id;
     }
 
-    virtual CSteamID GetFriendByIndex(int index, int flags)
-    {
-        return GetFriendByIndexValue(index, flags);
-    }
-
+    //Storm 3 Calls hidden Api Buffer Dont Change.
     virtual int GetFriendRelationship(CSteamID id)
     {
         id = ResolveSteamIDArgument(id, "GetFriendRelationship");
-        TraceFriends("GetFriendRelationship", std::to_string(static_cast<unsigned long long>(id)));
-        NSR_UNUSED(id);
+
+        TraceFriends(
+            "GetFriendRelationship",
+            std::to_string(static_cast<unsigned long long>(id)));
+
         Logger::Info("SteamFriends::GetFriendRelationship");
-        return 0;
+
+		//Keep This Returning 3 or Crash on player Connect. Also i Dont Know What It Does But It Works. THANKS IDA :)
+        return 3;
     }
 
+
+    //Check Other Plays Game State. Probably Should Not Touch This Function.
     virtual int GetFriendPersonaState(CSteamID id)
     {
         id = ResolveSteamIDArgument(id, "GetFriendPersonaState");
-        TraceFriends("GetFriendPersonaState", std::to_string(static_cast<unsigned long long>(id)));
-        NSR_UNUSED(id);
+
+        TraceFriends(
+            "GetFriendPersonaState",
+            std::to_string(static_cast<unsigned long long>(id)));
+
         Logger::Info("SteamFriends::GetFriendPersonaState");
+
+        //Just Render 1 Person Online.
         return 1;
     }
 
+
+    //Litterly Just Check Other Players Name Can not Get AnyMore BAsic Than This
     virtual const char* GetFriendPersonaName(CSteamID id)
     {
         id = ResolveSteamIDArgument(id, "GetFriendPersonaName");
-        TraceFriends("GetFriendPersonaName", std::to_string(static_cast<unsigned long long>(id)));
-        Logger::Info("SteamFriends::GetFriendPersonaName");
-        return SteamPersonaManager::GetFriendPersonaName(id);
-    }
 
+        TraceFriends(
+            "GetFriendPersonaName",
+            std::to_string(static_cast<unsigned long long>(id)));
+
+        Logger::Info("SteamFriends::GetFriendPersonaName");
+
+        const char* name = SteamPersonaManager::GetFriendPersonaName(id);
+
+        if (!name || !*name)
+            return "NS3FB Player";
+
+        return name;
+    }
+    
+    //Checks Player Info When Connecting This Just Exist Here.
     virtual bool GetFriendGamePlayed(CSteamID id, void* info)
     {
         id = ResolveSteamIDArgument(id, "GetFriendGamePlayed");
-        TraceFriends("GetFriendGamePlayed", std::to_string(static_cast<unsigned long long>(id)));
-        NSR_UNUSED(id);
+
+        TraceFriends(
+            "GetFriendGamePlayed",
+            std::to_string(static_cast<unsigned long long>(id)));
+
         Logger::Info("SteamFriends::GetFriendGamePlayed");
 
         if (info)
         {
             FriendGameInfoStub gameInfo{};
+            gameInfo.GameID = 234670; // NS3FB Steam AppID
+            gameInfo.GameIP = 0;
+            gameInfo.GamePort = 0;
+            gameInfo.QueryPort = 0;
+            gameInfo.LobbyID = 0;
+
             SafeCopy(info, sizeof(gameInfo), &gameInfo, sizeof(gameInfo), "GetFriendGamePlayed");
         }
 
-        return false;
+        return true;
     }
 
+    //Request UserInformation.
+    virtual bool RequestUserInformation(CSteamID id, bool nameOnly)
+    {
+        id = ResolveSteamIDArgument(id, "RequestUserInformation");
+
+        TraceFriends(
+            "RequestUserInformation",
+            SteamIDText(static_cast<uint64_t>(id)) +
+            (nameOnly ? " nameOnly=1" : " nameOnly=0"));
+
+        Logger::Info("SteamFriends015::RequestUserInformation offline-cache-hit");
+
+		//Keep This Returning True or It Crashes on Player Connect.
+        return true;
+    }
+
+   
+	//Get Player Name History. This Is Useless but Steam needs it for some reason.
     virtual const char* GetFriendPersonaNameHistory(CSteamID id, int index)
     {
         NSR_UNUSED(id);
@@ -411,9 +477,11 @@ public:
         return "";
     }
 
+    //Just Gets Player Steam Level.
     virtual int GetFriendSteamLevel(CSteamID id)
     {
         NSR_UNUSED(id);
+        //Dont Change This Value Idk What It Will Do But Dont. 
         return 0;
     }
 
@@ -648,32 +716,6 @@ public:
         return 0;
     }
 
-    virtual bool RequestUserInformation(CSteamID id, bool nameOnly)
-    {
-        // SteamFriends015 takes CSteamID by value. Do not pointer-probe garbage values here.
-        // Revolution crash logs showed a pointer-looking value immediately before an execute-null crash.
-        const uint64_t raw = static_cast<uint64_t>(id);
-        if (!IsLikelySteamID64(raw))
-        {
-            const CSteamID local = SteamIDManager::GetLocalSteamID();
-            TraceFriends(
-                "RequestUserInformationFallbackLocal",
-                "raw=" + SteamIDText(raw) + " fallbackLocal=" + SteamIDText(static_cast<uint64_t>(local)) +
-                    (nameOnly ? " nameOnly=1" : " nameOnly=0"));
-            id = local;
-        }
-        else
-        {
-            TraceFriends(
-                "RequestUserInformation",
-                SteamIDText(raw) + (nameOnly ? " nameOnly=1" : " nameOnly=0"));
-        }
-
-        NSR_UNUSED(id);
-        NSR_UNUSED(nameOnly);
-        Logger::Info("SteamFriends015::RequestUserInformation offline-cache-hit");
-        return false;
-    }
 
     virtual SteamAPICall_t RequestClanOfficerList(CSteamID clan)
     {

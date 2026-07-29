@@ -1,0 +1,25 @@
+V31 startup organization update
+===============================
+
+Kept existing features. Nothing was intentionally removed.
+
+Changed:
+- Added startup phase log lines: [STARTUP] Diagnostics, Steam bootstrap, online bootstrap, runtime workspace, popup/text tools, network/overlay.
+- RuntimeUiOptions is now initialized explicitly before HookText/Scaleform hooks use it.
+- F2 Runtime Editor now opens as a cleaner workspace:
+  - Overview
+  - Popups
+  - UI Toggles
+  - BGM Research
+  - Character Runtime
+  - Resources / Mods
+  - Functions
+- Added BGM/menu-song reverse notes in BGM_MENU_RESEARCH_NOTES.md.
+
+Kept:
+- Startup popup.
+- F2 editor.
+- Multi-popup runtime.
+- Online launch bootstrap.
+- Steam sticky callback work.
+- Character/runtime/resource research scaffolds.

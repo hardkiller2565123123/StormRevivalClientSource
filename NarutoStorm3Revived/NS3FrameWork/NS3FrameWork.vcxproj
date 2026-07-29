@@ -77,7 +77,7 @@
     <MinHookLibName>libMinHook.x86.lib</MinHookLibName>
   </PropertyGroup>
   <PropertyGroup>
-    <OutDir>C:\Users\dylan\source\repos\NarutoRevival Offline Release\Build\ns3\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>C:\Users\dylan\source\repos\StormRevivalClientSource\Build\ns1</OutDir>
     <IntDir>C:\Users\dylan\source\repos\NarutoRevival Offline Release\Build\_obj\ns3\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup>
@@ -213,4 +213,3 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
-

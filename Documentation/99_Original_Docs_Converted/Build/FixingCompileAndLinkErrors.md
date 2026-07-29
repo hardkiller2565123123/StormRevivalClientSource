@@ -85,4 +85,19 @@ Known Fix Patterns
 - Skipped initialization needed decompiled flow cleanup.
 - const char fixes respected string literal immutability.
 
+<<<<<<< HEAD
+============================================================
+2026-07-13 NS4 steam_api64 Debug x64 repair
+============================================================
+
+- Target: `NarutoStorm4Revived/steam_api64/steam_api64.vcxproj`, `Debug|x64`.
+- Fixed decompiled uninitialized locals in `Game/CpkLoader.cpp`, `Game/MovesetPlus.cpp`, and `Game/GuardEffectParam.cpp`.
+- `CpkLoader.cpp` needed an explicit empty small-string state before the IDA-recovered buffer helper could read its capacity field.
+- `MovesetPlus.cpp` needed safe fallback returns for unsupported or unresolved game versions.
+- `GuardEffectParam.cpp` needed its fallback action pointer initialized from the same current-action offsets already used in the active SC/S4 paths.
+- Also corrected two function-pointer call sites in `CpkLoader.cpp` where the typedef name had been left in place of the `_f` variable.
+- Verification: MSBuild completed successfully and produced `steam_api64.dll` for `Debug|x64`.
+
+=======
+>>>>>>> dfb9a8aa4b6fb850cc3bbd8b45cdcd1a376a598d
 End of manual.

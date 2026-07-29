@@ -1,277 +1,253 @@
 #include "StdInc.h"
 #include "WindowedFullscreen.h"
 #include "Logger.h"
+#include "HookManager.h"
 
-static HWND g_GameWindow = nullptr;
-static WNDPROC g_OriginalWndProc = nullptr;
-static bool g_Applied = false;
-static DWORD g_BackgroundKeepAliveArmTick = 0;
-static bool g_BackgroundKeepAliveLogged = false;
-
-extern bool g_PatchBackgroundPauseFix;
-
-static bool BackgroundKeepAliveReady()
+namespace
 {
-    if (!g_PatchBackgroundPauseFix || g_BackgroundKeepAliveArmTick == 0)
-        return false;
+    constexpr uintptr_t kCreateMainWindowRVA = 0x138EF0;
+    constexpr uintptr_t kExclusiveFullscreenRVA = 0x1392A0;
 
-    const DWORD elapsed = GetTickCount() - g_BackgroundKeepAliveArmTick;
-    const bool ready = elapsed >= 5000;
+    using CreateMainWindow_t = __int64(__fastcall*)(__int64 self, int width, int height, char fullscreen);
+    using ExclusiveFullscreen_t = int(__fastcall*)(__int64 self, char enable);
 
-    if (ready && !g_BackgroundKeepAliveLogged)
+    CreateMainWindow_t oCreateMainWindow = nullptr;
+    ExclusiveFullscreen_t oExclusiveFullscreen = nullptr;
+
+    uintptr_t g_CreateMainWindowAddr = 0;
+    uintptr_t g_ExclusiveFullscreenAddr = 0;
+
+    HWND g_GameWindow = nullptr;
+    WNDPROC g_OriginalWndProc = nullptr;
+    HANDLE g_LateThread = nullptr;
+    bool g_Installed = false;
+
+    RECT GetMonitorRect(HWND hwnd)
     {
-        g_BackgroundKeepAliveLogged = true;
-        Logger::Info("Background keep-alive armed without controller focus sharing");
+        HMONITOR monitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+
+        MONITORINFO info{};
+        info.cbSize = sizeof(info);
+
+        if (GetMonitorInfoW(monitor, &info))
+            return info.rcMonitor;
+
+        RECT fallback{};
+        fallback.left = 0;
+        fallback.top = 0;
+        fallback.right = GetSystemMetrics(SM_CXSCREEN);
+        fallback.bottom = GetSystemMetrics(SM_CYSCREEN);
+        return fallback;
     }
 
-    return ready;
-}
-
-static LRESULT CALLBACK GameWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-    switch (msg)
+    void ApplyBorderless(HWND hwnd)
     {
-    case WM_ACTIVATEAPP:
-        if (wParam == FALSE && BackgroundKeepAliveReady())
-            return CallWindowProcA(g_OriginalWndProc, hwnd, msg, TRUE, lParam);
+        if (!hwnd)
+            return;
 
-        return CallWindowProcA(g_OriginalWndProc, hwnd, msg, wParam, lParam);
+        RECT rect = GetMonitorRect(hwnd);
 
-    case WM_ACTIVATE:
-        if (LOWORD(wParam) == WA_INACTIVE && BackgroundKeepAliveReady())
-            return CallWindowProcA(g_OriginalWndProc, hwnd, msg, MAKEWPARAM(WA_ACTIVE, HIWORD(wParam)), lParam);
+        SetWindowLongPtrW(hwnd, GWL_STYLE, WS_POPUP | WS_VISIBLE);
+        SetWindowLongPtrW(hwnd, GWL_EXSTYLE, 0);
 
-        return CallWindowProcA(g_OriginalWndProc, hwnd, msg, wParam, lParam);
+        ShowWindow(hwnd, SW_RESTORE);
 
-    case WM_KILLFOCUS:
-        if (BackgroundKeepAliveReady())
-            return 0;
+        SetWindowPos(
+            hwnd,
+            HWND_TOP,
+            rect.left,
+            rect.top,
+            rect.right - rect.left,
+            rect.bottom - rect.top,
+            SWP_NOOWNERZORDER |
+            SWP_FRAMECHANGED |
+            SWP_SHOWWINDOW);
 
-        return CallWindowProcA(g_OriginalWndProc, hwnd, msg, wParam, lParam);
-
-    case WM_SETFOCUS:
-        return CallWindowProcA(g_OriginalWndProc, hwnd, msg, wParam, lParam);
-
-    case WM_SYSCOMMAND:
-        if ((wParam & 0xFFF0) == SC_MINIMIZE)
-            return 0;
-        break;
+        SetForegroundWindow(hwnd);
+        SetFocus(hwnd);
     }
 
-    return CallWindowProcA(g_OriginalWndProc, hwnd, msg, wParam, lParam);
-}
-
-static bool IsConsoleOrToolWindow(HWND hwnd)
-{
-    if (!hwnd)
-        return true;
-
-    if (hwnd == GetConsoleWindow())
-        return true;
-
-    char className[128]{};
-    GetClassNameA(hwnd, className, sizeof(className));
-
-    if (strcmp(className, "ConsoleWindowClass") == 0)
-        return true;
-
-    const LONG_PTR exStyle = GetWindowLongPtrA(hwnd, GWL_EXSTYLE);
-    if ((exStyle & WS_EX_TOOLWINDOW) != 0)
-        return true;
-
-    return false;
-}
-
-static bool LooksLikeGameWindow(HWND hwnd)
-{
-    if (!hwnd || IsConsoleOrToolWindow(hwnd))
-        return false;
-
-    if (!IsWindowVisible(hwnd))
-        return false;
-
-    char title[256]{};
-    GetWindowTextA(hwnd, title, sizeof(title));
-
-    if (strlen(title) <= 0)
-        return false;
-
-    if (strstr(title, "Debug Console") || strstr(title, "cmd.exe") || strstr(title, "Command Prompt"))
-        return false;
-
-    if (!(strstr(title, "NARUTO") || strstr(title, "Naruto") || strstr(title, "NSUNS") || strstr(title, "Storm")))
-        return false;
-
-    RECT rc{};
-    if (!GetWindowRect(hwnd, &rc))
-        return false;
-
-    const int width = rc.right - rc.left;
-    const int height = rc.bottom - rc.top;
-    return width >= 640 && height >= 360;
-}
-
-static BOOL CALLBACK EnumWindowsCallback(HWND hwnd, LPARAM)
-{
-    DWORD windowProcessId = 0;
-    GetWindowThreadProcessId(hwnd, &windowProcessId);
-
-    if (windowProcessId != GetCurrentProcessId())
-        return TRUE;
-
-    if (!LooksLikeGameWindow(hwnd))
-        return TRUE;
-
-    g_GameWindow = hwnd;
-    return FALSE;
-}
-
-static HWND FindGameWindow()
-{
-    g_GameWindow = nullptr;
-    EnumWindows(EnumWindowsCallback, 0);
-    return g_GameWindow;
-}
-
-static void HookGameWindowProc(HWND hwnd)
-{
-    if (!hwnd || g_OriginalWndProc)
-        return;
-
-    g_OriginalWndProc = reinterpret_cast<WNDPROC>(
-        SetWindowLongPtrA(hwnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(GameWindowProc)));
-
-    if (g_OriginalWndProc)
-        Logger::Info("Game window procedure hooked for borderless fullscreen");
-    else
-        Logger::Error("Failed to hook game window procedure");
-}
-
-static bool IsBorderlessFullscreenApplied(HWND hwnd, const RECT& rect)
-{
-    if (!hwnd)
-        return false;
-
-    const LONG_PTR style = GetWindowLongPtrA(hwnd, GWL_STYLE);
-    const LONG_PTR exStyle = GetWindowLongPtrA(hwnd, GWL_EXSTYLE);
-
-    if ((style & (WS_CAPTION | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU)) != 0)
-        return false;
-
-    if ((exStyle & (WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE | WS_EX_WINDOWEDGE)) != 0)
-        return false;
-
-    RECT windowRect{};
-    if (!GetWindowRect(hwnd, &windowRect))
-        return false;
-
-    return windowRect.left == rect.left &&
-        windowRect.top == rect.top &&
-        windowRect.right == rect.right &&
-        windowRect.bottom == rect.bottom;
-}
-
-static void ApplyBorderlessFullscreen(HWND hwnd)
-{
-    if (!hwnd)
-        return;
-
-    if (IsConsoleOrToolWindow(hwnd) || !LooksLikeGameWindow(hwnd))
-        return;
-
-    HMONITOR monitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
-
-    MONITORINFO monitorInfo{};
-    monitorInfo.cbSize = sizeof(MONITORINFO);
-
-    if (!GetMonitorInfoA(monitor, &monitorInfo))
-        return;
-
-    const RECT& rect = monitorInfo.rcMonitor;
-
-    if (g_Applied && IsBorderlessFullscreenApplied(hwnd, rect))
-        return;
-
-    LONG_PTR style = GetWindowLongPtrA(hwnd, GWL_STYLE);
-    LONG_PTR exStyle = GetWindowLongPtrA(hwnd, GWL_EXSTYLE);
-
-    style &= ~WS_CAPTION;
-    style &= ~WS_THICKFRAME;
-    style &= ~WS_MINIMIZEBOX;
-    style &= ~WS_MAXIMIZEBOX;
-    style &= ~WS_SYSMENU;
-
-    exStyle &= ~WS_EX_DLGMODALFRAME;
-    exStyle &= ~WS_EX_CLIENTEDGE;
-    exStyle &= ~WS_EX_STATICEDGE;
-    exStyle &= ~WS_EX_WINDOWEDGE;
-
-    SetWindowLongPtrA(hwnd, GWL_STYLE, style);
-    SetWindowLongPtrA(hwnd, GWL_EXSTYLE, exStyle);
-
-    ShowWindow(hwnd, SW_RESTORE);
-
-    SetWindowPos(
-        hwnd,
-        HWND_TOP,
-        rect.left,
-        rect.top,
-        rect.right - rect.left,
-        rect.bottom - rect.top,
-        SWP_NOOWNERZORDER |
-        SWP_FRAMECHANGED |
-        SWP_SHOWWINDOW);
-
-    HookGameWindowProc(hwnd);
-
-    if (!g_Applied)
+    LRESULT CALLBACK hkWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     {
-        g_BackgroundKeepAliveArmTick = GetTickCount();
-        g_BackgroundKeepAliveLogged = false;
-        Logger::Info("Windowed fullscreen applied to game window");
-        Logger::Info("Background keep-alive will arm after startup audio grace");
-    }
-    else
-    {
-        Logger::Info("Windowed fullscreen corrected after game window changed");
-    }
-
-    g_Applied = true;
-}
-
-static DWORD WINAPI WindowedFullscreenThread(LPVOID)
-{
-    Logger::Info("Windowed fullscreen thread started");
-
-    for (int i = 0; i < 120; i++)
-    {
-        HWND hwnd = FindGameWindow();
-
-        if (hwnd)
+        switch (msg)
         {
-            ApplyBorderlessFullscreen(hwnd);
-            Sleep(1000);
-            continue;
+        case WM_ACTIVATEAPP:
+            return CallWindowProcW(g_OriginalWndProc, hwnd, msg, TRUE, lParam);
+
+        case WM_ACTIVATE:
+            if (LOWORD(wParam) == WA_INACTIVE)
+                return CallWindowProcW(g_OriginalWndProc, hwnd, msg, MAKEWPARAM(WA_ACTIVE, HIWORD(wParam)), lParam);
+            break;
+
+        case WM_KILLFOCUS:
+            return 0;
+
+        case WM_SYSCOMMAND:
+            if ((wParam & 0xFFF0) == SC_MINIMIZE)
+                return 0;
+            break;
+
+        case WM_SIZE:
+        case WM_MOVE:
+        case WM_DISPLAYCHANGE:
+            ApplyBorderless(hwnd);
+            break;
         }
 
-        Sleep(500);
+        return CallWindowProcW(g_OriginalWndProc, hwnd, msg, wParam, lParam);
     }
 
-    if (!g_Applied)
-        Logger::Error("Failed to find game window for windowed fullscreen");
-    return 0;
+    void HookWndProc(HWND hwnd)
+    {
+        if (!hwnd || g_OriginalWndProc)
+            return;
+
+        g_OriginalWndProc = reinterpret_cast<WNDPROC>(
+            SetWindowLongPtrW(hwnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(hkWndProc)));
+
+        if (g_OriginalWndProc)
+            Logger::Info("WindowedFullscreen: WndProc hooked");
+        else
+            Logger::Error("WindowedFullscreen: failed to hook WndProc");
+    }
+
+    __int64 __fastcall hkCreateMainWindow(__int64 self, int width, int height, char fullscreen)
+    {
+        Logger::Info("WindowedFullscreen: forcing native borderless create");
+
+        __int64 result = oCreateMainWindow(self, width, height, 0);
+
+        HWND hwnd = *reinterpret_cast<HWND*>(self + 32);
+        *reinterpret_cast<int*>(self + 48) = 0;
+
+        g_GameWindow = hwnd;
+
+        ApplyBorderless(hwnd);
+        HookWndProc(hwnd);
+
+        Logger::Info("WindowedFullscreen: native borderless applied after CreateWindowExW");
+        return result;
+    }
+
+    int __fastcall hkExclusiveFullscreen(__int64 self, char enable)
+    {
+        if (self)
+        {
+            *reinterpret_cast<int*>(self + 48) = 0;
+
+            HWND hwnd = *reinterpret_cast<HWND*>(self + 32);
+            if (hwnd)
+            {
+                g_GameWindow = hwnd;
+                ApplyBorderless(hwnd);
+                HookWndProc(hwnd);
+            }
+        }
+
+        Logger::Info("WindowedFullscreen: blocked exclusive fullscreen request");
+        return 0;
+    }
+
+    DWORD WINAPI LateApplyThread(LPVOID)
+    {
+        for (int i = 0; i < 120; ++i)
+        {
+            HWND hwnd = FindWindowW(L"MME_Sample", L"MME_Sample");
+
+            if (hwnd)
+            {
+                g_GameWindow = hwnd;
+                ApplyBorderless(hwnd);
+                HookWndProc(hwnd);
+
+                Logger::Info("WindowedFullscreen: late-applied to existing MME_Sample window");
+                return 0;
+            }
+
+            Sleep(500);
+        }
+
+        Logger::Error("WindowedFullscreen: failed to find MME_Sample window");
+        return 0;
+    }
 }
 
 namespace WindowedFullscreen
 {
-    void Init()
+    bool Init()
     {
-        CreateThread(
-            nullptr,
-            0,
-            WindowedFullscreenThread,
-            nullptr,
-            0,
-            nullptr);
+        if (g_Installed)
+            return true;
+
+        HMODULE exe = GetModuleHandleW(nullptr);
+        if (!exe)
+        {
+            Logger::Error("WindowedFullscreen: failed to get exe module");
+            return false;
+        }
+
+        uintptr_t base = reinterpret_cast<uintptr_t>(exe);
+
+        g_CreateMainWindowAddr = base + kCreateMainWindowRVA;
+        g_ExclusiveFullscreenAddr = base + kExclusiveFullscreenRVA;
+
+        if (!HookManager::Create(
+            reinterpret_cast<void*>(g_CreateMainWindowAddr),
+            reinterpret_cast<void*>(&hkCreateMainWindow),
+            reinterpret_cast<void**>(&oCreateMainWindow)))
+        {
+            Logger::Error("WindowedFullscreen: failed to hook CreateMainWindow");
+            return false;
+        }
+
+        if (!HookManager::Enable(reinterpret_cast<void*>(g_CreateMainWindowAddr)))
+        {
+            Logger::Error("WindowedFullscreen: failed to enable CreateMainWindow hook");
+            return false;
+        }
+
+        if (!HookManager::Create(
+            reinterpret_cast<void*>(g_ExclusiveFullscreenAddr),
+            reinterpret_cast<void*>(&hkExclusiveFullscreen),
+            reinterpret_cast<void**>(&oExclusiveFullscreen)))
+        {
+            Logger::Error("WindowedFullscreen: failed to hook ExclusiveFullscreen");
+            return false;
+        }
+
+        if (!HookManager::Enable(reinterpret_cast<void*>(g_ExclusiveFullscreenAddr)))
+        {
+            Logger::Error("WindowedFullscreen: failed to enable ExclusiveFullscreen hook");
+            return false;
+        }
+
+        g_LateThread = CreateThread(nullptr, 0, LateApplyThread, nullptr, 0, nullptr);
+        if (g_LateThread)
+        {
+            CloseHandle(g_LateThread);
+            g_LateThread = nullptr;
+        }
+
+        g_Installed = true;
+        Logger::Info("WindowedFullscreen: native hooks installed");
+        return true;
+    }
+
+    void Shutdown()
+    {
+        if (g_CreateMainWindowAddr)
+            HookManager::Disable(reinterpret_cast<void*>(g_CreateMainWindowAddr));
+
+        if (g_ExclusiveFullscreenAddr)
+            HookManager::Disable(reinterpret_cast<void*>(g_ExclusiveFullscreenAddr));
+
+        if (g_GameWindow && g_OriginalWndProc)
+            SetWindowLongPtrW(g_GameWindow, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(g_OriginalWndProc));
+
+        g_OriginalWndProc = nullptr;
+        g_GameWindow = nullptr;
+        g_Installed = false;
+
+        Logger::Info("WindowedFullscreen: shutdown");
     }
 }

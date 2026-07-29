@@ -1,7 +1,7 @@
 #include "StdInc.h"
 #include "NetworkHooks.h"
 #include "Logger.h"
-
+#include "SteamConfig.h"
 #include <cctype>
 #include <cstring>
 #include <ws2tcpip.h>
@@ -156,6 +156,17 @@ static bool IsAllowedHostName(const std::string& host)
         return true;
 
 
+    const SteamConfig::Config& config = SteamConfig::Get();
+    if (!config.LanOnly && !config.CustomServerHost.empty())
+    {
+        std::string configured = config.CustomServerHost;
+        std::transform(configured.begin(), configured.end(), configured.begin(), [](unsigned char c) {
+            return static_cast<char>(std::tolower(c));
+        });
+
+        if (lower == configured)
+            return true;
+    }
     return false;
 }
 
@@ -185,6 +196,18 @@ static void RememberAllowedIPv4ResultsW(PADDRINFOW result)
     }
 }
 
+
+static bool IsConfiguredCustomServerIPv4(uint32_t ip)
+{
+    const SteamConfig::Config& config = SteamConfig::Get();
+
+    if (config.LanOnly || config.CustomServerHost.empty())
+        return false;
+
+    uint32_t configured = 0;
+    return TryParseIPv4HostOrder(config.CustomServerHost, configured) && configured == ip;
+}
+
 static bool IsAllowedEndpoint(const sockaddr* addr)
 {
     if (!addr)
@@ -193,7 +216,9 @@ static bool IsAllowedEndpoint(const sockaddr* addr)
     if (addr->sa_family == AF_INET)
     {
         const auto* ipv4 = reinterpret_cast<const sockaddr_in*>(addr);
-        return IsAllowedIPv4(ntohl(ipv4->sin_addr.S_un.S_addr));
+
+        const uint32_t hostOrder = ntohl(ipv4->sin_addr.S_un.S_addr);
+        return IsAllowedIPv4(hostOrder) || IsConfiguredCustomServerIPv4(hostOrder);
     }
 
     if (addr->sa_family == AF_INET6)
@@ -616,7 +641,9 @@ namespace NetworkHooks
         }
 
         Logger::Info(
-            "Initializing network hooks: public internet blocked, LAN/VPN allowed");
+            SteamConfig::Get().LanOnly
+                ? "Initializing network hooks: public internet blocked, LAN/VPN allowed"
+                : "Initializing network hooks: LAN/VPN plus configured custom_server allowed");
 
         bool ok = true;
 

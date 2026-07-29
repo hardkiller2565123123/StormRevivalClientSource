@@ -1,0 +1,24 @@
+Online menu force rewrite v23
+===========================
+
+Ground truth from Pasted text(745):
+- sub_14079ED10 sets a1+224=1 and calls netbattlemainmenu.SetLock.
+- sub_140609F10/sub_14060A4A0 are above matchmaking and feed the Flash online menu.
+- sub_140B53350 and sub_140B53240 must report true.
+- sub_140B531C0 must report false.
+
+Changes:
+- Hardpatches sub_140B53350 -> true.
+- Hardpatches sub_140B53240 -> true.
+- Hardpatches sub_140B531C0 -> false.
+- Also patches selected/alternate profile checks true.
+- Hooks sub_140609F10 to force menu-ready fields before/after init.
+- Hooks sub_14060A4A0 and sub_14060A7A0 to keep a1+232/a1+236 ready and a1+224 unlocked.
+- Hooks sub_14079ED10 and suppresses the Flash SetLock call.
+- Calls sub_14079F0C0 unlock when available.
+- Writes qword_142188D20 + 1585296 to 1 when the manager exists.
+
+Expected log string:
+OnlineCheckBypass v22 online-gate + automatch trace enabled ... hardpatch_gates=1/1/1/1/1 ...
+
+If it still does not enter, send the log lines with [NETMENU-FORCE], [NETMENU], and [ONLINE-GATE].

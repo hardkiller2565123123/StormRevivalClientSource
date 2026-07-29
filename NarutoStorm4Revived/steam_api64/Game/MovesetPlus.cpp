@@ -918,6 +918,7 @@ uintptr_t MovesetPlus::me_FindHealthPointer(int characterId, int playerSide)
 	}
 	
 
+	return 0;
 }
 
 
@@ -1191,7 +1192,7 @@ void me_test_switch_stage(__int64 function_param, __int64 param2, char* string_p
 	typedef StageMoveVTable(__fastcall* Sub_141086E40Type)(__int64, __int64);
 
 	//&xmmword_1422FB990
-	__int64* pXmmword;
+	__int64* pXmmword = nullptr;
 
 	if (GameVersion && std::strcmp(GameVersion, "1.60") == 0) {
 
@@ -1200,6 +1201,12 @@ void me_test_switch_stage(__int64 function_param, __int64 param2, char* string_p
 	else if (GameVersion && std::strcmp(GameVersion, "1.09") == 0) {
 		pXmmword = reinterpret_cast<__int64*>(moduleBase + offsetS4::VTableXmmwordOffset - 0xC00);
 	}
+	else {
+		return;
+	}
+
+	if (!pXmmword || !MovesetPlus::VTableAddress)
+		return;
 
 	//*((__int64 *)&xmmword_1422FB990 + 1)
 	__int64 highPart = pXmmword[1];
