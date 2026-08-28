@@ -28,7 +28,7 @@ The current releases should be considered research and development builds. They 
 | Naruto Storm 3           | Reaches Online Menu                  |
 | Naruto Storm Revolution  | Currently crashes                    |
 | Naruto Storm 4           | Reaches Online Menu                  |
-| Naruto Storm Connections | Does not currently reach Online Menu |
+| Naruto Storm Connections | Does not Work after Recent patch     |
 
 ### Important Notes
 
