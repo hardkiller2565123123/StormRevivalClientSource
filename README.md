@@ -29,7 +29,8 @@ The current releases should be considered research and development builds. They 
 | Naruto Storm Revolution  | Currently crashes                    |
 | Naruto Storm 4           | Reaches Online Menu                  |
 | Naruto Storm Connections | Does not Work after Recent patch     |
-| ------------------------ | ------------------------------------ |
+
+
 Connections will no longer receives updates. updating and researching all of the values takes too long. feel free to fork and update them yourself. for this one its stuck on V1.6
 
 ### Important Notes
