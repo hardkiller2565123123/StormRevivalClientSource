@@ -2,65 +2,41 @@
 
 Copyright (c) 2026 Dylan (hardkiller2565123123)
 
-All rights reserved, except as expressly permitted below.
+All rights reserved, except as expressly permitted herein.
 
-## 1. Permission Granted
+## 1. Grant of Permission
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation (the "Software"), to:
 
-- View, download, and study the source code.
-- Fork and clone the repository.
-- Modify, improve, and experiment with the Software.
+- View, download, fork, study, and modify the Software.
 - Develop and maintain private modifications or derivative works.
-- Use modified versions for personal, private, non-commercial purposes.
-
-These permissions are subject to the conditions below.
+- Share original or modified copies privately with friends for personal, non-commercial use.
+- Collaborate on private development and submit contributions to the original repository.
 
 ## 2. Restrictions
 
-Without prior written permission from the copyright holder, you may NOT:
+Without prior written authorization from the copyright holder, the following activities are prohibited:
 
-- Redistribute, republish, reupload, or publicly release the Software or any substantial portion of it.
-- Distribute modified versions, derivative works, or compiled builds of the Software.
-- Sell, sublicense, monetize, or otherwise commercially exploit the Software or its modifications.
-- Use the Software or its source code in paid products, services, subscriptions, or commercial projects.
-- Claim ownership or original authorship of the Software.
-- Remove or alter copyright notices, attribution, or this license.
+- Public redistribution, publication, or distribution of the Software, including modified versions and compiled binaries.
+- Incorporation of the Software or substantial portions thereof into other projects, applications, frameworks, or software distributions.
+- Commercial use, sale, sublicensing, monetization, or other revenue-generating activities involving the Software.
+- Removal or alteration of copyright notices, attribution, or license terms.
+- Misrepresentation of the Software's origin or ownership.
 
-## 3. Private Development
+All permitted private distributions must retain the original copyright and license notices, and recipients must comply with these terms.
 
-Private forks, modifications, and development are expressly permitted, provided that:
+## 3. Intellectual Property
 
-- The Software and its modifications are not publicly redistributed without written authorization.
-- No commercial use or monetization occurs without written authorization.
-- The original copyright and license notices are preserved.
+Ownership of the original Software remains with its respective copyright holders. No rights are granted beyond those expressly stated in this license.
 
-Public contributions to the original repository may be submitted through pull requests, provided that the submission does not otherwise violate this license.
+This license does not grant rights to third-party software, trademarks, or other intellectual property incorporated into or associated with the Software.
 
-## 4. Redistribution and Commercial Permission
+## 4. Termination
 
-Redistribution, publication of modified versions, and commercial use require prior written authorization from the copyright holder.
+Any violation of this license automatically terminates the rights granted herein. Upon termination, the violating party must cease all use, modification, and distribution authorized under this license.
 
-Permission may be granted or denied at the copyright holder's discretion.
+## 5. Disclaimer of Warranty
 
-Any authorization must explicitly describe the permitted activities and does not grant additional rights beyond those stated.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
 
-## 5. Ownership
-
-The Software remains the intellectual property of its respective copyright holders.
-
-Forking, modifying, or contributing to the Software does not transfer ownership of the original Software.
-
-This license does not grant trademark rights or ownership of third-party materials.
-
-## 6. Termination
-
-Any violation of this license automatically terminates the permissions granted under it.
-
-Upon termination, the individual or organization must cease all activities authorized solely by this license.
-
-## 7. Disclaimer of Warranty
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-
-IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
