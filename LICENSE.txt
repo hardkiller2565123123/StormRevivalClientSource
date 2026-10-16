@@ -1,21 +1,66 @@
-MIT License
+# Storm License
 
-Copyright (c) [year] [fullname]
+Copyright (c) 2026 Dylan (hardkiller2565123123)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+All rights reserved, except as expressly permitted below.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## 1. Permission Granted
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to:
+
+- View, download, and study the source code.
+- Fork and clone the repository.
+- Modify, improve, and experiment with the Software.
+- Develop and maintain private modifications or derivative works.
+- Use modified versions for personal, private, non-commercial purposes.
+
+These permissions are subject to the conditions below.
+
+## 2. Restrictions
+
+Without prior written permission from the copyright holder, you may NOT:
+
+- Redistribute, republish, reupload, or publicly release the Software or any substantial portion of it.
+- Distribute modified versions, derivative works, or compiled builds of the Software.
+- Sell, sublicense, monetize, or otherwise commercially exploit the Software or its modifications.
+- Use the Software or its source code in paid products, services, subscriptions, or commercial projects.
+- Claim ownership or original authorship of the Software.
+- Remove or alter copyright notices, attribution, or this license.
+
+## 3. Private Development
+
+Private forks, modifications, and development are expressly permitted, provided that:
+
+- The Software and its modifications are not publicly redistributed without written authorization.
+- No commercial use or monetization occurs without written authorization.
+- The original copyright and license notices are preserved.
+
+Public contributions to the original repository may be submitted through pull requests, provided that the submission does not otherwise violate this license.
+
+## 4. Redistribution and Commercial Permission
+
+Redistribution, publication of modified versions, and commercial use require prior written authorization from the copyright holder.
+
+Permission may be granted or denied at the copyright holder's discretion.
+
+Any authorization must explicitly describe the permitted activities and does not grant additional rights beyond those stated.
+
+## 5. Ownership
+
+The Software remains the intellectual property of its respective copyright holders.
+
+Forking, modifying, or contributing to the Software does not transfer ownership of the original Software.
+
+This license does not grant trademark rights or ownership of third-party materials.
+
+## 6. Termination
+
+Any violation of this license automatically terminates the permissions granted under it.
+
+Upon termination, the individual or organization must cease all activities authorized solely by this license.
+
+## 7. Disclaimer of Warranty
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
